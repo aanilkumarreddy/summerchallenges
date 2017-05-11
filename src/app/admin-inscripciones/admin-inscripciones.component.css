@@ -1,0 +1,103 @@
+.admin-container{
+    margin-top:60px;
+    width: 100%;
+}
+
+.modalk{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(22,22,22,0.8);
+    z-index: 99999;
+    top: 0;
+    left: 0; 
+}
+.admin-container table{
+    width: 100%;
+    background-color: white;
+}
+table tr:nth-child(even){
+    background-color: rgba(88,88,88, 0.1);
+}
+admin-container table tr{
+    width: 100%;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+.admin-container table tr td{
+    border:1px solid rgba(88,88,88, 0.1);
+    vertical-align: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.6rem;
+}
+table tr td span{
+    font-size: 1rem;
+}
+.data-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    flex-direction: column;
+    vertical-align: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.num-container{
+    border-radius: 3px;
+    padding-top: 20px;
+    display: flex;
+    vertical-align: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex: 1;
+}
+.data-container .num-container:first-child .num-panel{
+    min-width: 300px;
+}
+.num-panel{
+    flex: 1;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(88,88,88,0.1), 0 6px 6px rgba(0,0,0,0.15);
+    display: flex;
+    border: 1px solid rgba(182,182,182,0.8);
+    font-family: 'Open Sans';
+    margin-right: 25px;
+}
+
+.num-panel:first-child{
+    margin-left: 25px;
+}
+
+.num-panel .title{
+    border-right: 2px solid rgba(88,88,88, 0.2);
+    padding: 25px;
+    font-size: 1.5vh;    
+    color:rgba(22,22,22, 0.4);
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    display: flex;
+    flex: 2;
+}
+.num-panel .data{
+    font-size: 2.8vh;
+    font-family: 'Open Sans';
+    font-weight: 800;
+    display: flex;
+    flex: 1;
+    padding: 12px;
+    vertical-align: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}

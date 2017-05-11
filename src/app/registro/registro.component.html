@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1" id="confirmacion">
+        <form atletaDatos>
+          <md-card class="example-card row bg-white">
+                <span class="btn btn-block">
+                  RELLENA TU INSCRIPCIÓN
+                </span> 
+            <hr /> 
+            <md-card-content class="col col-md-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">perm_identity</i></span>
+                <input type="text" #nombre class="form-control" placeholder="Nombre completo / Nombre equipo" aria-describedby="basic-addon1" required>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">mail_outline</i></span>
+                <input type="text" #email class="form-control" placeholder="Email de contacto" aria-describedby="basic-addon1" required>
+              </div>
+
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">vpn_key</i></span>
+                <input type="password" #password class="form-control" placeholder="Contraseña" aria-describedby="basic-addon1" required>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">my_location</i></span>
+                <input type="text" #box class="form-control" placeholder="Box / Club" aria-describedby="basic-addon1" required>
+              </div>
+
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">assessment</i></span>
+                  <!--<md-radio-group class="col-sm-12" (change)="actualizarPrecio()" name="categoria" [(ngModel)]="selectedValue" [align]="'start|end'">
+                      <md-radio-button class="col-sm-6" color='warn' *ngFor="let categoria of aux_categorias" [value]="categoria.c_id"> {{categoria.nombre}}</md-radio-button>
+                  </md-radio-group>-->
+
+                  <div *ngFor="let categoria of aux_categorias" (change)="actualizarPrecio()">
+                    <label class="radio-inline"><input [(ngModel)]="selectedValue" type="radio" name="optradio" [value]="categoria.c_id" required>{{categoria.nombre}}</label>
+                  </div>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">assessment</i></span>
+                <input type="text" #categoria class="form-control" value="{{selectedCategoria}}" aria-describedby="basic-addon1" disabled required>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">attach_money</i></span>
+                <input type="text" #prize class="form-control" aria-describedby="basic-addon1" value="{{precio}} € (IGIC incluido)" disabled required>
+              </div>
+
+              <div class="input-group col col-md-10 col-md-offset-1">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">info_outline</i></span>
+                <input type="text" #MessageError class="form-control error" value ="{{ error }}" aria-describedby="basic-addon1" disabled>
+              </div>
+              <hr />
+              <button class="btn btn-block" (click)="enviarDatos(nombre, email, password, box, categoria)"> SIGUIENTE </button>
+            </md-card-content>
+          </md-card>
+        </form>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<!--<form atletaDatos class="example-form">
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><md-input-container class="example-full-width">
+      <input  mdInput type="email" placeholder="Correo electrónico" required>
+    </md-input-container></td>
+    <td><md-input-container class="example-full-width">
+      <input  type="password" mdInput placeholder="Contraseña" required>
+    </md-input-container></td>
+    <td><button md-mini-fab (click)="login_correo(correo, password)"><md-icon>check</md-icon></button></td>
+  </tr></table>
+</form>-->
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1" id="confirmacion">
+        <form atletaDatos>
+          <md-card class="example-card row bg-white">
+                <span class="btn btn-block">
+                  CLASIFICATORIO ONLINE
+                </span> 
+            <hr /> 
+            <md-card-content class="col col-md-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">perm_identity</i></span>
+                <input type="text" #correo class="form-control" aria-describedby="basic-addon1" required>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">vpn_key</i></span>
+                <input type="password" #password class="form-control" aria-describedby="basic-addon1" required>
+              </div>
+              <div class="input-group col col-md-10 col-md-offset-1">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">info_outline</i></span>
+                <input type="text" #MessageError class="form-control error" value ="{{ error }}" aria-describedby="basic-addon1" disabled>
+              </div>
+              <hr />
+              <button class="btn btn-block" (click)="login_correo(correo, password)">
+                ENTRAR
+              </button> 
+            </md-card-content>
+          </md-card>
+        </form>
+      </div>
+  </div>
+</div>

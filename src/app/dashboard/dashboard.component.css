@@ -1,0 +1,209 @@
+#dashboard{
+    padding-top: 100px;
+}
+
+.profile-container{
+    display: flex;
+    min-height: 300px;
+    border-radius: 12px;
+}
+.decorador{
+    flex: 2;
+    display: flex;
+    vertical-align: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: #ffc600;
+}
+.decorador .material-icons{
+    font-size: 30vh !important;
+}
+.profile-info{
+    flex: 4;
+    background-color: rgba(244,244,244,0.9);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-left: 25px;
+    padding-top: 25px;
+
+}
+.header-info{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.mini-action{
+    cursor: pointer;
+}
+.header-info .data-container{
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+    align-content: center;
+    align-items: center;
+}
+.header-info span:first-child{
+    flex: 4;
+    font-weight: 800;
+    font-size: 3.5vh;
+}
+.header-info span i{
+    border-radius:50%;
+    background-color: #ffc600;
+    padding: 8px;
+    color: white;
+    margin-left: 6px;
+    font-size: 3vh !important;
+}
+.extra-info{
+    flex: 2;
+    display: flex;
+    vertical-align: center;
+    align-content: center;
+    align-items: center;
+}
+.extra-info .mini-action{
+    border-radius:50%;
+    background-color: #ffc600;
+    padding: 6px;
+    color: white;
+    margin-left: 4px;
+    font-size: 2vh !important;
+}
+.actions{
+    flex: 1;
+    padding-right: 25px;
+    text-align: right;
+}
+.message-container{
+    display: flex;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    flex: 1;
+    flex-direction: row;
+    padding: 25px;
+    background-color: rgba(244,244,244,0.9);
+    vertical-align: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+.message-container .text-container{
+    flex: 6;
+    padding-right: 25px;
+    font-family: "Open Sans";
+    text-align: justify;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.message-container .text-container p:first-child{
+    margin-right: 16px;
+}
+.message-container .text-container p, b{
+    font-family: "Open Sans";
+}
+.message-container .icon-container{
+    flex: 1;
+    display: flex;
+    vertical-align: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.message-container .icon-container .material-icons{
+    display: flex;
+    font-size: 10vh;
+    color: #ffc600;
+}
+.message-container .actions-container{
+    flex: 1;
+}
+@media (max-width: 768px){
+    .message-container{
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .icon-container{
+        background-color: #ffc600;
+        flex: 1;
+        width: 100%;
+        color: white;
+    }
+    .icon-container .material-icons{
+        color: white !important;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+    .text-container{
+        flex: 1; 
+        padding-right: 18px !important;
+        padding: 18px;
+    }
+    .header-info{
+        text-align: center;
+        justify-content: center;
+    }
+    .header-info *{
+        padding: 0px !important;
+    }
+    .header-info .data-container{
+        text-align: center;
+    }
+    .header-info .data-container *{
+        display: inline-block;
+        flex: 0;
+        padding: 0px !important;
+    }
+    .actions-container{
+        flex: 1;
+        width: 100%;
+        background-color: blue;
+    }
+    .profile-container{
+        flex-direction: column;
+        margin-bottom: 20px;
+        
+    }
+    .profile-container .decorador img{
+        max-height: 100px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .profile-container .profile-info{
+        padding-left: 0px;
+    }
+    .profile-container .profile-info .header-info{
+        padding-bottom: 20px;
+        border-bottom: 2px solid rgba(222,222,222,0.4);
+        box-shadow: 0px 2px 6px rgba(222,222,222,0.4);
+    }
+    .profile-container .header-info *{
+        padding-left: 20px;
+    }
+    .profile-container .extra-info{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .profile-container .actions{
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+    }
+    .profile-container .actions a{
+        flex: 1;
+    }
+    .profile-container .actions button{
+        width: 100%;
+        font-size: 1.5vh;
+    }
+}

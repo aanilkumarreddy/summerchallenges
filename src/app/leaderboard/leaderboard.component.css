@@ -1,0 +1,71 @@
+
+.leaderboard-container{
+    padding-top: 80px;
+    margin-bottom: 80px;
+}
+.leaderboard-container h2{
+    text-transform: uppercase;
+    font-weight: 800;
+    color: white;
+    text-align: center;
+}
+table{
+    width: 100%;
+    background-color: white;
+}
+table tr{
+    display: flex;
+    padding-top: 0;
+    padding: 12px;
+    border-top: 2px rgba(44,44,44,0.6);
+    border-bottom: 2px rgba(44,44,44,0.6);
+}
+table tr:first-child{
+    background-color: #ffc600;
+    color: white;
+    font-weight: 800;
+}
+table tr:first-child td{
+    border: none !important;
+}
+table tr:nth-child(even){
+    background-color: rgba(88,88,88, 0.1);
+}
+table tr td{
+    display: flex;
+    vertical-align: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.8rem;
+    flex: 1;
+}
+table tr td *{
+    flex: 1;
+}
+table tr td#name{
+    min-width: 240px;
+}
+#pos{
+    max-width: 10%;
+    font-weight: 800;
+    border-right: 2px solid rgba(44,44,44,0.2);
+}
+#score{
+    max-width: 15%;
+}
+table tr td span{
+    font-size: 1rem;
+}
+.boton-container{
+    display: flex;
+}
+.boton-container .btn{
+    flex: 1;
+    transition: all 0.2s ease-in-out;
+}
+.btn:hover{
+    background-color: rgba(222,222,222,0.8);
+}

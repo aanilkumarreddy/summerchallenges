@@ -1,0 +1,33 @@
+<div *ngIf="atletas" class="leaderboard-container">
+  <div class="boton-container">
+    <button class="btn" (click)="getAtletas_byCategoria(atleta.id_categoria)"> Ver mi categoría </button>
+    <button class="btn" (click)="getAtletas_byCategoria(1)"> RX Masculino </button>
+    <button class="btn" (click)="getAtletas_byCategoria(2)"> Scale Masculino </button>
+    <button class="btn" (click)="getAtletas_byCategoria(3)"> Scale Femenino </button>
+  </div>
+  <div class="boton-container">
+    <button class="btn" (click)="getAtletas_byCategoria(4)"> Team </button>
+    <button class="btn" (click)="getAtletas_byCategoria(5)"> Master Masculino </button>
+    <button class="btn" (click)="getAtletas_byCategoria(6)"> Master Femenino </button>
+    <button class="btn" (click)="getAtletas_byCategoria(7)"> Teens </button>
+  </div>
+
+
+  <h2 *ngIf="atletas">LEADERBOARD {{aux_categoria}} </h2>
+  <table>
+    <tr>
+      <td id="pos"> POS </td>
+      <td id="name"> NOMBRE </td>
+      <td id="score"> PUNTOS </td>
+      <td id="score"> WOD.1 </td>
+      <td id="score"> WOD.2 </td>
+    </tr>
+    <tr *ngFor="let atleta of atletas; let i = index" [attr.data-index]="i">
+      <td id="pos"> {{i+1}} </td>
+      <td id="name"> <b>{{atleta.nombre}}</b><span>{{atleta.box||"Independiente"}}</span></td>
+      <td id="score">{{atleta.puntos || 0}}</td>
+      <td id="score">{{atleta.wod1 || 0}}</td>
+      <td id="score">{{atleta.wod2 || 0}}</td>
+  </table>
+
+</div>

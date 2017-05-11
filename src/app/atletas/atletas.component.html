@@ -1,0 +1,26 @@
+<div *ngIf = "auth" class="container">
+    <button md-raised-button color="warn" [mdMenuTriggerFor]="menuRef">
+        Selecciona los atletas que quieres visualizar
+    </button>
+
+    <md-menu #menuRef="mdMenu">
+      <button md-menu-item (click)="getAtletas()">Todos los atletas</button>
+      <button md-menu-item (click)="getAtletaActual()"> ATLETA ACTUAL </button>
+      <button md-menu-item (click)="getAtletasByCoach(auth.email)"> MIS ATLETAS </button>
+    </md-menu>
+
+      <md-select placeholder="Lista de atletas" name="atletas">
+          <md-option *ngFor = "let atleta of aux_atletas" ng-value="atleta">{{atleta.nombre}}</md-option>
+      </md-select>
+
+      <md-list>
+        <md-list-item *ngFor="let atleta of aux_atletas">
+          <img md-list-avatar src="{{auth.avatar}}" alt="...">
+          <h3 md-line> {{atleta.nombre}} </h3>
+          <p md-line>
+            <span> {{atleta.box}} </span>
+            <span class="demo-2"> - {{atleta.email}} </span>
+          </p>
+        </md-list-item>
+      </md-list>
+</div>

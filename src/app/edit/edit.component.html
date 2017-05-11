@@ -1,0 +1,65 @@
+<div class="container-fluid" id="dashboard">
+  <div class="container">
+    <div *ngIf="atleta" class="message-container">
+      <div class="icon-container">
+        <i class="material-icons">error</i>
+      </div>
+      <div class="text-container">
+        <p> 
+         Los datos se actualizarán automaticamente al hacer click en el botón correspondiente, puedes comprobar los datos
+          actuales en la ficha que tienes a continuación.
+        </p>
+      </div>
+     <a routerLink="/" routerLinkActive="active"> <button class="btn"> VOLVER </button></a>
+    </div>
+    <div class="profile-duo">
+
+      <div *ngIf="atleta" class="profile-container">
+        <div class="decorador">
+            <img src="http://summerchallenges.com/img/logo.svg" alt="lanzarote summer challenge" />
+        </div>
+
+        <div class="profile-info">
+          <div class="header-info">
+            <span id="name">{{atleta.nombre}}</span>
+            <span id="email">{{atleta.email}}</span>
+          </div>
+          <div class="extra-info">
+            <i class="material-icons">assessment</i> {{nombreCategoria}}
+          </div>
+          <div class="actions">
+            <a target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}">
+              <button class="btn">PAGAR INSCRIPCIÓN</button>
+            </a>
+            <a target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}">
+              <button class="btn" disabled>VER WODS</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-container">
+        <div *ngIf="atleta" class="profile-info edit-form">
+          <div class="header-info" id="nuevos">
+
+            <input type="text" #name placeholder="Introduce aquí el nombre" />
+            <button (click)="updateName(name)" class="boton btn"> MODIFICAR NOMBRE</button>
+            <div *ngIf="atleta.inscripcion.estado<=1" class="container-categoria">
+              <div class="radio-container">
+                <div *ngFor="let categoria of aux_categorias" (change)="updateCategoria()">
+                  <label><input [(ngModel)]="selectedValue" type="radio" name="optradio" [value]="categoria.c_id" required>{{categoria.nombre}}</label>
+                </div>
+              </div>
+              <input type="text" #categoria placeholder="Tu nueva categoría" value="{{selectedCategoria}}" disabled/>
+              <button (click)="updateCategory(categoria)" class="boton btn"> MODIFICAR CATEGORIA </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</div>

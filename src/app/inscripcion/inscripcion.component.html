@@ -1,0 +1,43 @@
+      <div class="col-md-6 col-md-offset-3" id="confirmacion">
+        <md-card class="example-card row">
+            <md-card-header>
+              <md-card-title><h3>CONFIRMACIÓN DE INSCRIPCIÓN</h3></md-card-title>
+            </md-card-header>
+            <hr />
+          <md-card-content class="col col-md-10 col-md-offset-1">
+            <form method="POST" action="">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">perm_identity</i></span>
+                <input type="text" #fName class="form-control" value="{{auth.email}}" aria-describedby="basic-addon1" required disabled>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">mail_outline</i></span>
+                <input type="text" #fEmail class="form-control" value="" aria-describedby="basic-addon1" required disabled>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">vpn_key</i></span>
+                <input type="password" #fPassword class="form-control" value="" aria-describedby="basic-addon1" required disabled>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">home</i></span>
+                <input type="text" #fBox class="form-control" value="" aria-describedby="basic-addon1" required disabled>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="material-icons">fitness_center</i></span>
+                <input type="text" #fCategoria class="form-control" value="" aria-describedby="basic-addon1" required disabled>
+              </div>
+              <p class="prize">
+                <b> {{ precio }} € </b>
+              </p>
+              <button class="btn btn-block" (click)="enviarDatos(nombre, correo, password, box)">
+                CONFIRMAR Y PAGAR
+              </button>
+            </form>
+          </md-card-content>
+            
+        </md-card>
+      </div>

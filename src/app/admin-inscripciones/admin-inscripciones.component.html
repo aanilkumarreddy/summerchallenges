@@ -1,0 +1,92 @@
+<div class="data-container">
+  <div class="num-container" *ngIf="num_inscripciones">
+    <div class="num-panel">
+      <span class="title">INSCRIPCIONES </span>
+      <span class="data">{{num_inscripciones}}</span>
+    </div>
+    <div class="num-panel">
+      <span class="title"> PAGADAS </span>
+      <span class="data">{{num_pagados}}</span>
+    </div>
+  </div>
+
+  <div class="num-container" *ngIf="num_inscripciones">
+    <div class="num-panel">
+      <span class="title"> RX MASCULINO </span>
+      <span class="data">{{num_rx}}</span>
+    </div>
+    <div class="num-panel">
+      <span class="title"> SCALE MASCULINO </span>
+      <span class="data">{{num_scm}}</span>
+    </div>
+    <div class="num-panel">
+      <span class="title"> SCALE FEMENINO </span>
+      <span class="data">{{num_scf}}</span>
+    </div>
+    <div class="num-panel">
+      <span class="title"> TEAMS </span>
+      <span class="data">{{num_tm}}</span>
+    </div>
+    <div class="num-panel">
+      <span class="title"> MASTER MASCULINO </span>
+      <span class="data">{{num_msm}}</span>
+    </div>
+    <div class="num-panel">
+      <span class="title"> MASTER FEMENINO </span>
+      <span class="data">{{num_msf}}</span>
+    </div>
+    <div class="num-panel">
+      <span class="title"> TEEN </span>
+      <span class="data">{{num_tn}}</span>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="atletas" class="admin-container container">
+  <table *ngIf="lista_actual">
+    <tr>
+      <td id="name"> Nombre (correo) </td>
+      <td id="fecha"> Fecha pedido </td>
+      <td id="pedido"> Numero Pedido </td>
+      <td id="estado"> Estado </td>
+      <td id="actions"> Acciones </td>
+    </tr>
+    <tr *ngFor="let admin of lista_actual_no">
+      <td>{{admin.nombre}}<br /><span>({{admin.email}})</span></td>
+      <td>{{admin.inscripcion.fecha || "Sin confirmar"}}</td>
+      <td><b>{{admin.inscripcion.id_pedido}}</b></td> 
+      <td>{{admin.inscripcion.estado}}</td>
+      <td>
+        <button *ngIf="admin.inscripcion.estado <= 1" (click)="activar(admin.$key, admin.inscripcion.fecha, admin.inscripcion.id_pedido)" >ACTIVAR</button>
+        <button *ngIf="admin.inscripcion.estado > 1" (click)="desactivar(admin.$key, admin.inscripcion.fecha, admin.inscripcion.id_pedido)" > DESACTIVAR </button>
+      </td>
+  </table>
+</div>
+
+<div *ngIf="atletas" class="admin-container container">
+  <table *ngIf="lista_actual">
+    <tr>
+      <td id="name"> Nombre (correo) </td>
+      <td id="fecha"> Fecha pedido </td>
+      <td id="pedido"> Numero Pedido </td>
+      <td id="categoria"> Categoría </td>
+      <td id="estado"> Estado </td>
+      <td id="actions"> Acciones </td>
+    </tr>
+    <tr *ngFor="let admin of lista_actual_si">
+      <td>{{admin.nombre}}<br /><span>({{admin.email}})</span></td>
+      <td>{{admin.inscripcion.fecha || "Sin confirmar"}}</td>
+      <td><b>{{admin.inscripcion.id_pedido}}</b></td>
+      <td>{{admin.id_categoria}}</td> 
+      <td>{{admin.inscripcion.estado}}</td>
+      <td>
+        <button *ngIf="admin.inscripcion.estado <= 1" (click)="activar(admin.$key, admin.inscripcion.fecha, admin.inscripcion.id_pedido)" >ACTIVAR</button>
+        <button *ngIf="admin.inscripcion.estado > 1" (click)="desactivar(admin.$key, admin.inscripcion.fecha, admin.inscripcion.id_pedido)" > DESACTIVAR </button>
+      </td>
+  </table>
+</div>
+<!--
+<div class="modalk">
+  HOLA
+</div>
+-->

@@ -1,0 +1,184 @@
+.example-icon {
+  padding: 0 14px;
+}
+.navbar{
+  background-color: white;
+  border-bottom: 1px solid rgba(66,66,66,0.2);
+  box-shadow: 0px 0px 6px rgba(66,66,66,0.2);
+}
+.spacer {
+  flex: 2 1 auto;
+}
+.header-container{
+  display: flex;
+}
+.info-container{
+  display : flex;
+  flex: 4;
+  flex-direction: row;
+  vertical-align: center;
+  justify-content: center;
+  text-align: left;
+  align-items: center;
+}
+.info-container i{
+  flex: 1;
+}
+.info-container .datos{
+  flex: 10;
+  display: flex;
+  flex-direction: column;
+}
+.info-container .material-icons{
+  font-size: 7.5vh !important;
+  color: #ffc600 !important;
+}
+.info-container .datos #name{
+  font-size: 3vh;
+  font-weight: 600;
+  color: rgba(22,22,22,0.8);
+}
+.info-container .datos #email{
+  font-size: 1.5vh;
+  color: rgba(22,22,22,1);
+}
+/* RESPONSIVE */
+@media(max-width: 748px){
+  .info-container{
+    flex: 2;
+  }
+  .info-container .datos{
+    flex: 10;
+    display: flex;
+    flex-direction: column;
+    vertical-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .spacer{
+    flex: 1 1 auto;
+  }
+}
+.actions-container{
+  display : flex;
+  flex: 2;
+  text-align: right;
+  flex-direction: row;
+  align-content: right;
+  background-color: green;
+}
+.actions-container *{
+  border: 2px solid black;
+}
+
+.boton{
+  border-radius: 2px;
+  padding: 10px;
+  background-color: rgba(66,66,66,0.2);
+  color: white;
+  font-weight: 800;
+  box-shadow: none;
+  margin-right: 12px;
+  transition: all ease-in-out 0.4s;
+  font-size: 2.5vh;
+  border: none;
+}
+.boton:hover{
+  background-color: #ffc600;
+}
+.boton:active{
+  color: black;
+}
+.navbar .phone-mobile{
+  min-height: 80px;
+  flex-direction: column;
+  display: none;
+}
+.phone-mobile .info{
+  min-height: 30px;
+  flex: 1;
+  display: flex;
+  background-color: #ffc600;
+  flex-direction: row;
+  vertical-align: center;
+  text-align: left;
+  align-items: center;
+  padding: 5px 12px 5px 12px;
+  border-bottom: 1px solid rgba(222,222,222,0.4);
+  box-shadow: 0px 2px 12px rgba(222,222,222,0.4);
+}
+.phone-mobile .info .datos{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  vertical-align: center;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  font-size: 2vh;
+  font-weight: 800;
+}
+.phone-mobile .info .datos i{
+  margin-right: 6px;
+}
+.phone-mobile .info .logo{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+.phone-mobile .info .logout{
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.phone-mobile .info .logout i{
+    cursor: pointer;
+    color: white;
+}
+.phone-mobile .info img{
+  max-height: 30px;
+}
+.phone-mobile .actions{
+  min-height: 50px;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+.phone-mobile a{
+  text-decoration: none;
+}
+.phone-mobile .actions button{
+  flex: 1;
+  height: 50px;
+  border-radius: 0px;
+}
+.phone-mobile .actions .login{
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+.phone-mobile .actions .payment{
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+.phone-mobile .actions .login button{
+  flex: 1;
+  margin: 0;
+}
+.phone-mobile .actions .payment a{
+  flex: 1;
+  margin: 0;
+}
+@media (max-width: 768px){
+  .navbar .header-container{
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    display: none;
+  }
+  .navbar .phone-mobile{
+    display: flex; 
+  }
+}
