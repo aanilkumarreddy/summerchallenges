@@ -42,6 +42,39 @@
   font-size: 1.5vh;
   color: rgba(22,22,22,1);
 }
+
+/*MENU BOTTOM FIXED*/
+.menu-bottom-fixed{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  z-index: 99;
+  background: #ffc600;
+  display: flex;
+}
+.menu-bottom-fixed .op{
+  flex: 1;
+  color: white;
+  vertical-align: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 800;
+  font-size: 2.5vh;
+  padding: 15px;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+}
+
+.op:hover{
+  background: rgba(66,66,66,0.2);
+}
+.op a{
+  text-decoration: none;
+  color: white;
+}
+
+
 /* RESPONSIVE */
 @media(max-width: 748px){
   .info-container{
@@ -125,6 +158,10 @@
   flex: 1;
   display: flex;
   justify-content: center;
+  cursor: pointer;
+}
+.phone-mobile .home{
+  color: white;
   cursor: pointer;
 }
 .phone-mobile .info .logout{

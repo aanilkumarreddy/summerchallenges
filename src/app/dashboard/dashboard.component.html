@@ -23,8 +23,8 @@
         <a *ngIf="atleta.inscripcion.estado<=1" target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}">
           <button class="btn btn-block">PAGAR INSCRIPCIÓN</button>
         </a>
-        <a *ngIf="atleta.inscripcion.estado>1" target="_blank">
-          <button class="btn btn-block" disabled>VER WODS</button>
+        <a *ngIf="atleta.inscripcion.estado > 1" routerLink="/wods" routerLinkActive="active">
+          <button class="btn btn-block">VER WODS</button>
         </a>
       </div>
     </div>
@@ -34,7 +34,7 @@
       <div class="decorador">
           <img src="http://summerchallenges.com/img/logo.svg" alt="lanzarote summer challenge" />
       </div>
-
+ 
       <div class="profile-info">
         <div class="header-info">
           <div class="data-container">
@@ -53,10 +53,10 @@
           <a routerLink="/edit" routerLinkActive="active">
             <button class="btn"> EDITAR DATOS </button>
           </a>
-          <a *ngIf="atleta.inscripcion.estado > 2" target="_blank" routerLink="/wods" routerLinkActive="active">
+          <a *ngIf="atleta.inscripcion.estado > 1" routerLink="/wods" routerLinkActive="active">
             <button class="btn">VER WODS</button>
           </a>
-          <a *ngIf="atleta.inscripcion.estado == 2">
+          <a *ngIf="atleta.inscripcion.estado <= 1">
             <button class="btn" disabled> VER WODS </button>
           </a>
         </div>

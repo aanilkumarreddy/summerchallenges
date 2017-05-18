@@ -59,13 +59,52 @@ table tr td#name{
 table tr td span{
     font-size: 1rem;
 }
+.container-of{
+    display:flex;
+    flex-direction: column;
+}
 .boton-container{
     display: flex;
+    flex: 1;
 }
 .boton-container .btn{
-    flex: 1;
+    /*flex: 1;*/
     transition: all 0.2s ease-in-out;
 }
 .btn:hover{
     background-color: rgba(222,222,222,0.8);
+}
+p.info{
+    color: white;
+    text-align: center;
+    font-size: 2vh;
+}
+@media(max-width: 780px){
+
+    .container-of{
+        flex-direction: row;
+        align-content: space-between;
+    }
+    .boton-container{
+        max-width: 50%;        
+        flex-direction: column;
+    }
+    .boton-container .btn{
+        flex: 1;
+        padding: 6px;
+        font-size: 2vh;
+    }
+    #pos{
+        font-size: 2vh;
+        max-width: 5%;
+    }
+    #score{
+        max-width: 10%;
+        font-size: 2vh;
+    }
+    #name{
+        font-weight: 400;
+        font-size: 1.8vh;
+        min-width: 120px !important;
+    }
 }

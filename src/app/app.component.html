@@ -34,6 +34,9 @@
         <i class="material-icons"> account_circle </i>        
         <span id="name"> {{atleta.nombre}} </span>
       </div>
+      <div *ngIf="!atleta" class="home" routerLink="/" routerLinkActive="active">
+        <i class="material-icons">home</i>
+      </div>
       <div routerLink="/" routerLinkActive="active" class="logo">
         <img src="http://summerchallenges.com/img/logo.svg" alt="lanzarote summer challenge" />
       </div>
@@ -55,9 +58,25 @@
           <button class="boton btn-block"> MODIFICAR MIS DATOS </button>
         </a> 
       </div>
+      <div *ngIf="auth && atleta && atleta.inscripcion.estado > 1" class="payment">
+        <a routerLink="/wods" routerLinkActive="active"> 
+          <button class="boton btn-block">VER WODS </button> 
+        </a>
+        <a routerLink="/" routerLinkActive="active">
+          <button class="boton btn-block"> VOLVER </button>
+        </a> 
+      </div>
 
     </div>
 
   </div>
 </nav>
 <router-outlet></router-outlet>
+<div class="menu-bottom-fixed">
+  <div routerLink="/public-wods" routerLinkActive="active" class="op">
+    <a > VER WODS </a>
+  </div>
+  <div routerLink="/public-leaderboard" routerLinkActive="active" class="op">
+    <a> LEADERBOARDS </a>
+  </div>
+</div>

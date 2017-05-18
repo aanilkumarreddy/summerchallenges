@@ -27,6 +27,9 @@ import { EditComponent } from './edit/edit.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { AdminInscripcionesComponent } from './admin-inscripciones/admin-inscripciones.component';
 import { WodsComponent } from './wods/wods.component';
+import { WodsService } from './wods/wods.service';
+import { PublicLeaderboardComponent } from './public-leaderboard/public-leaderboard.component';
+import { PublicWodsComponent } from './public-wods/public-wods.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -44,6 +47,8 @@ const appRoutes : Routes = [
   { path : 'confirmacion', component : InscripcionComponent },
   { path : 'edit', component : EditComponent},
   { path : 'wods', component : WodsComponent},
+  { path : 'public-wods', component : PublicWodsComponent},
+  { path : 'public-leaderboard', component : PublicLeaderboardComponent},
   { path : 'admin', component : AdminInscripcionesComponent},
   { path : '', redirectTo : '/login', pathMatch : 'full'},
   { path : '**', redirectTo : '/' }
@@ -64,7 +69,9 @@ const appRoutes : Routes = [
     EditComponent,
     LeaderboardComponent,
     AdminInscripcionesComponent,
-    WodsComponent
+    WodsComponent,
+    PublicLeaderboardComponent,
+    PublicWodsComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +87,8 @@ const appRoutes : Routes = [
     AtletaService,
     CategoriasService,
     AtletasService,
-    InscripcionService
+    InscripcionService,
+    WodsService
   ],
   bootstrap: [AppComponent]
 })

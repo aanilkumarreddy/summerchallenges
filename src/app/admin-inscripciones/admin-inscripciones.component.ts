@@ -4,6 +4,7 @@ import { AtletasService } from "../atletas/atletas.service";
 import { AdminAtleta } from "./admin-atleta";
 import { AngularFire } from "angularfire2";
 import { Router } from "@angular/router";
+import { WodsService } from "../wods/wods.service";
 
 @Component({
   selector: 'app-admin-inscripciones',
@@ -31,7 +32,10 @@ export class AdminInscripcionesComponent implements OnInit {
   public num_msf : number;
   public num_tn : number;
 
-  constructor(private atletasService : AtletasService, private af : AngularFire, private router : Router) { 
+  constructor(private atletasService : AtletasService,
+              private af : AngularFire, 
+              private router : Router,
+              private wodsService : WodsService) { 
 
   this.atletas = this.atletasService.atletas;
   this.getAtletas();      
@@ -94,6 +98,10 @@ export class AdminInscripcionesComponent implements OnInit {
     let inscripcion = {estado : 2, fecha : fecha, id_pedido : pedido};
     const atl = this.atletasService.getAtleta_byKey(key);
     atl.update({ inscripcion : inscripcion });
+    let wod = {puntuacion : 0, tiempo : 0, url : 0, puesto : ""};
+    this.wodsService.update_wod1(key, wod);
+    this.wodsService.update_wod2(key, wod);
+    this.wodsService.update_puntos(key, 0);
   }
 
   desactivar(key, fecha, pedido){

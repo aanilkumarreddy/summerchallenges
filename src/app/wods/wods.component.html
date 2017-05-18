@@ -1,55 +1,80 @@
 <section class="container-fluid">
+  <div *ngIf="atleta" class="container mis-wod">
+    <div class="mi-wod">
+      <div class="mi-titulo">
+        TU WORKOUT 1
+      </div>
+      <div class="mi-puntuacion">
+        REPS: {{atleta.wod_1.puntuacion}}
+      </div>
+      <div class="mi-puesto">
+        PUESTO: {{atleta.wod_1.puesto}}
+      </div>
+    </div>
+    <div class="mi-wod">
+      <div class="mi-titulo">
+        TU WORKOUT 2
+      </div>
+      <div class="mi-puntuacion">
+        REPS: {{atleta.wod_2.puntuacion}}
+      </div>
+      <div class="mi-puesto">
+        PUESTO: {{atleta.wod_2.puesto}}
+      </div>
+    </div>
+  </div>
   <div class="container wods-container">
-
-    <div class="wod-container">
+    <div *ngFor="let wod of wods" class="wod-container">
+      <div class="wod-cc">
       <h1 class="wod-title">
-        WORKOUT 1
+        {{wod.titulo}}
       </h1>
       <div class="wod-img-container">
-        <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/covers%2Fremo-01.jpg?alt=media&token=faaca776-1af7-4422-b0e2-c8a36cf13f8c" alt="Lanzarote Summer Challenge 2017 - WORKOUT 1" />
+        <img src="{{wod.imagen}}" alt="Lanzarote Summer Challenge 2017 - {{wod.titulo}}" />
       </div>
       <div class="wod-description-container">
         <div class="wod-movements">
-          <p> 
-            <b> AMRAP 9' </b> <br />
-            100 cal row, <br />
-            Max burpees over the row (saltando el remo).
-          </p>
+          <div *ngFor="let p of wod.descripcion" class="movement-block">{{p}}<br /></div>
         </div>
         <div class="wod-poweredBy">
           <span> Patrocinado por: </span>
-          <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/logos%2Fhatlex-nm.png?alt=media&token=15e9041d-2ed4-4404-bfb6-6e989b4074d7" alt="Hatlex Canarias" />
+          <img src="{{wod.patrocinador.img}}" alt="{{wod.patrocinador.nombre}}" />
         </div>
+        <div class="especifications-container">
+          <div class="especifications-title">
+            <i class="material-icons">assignment</i>
+            <span> ESPECIFICACIONES </span>
+          </div>
+          <div *ngFor="let esp of wod.especificaciones" class="wod-especifications">
+            <p *ngIf="esp"> - {{esp}} </p>
+          </div>
+        </div>        
       </div>
-      <div class="wod-actions">
-         <button class="btn btn-block"> Enviar puntuación </button>
+      <div class="wod-actions"> 
+        <p class="puntuacion">PUNTUACION = {{wod.puntuacion}}</p>
+        <p class="puntuacion">TIEBRAKE = {{wod.tiebreak}}</p>
+        <div class="data">
+          <form #formPuntuacion>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><i class="material-icons">format_list_numbered</i></span>
+            <input type="text" placeholder="Puntuación" name="puntuacion" #puntuacion class="form-control" aria-describedby="basic-addon1" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><i class="material-icons"><i class="material-icons">access_time</i></i></span>
+            <input type="text" placeholder="Tiebrake (MM:SS)" name="time" #time class="form-control" aria-describedby="basic-addon1" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><i class="material-icons">videocam</i></span>
+            <input type="text" placeholder="URL / Link del vídeo" name="url" #url class="form-control"  aria-describedby="basic-addon1" required>
+          </div> 
+          <input *ngIf="wod.titulo=='WORKOUT 1' || wod.titulo=='WORKOUT 1 - TEENAGERS'" type="submit" class="btn btn-block" value="Enviar/Modificar puntuación" (click)="update_wod1(puntuacion, time, url, this.atleta.id_categoria)" />
+          <input *ngIf="wod.titulo=='WORKOUT 2' || wod.titulo=='WORKOUT 2 - TEENAGERS'" type="submit" class="btn btn-block" value="Enviar/Modificar puntuación" (click)="update_wod2(puntuacion, time, url, this.atleta.id_categoria)" />
+          </form>
+        </div>
+        
       </div>
-    </div>
-
-    <div class="wod-container">
-    <h1 class="wod-title">
-      WORKOUT 1
-    </h1>
-    <div class="wod-img-container">
-      <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/covers%2Fremo-01.jpg?alt=media&token=faaca776-1af7-4422-b0e2-c8a36cf13f8c" alt="Lanzarote Summer Challenge 2017 - WORKOUT 1" />
-    </div>
-    <div class="wod-description-container">
-      <div class="wod-movements">
-        <p> 
-          <b> AMRAP 9' </b> <br />
-          100 cal row, <br />
-          Max burpees over the row (saltando el remo).
-        </p>
-      </div>
-      <div class="wod-poweredBy">
-        <span> Patrocinado por: </span>
-        <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/logos%2Fhatlex-nm.png?alt=media&token=15e9041d-2ed4-4404-bfb6-6e989b4074d7" alt="Hatlex Canarias" />
-      </div>
-    </div>
-    <div class="wod-actions">
-        <button class="btn btn-block"> Enviar puntuación </button>
     </div>
   </div>
 
- </div>
+ </div> 
 </section>

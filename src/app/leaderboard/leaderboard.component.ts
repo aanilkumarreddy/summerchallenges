@@ -6,6 +6,7 @@ import { AuthCorreo } from "../auth/auth";
 import { Atleta } from "../atleta/atleta"; 
 import { AtletasService } from "../atletas/atletas.service";
 import { CategoriasService } from "../categorias/categorias.service";
+import { WodsService } from "../wods/wods.service";
 
 
 @Component({
@@ -28,8 +29,8 @@ export class LeaderboardComponent implements OnInit {
                private router : Router,
                private route: ActivatedRoute,
                private atletasService : AtletasService,
-               private categoriasService : CategoriasService) {
-  this.atleta = new Atleta("", "", "", "", "", ""); 
+               private categoriasService : CategoriasService,
+               private wodsService : WodsService) {
   //Nos subscribimos y cargamos los datos de auth para obtener el atleta actual
     this.af.auth.subscribe( (data : any) => {
       if(data){
@@ -41,6 +42,7 @@ export class LeaderboardComponent implements OnInit {
             atleta_actual.subscribe(data => {
               this.atleta = data;
               this.key = data.$key;
+              console.log(data.$key);
   
               const categoria_actual = this.categoriasService.getCategoria(data.id_categoria);
               categoria_actual.subscribe(data => {
@@ -62,7 +64,7 @@ export class LeaderboardComponent implements OnInit {
 
     })
 
-   }
+   }   
 
   ngOnInit() {
   }
@@ -77,6 +79,8 @@ export class LeaderboardComponent implements OnInit {
     const aux_atletas = this.atletasService.getAtletas_byCategoria(id_categoria);
     aux_atletas.subscribe(data => {
       this.atletas = data.filter(atleta => atleta.inscripcion.estado>1);
+      this.wodsService.update_leaderboard_wod1(this.atletas);
+      this.wodsService.update_leaderboard_wod2(this.atletas);
     })
   }
 
