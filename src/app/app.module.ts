@@ -33,11 +33,11 @@ import { PublicWodsComponent } from './public-wods/public-wods.component';
 
 // Must export the config
 export const firebaseConfig = {
-  apiKey: "AIzaSyDfWOWoqNiwXG2A275hpPGfxR7vKqeP5hw",
-  authDomain: "lnzsumchl1.firebaseapp.com",
-  databaseURL: "https://lnzsumchl1.firebaseio.com",
-  storageBucket: "lnzsumchl1.appspot.com",
-  messagingSenderId: "523835141115"
+  apiKey: "---",
+  authDomain: "---",
+  databaseURL: "---",
+  storageBucket: "---",
+  messagingSenderId: "---"
 };
 
 const appRoutes : Routes = [
