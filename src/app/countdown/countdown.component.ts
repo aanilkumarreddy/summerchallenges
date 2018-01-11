@@ -16,12 +16,21 @@ export class CountdownComponent implements OnInit {
   public minutes : Number;
   public seconds : Number;
 
+  public months = {
+    feb : {
+      month: "febrero",
+      days : 28,
+      start: 3,
+      special_days: ["2-28", "Clasificatorio online"]
+    }
+  }
+
   constructor() {
     setInterval(this.getCountDown, 1000);
   }
 
   ngOnInit() {
-
+    this.getCountDown();
   }
 
   getCountDown() {
@@ -63,12 +72,25 @@ export class CountdownComponent implements OnInit {
 
     var seconds = Math.floor(interval / 1000 );
 
+    let aux : Array<string> = [];
+    let aux_hours : string;
+    let aux_minutes : string;
+    let aux_seconds : string;
+
+    aux = [aux_hours, aux_minutes, aux_seconds];
+
+    let data : Array<number> = [];
+    data = [hours, minutes, seconds];
+
+    aux.forEach((t, index) => {
+      let time : number = data[index];
+      (time / 10) < 1 ? t = "0" + time : t = "" + time;
+      aux[index] = t;
+    });
+
     _days.innerText = "" + days;
-    _hours.innerText = "" + hours;
-    _minutes.innerText = "" + minutes;
-    _seconds.innerText = "" + seconds;
-
-
-    console.log(this.seconds);
+    _hours.innerText = aux[0];
+    _minutes.innerText = aux[1];
+    _seconds.innerText = aux[2];
   }
 }

@@ -56,8 +56,8 @@ const appRoutes : Routes = [
   { path : 'admin', component : AdminInscripcionesComponent},
   { path : 'admin-leaderboard', component : AdminLeaderboardComponent},
   { path : 'team-scores', component : TeamScoresComponent},
-  { path : '', redirectTo : '/login', pathMatch : 'full'},
-  { path : '**', redirectTo : '/' }
+  { path : '', redirectTo : '/countdown', pathMatch : 'full'},
+  { path : '**', redirectTo : '/countdown' }
 ];
 
 @NgModule({

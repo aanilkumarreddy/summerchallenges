@@ -86,6 +86,11 @@ table tr{
 .flex {
     display: flex;
 }
+.flex-center {
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
 
 .flex-column {
     flex-direction: column;

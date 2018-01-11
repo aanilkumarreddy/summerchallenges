@@ -1,5 +1,24 @@
+section {
+    width: 80%;
+    margin: 0 auto;
+}
+.countdown-container {
+    width: 75%;
+    height: 100vh;
+    color: white;
+}
+.logo-container {
+    width: 25%;
+}
+.logo-container img {
+    width: 100%;
+    max-height: 80vh;
+}
 .countdown {
-
+    background-color: #5d9d9d;
+    width: 80%;
+    border-radius: 3px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .countdown .date {
     display: flex;
@@ -8,6 +27,31 @@
     justify-content: center;
     align-items: center;
     flex: 1;
-    font-size: 4em;
-    font-weight: 800;
+    padding: 16px 8px 32px 8px;
+    text-align: center;
+}
+.countdown .date:first-child {
+    flex: 2;
+    border-right: 3px solid rgba(11,11,11, 0.06);
+}
+.date:first-child .date-time {
+    font-size: 8em;
+}
+.date-title {
+    font-size: 1em;
+    font-weight: 100;
+}
+.date-time {
+    font-size: 5em;
+    line-height: 1.2em;
+    color: #ffffff;
+        text-shadow:
+    -1px -1px 1px rgba(11,11,11, 0.1),
+    2px 2px 1px rgba(22,22,22, 0.2);
+}
+
+.cool-shadow {
+    text-shadow:
+    -1px -1px 1px rgba(11,11,11, 0.1),
+    2px 2px 1px rgba(22,22,22, 0.2);
 }
