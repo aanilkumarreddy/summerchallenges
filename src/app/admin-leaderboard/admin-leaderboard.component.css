@@ -1,7 +1,7 @@
 
-.leaderboard-container{
-    padding-top: 80px;
-    margin-bottom: 80px;
+.leaderboard-container:first-child{
+    padding-top: 20px;
+    margin-bottom: 40px;
 }
 .leaderboard-container h2{
     text-transform: uppercase;
@@ -18,6 +18,9 @@
 table{
     width: 100%;
     background-color: white;
+}
+p.p12{
+    font-size: 18px;
 }
 table tr{
     display: flex;
@@ -68,22 +71,32 @@ table tr td span{
 .container-of{
     display:flex;
     flex-direction: column;
+    margin-bottom: 25px;
 }
 .boton-container{
     display: flex;
     flex: 1;
 }
 .boton-container .btn{
-    /*flex: 1;*/
+    flex: 1;
     transition: all 0.2s ease-in-out;
+}
+.btn-lg{
+    width: 90%;
+    margin: 12px;
+
 }
 .btn:hover{
     background-color: rgba(222,222,222,0.8);
 }
 p.info{
-    color: white;
-    text-align: center;
-    font-size: 2vh;
+    color: black;
+    text-align: justify;
+    font-size: 2.2vh;
+    background-color: white;
+    padding: 12px;
+    border-radius: 3px;
+    border: 5px solid rgba(222,222,222, 0.6);
 }
 @media(max-width: 780px){
 

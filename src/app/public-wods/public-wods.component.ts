@@ -10,10 +10,8 @@ export class PublicWodsComponent implements OnInit {
   public wods;
   public aux_wods;
 
-  constructor(private wodsSerive : WodsService) { 
-    this.wodsSerive.wods.subscribe(wods =>{
-      this.setWods(wods);
-    })
+  constructor(private wodsService : WodsService) { 
+    this.wods = this.wodsService.wods;
   }
 
   ngOnInit() {

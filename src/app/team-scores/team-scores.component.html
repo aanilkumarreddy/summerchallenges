@@ -1,0 +1,153 @@
+<div *ngIf="atleta" class="container-fluid">
+  <div clas="container">
+    <div class="atleta-container">
+
+      <!-- ATLETA 1 -->
+      <div *ngIf="atl_1.nombre" class="atleta">
+
+        <!-- SI YA TENEMOS DATOS -->
+        <div class="name"> {{atl_1.nombre}} ({{atl_1.id}}) </div>
+        <div class="urls">
+          <div  class="show">
+            <div *ngIf="!atl_1.url_1" class="wod1">
+              <form>
+                URL WOD 1: <input #url type="text" required/>
+                <button class="btn" (click)="addUrl(1, 1, url)"> Enviar </button>
+              </form>
+            </div>
+            <div *ngIf="atl_1.url_1" class="wod1">
+                URL WOD 1: <a href="{{atl_1.url_1}}"> {{atl_1.url_1}} </a> 
+                <button class="btn" (click)="removeUrl(1, 1)"> Borrar </button>
+            </div>
+          </div>
+          <div *ngIf="!atl_1.url_2" class="show">
+            <div class="wod1">
+              <form>
+                URL WOD 2: <input #url type="text" required/>
+                <button class="btn" (click)="addUrl(2, 1, url)"> Enviar </button>
+              </form>
+            </div>            
+          </div>
+          <div *ngIf="atl_1.url_2" class="show">
+            URL WOD 2: <a href="{{atl_1.url_2}}"> {{atl_1.url_2}} </a> 
+            <button class="btn" (click)="removeUrl(2, 1)"> Borrar </button>
+          </div>
+        </div>
+        <!-- FIN SI YA TENEMOS DATOS -->
+        
+      </div>
+      <!-- FIN ATLETA 1 -->
+
+      <div *ngIf="!atleta.atl_1" class="atleta-input">
+        <!-- PARA AÑADIRLO -->
+        <div class="name"> ATLETA 1: </div>
+        <form>
+        <input type="text" placeholder="Nombre" #nombre required/>
+        <input type="text" placeholder="DNI / ID" #id required/>
+        <button class="btn" (click)="addAthlete(1, nombre, id)" class="btn"> Añadir </button>
+        </form>
+        <!-- FIN PARA AÑADIRLO -->
+      </div>
+    </div>
+
+    <div class="atleta-container">
+
+      <!-- ATLETA 2 -->
+      <div *ngIf="atl_2.nombre" class="atleta">
+
+        <!-- SI YA TENEMOS DATOS -->
+        <div class="name"> {{atl_2.nombre}} ({{atl_2.id}})  </div>
+        <div class="urls">
+          <div  class="show">
+            <div *ngIf="!atl_2.url_1" class="wod1">
+              <form>
+                URL WOD 1: <input #url type="text" required/>
+                <button class="btn" (click)="addUrl(1, 2, url)"> Enviar </button>
+              </form>
+            </div>
+            <div *ngIf="atl_2.url_1" class="wod1">
+                URL WOD 1: <a href="{{atl_2.url_1}}"> {{atl_2.url_1}} </a> 
+                <button class="btn" (click)="removeUrl(1, 2)"> Borrar </button>
+            </div>
+          </div>
+          <div *ngIf="!atl_2.url_2" class="show">
+            <div class="wod1">
+              <form>
+                URL WOD 2: <input #url type="text" required/>
+                <button class="btn" (click)="addUrl(2, 2, url)"> Enviar </button>
+              </form>
+            </div>            
+          </div>
+          <div *ngIf="atl_2.url_2" class="show">
+            URL WOD 2: <a href="{{atl_2.url_2}}"> {{atl_2.url_2}} </a> 
+            <button class="btn" (click)="removeUrl(2, 2)"> Borrar </button>
+          </div>
+        </div>
+        <!-- FIN SI YA TENEMOS DATOS -->
+        
+      </div>
+      <!-- FIN ATLETA 2 -->
+
+      <div *ngIf="!atleta.atl_2" class="atleta-input">
+        <!-- PARA AÑADIRLO -->
+        ATLETA 2:
+        <form>
+        <input type="text" placeholder="Nombre" #nombre required/>
+        <input type="text" placeholder="DNI / ID" #id required/>
+        <button class="btn" (click)="addAthlete(2, nombre, id)" class="btn"> Añadir </button>
+        </form>
+        <!-- FIN PARA AÑADIRLO -->
+      </div>
+    </div>
+
+    <div class="atleta-container">
+      <!-- ATLETA 3 -->
+      <div *ngIf="atl_3.nombre" class="atleta">
+
+        <!-- SI YA TENEMOS DATOS -->
+        <div class="name"> {{atl_3.nombre}} ({{atl_3.id}})  </div>
+        <div class="urls">
+          <div  class="show">
+            <div *ngIf="!atl_3.url_1" class="wod1">
+              <form>
+                URL WOD 1: <input #url type="text" required/>
+                <input #atl value="{{atl_3.nombre}}" type="hidden" />
+                <button class="btn" (click)="addUrl(1,3,url)"> Enviar </button>
+              </form>
+            </div>
+            <div *ngIf="atl_3.url_1" class="wod1">
+                URL WOD 1: <a href="{{atl_3.url_1}}"> {{atl_3.url_1}} </a> 
+                <button class="btn" (click)="removeUrl(1,3)"> Borrar </button>
+            </div>
+          </div>
+          <div *ngIf="!atl_3.url_2" class="show">
+            <div class="wod1">
+              <form>
+                URL WOD 2: <input #url type="text" required/>
+                <button class="btn" (click)="addUrl(2,3,url)"> Enviar </button>
+              </form>
+            </div>            
+          </div>
+          <div *ngIf="atl_3.url_2" class="show">
+                URL WOD 2: <a href="{{atl_3.url_2}}"> {{atl_3.url_2}} </a> 
+                <button class="btn" (click)="removeUrl(2,3)"> Borrar </button>
+            </div>
+        </div>
+        <!-- FIN SI YA TENEMOS DATOS -->
+        
+      </div>
+      <!-- FIN ATLETA 1 -->
+
+      <div *ngIf="!atleta.atl_3" class="atleta-input">
+        <!-- PARA AÑADIRLO -->
+        <form>
+        <input type="text" placeholder="Nombre" #nombre required/>
+        <input type="text" placeholder="DNI / ID" #id required/>
+        <button class="btn" (click)="addAthlete(3, nombre, id)" class="btn"> Añadir </button>
+        </form>
+        <!-- FIN PARA AÑADIRLO -->
+      </div>
+    </div>
+
+  </div>
+</div>

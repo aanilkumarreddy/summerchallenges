@@ -74,7 +74,6 @@
   color: white;
 }
 
-
 /* RESPONSIVE */
 @media(max-width: 748px){
   .info-container{
@@ -216,6 +215,6 @@
     display: none;
   }
   .navbar .phone-mobile{
-    display: flex; 
+    display: flex;
   }
 }

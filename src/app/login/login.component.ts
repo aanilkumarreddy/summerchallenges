@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
               ) { 
     this.af.auth.subscribe( (data : any) => {
       if(data){
-        this.router.navigate(['/dashboard']);
       }else{
       }
 

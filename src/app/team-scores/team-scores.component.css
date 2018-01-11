@@ -1,0 +1,74 @@
+.container-fluid{
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+
+.container{
+    display : flex;
+    flex-direction: column;
+}
+
+.atleta-container{
+    display: flex;
+    flex: 1;
+    background-color: white;
+    color: black;
+    margin-bottom: 40px;
+}
+.atleta-container .atleta{
+    flex: 1;
+}
+.atleta-container .atleta .name{
+    width: 100%;
+    background-color: #ffc600;
+    font-weight: 800;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+}
+.urls{
+    display: flex;
+    flex-direction: row;
+}
+.show{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
+}
+.show *{
+    flex: 1;
+}
+.show a{
+    font-size: 10px;
+}
+.show form{
+    display: flex;
+    vertical-align: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.btn{
+    max-width: 80%; 
+}
+.atleta-input{
+    display: flex;
+    flex-direction: column;
+    vertical-align: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+.atleta-input .name{
+    width: 100%;
+    background-color: #ffc600;
+    text-align: center;
+    padding: 8px;
+    color: white;
+    font-weight: 800;
+}

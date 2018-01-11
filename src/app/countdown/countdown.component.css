@@ -1,0 +1,13 @@
+.countdown {
+
+}
+.countdown .date {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    font-size: 4em;
+    font-weight: 800;
+}

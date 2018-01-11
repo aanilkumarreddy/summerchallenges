@@ -4,7 +4,7 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-repeat: no-repeat;  
+    background-repeat: no-repeat;
     background-image: url('assets/img/bg-01.jpg');
 }
 /* PROBANDO */
@@ -51,10 +51,10 @@ table tr{
     margin-bottom: 5px;
     padding-top: 12px;
 }
-.input-group-addon{    
+.input-group-addon{
     background-color: transparent;
     color: #ffc600;
-    border: none; 
+    border: none;
 }
 .form-control{
     box-shadow: none;
@@ -81,4 +81,12 @@ table tr{
   font-size: 10px;
   background-color: transparent !important;
   border: none;
+}
+/* v 2.0 */
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
 }

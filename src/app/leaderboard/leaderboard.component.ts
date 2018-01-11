@@ -17,7 +17,7 @@ import { WodsService } from "../wods/wods.service";
 export class LeaderboardComponent implements OnInit {
   private auth : any;
   public key : any;
-  public atleta : Atleta;
+  public atleta : any;
   public categoria : any;
   public estado : boolean;
   public atletas : any;
@@ -30,58 +30,94 @@ export class LeaderboardComponent implements OnInit {
                private route: ActivatedRoute,
                private atletasService : AtletasService,
                private categoriasService : CategoriasService,
-               private wodsService : WodsService) {
-  //Nos subscribimos y cargamos los datos de auth para obtener el atleta actual
-    this.af.auth.subscribe( (data : any) => {
-      if(data){
-        this.auth = data.auth;
-        let aux_atleta = this.atletasService.getAtleta_byEmail(this.auth.email);
-        aux_atleta.subscribe(data => {
-          data.forEach(element => {
-            const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
-            atleta_actual.subscribe(data => {
-              this.atleta = data;
-              this.key = data.$key;
-              console.log(data.$key);
-  
-              const categoria_actual = this.categoriasService.getCategoria(data.id_categoria);
-              categoria_actual.subscribe(data => {
-                data.forEach(element => {
-                  this.categoria = element.nombre;
-                  this.id_categoria = element.c_id;
-                  this.getAtletas_byCategoria(element.c_id);
-                })
-              })
-            })
-          });
-        })
-
-      }else{
-        this.auth = null;
-        this.atleta = null;
-        this.router.navigate(['/login']);
-      }
-
-    })
-
+               private wodsService : WodsService) {    
+    this.atleta = this.atletasService.atleta;
+    this.key = this.atleta.$key;
+    this.categoria = this.atleta.id_categoria;
+    /*this.getAtletas_byCategoria(this.categoria);*/
    }   
 
   ngOnInit() {
   }
 
   getAtletas_byCategoria(id_categoria){
-    const cat = this.categoriasService.getCategoria(id_categoria);
-    cat.subscribe(data => {
-      data.forEach(categoria => {
-        this.aux_categoria = categoria.nombre;
-      })
+    this.atletas = this.atletasService.aux_atletas.filter(atleta => atleta.inscripcion.estado > 1 && atleta.id_categoria==id_categoria);    
+    this.orderBy_total(); 
+  }
+  orderBy_wod2(){
+    // Ordernar por wod_2
+    this.atletas.forEach(atleta =>{
+      atleta.wod_2.puntuacion = parseInt(atleta.wod_2.puntuacion);
     })
-    const aux_atletas = this.atletasService.getAtletas_byCategoria(id_categoria);
-    aux_atletas.subscribe(data => {
-      this.atletas = data.filter(atleta => atleta.inscripcion.estado>1);
-      this.wodsService.update_leaderboard_wod1(this.atletas);
-      this.wodsService.update_leaderboard_wod2(this.atletas);
+
+    this.atletas.sort((a, b) => a.wod_2.puntuacion < b.wod_2.puntuacion ? 1 : -1);
+    
+    let kk = 0;
+    this.atletas.forEach(atleta =>{
+      if(atleta.wod_2.puntuacion!=0){
+        kk++;
+        atleta.wod_2.puesto = kk;
+      }else{
+        atleta.wod_2.puesto = 99;
+      }
     })
+    this.atletas.sort((a, b) => a.wod_2.puesto > b.wod_2.puesto ? 1 : -1);
+
+    this.atletas.forEach(atleta =>{
+      if(atleta.wod_2.puesto == 99){
+        atleta.wod_2.puesto = "-";
+      }
+    })
+  }
+
+  orderBy_wod1(){
+    this.atletas.forEach(atleta =>{
+      atleta.wod_1.puntuacion = parseInt(atleta.wod_1.puntuacion);
+    })
+    this.atletas.sort((a, b) => a.wod_1.puntuacion < b.wod_1.puntuacion ? 1 : -1);
+
+    let kk = 0;
+    this.atletas.forEach(atleta =>{
+      if(atleta.wod_1.puntuacion!=0){
+        kk++;
+        atleta.wod_1.puesto = kk;
+      }else{
+        atleta.wod_1.puesto = 99;
+      }
+    })
+    this.atletas.sort((a, b) => a.wod_1.puesto > b.wod_1.puesto ? 1 : -1);
+
+    this.atletas.forEach(atleta =>{
+      if(atleta.wod_1.puesto == 99){
+        atleta.wod_1.puesto = "-";
+      }
+    })
+  }
+
+  orderBy_total(){
+
+    this.orderBy_wod1();
+    this.orderBy_wod2();
+    
+    this.atletas.forEach(atleta =>{
+      if(atleta.wod_1.puntuacion != 0 && atleta.wod_2.puntuacion != 0){
+        atleta.puntos = atleta.wod_1.puesto + atleta.wod_2.puesto;
+      }else if(atleta.wod_1.puntuacion != 0 || atleta.wod_2.puntuacion != 0){
+        atleta.puntos = 98;
+      }else{
+        atleta.puntos = 99;
+      }
+    })
+
+    this.atletas.sort((a, b) => a.puntos > b.puntos ? 1 : -1);
+
+    this.atletas.forEach(atleta =>{
+      if(atleta.puntos == 99 || atleta.puntos == 98){
+        atleta.puntos = "-";
+      }
+    })
+    
+    
   }
 
 }
