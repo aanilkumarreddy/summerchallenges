@@ -15,16 +15,25 @@ import { CategoriasService } from "../categorias/categorias.service";
 export class DashboardComponent implements OnInit {
   private auth : any;
   public key : any;
-  public atleta : Atleta;
+  public atleta : any;
   public categoria : any;
+  public teamData : boolean;
+  public team : any;
+                
   constructor( private authService : AuthService,
                private af : AngularFire,
                private router : Router,
                private route: ActivatedRoute,
                private atletasService : AtletasService,
                private categoriasService : CategoriasService) {
-  this.atleta = new Atleta("", "", "", "", "", ""); 
+  //this.atleta = new Atleta("", "", "", "", "", ""); 
   //Nos subscribimos y cargamos los datos de auth para obtener el atleta actual
+  this.router.navigate(['/login']);
+    this.team = {
+                  'atl_1' : "",
+                  'atl_2' : "",
+                  'atl_3' : ""
+                };
     this.af.auth.subscribe( (data : any) => {
       if(data){
         this.auth = data.auth;
@@ -33,6 +42,7 @@ export class DashboardComponent implements OnInit {
           data.forEach(element => {
             const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
             atleta_actual.subscribe(data => {
+              this.getTeam(data);
               this.atleta = data;
               this.key = data.$key;
               if(data.email == "info@summerchallenges.com"){
@@ -56,10 +66,72 @@ export class DashboardComponent implements OnInit {
       }
 
     })
-
    }
 
   ngOnInit() {
+  }
+
+  isTeam(atleta){
+    return atleta.id_categoria == 4 ? true : false;
+  }
+  getTeam(atleta){
+    
+    if(this.isTeam(atleta)){
+      this.teamData = true;
+      if(!atleta.atl_1){
+        return
+      }else{
+        this.team.atl_1 = atleta.atl_1 || "";
+        this.team.atl_2 = atleta.atl_2 || "";
+        this.team.atl_3 = atleta.atl_3 || "";
+        let flag = false;
+          if(this.team.atl_1.nombre == "" || this.team.atl_2.nombre == "" || this.team.atl_3.nombre == ""){
+            this.teamData = true;
+          }else{
+            this.teamData = false;
+          }
+      }
+    }
+  }
+
+  closeModal(){
+    const modal = document.querySelector('.team-modal');
+
+    modal.classList.add('off');
+    this.removeBlur();
+  }
+
+  removeBlur(){
+    const dashboard = document.querySelector('#dashboard');
+    dashboard.classList.remove('blur');
+  }
+
+  addAthlete_1(name, id){
+    if(!this.atleta.atl_1){
+        let atl_1 = {
+          nombre : name.value,
+          id : id.value
+        };
+      this.atletasService.updateTeam_1(this.key, atl_1);
+    }
+  }
+  addAthlete_2(name, id){
+    if(!this.atleta.atl_2){
+        let atl_1 = {
+          nombre : name.value,
+          id : id.value
+        };
+      this.atletasService.updateTeam_2(this.key, atl_1);
+    }
+  }
+  addAthlete_3(name, id){
+    if(!this.atleta.atl_3){
+        let atl_1 = {
+          nombre : name.value,
+          id : id.value
+        };
+      this.atletasService.updateTeam_3(this.key, atl_1);
+    }
   }
 
 }

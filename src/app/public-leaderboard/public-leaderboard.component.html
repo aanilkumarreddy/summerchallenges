@@ -1,13 +1,13 @@
 <div class="container">
   <div class="titulo">Selecciona categoría:</div>
-  <select [(ngModel)]="selectedValue" (change)="getLeaderboard(selectedValue, this.atletas)">
+  <select [(ngModel)]="selectedValue" (change)="getAtletas_byCategoria(selectedValue)">
     <option *ngFor="let categoria of categorias" [ngValue]="categoria.c_id" [selected]="categoria.c_id==1">
       {{categoria.nombre}}
     </option>
   </select>
-  <div *ngIf="leaderboard">
+  <div *ngIf="atletas">
     <div class="leaderboard">
-      <div class="atleta" *ngFor="let atleta of leaderboard; let pos = index">
+      <div class="atleta" *ngFor="let atleta of atletas; let pos = index">
         <div class="pos">
           {{pos+1}}º 
         </div>

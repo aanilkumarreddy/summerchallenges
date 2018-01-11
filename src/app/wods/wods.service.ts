@@ -6,13 +6,20 @@ import { AtletasService } from "../atletas/atletas.service";
 @Injectable()
 export class WodsService {
 
-  public wods : FirebaseListObservable <any[]>;
+  public wods : any;
   private allAtletes : any;
 
   constructor(private af : AngularFire,
               private authService : AuthService,
-              private atletasService : AtletasService) { 
-                this.wods = af.database.list('/Wods');
+              private atletasService : AtletasService) {
+                let aux_wods = af.database.list('/Wods');
+                aux_wods.subscribe(data =>{                  
+                  data.forEach(wod =>{
+                    wod.descripcion = wod.descripcion.split(">");
+                  })
+                  this.wods = data;
+                }) 
+  
                 this.atletasService.atletas.subscribe(atletas =>{
                   this.allAtletes = atletas;
                 })

@@ -1,4 +1,5 @@
 <div class="data-container">
+  <button routerLink="/admin-leaderboard" roterLinkActive="active"> ADMIN LEADERBOARD </button>
   <div class="num-container" *ngIf="num_inscripciones">
     <div class="num-panel">
       <span class="title">INSCRIPCIONES </span>
@@ -52,7 +53,7 @@
       <td id="actions"> Acciones </td>
     </tr>
     <tr *ngFor="let admin of lista_actual_no">
-      <td>{{admin.nombre}}<br /><span>({{admin.email}})</span></td>
+      <td>{{admin.nombre}}<br /><span>({{admin.email}} -<b>{{admin.$key}}</b>)</span></td>
       <td>{{admin.inscripcion.fecha || "Sin confirmar"}}</td>
       <td><b>{{admin.inscripcion.id_pedido}}</b></td> 
       <td>{{admin.inscripcion.estado}}</td>
@@ -74,7 +75,7 @@
       <td id="actions"> Acciones </td>
     </tr>
     <tr *ngFor="let admin of lista_actual_si">
-      <td>{{admin.nombre}}<br /><span>({{admin.email}})</span></td>
+      <td>{{admin.nombre}}<br /><span>({{admin.email}} - {{admin.$key}})</span></td>
       <td>{{admin.inscripcion.fecha || "Sin confirmar"}}</td>
       <td><b>{{admin.inscripcion.id_pedido}}</b></td>
       <td>{{admin.id_categoria}}</td> 

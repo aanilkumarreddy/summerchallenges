@@ -1,31 +1,18 @@
-<div class="container-fluid" id="dashboard">
+<div *ngIf="atleta" class="container-fluid" id="dashboard">
   <div class="container">
 
     <div class="message-container">
       <div class="icon-container">
         <i class="material-icons">error</i>
       </div>
-      <div *ngIf="atleta.inscripcion.estado<=1" class="text-container">
-        <p> 
-          Ahora ya estás registrado en nuestro sistema, <b>para poder acceder al clasificatorio online debes formalizar el pago de la inscripción</b>. Puedes realizar el pago a través
-          de nuestra plataforma de pago seguro haciendo click en alguno de los botones de "PAGAR INSCRIPCION" que hay habilitados en la pantalla.
-        </p>
-        <p> Una vez realizado el pago, tu perfil estará activado en un plazo máximo de 24 horas, no dudes en ponerte en contacto con nosotros
-          si tienes alguna incidencia. <br />
-          <b> info@summerchallenges.com </b>
-      </div>
       <div *ngIf="atleta.inscripcion.estado>1" class="text-container">
-        <p> 
-          Hemos recibido el pago de tu inscripción correctamente, ahora sólo te queda esperar para descubrir los WOD, ¿estás preparado?.
+        <p>
+            <b>¡CERRADO PLAZO DE SUBIDA DE PUNTUACIONES E INSCRIPCIONES!</b> <br />
+
+            Gracias por confiar en el Lanzarote Summer Challenge, estamos resolviendo las incidencias
+            que hayan podido tener los atletas durante el día de ayer (30 de mayo). La <b>clasificación final</b>
+            se dará a conocer el <b>viernes 02 de junio.</b>
         </p>
-      </div>
-      <div class="actions-container">
-        <a *ngIf="atleta.inscripcion.estado<=1" target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}">
-          <button class="btn btn-block">PAGAR INSCRIPCIÓN</button>
-        </a>
-        <a *ngIf="atleta.inscripcion.estado > 1" routerLink="/wods" routerLinkActive="active">
-          <button class="btn btn-block">VER WODS</button>
-        </a>
       </div>
     </div>
 
@@ -38,9 +25,9 @@
       <div class="profile-info">
         <div class="header-info">
           <div class="data-container">
-            <span id="name">{{atleta.nombre}}<i title="Editar" routerLink="/edit" routerLinkActive="active" class="material-icons mini-action">mode_edit</i></span> 
+            <span id="name">{{atleta.nombre}}</span> 
           </div>
-          <span id="email">{{atleta.email}}</span>
+          <span *ngIf="atleta.atl_1 && atleta.atl_2 && atleta.atl_3 && atleta.id_categoria==4 && !teamData" id="team">{{atleta.atl_1.nombre}} - {{atleta.atl_2.nombre}} - {{atleta.atl_3.nombre}}</span>
         </div>
         <div class="extra-info">
           <i class="material-icons">assessment</i> {{categoria}}
@@ -67,7 +54,39 @@
       <app-leaderboard></app-leaderboard> 
     </div>
 
+  </div>
+</div>
 
 
+<div *ngIf="teamData" class="team-modal modal">
+  <div class="container">
+    <div class="close-bar">
+      <span (click)="closeModal()"> X </span>
+    </div>
+    <div class="title">
+      <span> CONFIRMACIÓN ATLETAS TEAM </span>
+    </div>
+    <div class="form">
+      <form>
+        <div *ngIf="!atleta.atl_1" class="atleta">
+          <h3> ATLETA 1 </h3>
+          <input type="text" #nombre_1 name="nombre_1" placeholder="Nombre" required/>
+          <input type="text" #id_1 name="id_1" placeholder="ID / DNI" required/>
+          <button class="btn" (click)="addAthlete_1(nombre_1, id_1)"> CONFIRMAR </button>
+        </div>
+        <div *ngIf="!atleta.atl_2" class="atleta">
+          <h3> ATLETA 2 </h3>
+          <input type="text" #nombre_2 placeholder="Nombre" />
+          <input type="text" #id_2 placeholder="ID / DNI" />
+          <button class="btn" (click)="addAthlete_2(nombre_2, id_2)"> CONFIRMAR </button>
+        </div>
+        <div *ngIf="!atleta.atl_3" class="atleta">
+          <h3> ATLETA 3 </h3>
+          <input type="text" #nombre_3 placeholder="Nombre" />
+          <input type="text" #id_3 placeholder="ID / DNI" />
+          <button class="btn" (click)="addAthlete_3(nombre_3, id_3)"> CONFIRMAR </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

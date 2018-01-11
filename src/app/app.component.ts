@@ -5,7 +5,8 @@ import { AuthGoogle } from './auth/auth';
 import { AtletaService } from "./atleta/atleta.service";
 import { CategoriasService } from "./categorias/categorias.service";
 import { AtletasService } from "./atletas/atletas.service";
-import { RouterModule, Routes, Router} from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router';
+import { WodsService } from "./wods/wods.service";
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,14 @@ export class AppComponent {
   public aux_atletas : any;
   public atleta : any;
   public key : any;
+  public wods : any;
 
   constructor( private authService : AuthService,
                private af : AngularFire,
                private atletaService : AtletaService,
                private categoriasService : CategoriasService,
                private atletasService : AtletasService,
+               public wodsService : WodsService,
                private router : Router) {
     //Nos subscribimos y cargamos los datos de auth
     this.af.auth.subscribe( (data : any) => {
@@ -37,6 +40,8 @@ export class AppComponent {
             atleta_actual.subscribe(data => {
               this.atleta = data;
               this.key = data.$key;
+              this.atletasService.setAtletaActual(this.key);
+              this.categoriasService.setCategoriaActual(data.id_categoria);
             })
           });
         })
@@ -45,6 +50,8 @@ export class AppComponent {
         this.auth = null;
         this.atleta = null;
       }
+
+      this.wods = this.wodsService.wods;
 
     })
   } // fin del constructor

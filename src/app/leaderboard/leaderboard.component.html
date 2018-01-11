@@ -1,4 +1,8 @@
-<div *ngIf="atletas" class="container leaderboard-container">
+<div *ngIf="atleta" class="container leaderboard-container">
+  <h2>LEADERBOARD {{aux_categoria}} </h2>
+  <p class="info"> La clasificación es suceptible de contener errores de automatización. 
+    La clasificación definitiva será publicada una vez se haya finalizado el plazo
+    para entregar los WORKOUT. </p>
   <div class="container-of">
     <div class="boton-container">
       <button class="btn" (click)="getAtletas_byCategoria(atleta.id_categoria)"> Ver mi categoría </button>
@@ -15,17 +19,20 @@
   </div>
 
 
-  <h2 *ngIf="atletas">LEADERBOARD {{aux_categoria}} </h2>
-  <p class="info"> La clasificación es suceptible de contener errores de automatización. 
-    La clasificación definitiva será publicada una vez se haya finalizado el plazo
-    para entregar los WORKOUT. </p>
-  <table>
+
+    <div *ngIf="atletas" class="orderBy">
+      <span> ORDERNAR POR: </span>
+      <button class="btn" (click)="orderBy_total()"> PUNTOS </button>
+      <button class="btn" (click)="orderBy_wod1()"> WOD 1 </button>
+      <button class="btn" (click)="orderBy_wod2()"> WOD 2 </button>
+    </div>
+  <table *ngIf="atletas">
     <tr>
       <td id="pos"> POS </td>
       <td id="name"> NOMBRE </td>
-      <td id="score" class="score"> PUNTOS </td>
-      <td id="score" class="score"> WOD.1 </td>
-      <td id="score" class="score"> WOD.2 </td>
+      <td (click)="orderBy_total()" id="score" class="score"> PUNTOS</td>
+      <td (click)="orderBy_wod1()" id="score" class="score"> W 1</td>
+      <td (click)="orderBy_wod2()" id="score" class="score"> W 2</td>
     </tr>
     <tr *ngFor="let atleta of atletas; let i = index" [attr.data-index]="i">
       <td id="pos"> {{i+1}} </td>

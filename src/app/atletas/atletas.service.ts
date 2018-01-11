@@ -6,12 +6,18 @@ import { AuthService } from "../auth/auth.service";
 export class AtletasService {
 
   public atletas : FirebaseListObservable <any[ ]>;
+  public aux_atletas : any;
   public bandera;
-  private atleta : FirebaseObjectObservable <any []>;
+  public atleta : any;
+  public team : any;
 
   constructor(private af:AngularFire,
               private authService : AuthService) { 
     this.atletas = af.database.list('/Atletas');
+    this.atletas.subscribe(data =>{
+      this.aux_atletas = data;
+    })
+
   }
 
   getAtleta_byEmail(email : string){
@@ -26,6 +32,19 @@ export class AtletasService {
   
   getAtleta_byState(state:number){
 
+  }
+
+  getTeam_atl_1(key){
+    const aux_atleta = this.af.database.object('/Atletas/'+key+'/atl_1');
+    return aux_atleta;
+  }
+    getTeam_atl_2(key){
+    const aux_atleta = this.af.database.object('/Atletas/'+key+'/atl_2');
+    return aux_atleta;
+  }
+    getTeam_atl_3(key){
+    const aux_atleta = this.af.database.object('/Atletas/'+key+'/atl_3');
+    return aux_atleta;
   }
 
   getAtleta_byCoach(email : string){
@@ -64,6 +83,24 @@ export class AtletasService {
   updateCategory(key, categoria){
     const aux_atlete = this.getAtleta_byKey(key);
     aux_atlete.update({ id_categoria : categoria });
+  }
+  updateTeam_1(key, atl_1){
+    const aux_atleta = this.getAtleta_byKey(key);
+    aux_atleta.update({ atl_1 : atl_1});
+  }
+  updateTeam_2(key, atl_1){
+    const aux_atleta = this.getAtleta_byKey(key);
+    aux_atleta.update({ atl_2 : atl_1});
+  }
+  updateTeam_3(key, atl_1){
+    const aux_atleta = this.getAtleta_byKey(key);
+    aux_atleta.update({ atl_3 : atl_1});
+  }
+  setAtletaActual(key){
+    const aux_atleta = this.getAtleta_byKey(key);
+    aux_atleta.subscribe(data => {
+      this.atleta = data;
+    })
   }
 
 }

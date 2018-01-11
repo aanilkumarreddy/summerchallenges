@@ -30,6 +30,9 @@ import { WodsComponent } from './wods/wods.component';
 import { WodsService } from './wods/wods.service';
 import { PublicLeaderboardComponent } from './public-leaderboard/public-leaderboard.component';
 import { PublicWodsComponent } from './public-wods/public-wods.component';
+import { TeamScoresComponent } from './team-scores/team-scores.component';
+import { AdminLeaderboardComponent } from './admin-leaderboard/admin-leaderboard.component';
+import { CountdownComponent } from './countdown/countdown.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -47,11 +50,14 @@ const appRoutes : Routes = [
   { path : 'confirmacion', component : InscripcionComponent },
   { path : 'edit', component : EditComponent},
   { path : 'wods', component : WodsComponent},
+  { path: 'countdown', component: CountdownComponent},
   { path : 'public-wods', component : PublicWodsComponent},
   { path : 'public-leaderboard', component : PublicLeaderboardComponent},
   { path : 'admin', component : AdminInscripcionesComponent},
-  { path : '', redirectTo : '/login', pathMatch : 'full'},
-  { path : '**', redirectTo : '/' }
+  { path : 'admin-leaderboard', component : AdminLeaderboardComponent},
+  { path : 'team-scores', component : TeamScoresComponent},
+  { path : '', redirectTo : '/countdown', pathMatch : 'full'},
+  { path : '**', redirectTo : '/countdown' }
 ];
 
 @NgModule({
@@ -71,7 +77,10 @@ const appRoutes : Routes = [
     AdminInscripcionesComponent,
     WodsComponent,
     PublicLeaderboardComponent,
-    PublicWodsComponent
+    PublicWodsComponent,
+    TeamScoresComponent,
+    AdminLeaderboardComponent,
+    CountdownComponent
   ],
   imports: [
     BrowserModule,
