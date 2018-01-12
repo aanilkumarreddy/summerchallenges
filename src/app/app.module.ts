@@ -36,11 +36,12 @@ import { CountdownComponent } from './countdown/countdown.component';
 
 // Must export the config
 export const firebaseConfig = {
-  apiKey: "---",
-  authDomain: "---",
-  databaseURL: "---",
-  storageBucket: "---",
-  messagingSenderId: "---"
+  apiKey: "AIzaSyDfWOWoqNiwXG2A275hpPGfxR7vKqeP5hw",
+  authDomain: "lnzsumchl1.firebaseapp.com",
+  databaseURL: "https://lnzsumchl1.firebaseio.com",
+  projectId: "lnzsumchl1",
+  storageBucket: "lnzsumchl1.appspot.com",
+  messagingSenderId: "523835141115"
 };
 
 const appRoutes : Routes = [

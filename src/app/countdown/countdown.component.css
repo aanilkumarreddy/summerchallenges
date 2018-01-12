@@ -68,7 +68,7 @@ section {
         padding-top: 2.5%;
     }
     .logo-container img {
-        max-height: 70vh;
+        max-height: 380px;
     }
     .countdown-container {
         position: fixed;

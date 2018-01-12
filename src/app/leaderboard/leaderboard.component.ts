@@ -3,7 +3,7 @@ import { Router, RouterModule, ActivatedRoute } from "@angular/router";
 import { AuthService } from '../auth/auth.service';
 import { AngularFire, FirebaseListObservable } from "angularfire2";
 import { AuthCorreo } from "../auth/auth";
-import { Atleta } from "../atleta/atleta"; 
+import { Atleta } from "../atleta/atleta";
 import { AtletasService } from "../atletas/atletas.service";
 import { CategoriasService } from "../categorias/categorias.service";
 import { WodsService } from "../wods/wods.service";
@@ -30,19 +30,19 @@ export class LeaderboardComponent implements OnInit {
                private route: ActivatedRoute,
                private atletasService : AtletasService,
                private categoriasService : CategoriasService,
-               private wodsService : WodsService) {    
+               private wodsService : WodsService) {
     this.atleta = this.atletasService.atleta;
     this.key = this.atleta.$key;
     this.categoria = this.atleta.id_categoria;
     /*this.getAtletas_byCategoria(this.categoria);*/
-   }   
+   }
 
   ngOnInit() {
   }
 
   getAtletas_byCategoria(id_categoria){
-    this.atletas = this.atletasService.aux_atletas.filter(atleta => atleta.inscripcion.estado > 1 && atleta.id_categoria==id_categoria);    
-    this.orderBy_total(); 
+    this.atletas = this.atletasService.aux_atletas.filter(atleta => atleta.inscripcion.estado > 1 && atleta.id_categoria==id_categoria);
+    this.orderBy_total();
   }
   orderBy_wod2(){
     // Ordernar por wod_2
@@ -51,7 +51,7 @@ export class LeaderboardComponent implements OnInit {
     })
 
     this.atletas.sort((a, b) => a.wod_2.puntuacion < b.wod_2.puntuacion ? 1 : -1);
-    
+
     let kk = 0;
     this.atletas.forEach(atleta =>{
       if(atleta.wod_2.puntuacion!=0){
@@ -98,7 +98,7 @@ export class LeaderboardComponent implements OnInit {
 
     this.orderBy_wod1();
     this.orderBy_wod2();
-    
+
     this.atletas.forEach(atleta =>{
       if(atleta.wod_1.puntuacion != 0 && atleta.wod_2.puntuacion != 0){
         atleta.puntos = atleta.wod_1.puesto + atleta.wod_2.puesto;
@@ -116,8 +116,8 @@ export class LeaderboardComponent implements OnInit {
         atleta.puntos = "-";
       }
     })
-    
-    
+
+
   }
 
 }
