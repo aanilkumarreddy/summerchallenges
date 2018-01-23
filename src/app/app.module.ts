@@ -33,6 +33,8 @@ import { PublicWodsComponent } from './public-wods/public-wods.component';
 import { TeamScoresComponent } from './team-scores/team-scores.component';
 import { AdminLeaderboardComponent } from './admin-leaderboard/admin-leaderboard.component';
 import { CountdownComponent } from './countdown/countdown.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { RedSysAPIService } from './redSysAPI/red-sys-api.service'
 
 // Must export the config
 export const firebaseConfig = {
@@ -81,7 +83,8 @@ const appRoutes : Routes = [
     PublicWodsComponent,
     TeamScoresComponent,
     AdminLeaderboardComponent,
-    CountdownComponent
+    CountdownComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,7 +101,8 @@ const appRoutes : Routes = [
     CategoriasService,
     AtletasService,
     InscripcionService,
-    WodsService
+    WodsService,
+    RedSysAPIService
   ],
   bootstrap: [AppComponent]
 })

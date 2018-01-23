@@ -6,6 +6,7 @@ import { AuthCorreo } from "../auth/auth";
 import { Atleta } from "../atleta/atleta";
 import { AtletasService } from "../atletas/atletas.service";
 import { CategoriasService } from "../categorias/categorias.service";
+import { RedSysAPIService } from '../redSysAPI/red-sys-api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,16 +20,17 @@ export class DashboardComponent implements OnInit {
   public categoria : any;
   public teamData : boolean;
   public team : any;
-                
+
   constructor( private authService : AuthService,
                private af : AngularFire,
                private router : Router,
                private route: ActivatedRoute,
                private atletasService : AtletasService,
-               private categoriasService : CategoriasService) {
-  //this.atleta = new Atleta("", "", "", "", "", ""); 
+               private categoriasService : CategoriasService,
+               private redsys : RedSysAPIService) {
+  //this.atleta = new Atleta("", "", "", "", "", "");
   //Nos subscribimos y cargamos los datos de auth para obtener el atleta actual
-  this.router.navigate(['/login']);
+  //this.router.navigate(['/login']);
     this.team = {
                   'atl_1' : "",
                   'atl_2' : "",
@@ -48,7 +50,7 @@ export class DashboardComponent implements OnInit {
               if(data.email == "info@summerchallenges.com"){
                 this.router.navigate(['/admin']);
               }
-  
+
               const categoria_actual = this.categoriasService.getCategoria(data.id_categoria);
               categoria_actual.subscribe(data => {
                 data.forEach(element => {
@@ -75,7 +77,7 @@ export class DashboardComponent implements OnInit {
     return atleta.id_categoria == 4 ? true : false;
   }
   getTeam(atleta){
-    
+
     if(this.isTeam(atleta)){
       this.teamData = true;
       if(!atleta.atl_1){

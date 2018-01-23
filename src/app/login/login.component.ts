@@ -9,12 +9,14 @@ import { AngularFire } from "angularfire2";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit { 
+export class LoginComponent implements OnInit {
   public error : string = "Introduce tus credenciales para iniciar sesión";
+  public password : string = "Contraseña";
+
   constructor(private af : AngularFire,
               private router : Router,
               private authService : AuthService
-              ) { 
+              ) {
     this.af.auth.subscribe( (data : any) => {
       if(data){
       }else{
@@ -26,7 +28,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login_correo(email : HTMLInputElement, password : HTMLInputElement){    
+  manageInput(text: HTMLInputElement) {
+  }
+
+  login_correo(email : HTMLInputElement, password : HTMLInputElement){
     this.authService.login_correo(email.value, password.value)
       .then(promise => {this.router.navigate(['/dashboard'])},
       error => {
