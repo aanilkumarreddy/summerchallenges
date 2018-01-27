@@ -1,4 +1,4 @@
-<!--<nav class="navbar navbar-fixed-top">
+<nav class="navbar navbar-fixed-top">
   <div class="container-fluid header-container">
 
     <div routerLink="/" routerLinkActive="active" class="info-container datos">
@@ -19,15 +19,15 @@
       <button *ngIf="!auth" routerLink="/login" routerLinkActive="active" class="boton navbar-btn navbar-right"> ACCEDER </button>
       <button *ngIf="!auth" routerLink="/registro" routerLinkActive="active" class="boton navbar-btn navbar-right"> INSCRÍBETE </button>
     </div>
-      
+
     <div *ngIf="auth" class="auth-actions-container">
       <button class="boton navbar-btn navbar-right" (click)="logout()"> CERRAR SESION </button>
-      <a *ngIf="atleta && atleta.inscripcion.estado <= 1" target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}"> 
-        <button class="boton navbar-btn navbar-right">PAGAR INSCRIPCION </button> 
+      <a *ngIf="atleta && atleta.inscripcion.estado <= 1" target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}">
+        <button class="boton navbar-btn navbar-right">PAGAR INSCRIPCION </button>
       </a>
       <a routerLink="/edit" routerLinkActive="active">
           <button class="boton navbar-btn navbar-right"> MODIFICAR MIS DATOS </button>
-        </a> 
+        </a>
     </div>
 
   </div>
@@ -35,7 +35,7 @@
 
     <div class="info">
       <div *ngIf="atleta" class="datos">
-        <i class="material-icons"> account_circle </i>        
+        <i class="material-icons"> account_circle </i>
         <span id="name"> {{atleta.nombre}} </span>
       </div>
       <div *ngIf="!atleta" class="home" routerLink="/" routerLinkActive="active">
@@ -55,32 +55,32 @@
         <button *ngIf="!auth" routerLink="/registro" routerLinkActive="active" class="boton"> INSCRÍBETE </button>
       </div>
       <div *ngIf="auth && atleta && atleta.inscripcion.estado <= 1" class="payment">
-        <a target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}"> 
+        <a target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}">
           <button class="boton btn-block">PAGAR INSCRIPCION </button>
         </a>
         <a routerLink="/edit" routerLinkActive="active">
           <button class="boton btn-block"> MODIFICAR MIS DATOS </button>
-        </a> 
+        </a>
       </div>
       <div *ngIf="auth && atleta && atleta.inscripcion.estado > 1" class="payment">
-        <a routerLink="/wods" routerLinkActive="active"> 
-          <button class="boton btn-block">VER WODS </button> 
+        <a routerLink="/wods" routerLinkActive="active">
+          <button class="boton btn-block">VER WODS </button>
         </a>
         <a routerLink="/" routerLinkActive="active">
           <button class="boton btn-block"> VOLVER </button>
-        </a> 
+        </a>
       </div>
 
     </div>
 
   </div>
-</nav>-->
+</nav>
 <router-outlet></router-outlet>
-<!--<div class="menu-bottom-fixed">
+<div class="menu-bottom-fixed">
   <div routerLink="/public-wods" routerLinkActive="active" class="op">
     <a > VER WODS </a>
   </div>
   <div routerLink="/public-leaderboard" routerLinkActive="active" class="op">
     <a> LEADERBOARDS </a>
   </div>
-</div>-->
+</div>

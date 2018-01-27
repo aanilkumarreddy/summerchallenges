@@ -6,6 +6,8 @@ import { AuthCorreo } from "../auth/auth";
 import { Atleta } from "../atleta/atleta";
 import { AtletasService } from "../atletas/atletas.service";
 import { CategoriasService } from "../categorias/categorias.service";
+import { RedSysAPIService } from '../redSysAPI/red-sys-api.service';
+import { RedsysPayment } from '../models/redsys-payment';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,16 +21,19 @@ export class DashboardComponent implements OnInit {
   public categoria : any;
   public teamData : boolean;
   public team : any;
-                
+  private paymentData : any;
+
   constructor( private authService : AuthService,
                private af : AngularFire,
                private router : Router,
                private route: ActivatedRoute,
                private atletasService : AtletasService,
-               private categoriasService : CategoriasService) {
-  //this.atleta = new Atleta("", "", "", "", "", ""); 
+               private categoriasService : CategoriasService,
+               private redsys : RedSysAPIService) {
+  //this.atleta = new Atleta("", "", "", "", "", "");
   //Nos subscribimos y cargamos los datos de auth para obtener el atleta actual
-  this.router.navigate(['/login']);
+  //this.router.navigate(['/login']);
+
     this.team = {
                   'atl_1' : "",
                   'atl_2' : "",
@@ -36,6 +41,9 @@ export class DashboardComponent implements OnInit {
                 };
     this.af.auth.subscribe( (data : any) => {
       if(data){
+        //Cargamos los datos necesarios para gestionar el pago de la inscripción
+        //this.paymentData = this.getPaymentData();
+
         this.auth = data.auth;
         let aux_atleta = this.atletasService.getAtleta_byEmail(this.auth.email);
         aux_atleta.subscribe(data => {
@@ -48,7 +56,7 @@ export class DashboardComponent implements OnInit {
               if(data.email == "info@summerchallenges.com"){
                 this.router.navigate(['/admin']);
               }
-  
+
               const categoria_actual = this.categoriasService.getCategoria(data.id_categoria);
               categoria_actual.subscribe(data => {
                 data.forEach(element => {
@@ -75,7 +83,7 @@ export class DashboardComponent implements OnInit {
     return atleta.id_categoria == 4 ? true : false;
   }
   getTeam(atleta){
-    
+
     if(this.isTeam(atleta)){
       this.teamData = true;
       if(!atleta.atl_1){
@@ -132,6 +140,47 @@ export class DashboardComponent implements OnInit {
         };
       this.atletasService.updateTeam_3(this.key, atl_1);
     }
+  }
+  getPaymentData() {
+    return this.redsys.getData(this.atleta.email)
+      .subscribe(data => data)
+  }
+  pay() {
+    console.log(this.atleta);
+    let payment = this.redsys.getData(this.atleta.email);
+    payment.subscribe(data => {
+      let payment_form : HTMLFormElement = document.createElement('form');
+
+      payment_form.setAttribute('method', 'POST');
+      payment_form.setAttribute('action', data.url);
+      payment_form.setAttribute('target', '_blank');
+
+      let params : HTMLInputElement = document.createElement('input');
+      params.setAttribute('name', 'Ds_MerchantParameters');
+      params.setAttribute('type', 'hidden');
+      params.setAttribute('value', data.params);
+      payment_form.appendChild(params);
+
+      let version : HTMLInputElement = document.createElement('input');
+      version.setAttribute('name', 'Ds_SignatureVersion');
+      version.setAttribute('type', 'hidden');
+      version.setAttribute('value', data.version);
+      payment_form.appendChild(version);
+
+      let signature : HTMLInputElement = document.createElement('input');
+      signature.setAttribute('name', 'Ds_Signature');
+      signature.setAttribute('type', 'hidden');
+      signature.setAttribute('value', data.signature);
+      payment_form.appendChild(signature);
+
+      document.body.appendChild(payment_form);
+        // TODO: delete this
+        console.log(data);
+      payment_form.submit();
+    })
+
+
+
   }
 
 }

@@ -16,14 +16,15 @@ export class CountdownComponent implements OnInit {
   public minutes : Number;
   public seconds : Number;
 
-  public months = {
-    feb : {
+  public months = [
+    {
       month: "febrero",
       days : 28,
       start: 3,
       special_days: ["2-28", "Clasificatorio online"]
-    }
-  }
+    },
+    {},{}
+  ];
 
   constructor() {
     setInterval(this.getCountDown, 1000);
