@@ -41,9 +41,6 @@ export class DashboardComponent implements OnInit {
                 };
     this.af.auth.subscribe( (data : any) => {
       if(data){
-        //Cargamos los datos necesarios para gestionar el pago de la inscripción
-        //this.paymentData = this.getPaymentData();
-
         this.auth = data.auth;
         let aux_atleta = this.atletasService.getAtleta_byEmail(this.auth.email);
         aux_atleta.subscribe(data => {
@@ -141,32 +138,37 @@ export class DashboardComponent implements OnInit {
       this.atletasService.updateTeam_3(this.key, atl_1);
     }
   }
-  getPaymentData() {
-    return this.redsys.getData(this.atleta.email)
-      .subscribe(data => data)
-  }
-  pay() {
-    console.log(this.atleta.$key);
-    let payment = this.redsys.getData(this.atleta.$key);
-    payment.subscribe(data => {
-      let payment_form : HTMLFormElement = document.createElement('form');
 
+  pay() {
+    //TODO - Eliminar, es sólo para test.
+    console.log(this.atleta.$key);
+
+    // Obtenemos los datos de pago de la API
+    let payment = this.redsys.getData(this.atleta.$key);
+
+    //Nos suscribimos a la respuesta de la API
+    payment.subscribe(data => {
+      //Formulario de envio de datos para Redsys
+      let payment_form : HTMLFormElement = document.createElement('form');
       payment_form.setAttribute('method', 'POST');
       payment_form.setAttribute('action', data.url);
       payment_form.setAttribute('target', '_blank');
 
+      //Input con los parametros de la compra devueltos por la API - Datos obligatorios + opcionales + urls
       let params : HTMLInputElement = document.createElement('input');
       params.setAttribute('name', 'Ds_MerchantParameters');
       params.setAttribute('type', 'hidden');
       params.setAttribute('value', data.params);
       payment_form.appendChild(params);
 
+      //Input con la versión de la firma de RedSys - Obligatorio
       let version : HTMLInputElement = document.createElement('input');
       version.setAttribute('name', 'Ds_SignatureVersion');
       version.setAttribute('type', 'hidden');
       version.setAttribute('value', data.version);
       payment_form.appendChild(version);
 
+      //Input con la firma de Redsys - Obligatorio
       let signature : HTMLInputElement = document.createElement('input');
       signature.setAttribute('name', 'Ds_Signature');
       signature.setAttribute('type', 'hidden');
@@ -174,8 +176,8 @@ export class DashboardComponent implements OnInit {
       payment_form.appendChild(signature);
 
       document.body.appendChild(payment_form);
-        // TODO: delete this
-        console.log(data);
+
+      //Enviamos formulario - Redireccionamiento a Redsys.
       payment_form.submit();
     })
 
