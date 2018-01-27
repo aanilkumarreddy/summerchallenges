@@ -146,8 +146,8 @@ export class DashboardComponent implements OnInit {
       .subscribe(data => data)
   }
   pay() {
-    console.log(this.atleta);
-    let payment = this.redsys.getData(this.atleta.email);
+    console.log(this.atleta.$key);
+    let payment = this.redsys.getData(this.atleta.$key);
     payment.subscribe(data => {
       let payment_form : HTMLFormElement = document.createElement('form');
 

@@ -6,8 +6,11 @@ export class RedSysAPIService {
 
   constructor(private http:Http) { }
 
-  getData(email) {
-    return this.http.get('http://api.gcsummerchallenge.com/random/' + email)
+  getData(id) {
+    //ONLINE DEV
+      //return this.http.get('http://api.gcsummerchallenge.com/random/' + id)
+    //LOCAL DEV
+      return this.http.get('http://localhost/GCSUMMAPI/payment/' + id)
     .map(response => response.json());
   }
 
