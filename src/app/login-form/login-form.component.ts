@@ -14,7 +14,7 @@ export class LoginFormComponent {
   private payment : any;
 
   constructor(private http:Http, private redsys:RedSysAPIService) {
-    let data = this.redsys.getData()
+    let data = this.redsys.getData('email@gmail.com')
       .subscribe(data => {
         this.payment = data;
       })
