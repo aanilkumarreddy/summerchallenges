@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -34,17 +34,17 @@ import { TeamScoresComponent } from './team-scores/team-scores.component';
 import { AdminLeaderboardComponent } from './admin-leaderboard/admin-leaderboard.component';
 import { CountdownComponent } from './countdown/countdown.component';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { RedSysAPIService } from './redSysAPI/red-sys-api.service'
+import { RedSysAPIService } from './redSysAPI/red-sys-api.service';
 
 // Must export the config
 export const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  databaseURL: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: ""
-};
+  apiKey: "AIzaSyDfWOWoqNiwXG2A275hpPGfxR7vKqeP5hw",
+  authDomain: "lnzsumchl1.firebaseapp.com",
+  databaseURL: "https://lnzsumchl1.firebaseio.com",
+  projectId: "lnzsumchl1",
+  storageBucket: "lnzsumchl1.appspot.com",
+  messagingSenderId: "523835141115"
+ };
 
 const appRoutes : Routes = [
   { path : 'dashboard', component : DashboardComponent },
