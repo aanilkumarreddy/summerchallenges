@@ -7,25 +7,26 @@
       </div>
       <div *ngIf="atleta.inscripcion.estado>1" class="text-container">
         <p>
-            <b>¡CERRADO PLAZO DE SUBIDA DE PUNTUACIONES E INSCRIPCIONES!</b> <br />
+            <b>¡YA PUEDES FORMALIZAR TU INSCRIPCIÓN!</b> <br />
 
-            Gracias por confiar en el Lanzarote Summer Challenge, estamos resolviendo las incidencias
-            que hayan podido tener los atletas durante el día de ayer (30 de mayo). La <b>clasificación final</b>
-            se dará a conocer el <b>viernes 02 de junio.</b>
+            Tienes <b>hasta el 05 de marzo</b> para hacer el pago de la misma.
         </p>
+      </div>
+      <div class="actions-container">
+        <button (click)="pay()" class="btn">PAGAR INSCRIPCIÓN</button>
       </div>
     </div>
 
-    
+
     <div class="profile-container">
       <div class="decorador">
           <img src="http://summerchallenges.com/img/logo.svg" alt="lanzarote summer challenge" />
       </div>
- 
+
       <div class="profile-info">
         <div class="header-info">
           <div class="data-container">
-            <span id="name">{{atleta.nombre}}</span> 
+            <span id="name">{{atleta.nombre}}</span>
           </div>
           <span *ngIf="atleta.atl_1 && atleta.atl_2 && atleta.atl_3 && atleta.id_categoria==4 && !teamData" id="team">{{atleta.atl_1.nombre}} - {{atleta.atl_2.nombre}} - {{atleta.atl_3.nombre}}</span>
         </div>
@@ -47,11 +48,11 @@
             <button class="btn" disabled> VER WODS </button>
           </a>
         </div>
-      </div>    
+      </div>
 
     </div>
     <div *ngIf="atleta.inscripcion.estado>1" class="leaderboard-container" id="leaderboard">
-      <app-leaderboard></app-leaderboard> 
+      <app-leaderboard></app-leaderboard>
     </div>
 
   </div>

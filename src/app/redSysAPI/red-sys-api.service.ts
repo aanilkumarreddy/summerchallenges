@@ -6,8 +6,8 @@ export class RedSysAPIService {
 
   constructor(private http:Http) { }
 
-  getData() {
-    return this.http.get('http://localhost/GCSUMMAPI/random')
+  getData(email) {
+    return this.http.get('http://api.gcsummerchallenge.com/random/' + email)
     .map(response => response.json());
   }
 
