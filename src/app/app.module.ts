@@ -37,6 +37,7 @@ import { RedSysAPIService } from './redSysAPI/red-sys-api.service';
 import { RegistroTeamComponent } from './registro-team/registro-team.component';
 import { RegistroJuezComponent } from './registro-juez/registro-juez.component';
 import { RegistroVoluntarioComponent } from './registro-voluntario/registro-voluntario.component'
+import { EmailService } from './email-service/email.service';
 
 // Must export the config
 export const firebaseConfig = {
@@ -55,14 +56,15 @@ const appRoutes : Routes = [
   { path : 'confirmacion', component : InscripcionComponent },
   { path : 'edit', component : EditComponent},
   { path : 'wods', component : WodsComponent},
-  { path: 'countdown', component: CountdownComponent},
+  { path: 'countdown', component: LoginComponent},
   { path : 'public-wods', component : PublicWodsComponent},
   { path : 'public-leaderboard', component : PublicLeaderboardComponent},
   { path : 'admin', component : AdminInscripcionesComponent},
   { path : 'admin-leaderboard', component : AdminLeaderboardComponent},
   { path : 'team-scores', component : TeamScoresComponent},
-  { path : '', redirectTo : '/countdown', pathMatch : 'full'},
-  { path : '**', redirectTo : '/countdown' }
+  { path : 'countdown', redirectTo : '/login', pathMatch: 'full'},
+  { path : '', redirectTo : '/login', pathMatch : 'full'},
+  { path : '**', redirectTo : '/login' }
 ];
 
 @NgModule({
@@ -108,7 +110,8 @@ const appRoutes : Routes = [
     AtletasService,
     InscripcionService,
     WodsService,
-    RedSysAPIService
+    RedSysAPIService,
+    EmailService
   ],
   bootstrap: [AppComponent]
 })
