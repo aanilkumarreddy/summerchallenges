@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppComponent } from './app.component';
 import { AuthService } from './auth/auth.service';
 import { AngularFireModule } from 'angularfire2';
@@ -35,6 +34,7 @@ import { AdminLeaderboardComponent } from './admin-leaderboard/admin-leaderboard
 import { CountdownComponent } from './countdown/countdown.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RedSysAPIService } from './redSysAPI/red-sys-api.service';
+import { RegistroTeamComponent } from './registro-team/registro-team.component'
 
 // Must export the config
 export const firebaseConfig = {
@@ -85,11 +85,13 @@ const appRoutes : Routes = [
     AdminLeaderboardComponent,
     CountdownComponent,
     LoginFormComponent,
+    RegistroTeamComponent,
   ],
   imports: [
     BrowserModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
     RouterModule.forRoot(appRoutes),

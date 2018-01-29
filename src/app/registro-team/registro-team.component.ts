@@ -13,11 +13,11 @@ import { InscripcionService } from "../inscripcion/inscripcion.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-registro',
-  templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css']
+  selector: 'app-registro-team',
+  templateUrl: './registro-team.component.html',
+  styleUrls: ['./registro-team.component.css']
 })
-export class RegistroComponent implements OnInit {
+export class RegistroTeamComponent implements OnInit {
 
   public listCategorias: FirebaseListObservable<any>;
   public emptyField: boolean = false;
@@ -33,7 +33,7 @@ export class RegistroComponent implements OnInit {
   private box: string = '';
   private category: string = '';
   private selectedCategory: string;
-  private precio: number = 16.05;
+  private precio: number = 32.10;
 
   public emailRegularExpression = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   public dniRegularExpression = /^\d{8}[a-zA-Z]$/;
@@ -49,13 +49,15 @@ export class RegistroComponent implements OnInit {
   ) {
 
     this.rForm = fb.group({
-      'name': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      'dni': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
+      'teamName': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      'category': [null, Validators.required],
+      'name1': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      'dni1': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
+      'name2': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      'dni2': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
       'email': [null, Validators.compose([Validators.required, Validators.pattern(this.emailRegularExpression)])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
-      'passwordConfirm': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
-      'box': [null],
-      'category': [null, Validators.required]
+      'passwordConfirm': [null, Validators.compose([Validators.required, Validators.minLength(6)])]
     });
 
     this.getCategorias();
@@ -72,7 +74,7 @@ export class RegistroComponent implements OnInit {
     this.listCategorias = this.categoriasService.categorias;
 
     this.listCategorias.subscribe(aux_categorias => {
-      this.aux_categorias = aux_categorias.filter(item => item.c_id != 3 && item.c_id !=4);
+      this.aux_categorias = this.aux_categorias = aux_categorias.filter(item => item.c_id == 3 || item.c_id == 4);
     })
   }
 
@@ -99,16 +101,13 @@ export class RegistroComponent implements OnInit {
             /*const inscripcion = this.generarInscripcion(atleta);*/
             this.atletasService.pushAtleta(atleta);
 
-            //this.router.navigateByUrl(['/confirmacion']);
+            //this.router.navigateByUrl(['/confirmacion']); 
           })
           .catch(error => {
             this.error = error.message;
-            console.log(this.error);
           })
       } else {
         this.error = "emailErr";
-            console.log(this.error);
-        
       }
     })
   }
@@ -138,10 +137,11 @@ export class RegistroComponent implements OnInit {
     return false;
   }
 
-  validarPassword(){
+  validarPassword() {
     let formValues = this.rForm.value;
-    if(formValues.password != formValues.passwordConfirm && this.rForm.controls['passwordConfirm'].touched) return true;
+    if (formValues.password != formValues.passwordConfirm && this.rForm.controls['passwordConfirm'].touched) return true;
     return false;
   }
 
 }
+

@@ -102,3 +102,23 @@ table tr *{
 .example-card{
     background-color: white;
 }
+
+/* VALIDATIONS */
+
+.form-control-invalid-alert{
+    font-size: 12px;
+    color: red;
+    font-weight: 500;
+}
+
+.form-control-invalid{
+    border: 1px solid red;
+    background: rgb(238, 170, 170);
+    color: #641313;
+}
+
+.btn-cancel{
+    background: rgb(231, 114, 114);
+    color: #641313;
+    margin: 10px 0;
+}

@@ -31,6 +31,6 @@ export class CategoriasService {
       this.categoria = data;
     })
   }
-  
+
 
 }
