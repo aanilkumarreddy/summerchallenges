@@ -99,7 +99,7 @@ export class RegistroComponent implements OnInit {
             /*const inscripcion = this.generarInscripcion(atleta);*/
             this.atletasService.pushAtleta(atleta);
 
-            //this.router.navigateByUrl(['/confirmacion']); 
+            //this.router.navigateByUrl(['/confirmacion']);
           })
           .catch(error => {
             this.error = error.message;
@@ -120,7 +120,7 @@ export class RegistroComponent implements OnInit {
 
   actualizarPrecio() {
     this.categoriasService
-      .getCategoria(this.category)
+      .getCategoria(this.rForm.value.category)
       .subscribe(aux_categoria => {
         console.log('Entramos');
         console.log(aux_categoria); //Array vacio aux_categoria !!
