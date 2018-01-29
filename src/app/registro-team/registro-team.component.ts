@@ -13,11 +13,11 @@ import { InscripcionService } from "../inscripcion/inscripcion.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-registro',
-  templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css']
+  selector: 'app-registro-team',
+  templateUrl: './registro-team.component.html',
+  styleUrls: ['./registro-team.component.css']
 })
-export class RegistroComponent implements OnInit {
+export class RegistroTeamComponent implements OnInit {
 
   public listCategorias: FirebaseListObservable<any>;
   public emptyField: boolean = false;
@@ -49,13 +49,14 @@ export class RegistroComponent implements OnInit {
   ) {
 
     this.rForm = fb.group({
-      'name': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      'dni': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
+      'teamName': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      'name1': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      'dni1': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
+      'name2': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      'dni2': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
       'email': [null, Validators.compose([Validators.required, Validators.pattern(this.emailRegularExpression)])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
       'passwordConfirm': [null, Validators.required],
-      'box': [null],
-      'category': [null, Validators.required]
     });
 
     this.getCategorias();
@@ -145,3 +146,4 @@ export class RegistroComponent implements OnInit {
   }
 
 }
+
