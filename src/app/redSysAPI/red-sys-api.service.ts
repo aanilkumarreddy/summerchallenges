@@ -6,22 +6,12 @@ export class RedSysAPIService {
 
   constructor(private http:Http) { }
 
-  getData(id) {
-    //ONLINE DEV
-      //return this.http.get('http://api.gcsummerchallenge.com/random/' + id)
-    //LOCAL DEV
-      return this.http.get('http://localhost/GCSUMMAPI/payment/' + id)
+  getData(key) {
+    /*
+    * La API se encarga de generar la petición de pago con los datos del usuario
+    * Por parámetro debe llegar el key del auth del usuario
+    */
+      return this.http.get('http://api.gcsummerchallenge.com/payment/' + key)
     .map(response => response.json());
   }
-
-  sendPayment() {
-    /*
-    console.log(this.payment);
-    let form: any = document.querySelector('.login-form');
-    form.html = 'Ds_Merchant_SignatureVersion <input type="text" name="Ds_SignatureVersion" value="' + this.payment.version + '" /><br /> Ds_Merchant_MerchantParameters<input type="text" name="Ds_MerchantParameters" value="' + this.payment.params + '"/><br /> Ds_Merchant_Signature<input type="text" name="Ds_Signature" value="' + this.payment.signature + '"/></br>';
-    console.log(form.html);
-    form.submit();
-    */
-  }
-
 }
