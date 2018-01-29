@@ -1,3 +1,61 @@
-<p>
-  registro-juez works!
-</p>
+<form atletaDatos [formGroup]="rForm" (ngSubmit)="enviarDatos()">
+  <md-card class="example-card row bg-white">
+    <h2 class="btn btn-block">
+      RELLENA TU INSCRIPCIÓN
+    </h2>
+    <hr/>
+    <md-card-content class="col col-md-12">
+
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <i class="material-icons">perm_identity</i>
+        </span>
+        <input type="text" formControlName="name" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('name')}"
+          placeholder="Nombre completo" aria-describedby="basic-addon1">
+        <span class="form-control-invalid-alert" *ngIf="validarCampo('name')">(*) Se requiere al menos 3 letras</span>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <i class="material-icons">picture_in_picture</i>
+        </span>
+        <input type="text" formControlName="dni" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('dni')}"
+          maxlength="9" placeholder="DNI" aria-describedby="basic-addon1">
+        <span class="form-control-invalid-alert" *ngIf="validarCampo('dni')">(*) Se requiere este campo</span>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <i class="material-icons">mail_outline</i>
+        </span>
+        <input type="text" formControlName="email" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('email') || error=='emailErr'}"
+          placeholder="Email de contacto" aria-describedby="basic-addon1">
+        <span class="form-control-invalid-alert" *ngIf="validarCampo('email')">(*) Se requiere email válido</span>
+        <span class="form-control-invalid-alert" *ngIf="error=='emailErr'">(*) El email ya está registrado</span>              
+
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <i class="material-icons">vpn_key</i>
+        </span>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('password') }"
+          placeholder="Contraseña" aria-describedby="basic-addon1">
+        <span class="form-control-invalid-alert" *ngIf="validarCampo('password')">(*) Contraseña de al menos seis caracteres</span>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <i class="material-icons">vpn_key</i>
+        </span>
+        <input type="password" formControlName="passwordConfirm" class="form-control" [ngClass]="{'form-control-invalid': validarPassword() || validarCampo('passwordConfirm') }"
+          placeholder="Repita la Contraseña" aria-describedby="basic-addon1">
+        <span class="form-control-invalid-alert" *ngIf="validarPassword() || validarCampo('passwordConfirm')">(*) La contraseña no coincide</span>
+      </div>
+
+      <hr/>
+      <input type="submit" class="btn btn-block" value="SIGUIENTE">
+
+    </md-card-content>
+  </md-card>
+</form>

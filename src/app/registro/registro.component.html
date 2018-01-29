@@ -3,11 +3,21 @@
     <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1" id="confirmacion">
       
       
-      <md-card class="example-card row bg-white" *ngIf="!individual && !equipo">
-        <button class="btn btn-block" (click)="individual=true">INDIVIDUAL</button>
-        <button class="btn btn-block" (click)="equipo=true">EQUIPO</button>
-        
-      </md-card>
+      <div *ngIf="!individual && !equipo && !juez && !voluntario">
+        <md-card class="example-card row bg-white">
+          <button class="btn btn-block" (click)="individual=true">INDIVIDUAL</button>
+          <button class="btn btn-block" (click)="equipo=true">EQUIPO</button>
+          
+        </md-card>
+  
+        <hr>
+  
+        <md-card class="example-card row bg-white">
+          <button class="btn btn-block" (click)="juez=true">JUEZ</button>
+          <button class="btn btn-block" (click)="voluntario=true">VOLUNTARIO</button>
+          
+        </md-card>
+      </div>
 
       <form *ngIf="individual" atletaDatos [formGroup]="rForm" (ngSubmit)="enviarDatos()">
         <md-card class="example-card row bg-white">
@@ -83,13 +93,7 @@
               </span>
               <input type="text" #prize class="form-control" aria-describedby="basic-addon1" [disabled]="true" value="{{precio}} € (IGIC incluido)">
             </div>
-<!-- 
-            <div class="input-group col col-md-10 col-md-offset-1">
-              <span class="input-group-addon" id="basic-addon1">
-                <i class="material-icons">info_outline</i>
-              </span>
-              <input type="text" #MessageError class="form-control error" value="{{ error }}" aria-describedby="basic-addon1" disabled>
-            </div> -->
+
             <hr/>
             <input type="submit" class="btn btn-block" value="SIGUIENTE">
             
@@ -99,7 +103,11 @@
 
       <app-registro-team *ngIf="equipo"></app-registro-team>
 
-      <button *ngIf="individual || equipo" (click)="individual=false;equipo=false"  class="btn btn-block btn-cancel">CANCELAR</button>
+      <app-registro-juez *ngIf="juez"></app-registro-juez>
+
+      <app-registro-voluntario *ngIf="voluntario"></app-registro-voluntario>
+
+      <button *ngIf="individual || equipo || juez || voluntario" (click)="individual=false;equipo=false;juez=false;voluntario=false"  class="btn btn-block btn-cancel">CANCELAR</button>
       
     </div>
   </div>
