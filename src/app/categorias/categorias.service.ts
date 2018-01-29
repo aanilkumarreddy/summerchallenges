@@ -17,7 +17,6 @@ export class CategoriasService {
    }
 
   getCategoria(id:string){
-    console.log(id);
    this.categoria = this.af.database.list('/Categorias', {
       query : {
         orderByChild: 'c_id',
