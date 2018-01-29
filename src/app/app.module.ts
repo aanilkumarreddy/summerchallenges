@@ -34,7 +34,9 @@ import { AdminLeaderboardComponent } from './admin-leaderboard/admin-leaderboard
 import { CountdownComponent } from './countdown/countdown.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RedSysAPIService } from './redSysAPI/red-sys-api.service';
-import { RegistroTeamComponent } from './registro-team/registro-team.component'
+import { RegistroTeamComponent } from './registro-team/registro-team.component';
+import { RegistroJuezComponent } from './registro-juez/registro-juez.component';
+import { RegistroVoluntarioComponent } from './registro-voluntario/registro-voluntario.component'
 
 // Must export the config
 export const firebaseConfig = {
@@ -86,6 +88,8 @@ const appRoutes : Routes = [
     CountdownComponent,
     LoginFormComponent,
     RegistroTeamComponent,
+    RegistroJuezComponent,
+    RegistroVoluntarioComponent,
   ],
   imports: [
     BrowserModule,
