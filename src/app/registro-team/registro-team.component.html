@@ -6,15 +6,26 @@
     <hr/>
     <md-card-content class="col col-md-12">
 
-      <span class=".form-title-field">Nombre del Equipo:</span>
+      <span class=".form-title-field">Datos del Equipo:</span>
 
       <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">
-          <i class="material-icons">perm_identity</i>
+          <i class="material-icons">people_outline</i>
         </span>
         <input type="text" formControlName="teamName" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('teamName')}"
           placeholder="Nombre del Equipo" aria-describedby="basic-addon1">
         <span class="form-control-invalid-alert" *ngIf="validarCampo('teamName')">(*) Se requiere al menos 3 letras</span>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <i class="material-icons">assessment</i>
+        </span>
+        <select formControlName="category" (change)="actualizarPrecio()" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('category')}">
+          <option value="null" [disabled]="true" [selected]="true">Selecciona tu categoría</option>
+          <option *ngFor="let categoria of aux_categorias" [ngValue]="categoria.c_id">{{categoria.nombre}}</option>
+        </select>
+        <span class="form-control-invalid-alert" *ngIf="validarCampo('category')">(*) Seleccione una categoría</span>
       </div>
 
       <span class=".form-title-field">Datos del primer atleta:</span>
@@ -29,7 +40,7 @@
 
       <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">
-          <i class="material-icons">perm_identity</i>
+          <i class="material-icons">picture_in_picture</i>
         </span>
         <input type="text" formControlName="dni1" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('dni1')}"
           maxlength="9" placeholder="DNI" aria-describedby="basic-addon1">
@@ -49,7 +60,7 @@
 
       <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">
-          <i class="material-icons">perm_identity</i>
+          <i class="material-icons">picture_in_picture</i>
         </span>
         <input type="text" formControlName="dni2" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('dni2')}"
           maxlength="9" placeholder="DNI" aria-describedby="basic-addon1">
@@ -62,9 +73,11 @@
         <span class="input-group-addon" id="basic-addon1">
           <i class="material-icons">mail_outline</i>
         </span>
-        <input type="text" formControlName="email" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('email')}"
+        <input type="text" formControlName="email" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('email') || error=='emailErr'}"
           placeholder="Email de contacto" aria-describedby="basic-addon1">
         <span class="form-control-invalid-alert" *ngIf="validarCampo('email')">(*) Se requiere email válido</span>
+        <span class="form-control-invalid-alert" *ngIf="error=='emailErr'">(*) El email ya está registrado</span>              
+
       </div>
 
       <div class="input-group">
@@ -80,9 +93,9 @@
         <span class="input-group-addon" id="basic-addon1">
           <i class="material-icons">vpn_key</i>
         </span>
-        <input type="password" formControlName="passwordConfirm" class="form-control" [ngClass]="{'form-control-invalid': validarPassword() }"
+        <input type="password" formControlName="passwordConfirm" class="form-control" [ngClass]="{'form-control-invalid': validarPassword() || validarCampo('passwordConfirm') }"
           placeholder="Repita la Contraseña" aria-describedby="basic-addon1">
-        <span class="form-control-invalid-alert" *ngIf="validarPassword()">(*) La contraseña no coincide</span>
+        <span class="form-control-invalid-alert" *ngIf="validarPassword() || validarCampo('passwordConfirm')">(*) La contraseña no coincide</span>
       </div>
 
       <div class="input-group">

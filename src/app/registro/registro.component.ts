@@ -53,7 +53,7 @@ export class RegistroComponent implements OnInit {
       'dni': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
       'email': [null, Validators.compose([Validators.required, Validators.pattern(this.emailRegularExpression)])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
-      'passwordConfirm': [null, Validators.required],
+      'passwordConfirm': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
       'box': [null],
       'category': [null, Validators.required]
     });
@@ -72,7 +72,7 @@ export class RegistroComponent implements OnInit {
     this.listCategorias = this.categoriasService.categorias;
 
     this.listCategorias.subscribe(aux_categorias => {
-      this.aux_categorias = aux_categorias;
+      this.aux_categorias = aux_categorias.filter(item => item.c_id != 3 && item.c_id !=4);
     })
   }
 
@@ -103,9 +103,12 @@ export class RegistroComponent implements OnInit {
           })
           .catch(error => {
             this.error = error.message;
+            console.log(this.error);
           })
       } else {
-        this.error = "EMAIL NO DISPONIBLE, PRUEBA OTRO O, INICIA SESIÓN";
+        this.error = "emailErr";
+            console.log(this.error);
+        
       }
     })
   }
@@ -122,9 +125,6 @@ export class RegistroComponent implements OnInit {
     this.categoriasService
       .getCategoria(this.rForm.value.category)
       .subscribe(aux_categoria => {
-        console.log('Entramos');
-        console.log(aux_categoria); //Array vacio aux_categoria !!
-
         aux_categoria.forEach(cat => {
           this.precio = cat.precio;
           this.selectedCategory = cat.nombre;

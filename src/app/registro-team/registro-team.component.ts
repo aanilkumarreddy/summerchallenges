@@ -33,7 +33,7 @@ export class RegistroTeamComponent implements OnInit {
   private box: string = '';
   private category: string = '';
   private selectedCategory: string;
-  private precio: number = 16.05;
+  private precio: number = 32.10;
 
   public emailRegularExpression = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   public dniRegularExpression = /^\d{8}[a-zA-Z]$/;
@@ -50,13 +50,14 @@ export class RegistroTeamComponent implements OnInit {
 
     this.rForm = fb.group({
       'teamName': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      'category': [null, Validators.required],
       'name1': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       'dni1': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
       'name2': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       'dni2': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
       'email': [null, Validators.compose([Validators.required, Validators.pattern(this.emailRegularExpression)])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
-      'passwordConfirm': [null, Validators.required],
+      'passwordConfirm': [null, Validators.compose([Validators.required, Validators.minLength(6)])]
     });
 
     this.getCategorias();
@@ -73,7 +74,7 @@ export class RegistroTeamComponent implements OnInit {
     this.listCategorias = this.categoriasService.categorias;
 
     this.listCategorias.subscribe(aux_categorias => {
-      this.aux_categorias = aux_categorias;
+      this.aux_categorias = this.aux_categorias = aux_categorias.filter(item => item.c_id == 3 || item.c_id == 4);
     })
   }
 
@@ -106,7 +107,7 @@ export class RegistroTeamComponent implements OnInit {
             this.error = error.message;
           })
       } else {
-        this.error = "EMAIL NO DISPONIBLE, PRUEBA OTRO O, INICIA SESIÓN";
+        this.error = "emailErr";
       }
     })
   }
@@ -121,11 +122,8 @@ export class RegistroTeamComponent implements OnInit {
 
   actualizarPrecio() {
     this.categoriasService
-      .getCategoria(this.category)
+      .getCategoria(this.rForm.value.category)
       .subscribe(aux_categoria => {
-        console.log('Entramos');
-        console.log(aux_categoria); //Array vacio aux_categoria !!
-
         aux_categoria.forEach(cat => {
           this.precio = cat.precio;
           this.selectedCategory = cat.nombre;
@@ -139,9 +137,9 @@ export class RegistroTeamComponent implements OnInit {
     return false;
   }
 
-  validarPassword(){
+  validarPassword() {
     let formValues = this.rForm.value;
-    if(formValues.password != formValues.passwordConfirm && this.rForm.controls['passwordConfirm'].touched) return true;
+    if (formValues.password != formValues.passwordConfirm && this.rForm.controls['passwordConfirm'].touched) return true;
     return false;
   }
 

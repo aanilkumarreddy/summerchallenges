@@ -27,7 +27,7 @@
 
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">
-                  <i class="material-icons">perm_identity</i>
+                  <i class="material-icons">picture_in_picture</i>
                 </span>
                 <input type="text" formControlName="dni" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('dni')}"  maxlength="9" placeholder="DNI" aria-describedby="basic-addon1">
                 <span class="form-control-invalid-alert" *ngIf="validarCampo('dni')">(*) Se requiere este campo</span>
@@ -37,8 +37,9 @@
               <span class="input-group-addon" id="basic-addon1">
                 <i class="material-icons">mail_outline</i>
               </span>
-              <input type="text" formControlName="email" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('email')}" placeholder="Email de contacto" aria-describedby="basic-addon1">
+              <input type="text" formControlName="email" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('email') || error=='emailErr'}" placeholder="Email de contacto" aria-describedby="basic-addon1">
               <span class="form-control-invalid-alert" *ngIf="validarCampo('email')">(*) Se requiere email válido</span>              
+              <span class="form-control-invalid-alert" *ngIf="error=='emailErr'">(*) El email ya está registrado</span>              
             </div>
 
             <div class="input-group">
@@ -53,9 +54,9 @@
                 <span class="input-group-addon" id="basic-addon1">
                   <i class="material-icons">vpn_key</i>
                 </span>
-                <input type="password" formControlName="passwordConfirm" class="form-control" [ngClass]="{'form-control-invalid': validarPassword() }"
+                <input type="password" formControlName="passwordConfirm" class="form-control" [ngClass]="{'form-control-invalid': validarPassword() || validarCampo('passwordConfirm') }"
                   placeholder="Repita la Contraseña" aria-describedby="basic-addon1">
-                <span class="form-control-invalid-alert" *ngIf="validarPassword()">(*) La contraseña no coincide</span>
+                <span class="form-control-invalid-alert" *ngIf="validarPassword() || validarCampo('passwordConfirm')">(*) La contraseña no coincide</span>
               </div>
 
             <div class="input-group">
