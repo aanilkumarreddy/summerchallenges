@@ -3,14 +3,14 @@ import { Inject } from "@angular/core";
 
 export class Atleta {
 
-    constructor(public nombre, 
-                public box, 
-                public email, 
-                public id_categoria,
-                public password,
-                public inscripcion,
-                public id_coach?                               
-                ){
+    constructor(public nombre,
+        public box,
+        public email,
+        public id_categoria,
+        public password,
+        public inscripcion,
+        public id_coach?
+    ) {
         this.nombre = nombre;
         this.box = box;
         this.email = email;
