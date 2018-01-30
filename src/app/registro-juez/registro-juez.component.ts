@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable, AngularFire } from "angularfire2";
 import { Atleta } from "../atleta/atleta";
-import { AtletasService } from "../atletas/atletas.service";
+import { JuecesService } from "../jueces/jueces.service";
 import { AuthCorreo } from "../auth/auth";
 import { AuthService } from "../auth/auth.service";
 import { Router } from "@angular/router";
@@ -17,8 +17,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registro-juez.component.css']
 })
 export class RegistroJuezComponent {
-  
-  public emptyField: boolean = false;
+
+  private error;
+
+  private emptyField: boolean = false;
   private rForm: FormGroup;
   private name: string = '';
   private dni: string = '';
@@ -26,12 +28,12 @@ export class RegistroJuezComponent {
   private password: string = '';
   private passwordConfirm: string = '';
 
-  public emailRegularExpression = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  public dniRegularExpression = /^\d{8}[a-zA-Z]$/;
+  private emailRegularExpression = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  private dniRegularExpression = /^\d{8}[a-zA-Z]$/;
 
   constructor(
     private af: AngularFire,
-    private atletasService: AtletasService,
+    private juecesService: JuecesService,
     private authService: AuthService,
     private router: Router,
     private inscripcionService: InscripcionService,
@@ -54,12 +56,34 @@ export class RegistroJuezComponent {
       return;
     }
 
-    // const aux_correo: string = formValues.email;
-    // let kk = aux_correo.toLowerCase();
-    // const inscripcion = new Inscripcion(1, "Sin confirmar", "Sin confirmar");
-    // const atleta = new Atleta(formValues.name, formValues.box, kk, formValues.category, formValues.password, inscripcion);
-    // this.registroAtleta(atleta, formValues.password);
+    const juez = {
+      name: formValues.name,
+      dni: formValues.dni,
+      email: formValues.email.toLowerCase(),
+      password: formValues.password
+    }
 
+    this.registroJuez(juez, formValues.password);
+
+  }
+
+  registroJuez(juez, password) {
+    const aux_observable = this.juecesService.getJuez_byEmail(juez.email).subscribe(data => {
+      if (data.length == 0) {
+        this.authService.createUser(juez.email, password)
+          .then(data => {
+            this.juecesService.pushJuez(juez);
+          })
+          .catch(error => {
+            this.error = error.message;
+            console.log(this.error);
+          })
+      } else {
+        this.error = "emailErr";
+            console.log(this.error);
+        
+      }
+    })
   }
 
   validarCampo(campo) {
