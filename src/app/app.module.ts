@@ -15,6 +15,7 @@ import { InscripcionComponent } from './inscripcion/inscripcion.component';
 import { AtletaService } from "./atleta/atleta.service";
 import { AtletasService} from "./atletas/atletas.service";
 import { JuecesService } from "./jueces/jueces.service";
+import { VoluntariosService } from "./voluntarios/voluntarios.service";
 import { CategoriasComponent } from './categorias/categorias.component';
 import { CategoriasService } from "./categorias/categorias.service";
 import { Routes, RouterModule } from "@angular/router";
@@ -110,6 +111,7 @@ const appRoutes : Routes = [
     CategoriasService,
     AtletasService,
     JuecesService,
+    VoluntariosService,
     InscripcionService,
     WodsService,
     RedSysAPIService,
