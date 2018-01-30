@@ -27,7 +27,7 @@ table tr{
     border-bottom: 2px rgba(44,44,44,0.6);
 }
 table tr:first-child{
-    background-color: #ffc600;
+    background-color: #009c9c;
     color: white;
     font-weight: 800;
 }
@@ -92,7 +92,7 @@ p.info{
         align-content: space-between;
     }
     .boton-container{
-        max-width: 50%;        
+        max-width: 50%;
         flex-direction: column;
     }
     .boton-container .btn{

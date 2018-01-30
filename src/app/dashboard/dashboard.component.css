@@ -20,7 +20,7 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    background-color: #ffc600;
+    background-color: #009c9c;
 }
 .decorador .material-icons{
     font-size: 30vh !important;
@@ -33,8 +33,8 @@
     box-sizing: border-box;
     padding-left: 25px;
     padding-top: 25px;
-
 }
+
 .header-info{
     flex: 1;
     display: flex;
@@ -58,7 +58,7 @@
 }
 .header-info span i{
     border-radius:50%;
-    background-color: #ffc600;
+    background-color: #009c9c;
     padding: 8px;
     color: white;
     margin-left: 6px;
@@ -73,7 +73,7 @@
 }
 .extra-info .mini-action{
     border-radius:50%;
-    background-color: #ffc600;
+    background-color: #009c9c;
     padding: 6px;
     color: white;
     margin-left: 4px;
@@ -125,7 +125,7 @@
 .message-container .icon-container .material-icons{
     display: flex;
     font-size: 10vh;
-    color: #ffc600;
+    color: #009c9c;
 }
 .message-container .actions-container{
     flex: 1;
@@ -164,7 +164,7 @@
     cursor: pointer;
     /*float: right;*/
     padding: 12px;
-    background-color: #ffc600;
+    background-color: #009c9c;
     color: white;
 }
 .team-modal .container{
@@ -266,7 +266,7 @@
     }
 
     .icon-container{
-        background-color: #ffc600;
+        background-color: #009c9c;
         flex: 1;
         width: 100%;
         color: white;

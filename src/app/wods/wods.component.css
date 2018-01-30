@@ -7,7 +7,7 @@
     width: 100%;
 }
 .wod-img-container{
-    max-width: 100%; 
+    max-width: 100%;
 }
 .wod-img-container img{
     width: 100%;
@@ -20,7 +20,7 @@
     border-radius: 3px;
     overflow: hidden;
     width: 45%;
-    height: auto; 
+    height: auto;
 }
 .wod-cc{
     background: white;
@@ -43,7 +43,7 @@
 }
 p{
     font-family: 'Open Sans';
-} 
+}
 .wod-description-container .wod-movements{
     text-align: center;
     font-weight: 800;
@@ -56,10 +56,10 @@ p{
 .especifications-container{
     background-color: rgba(200,200,200,0.4);
     padding: 16px;
-    margin-top: 16px; 
+    margin-top: 16px;
 }
 .especifications-title{
-    background-color: #ffc600;
+    background-color: #009c9c;
     padding: 16px;
     display: flex;
     vertical-align: center;
@@ -68,7 +68,7 @@ p{
     align-items: center;
     flex-direction: column;
     color: white;
-    margin-bottom: 16px;    
+    margin-bottom: 16px;
 }
 .especifications-title .material-icons{
     font-size: 20vh;
