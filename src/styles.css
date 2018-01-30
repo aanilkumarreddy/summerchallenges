@@ -54,7 +54,7 @@ table tr{
 }
 .input-group-addon{
     background-color: transparent;
-    color: #ffc600;
+    color: #009c9c;
     border: none;
 }
 .form-control{
@@ -74,7 +74,7 @@ table tr{
 .btn{
   border-radius: 0px;
   padding: 15px;
-  background-color: #ffc600;
+  background-color: #009c9c;
   color: white;
   font-weight: 800;
 }
