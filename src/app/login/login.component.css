@@ -59,10 +59,10 @@ table tr *{
     margin-bottom: 5px;
     padding-top: 12px;
 }
-.input-group-addon{    
+.input-group-addon{
     background-color: transparent;
-    color: #ffc600;
-    border: none; 
+    color: #009c9c;
+    border: none;
 }
 .form-control{
     box-shadow: none;
@@ -82,7 +82,7 @@ table tr *{
 .btn{
   border-radius: 0px;
   padding: 15px;
-  background-color: #ffc600;
+  background-color: #009c9c;
   color: white;
   font-weight: 800;
 }
