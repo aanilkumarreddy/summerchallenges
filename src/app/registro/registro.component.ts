@@ -11,6 +11,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { Inscripcion } from "../inscripcion/inscripcion";
 import { InscripcionService } from "../inscripcion/inscripcion.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmailService } from '../email-service/email.service';
 
 @Component({
   selector: 'app-registro',
@@ -45,7 +46,8 @@ export class RegistroComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private inscripcionService: InscripcionService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private emailService : EmailService
   ) {
 
     this.rForm = fb.group({
@@ -97,8 +99,15 @@ export class RegistroComponent implements OnInit {
         this.authService.createUser(atleta.email, password)
           .then(data => {
             /*const inscripcion = this.generarInscripcion(atleta);*/
-            this.atletasService.pushAtleta(atleta);
-
+            let aux_atleta = this.atletasService.pushAtleta(atleta);
+            this.emailService.send('registro', aux_atleta.key)
+              .subscribe(data => {
+                /*
+                *  Código para cambiar el estado del atleta
+                *  dependiendo si la respuesta es positiva
+                */
+                console.log(data);
+              })
             //this.router.navigateByUrl(['/confirmacion']);
           })
           .catch(error => {
@@ -108,7 +117,7 @@ export class RegistroComponent implements OnInit {
       } else {
         this.error = "emailErr";
             console.log(this.error);
-        
+
       }
     })
   }

@@ -12,7 +12,7 @@ export class AtletasService {
   public team : any;
 
   constructor(private af:AngularFire,
-              private authService : AuthService) { 
+              private authService : AuthService) {
     this.atletas = af.database.list('/Atletas');
     this.atletas.subscribe(data =>{
       this.aux_atletas = data;
@@ -29,7 +29,7 @@ export class AtletasService {
     })
     return aux_atleta;
   }
-  
+
   getAtleta_byState(state:number){
 
   }
@@ -73,12 +73,12 @@ export class AtletasService {
   }
 
   pushAtleta(atleta){
-      this.af.database.list('/Atletas').push(atleta);
-      
+      return this.af.database.list('/Atletas').push(atleta);
+
   }
   updateName(key, name : string){
     const aux_atlete = this.getAtleta_byKey(key);
-    aux_atlete.update({nombre : name}); 
+    aux_atlete.update({nombre : name});
   }
   updateCategory(key, categoria){
     const aux_atlete = this.getAtleta_byKey(key);

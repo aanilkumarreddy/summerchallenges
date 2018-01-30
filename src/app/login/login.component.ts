@@ -25,8 +25,14 @@ export class LoginComponent {
     private af: AngularFire,
     private router: Router,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
+
+    this.af.auth.subscribe(data => {
+      if(data) {
+        this.router.navigate(['/dashboard']);
+      }
+    })
 
     this.rForm = fb.group({
       'email': [null, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
@@ -49,7 +55,7 @@ export class LoginComponent {
   validarCampo(campo) {
     if (!this.rForm.controls[campo].valid && this.rForm.controls[campo].touched) return true;
     return false;
-  } 
+  }
 
   validarFallo(campo) {
     if ( campo == "email"  && this.error == "Email no registrado") return true;

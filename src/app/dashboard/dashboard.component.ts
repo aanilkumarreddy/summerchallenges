@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
                private route: ActivatedRoute,
                private atletasService : AtletasService,
                private categoriasService : CategoriasService,
-               private redsys : RedSysAPIService) {
+               private redsys : RedSysAPIService,) {
   //this.atleta = new Atleta("", "", "", "", "", "");
   //Nos subscribimos y cargamos los datos de auth para obtener el atleta actual
   //this.router.navigate(['/login']);
@@ -180,9 +180,5 @@ export class DashboardComponent implements OnInit {
       //Enviamos formulario - Redireccionamiento a Redsys.
       payment_form.submit();
     })
-
-
-
   }
-
 }
