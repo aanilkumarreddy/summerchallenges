@@ -34,7 +34,7 @@ export class VoluntariosService {
   }
 
   pushVoluntario(Voluntario) {
-    this.af.database.list('/Voluntarios').push(Voluntario);
+    return this.af.database.list('/Voluntarios').push(Voluntario);
 
   }
   updateName(key, name: string) {

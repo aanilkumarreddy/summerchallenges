@@ -41,6 +41,9 @@
               <span class="form-control-invalid-alert" *ngIf="error=='Contraseña incorrecta'">(*) Contraseña incorrecta</span>              
             </div>
 
+            <span (click)="recuperarPassword()" *ngIf="retrievePassword==false" class="recuperar-pass">¿Olvidaste tu contraseña?</span>
+            <span *ngIf="retrievePassword==true" class="recuperar-pass recuperar-pass-response">Tu contraseña se ha enviado a tu correo</span>
+
             <!-- ERROR MESSAGE -->
             <!-- <div class="input-group col col-md-10 col-md-offset-1">
               <span class="input-group-addon" id="basic-addon1">
