@@ -34,8 +34,7 @@ export class JuecesService {
   }
 
   pushJuez(juez) {
-    this.af.database.list('/Jueces').push(juez);
-
+    return this.af.database.list('/Jueces').push(juez);
   }
   updateName(key, name: string) {
     const aux_atlete = this.getJuez_byKey(key);

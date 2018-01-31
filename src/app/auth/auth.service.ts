@@ -33,4 +33,8 @@ export class AuthService {
     return this.af.auth.logout();
   }
 
+  // resetPassword(){
+  //   //return this.af.auth.s
+  // }
+
 }

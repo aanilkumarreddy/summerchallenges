@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
 
   public error: string = null;
+  public retrievePassword:boolean = false;
   private emptyField:boolean = false;
 
   private rForm: FormGroup;
@@ -54,6 +55,7 @@ export class LoginComponent {
 
   validarCampo(campo) {
     if (!this.rForm.controls[campo].valid && this.rForm.controls[campo].touched) return true;
+    if (campo != "password" && this.emptyField) return true;
     return false;
   }
 
@@ -61,6 +63,16 @@ export class LoginComponent {
     if ( campo == "email"  && this.error == "Email no registrado") return true;
     if ( campo == "password"  && this.error == "Contraseña incorrecta") return true;
     return false;
+  }
+
+  recuperarPassword(){
+    if(!this.rForm.controls['email'].valid){
+      this.emptyField = true;
+      return;
+    }
+
+    this.retrievePassword = true;  
+     
   }
 
 }
