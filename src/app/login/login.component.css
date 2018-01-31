@@ -92,6 +92,22 @@ table tr *{
   border: none;
 }
 
+.recuperar-pass{
+    font-size: 13px;
+    color: rgb(158, 158, 158);
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+    display: block;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.recuperar-pass-response{
+    text-decoration: none;
+    cursor: none;
+}
+
 /* VALIDATIONS */
 
 .form-control-invalid-alert{

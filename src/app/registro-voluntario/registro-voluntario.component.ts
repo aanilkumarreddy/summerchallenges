@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable, AngularFire } from "angularfire2";
 import { Atleta } from "../atleta/atleta";
-import { AtletasService } from "../atletas/atletas.service";
+import { VoluntariosService } from "../voluntarios/voluntarios.service";
 import { AuthCorreo } from "../auth/auth";
 import { AuthService } from "../auth/auth.service";
 import { Router } from "@angular/router";
@@ -10,6 +10,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { Inscripcion } from "../inscripcion/inscripcion";
 import { InscripcionService } from "../inscripcion/inscripcion.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmailService } from '../email-service/email.service';
 
 @Component({
   selector: 'app-registro-voluntario',
@@ -17,8 +18,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registro-voluntario.component.css']
 })
 export class RegistroVoluntarioComponent {
-  
-  public emptyField: boolean = false;
+
+  private error;
+
+  private emptyField: boolean = false;
   private rForm: FormGroup;
   private name: string = '';
   private dni: string = '';
@@ -31,11 +34,12 @@ export class RegistroVoluntarioComponent {
 
   constructor(
     private af: AngularFire,
-    private atletasService: AtletasService,
+    private voluntariosService: VoluntariosService,
     private authService: AuthService,
     private router: Router,
     private inscripcionService: InscripcionService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private emailService: EmailService
   ) {
     this.rForm = fb.group({
       'name': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -54,12 +58,41 @@ export class RegistroVoluntarioComponent {
       return;
     }
 
-    // const aux_correo: string = formValues.email;
-    // let kk = aux_correo.toLowerCase();
-    // const inscripcion = new Inscripcion(1, "Sin confirmar", "Sin confirmar");
-    // const atleta = new Atleta(formValues.name, formValues.box, kk, formValues.category, formValues.password, inscripcion);
-    // this.registroAtleta(atleta, formValues.password);
+    const voluntario = {
+      name: formValues.name,
+      dni: formValues.dni,
+      email: formValues.email.toLowerCase(),
+      password: formValues.password
+    }
 
+    this.registroVoluntario(voluntario, formValues.password);
+  }
+
+  registroVoluntario(voluntario, password) {
+    const aux_observable = this.voluntariosService.getVoluntario_byEmail(voluntario.email).subscribe(data => {
+      if (data.length == 0) {
+        this.authService.createUser(voluntario.email, password)
+          .then(data => {
+            let aux_voluntario = this.voluntariosService.pushVoluntario(voluntario);
+            this.emailService.send('voluntario', aux_voluntario.key)
+              .subscribe(data => {
+                /*
+                *  Código para cambiar el estado del atleta
+                *  dependiendo si la respuesta es positiva
+                */
+                console.log(data);
+              })
+          })
+          .catch(error => {
+            this.error = error.message;
+            console.log(this.error);
+          })
+      } else {
+        this.error = "emailErr";
+        console.log(this.error);
+
+      }
+    })
   }
 
   validarCampo(campo) {

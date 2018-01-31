@@ -10,6 +10,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { Inscripcion } from "../inscripcion/inscripcion";
 import { InscripcionService } from "../inscripcion/inscripcion.service";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmailService } from '../email-service/email.service';
 
 @Component({
   selector: 'app-registro-juez',
@@ -37,7 +38,8 @@ export class RegistroJuezComponent {
     private authService: AuthService,
     private router: Router,
     private inscripcionService: InscripcionService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private emailService : EmailService
   ) {
     this.rForm = fb.group({
       'name': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -72,7 +74,15 @@ export class RegistroJuezComponent {
       if (data.length == 0) {
         this.authService.createUser(juez.email, password)
           .then(data => {
-            this.juecesService.pushJuez(juez);
+            let aux_juez = this.juecesService.pushJuez(juez);
+            this.emailService.send('juez', aux_juez.key)
+              .subscribe(data => {
+                /*
+                *  Código para cambiar el estado del atleta
+                *  dependiendo si la respuesta es positiva
+                */
+                console.log(data);
+              })
           })
           .catch(error => {
             this.error = error.message;
