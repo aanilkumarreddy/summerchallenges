@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, AuthProviders, AuthMethods } from "angularfire2";
+import * as fire from 'firebase';
+
 
 @Injectable()
 export class AuthService {
-
-  constructor(private af : AngularFire) { 
-
-  }
+  constructor(private af : AngularFire) {}
 
   createUser(email : string, password : string){
     return this.af.auth.createUser({ email: email, password: password })
@@ -33,8 +32,10 @@ export class AuthService {
     return this.af.auth.logout();
   }
 
-  // resetPassword(){
-  //   //return this.af.auth.s
-  // }
+  resetPassword(){
+    this.af.auth.subscribe(data => {
+      console.log(data);
+    })
+  }
 
 }

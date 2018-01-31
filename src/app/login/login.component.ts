@@ -70,8 +70,9 @@ export class LoginComponent {
       return;
     }
 
-    this.retrievePassword = true;  
-     
+    this.retrievePassword = true;
+    this.authService.resetPassword();
+
   }
 
 }
