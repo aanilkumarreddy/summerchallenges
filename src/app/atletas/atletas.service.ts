@@ -80,6 +80,11 @@ export class AtletasService {
     const aux_atlete = this.getAtleta_byKey(key);
     aux_atlete.update({nombre : name});
   }
+  updatePassword(key, password: string){
+    let aux_atleta = this.getAtleta_byKey(key);
+    return aux_atleta.update({password: password});
+  }
+
   updateCategory(key, categoria){
     const aux_atlete = this.getAtleta_byKey(key);
     aux_atlete.update({ id_categoria : categoria });
