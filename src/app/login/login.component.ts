@@ -27,7 +27,6 @@ export class LoginComponent {
     private authService: AuthService,
     private fb: FormBuilder,
   ) {
-
     this.af.auth.subscribe(data => {
       if(data) {
         this.router.navigate(['/dashboard']);
