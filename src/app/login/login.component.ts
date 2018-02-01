@@ -4,6 +4,8 @@ import { RouterModule, Routes, Router } from '@angular/router';
 import { AuthService } from "../auth/auth.service";
 import { AngularFire } from "angularfire2";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmailService } from '../email-service/email.service';
+import { AtletasService } from "../atletas/atletas.service";
 
 @Component({
   selector: 'app-login',
@@ -13,8 +15,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
 
   public error: string = null;
-  public retrievePassword:boolean = false;
-  private emptyField:boolean = false;
+  public retrievePassword: boolean = false;
+  private emptyField: boolean = false;
 
   private rForm: FormGroup;
   private email: string = '';
@@ -27,9 +29,11 @@ export class LoginComponent {
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder,
+    private atletasService: AtletasService,
+    private emailService: EmailService
   ) {
     this.af.auth.subscribe(data => {
-      if(data) {
+      if (data) {
         this.router.navigate(['/dashboard']);
       }
     })
@@ -59,19 +63,24 @@ export class LoginComponent {
   }
 
   validarFallo(campo) {
-    if ( campo == "email"  && this.error == "Email no registrado") return true;
-    if ( campo == "password"  && this.error == "Contraseña incorrecta") return true;
+    if (campo == "email" && this.error == "Email no registrado") return true;
+    if (campo == "password" && this.error == "Contraseña incorrecta") return true;
     return false;
   }
 
-  recuperarPassword(){
-    if(!this.rForm.controls['email'].valid){
+  recuperarPassword() {
+    if (!this.rForm.controls['email'].valid) {
       this.emptyField = true;
       return;
     }
 
     this.retrievePassword = true;
-    this.authService.resetPassword();
+    let aux_atleta: any = this.atletasService.getAtleta_byEmail(this.rForm.value.email).subscribe(data => {
+      this.emailService.send('registro', data[0].$key)
+        .subscribe(data => {
+          console.log(data);
+        })
+    });
 
   }
 
