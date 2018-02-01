@@ -40,6 +40,7 @@ import { RegistroTeamComponent } from './registro-team/registro-team.component';
 import { RegistroJuezComponent } from './registro-juez/registro-juez.component';
 import { RegistroVoluntarioComponent } from './registro-voluntario/registro-voluntario.component'
 import { EmailService } from './email-service/email.service';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -65,6 +66,7 @@ const appRoutes : Routes = [
   { path : 'admin-leaderboard', component : AdminLeaderboardComponent},
   { path : 'team-scores', component : TeamScoresComponent},
   { path : 'countdown', redirectTo : '/login', pathMatch: 'full'},
+  { path: 'reset-password', component: ResetPasswordComponent},
   { path : '', redirectTo : '/login', pathMatch : 'full'},
   { path : '**', redirectTo : '/login' }
 ];
@@ -94,6 +96,7 @@ const appRoutes : Routes = [
     RegistroTeamComponent,
     RegistroJuezComponent,
     RegistroVoluntarioComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
