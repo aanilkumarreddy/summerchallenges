@@ -103,6 +103,14 @@ table tr *{
     background-color: white;
 }
 
+.btn-fb{
+    background-color: #3b5998;
+}
+
+.btn-google{
+    background-color: #d34836;
+}
+
 /* VALIDATIONS */
 
 .form-control-invalid-alert{

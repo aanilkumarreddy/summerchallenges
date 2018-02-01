@@ -5,18 +5,20 @@
         <i class="material-icons">error</i>
       </div>
       <div class="text-container">
-        <p> 
-         Los datos se actualizarán automaticamente al hacer click en el botón correspondiente, puedes comprobar los datos
-          actuales en la ficha que tienes a continuación.
+        <p>
+          Los datos se actualizarán automaticamente al hacer click en el botón correspondiente, puedes comprobar los datos actuales
+          en la ficha que tienes a continuación.
         </p>
       </div>
-     <a routerLink="/" routerLinkActive="active"> <button class="btn"> VOLVER </button></a>
+      <a routerLink="/" routerLinkActive="active">
+        <button class="btn"> VOLVER </button>
+      </a>
     </div>
     <div class="profile-duo">
 
       <div *ngIf="atleta" class="profile-container">
         <div class="decorador">
-            <img src="http://summerchallenges.com/img/logo.svg" alt="lanzarote summer challenge" />
+          <img src="http://summerchallenges.com/img/logo.svg" alt="lanzarote summer challenge" />
         </div>
 
         <div class="profile-info">
@@ -28,38 +30,43 @@
             <i class="material-icons">assessment</i> {{nombreCategoria}}
           </div>
           <div class="actions">
-            <a target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}">
-              <button class="btn">PAGAR INSCRIPCIÓN</button>
+            <a target="_blank" (click)="pay()" class="btn">
+              PAGAR INSCRIPCIÓN
             </a>
-            <a target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}">
-              <button class="btn" disabled>VER WODS</button>
+            <a target="_blank" class="btn" disabled>
+              VER WODS
             </a>
           </div>
         </div>
       </div>
 
-      <div class="profile-container">
-        <div *ngIf="atleta" class="profile-info edit-form">
-          <div class="header-info" id="nuevos">
+      <form atletaDatos [formGroup]="rForm">
+        <md-card class="example-card row bg-white">
 
-            <input type="text" #name placeholder="Introduce aquí el nombre" />
-            <button (click)="updateName(name)" class="boton btn"> MODIFICAR NOMBRE</button>
-            <div *ngIf="atleta.inscripcion.estado<=1" class="container-categoria">
-              <div class="radio-container">
-                <div *ngFor="let categoria of aux_categorias" (change)="updateCategoria()">
-                  <label><input [(ngModel)]="selectedValue" type="radio" name="optradio" [value]="categoria.c_id" required>{{categoria.nombre}}</label>
-                </div>
-              </div>
-              <input type="text" #categoria placeholder="Tu nueva categoría" value="{{selectedCategoria}}" disabled/>
-              <button (click)="updateCategory(categoria)" class="boton btn"> MODIFICAR CATEGORIA </button>
+          <md-card-content class="col col-md-12">
+
+
+            <input type="text" formControlName="name" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('name')}"
+              placeholder="Nombre completo" aria-describedby="basic-addon1">
+            <span class="form-control-invalid-alert" *ngIf="validarCampo('name')">(*) Se requiere al menos 3 letras</span>
+
+            <button class="btn btn-block" (click)="updateName()">MODIFICAR NOMBRE</button>
+
+
+            <select formControlName="category" class="form-control">
+              <option value="null" [disabled]="true" [selected]="true">Selecciona tu categoría</option>
+              <option *ngFor="let categoria of aux_categorias" [ngValue]="categoria.c_id">{{categoria.nombre}}</option>
+            </select>
+
+            <button class="btn btn-block" (click)="requestChangeOfCategory()" *ngIf="stateRequestForChangeOfCategory == ''">SOLICITAR CAMBIO DE CATEGORÍA</button>
+            <div class="spinner-container" *ngIf="stateRequestForChangeOfCategory == 'sending'">
+              <div class="load-spinner"></div>
             </div>
-          </div>
-        </div>
-      </div>
+            <span *ngIf="stateRequestForChangeOfCategory == 'sended'">{{changeCategoryMessage}}</span>
+
+          </md-card-content>
+        </md-card>
+      </form>
 
     </div>
-
-
-
   </div>
-</div>

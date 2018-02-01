@@ -227,3 +227,73 @@
         flex-direction: column;
     }
 }
+
+.form-control{
+    width: 100%;
+    box-shadow: none;
+    font-size: 14px;
+    border: none;
+    color: #000000;
+    padding: 0px;
+    padding-left: 12px;
+    background-color: rgba(222,222,222,0.2);
+    border: 1px solid rgba(222,222,222,0.6);
+    border-radius: 0px;
+    float: right;
+    margin: 10px 0;
+   /* width: 60vh;*/
+}
+
+/* __________________________: Validations Aspects :___________________________ */
+.form-control-invalid-alert{
+    font-size: 12px;
+    color: red;
+    font-weight: 500;
+}
+
+.form-control-invalid{
+    border: 1px solid red;
+    background: rgb(238, 170, 170);
+    color: #641313;
+}
+
+.btn-cancel{
+    background: rgb(231, 114, 114);
+    color: #641313;
+    margin: 10px 0;
+}
+
+/* ____________________________: Spinner Aspects :_____________________________ */
+.spinner-container{
+    width: 100%;
+    height: 35px;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: flex-end;
+}
+.load-spinner {
+    border: 5px solid #333;
+    border-radius: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    opacity: 0;
+    width: 30px;
+ 
+    animation: pulsate 1s ease-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pulsate {
+    0% {
+      transform: scale(.1);
+      opacity: 0.0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+}

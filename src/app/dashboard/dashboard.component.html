@@ -35,17 +35,17 @@
           <i *ngIf="atleta.inscripcion.estado<=1" title="Editar" routerLink="/edit" routerLinkActive="active" class="material-icons mini-action">mode_edit</i>
         </div>
         <div class="actions">
-          <a *ngIf="atleta.inscripcion.estado<=1" target="_blank" href="http://summerchallenges.com/firebasePHP/test-firebasePHP.php?u={{key}}">
-            <button class="btn">PAGAR INSCRIPCIÓN</button>
+          <a *ngIf="atleta.inscripcion.estado<=1" target="_blank" class="btn" (click)="pay()">
+              PAGAR INSCRIPCIÓN
           </a>
-          <a routerLink="/edit" routerLinkActive="active">
-            <button class="btn"> EDITAR DATOS </button>
+          <a routerLink="/edit" routerLinkActive="active" class="btn">
+            EDITAR DATOS
           </a>
-          <a *ngIf="atleta.inscripcion.estado > 1" routerLink="/wods" routerLinkActive="active">
-            <button class="btn">VER WODS</button>
+          <a *ngIf="atleta.inscripcion.estado > 1" routerLink="/wods" routerLinkActive="active" class="btn">
+              VER WODS
           </a>
-          <a *ngIf="atleta.inscripcion.estado <= 1">
-            <button class="btn" disabled> VER WODS </button>
+          <a *ngIf="atleta.inscripcion.estado <= 1" class="btn" disabled>
+              VER WODS
           </a>
         </div>
       </div>
