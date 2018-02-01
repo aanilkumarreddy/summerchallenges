@@ -41,6 +41,7 @@ import { RegistroJuezComponent } from './registro-juez/registro-juez.component';
 import { RegistroVoluntarioComponent } from './registro-voluntario/registro-voluntario.component'
 import { EmailService } from './email-service/email.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { RegistroIndividualComponent } from './registro-individual/registro-individual.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -56,6 +57,10 @@ const appRoutes : Routes = [
   { path : 'dashboard', component : DashboardComponent },
   { path : 'login', component : LoginComponent },
   { path : 'registro', component : RegistroComponent },
+  { path : 'registro-individual', component : RegistroIndividualComponent },
+  { path : 'registro-team', component : RegistroTeamComponent },
+  { path : 'registro-juez', component : RegistroJuezComponent },
+  { path : 'registro-voluntario', component : RegistroVoluntarioComponent },
   { path : 'confirmacion', component : InscripcionComponent },
   { path : 'edit', component : EditComponent},
   { path : 'wods', component : WodsComponent},
@@ -98,6 +103,7 @@ const appRoutes : Routes = [
     RegistroJuezComponent,
     RegistroVoluntarioComponent,
     ResetPasswordComponent,
+    RegistroIndividualComponent,
   ],
   imports: [
     BrowserModule,

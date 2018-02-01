@@ -46,12 +46,12 @@ table tr *{
     margin-bottom: 5px;
     padding-top: 12px;
 }
-.input-group-addon{    
+.input-group-addon{
     background-color: transparent;
     color: #009c9c;
     border: none;
     font-family: 'Open Sans';
-    font-weight: 400; 
+    font-weight: 400;
 }
 .form-control{
     box-shadow: none;
@@ -95,7 +95,7 @@ table tr *{
 }
 .mat-radio-inner-circle {
     background-color: #009c9c !important;
-} 
+}
 .bg-white{
     background-color: white;
 }
@@ -103,10 +103,12 @@ table tr *{
     background-color: white;
 }
 
-.form-title-field{
-    font-size: 15px;
-    color: rgb(34, 34, 34);
-    font-weight: 600;
+.btn-fb{
+    background-color: #3b5998;
+}
+
+.btn-google{
+    background-color: #d34836;
 }
 
 /* VALIDATIONS */
