@@ -51,9 +51,9 @@ export class RegistroTeamComponent implements OnInit {
     this.rForm = fb.group({
       'teamName': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       'category': [null, Validators.required],
-      'name1': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      'name1': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(400)])],
       'dni1': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
-      'name2': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      'name2': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(40)])],
       'dni2': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
       'email': [null, Validators.compose([Validators.required, Validators.pattern(this.emailRegularExpression)])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
