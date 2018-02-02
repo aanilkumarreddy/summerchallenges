@@ -223,7 +223,6 @@ export class DashboardComponent implements OnInit {
 
   pay() {
     //TODO - Eliminar, es sólo para test.
-    console.log(this.atleta.$key);
 
     // Obtenemos los datos de pago de la API
     let payment = this.redsys.getData(this.atleta.$key);

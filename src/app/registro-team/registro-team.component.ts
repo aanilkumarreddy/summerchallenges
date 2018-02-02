@@ -104,7 +104,6 @@ export class RegistroTeamComponent implements OnInit {
         dni2: formValues.dni2,
       }
     }
-    console.log(atletaEquipo);
     // this.registroAtleta(formValues.name1, formValues.password);
     this.registroAtleta(atletaEquipo, formValues.password);
 
@@ -123,7 +122,6 @@ export class RegistroTeamComponent implements OnInit {
                 *  Código para cambiar el estado del atleta
                 *  dependiendo si la respuesta es positiva
                 */
-                console.log(data);
               })
             //this.router.navigateByUrl(['/confirmacion']); 
           })

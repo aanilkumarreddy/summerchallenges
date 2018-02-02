@@ -106,17 +106,14 @@ export class RegistroIndividualComponent implements OnInit {
                 *  Código para cambiar el estado del atleta
                 *  dependiendo si la respuesta es positiva
                 */
-                console.log(data);
               })
             //this.router.navigateByUrl(['/confirmacion']);
           })
           .catch(error => {
             this.error = error.message;
-            console.log(this.error);
           })
       } else {
         this.error = "emailErr";
-            console.log(this.error);
 
       }
     })
@@ -155,7 +152,7 @@ export class RegistroIndividualComponent implements OnInit {
 
   loginGoogle(){
     this.authService.login_google().then(
-      response => console.log(response)
+      response => {} //console.log(response)
     )
   }
 }

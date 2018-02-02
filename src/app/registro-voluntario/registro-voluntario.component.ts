@@ -82,16 +82,13 @@ export class RegistroVoluntarioComponent {
                 *  dependiendo si la respuesta es positiva
                 */
                 if(data._body == "1") this.especialRegistrado = true
-                console.log(data);
               })
           })
           .catch(error => {
             this.error = error.message;
-            console.log(this.error);
           })
       } else {
         this.error = "emailErr";
-        console.log(this.error);
 
       }
     })

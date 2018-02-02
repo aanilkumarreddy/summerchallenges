@@ -38,7 +38,7 @@ export class AuthService {
 
   logout() {
     return this.af.auth.logout()
-      .then(response => console.log(response))
+      .then(response => {})
   }
 
   // resetPassword(email) {

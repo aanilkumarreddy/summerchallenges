@@ -119,7 +119,6 @@ export class EditComponent implements OnInit {
     this.stateRequestForChangeOfCategory = 'sending';
     this.emailService.send('categoria-admin', this.atleta.$key + '/' + this.rForm.value.category)
       .subscribe((data: any) => {
-        console.log(data);
         let newCategory = this.aux_categorias.filter(category => category.c_id == this.rForm.value.category);
         let prevCategory = this.aux_categorias.filter(category => category.c_id == this.atleta.id_categoria);
 
@@ -146,7 +145,6 @@ export class EditComponent implements OnInit {
 
   pay() {
     //TODO - Eliminar, es sólo para test.
-    console.log(this.atleta.$key);
 
     // Obtenemos los datos de pago de la API
     let payment = this.redsys.getData(this.atleta.$key);
