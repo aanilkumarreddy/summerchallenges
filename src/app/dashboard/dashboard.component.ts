@@ -160,13 +160,13 @@ export class DashboardComponent implements OnInit {
     let u_key = this.atleta.$key;
     let u_email = this.atleta.email;
     let u_price:number;
-    
+
     // TODO: REFACTORIZAR
     if(this.atleta.id_categoria == 3 || this.atleta.id_categoria == 4) u_price = 3210;
     else u_price = 1605;
 
     var handler = (<any>window).StripeCheckout.configure({
-      key: t_key,
+      key: l_key,
       locale: "auto",
       token: function(token: any, payProgres: any) {
         // Enviamos los datos necesarios para gestionar el pago en la API
