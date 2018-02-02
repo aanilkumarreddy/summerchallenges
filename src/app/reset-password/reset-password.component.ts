@@ -14,8 +14,9 @@ import { AtletasService } from '../atletas/atletas.service';
 })
 export class ResetPasswordComponent implements OnInit {
   public error: string = null;
-  public done:boolean = false;
-  private emptyField:boolean = false;
+  public done: boolean = false;
+  public doing: boolean = false;
+  private emptyField: boolean = false;
 
   private rForm: FormGroup;
   private email: string = '';
@@ -30,11 +31,11 @@ export class ResetPasswordComponent implements OnInit {
     private emailService: EmailService,
     private atletaService: AtletasService,
     private router: Router
-  ){
+  ) {
     this.af.auth.subscribe(data => {
-      if(!data) {
+      if (!data) {
         this.router.navigate(['/login']);
-      }else {
+      } else {
         this.auth = data.auth;
       }
     })
@@ -52,34 +53,35 @@ export class ResetPasswordComponent implements OnInit {
     return false;
   }
   validarFallo(campo) {
-    if ( campo == "password"  && this.error == "Contraseña incorrecta") return true;
+    if (campo == "password" && this.error == "Contraseña incorrecta") return true;
     return false;
   }
   redirect() {
     this.router.navigate(['/dashboard']);
   }
   resetPassword() {
-      this.atleta = this.atletaService.getAtleta_byEmail(this.auth.email);
-      this.auth.updatePassword(this.rForm.value.password).then(() => {
-        this.atleta.subscribe(atl => {
-         atl.forEach(aux_atl => {
+    this.doing = true;
+    this.atleta = this.atletaService.getAtleta_byEmail(this.auth.email);
+    this.auth.updatePassword(this.rForm.value.password).then(() => {
+      this.atleta.subscribe(atl => {
+        atl.forEach(aux_atl => {
           this.atletaService.updatePassword(aux_atl.$key, this.rForm.value.password)
-          .then(() => {
-            //Password cambiado en Firebase.
-            this.emailService.send('registro', aux_atl.$key).subscribe(data => {
-              this.done = true;
-              window.setTimeout(() => {
-                this.router.navigate(['/dashboard']);
-              }, 1000);
+            .then(() => {
+              //Password cambiado en Firebase.
+              this.emailService.send('registro', aux_atl.$key).subscribe(data => {
+                this.done = true;
+                window.setTimeout(() => {
+                  this.router.navigate(['/dashboard']);
+                }, 1000);
+              })
+            }).catch(error => {
+              console.log(error);
             })
-          }).catch(error => {
-            console.log(error);
-          })
-         })
         })
-      }).catch(error => {
-        console.log(error);
       })
+    }).catch(error => {
+      console.log(error);
+    })
   }
 
 }
