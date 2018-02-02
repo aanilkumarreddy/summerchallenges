@@ -76,7 +76,7 @@ export class LoginComponent {
 
     this.retrievePassword = true;
     let aux_atleta: any = this.atletasService.getAtleta_byEmail(this.rForm.value.email).subscribe(data => {
-      this.emailService.send('registro', data[0].$key)
+      this.emailService.send('forgot-password', data[0].$key)
         .subscribe(data => {
           console.log(data);
         })
