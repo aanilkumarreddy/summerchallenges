@@ -19,4 +19,8 @@ export class RedSysAPIService {
     return this.http.get('http://api.gcsummerchallenge.com/stripe/' + key + '/' + u_key)
       .map(response => response);
   }
+  stripeTeam(key, u_key) {
+    return this.http.get('http://api.gcsummerchallenge.com/stripe-team/' + key + '/' + u_key)
+      .map(response => response);
+  }
 }

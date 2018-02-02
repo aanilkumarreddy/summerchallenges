@@ -299,7 +299,7 @@
     .actions-container{
         flex: 1;
         width: 100%;
-        background-color: blue;
+        background-color: rgba(244,244,244,0.9);
     }
     .profile-container{
         flex-direction: column;
@@ -358,7 +358,7 @@
     margin: -15px 0 0 -15px;
     opacity: 0;
     width: 30px;
- 
+
     animation: pulsate 1s ease-out;
     animation-iteration-count: infinite;
 }
