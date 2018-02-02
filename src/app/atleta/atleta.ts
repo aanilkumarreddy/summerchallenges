@@ -10,12 +10,14 @@ export class Atleta {
         public id_categoria,
         public password,
         public inscripcion,
+        public estado,
         public id_coach?
     ) {
         this.nombre = nombre;
         this.dni = dni;
         this.box = box;
         this.email = email;
+        this.estado = 0;
         this.id_categoria = id_categoria;
         this.password = password;
         this.id_coach = id_coach || "";

@@ -20,6 +20,7 @@ import { EmailService } from '../email-service/email.service';
 export class RegistroVoluntarioComponent {
 
   private error;
+  private especialRegistrado: boolean = false;
 
   private emptyField: boolean = false;
   private rForm: FormGroup;
@@ -75,11 +76,12 @@ export class RegistroVoluntarioComponent {
           .then(data => {
             let aux_voluntario = this.voluntariosService.pushVoluntario(voluntario);
             this.emailService.send('voluntario', aux_voluntario.key)
-              .subscribe(data => {
+              .subscribe((data:any) => {
                 /*
                 *  Código para cambiar el estado del atleta
                 *  dependiendo si la respuesta es positiva
                 */
+                if(data._body == "1") this.especialRegistrado = true
                 console.log(data);
               })
           })
