@@ -68,7 +68,7 @@ export class ResetPasswordComponent implements OnInit {
           this.atletaService.updatePassword(aux_atl.$key, this.rForm.value.password)
             .then(() => {
               //Password cambiado en Firebase.
-              this.emailService.send('registro', aux_atl.$key).subscribe(data => {
+              this.emailService.send('password', aux_atl.$key).subscribe(data => {
                 this.done = true;
                 window.setTimeout(() => {
                   this.router.navigate(['/dashboard']);
