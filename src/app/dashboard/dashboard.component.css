@@ -342,6 +342,12 @@
     }
 }
 
+.btn-cancel{
+    background: rgb(231, 114, 114);
+    color: #641313;
+    margin: 10px 0;
+}
+
 /* ____________________________: Spinner Aspects :_____________________________ */
 .spinner-container{
     width: 100%;

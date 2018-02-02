@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   public team: any;
   private paymentData: any;
   private payProgress: string = "notInitiated";
-  private payed: boolean = false;
+  private payError: string = 'noError';
 
   constructor(
     private authService: AuthService,
@@ -152,6 +152,7 @@ export class DashboardComponent implements OnInit {
   // Gestión del pago mediante Stripe
   openCheckout() {
     let entorno = this;
+    entorno.payError = "noError";     
     entorno.payProgress = "inProgress";
 
     let redsys = this.redsys;
@@ -174,10 +175,12 @@ export class DashboardComponent implements OnInit {
           redsys.stripeTeam(token.id, u_key).subscribe(
             data => {
               entorno.payProgress = "finished";
-              console.log(data);
+                      
+              // console.log(data);
             },
             err => {
-              console.log("No se hizo pago!");
+              // console.log("No se hizo pago!");
+              entorno.payError = "error";
             }
           );
         }
@@ -185,10 +188,13 @@ export class DashboardComponent implements OnInit {
           redsys.stripeData(token.id, u_key).subscribe(
             data => {
               entorno.payProgress = "finished";
-              console.log(data);
+              
+              // console.log(data);
             },
             err => {
-              console.log("No se hizo pago!");
+              // console.log("No se hizo pago!");
+              entorno.payError = "error";
+              
             }
           );
 
