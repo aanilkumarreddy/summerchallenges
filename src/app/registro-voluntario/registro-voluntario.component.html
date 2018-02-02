@@ -7,7 +7,8 @@
             RELLENA TU INSCRIPCIÓN
           </h2>
           <hr/>
-          <md-card-content class="col col-md-12">
+          <span  *ngIf="especialRegistrado">Voluntario registrado. Revise su correo para más información.</span>
+          <md-card-content class="col col-md-12" *ngIf="!especialRegistrado">
 
             <div class="input-group">
               <span class="input-group-addon" id="basic-addon1">

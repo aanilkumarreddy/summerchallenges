@@ -5,14 +5,23 @@
       <div class="icon-container">
         <i class="material-icons">error</i>
       </div>
-      <div *ngIf="atleta.inscripcion.estado>1" class="text-container">
+      <div *ngIf="atleta.estado<2" class="text-container">
         <p>
           <b>¡YA PUEDES FORMALIZAR TU INSCRIPCIÓN!</b>
           <br /> Tienes
           <b>hasta el 05 de marzo</b> para hacer el pago de la misma.
         </p>
       </div>
-      <div class="actions-container">
+
+      <div *ngIf="atleta.estado>1" class="text-container">
+        <p>
+          <b>¡PAGO COMPLETADO!</b>
+          <br /> 
+          Wods disponibles a partir del <b> 06 de marzo.</b>
+        </p>
+      </div>
+
+      <div class="actions-container" *ngIf="atleta.estado<2">
         <button (click)="openCheckout()" class="btn" *ngIf="payProgress=='notInitiated'">PAGAR INSCRIPCIÓN</button>
 
         <div class="spinner-container" *ngIf="payProgress=='inProgress'">
@@ -41,32 +50,36 @@
         </div>
         <div class="extra-info">
           <i class="material-icons">assessment</i> {{categoria}}
-          <i *ngIf="atleta.inscripcion.estado<=1" title="Editar" routerLink="/edit" routerLinkActive="active" class="material-icons mini-action">mode_edit</i>
+          <!-- <i *ngIf="atleta.estado<=1" title="Editar" routerLink="/edit" routerLinkActive="active" class="material-icons mini-action">mode_edit</i> -->
         </div>
         <div class="actions">
-          <!-- <a *ngIf="atleta.inscripcion.estado<=1" target="_blank" class="btn" (click)="pay()">
+          <!-- <a *ngIf="atleta.estado<=1" target="_blank" class="btn" (click)="pay()">
               PAGAR INSCRIPCIÓN
           </a> -->
           <a routerLink="/edit" routerLinkActive="active" class="btn">
             EDITAR DATOS
           </a>
-          <a *ngIf="atleta.inscripcion.estado > 1" routerLink="/wods" routerLinkActive="active" class="btn">
+
+          <!-- TODO: TEMPORAL -->
+          <!-- <a *ngIf="atleta.estado > 1" routerLink="/wods" routerLinkActive="active" class="btn">
             VER WODS
           </a>
-          <a *ngIf="atleta.inscripcion.estado <= 1" class="btn" disabled>
+          <a *ngIf="atleta.estado <= 1" class="btn" disabled>
             VER WODS
-          </a>
+          </a> -->
         </div>
       </div>
 
     </div>
-    <div *ngIf="atleta.inscripcion.estado>1" class="leaderboard-container" id="leaderboard">
+    <!-- TODO: TEMPORAL -->
+    <!-- <div *ngIf="atleta.estado>1" class="leaderboard-container" id="leaderboard">
       <app-leaderboard></app-leaderboard>
-    </div>
+    </div> -->
 
   </div>
 </div>
 
+<!-- TODO: KILL
 
 <div *ngIf="teamData" class="team-modal modal">
   <div class="container">
@@ -99,4 +112,4 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->

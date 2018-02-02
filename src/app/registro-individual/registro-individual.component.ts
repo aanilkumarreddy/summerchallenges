@@ -88,7 +88,7 @@ export class RegistroIndividualComponent implements OnInit {
     const aux_correo: string = formValues.email;
     let kk = aux_correo.toLowerCase();
     const inscripcion = new Inscripcion(1, "Sin confirmar", "Sin confirmar");
-    const atleta = new Atleta(formValues.name, formValues.dni, formValues.box, kk, formValues.category, formValues.password, inscripcion);
+    const atleta = new Atleta(formValues.name, formValues.dni, formValues.box, kk, formValues.category, formValues.password, inscripcion, 0);
     this.registroAtleta(atleta, formValues.password);
 
   }

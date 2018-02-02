@@ -20,6 +20,7 @@ import { EmailService } from '../email-service/email.service';
 export class RegistroJuezComponent {
 
   private error;
+  private especialRegistrado: boolean = false;
 
   private emptyField: boolean = false;
   private rForm: FormGroup;
@@ -76,12 +77,8 @@ export class RegistroJuezComponent {
           .then(data => {
             let aux_juez = this.juecesService.pushJuez(juez);
             this.emailService.send('juez', aux_juez.key)
-              .subscribe(data => {
-                /*
-                *  Código para cambiar el estado del atleta
-                *  dependiendo si la respuesta es positiva
-                */
-                console.log(data);
+              .subscribe((data:any) => {
+                if(data._body == "1") this.especialRegistrado = true
               })
           })
           .catch(error => {
