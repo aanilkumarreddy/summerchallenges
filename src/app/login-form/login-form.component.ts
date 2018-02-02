@@ -32,14 +32,11 @@ export class LoginFormComponent {
     private atletasService: AtletasService,
     private emailService: EmailService
   ) {
-    // this.af.auth.subscribe(data => {
-    //   if (data) {
-    //     this.router.navigate(['/dashboard']);
-    //   }
-    // })
+    this.af.auth.subscribe(data => {
+      this.email = data.auth.email;
+    })
 
     this.rForm = fb.group({
-      'email': [null, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])]
     });
 
@@ -47,13 +44,14 @@ export class LoginFormComponent {
 
   login_correo() {
     let formValues = this.rForm.value;
-    this.authService.login_correo(formValues.email, formValues.password)
+    
+    this.authService.login_correo(this.email, formValues.password)
       .then(promise => { this.router.navigate(['/reset-password']) },
       (error: any) => {
         if (error.code == "auth/user-not-found") this.error = "Email no registrado";
         if (error.code == "auth/wrong-password") this.error = "Contraseña incorrecta";
       }
-      );
+    );
   }
 
   validarCampo(campo) {

@@ -7,19 +7,29 @@
       </div>
       <div *ngIf="atleta.inscripcion.estado>1" class="text-container">
         <p>
-            <b>¡YA PUEDES FORMALIZAR TU INSCRIPCIÓN!</b> <br />
-
-            Tienes <b>hasta el 05 de marzo</b> para hacer el pago de la misma.
+          <b>¡YA PUEDES FORMALIZAR TU INSCRIPCIÓN!</b>
+          <br /> Tienes
+          <b>hasta el 05 de marzo</b> para hacer el pago de la misma.
         </p>
       </div>
       <div class="actions-container">
-        <button (click)="openCheckout()" class="btn">PAGAR INSCRIPCIÓN</button>
+        <button (click)="openCheckout()" class="btn" *ngIf="payProgress=='notInitiated'">PAGAR INSCRIPCIÓN</button>
+
+        <div class="spinner-container" *ngIf="payProgress=='inProgress'">
+          <div class="load-spinner"></div>
+        </div>
+
+        <span *ngIf="payProgress=='finished'">
+          Pago realizado. Revise el correo.
+        </span>
+
       </div>
     </div>
 
     <div class="profile-container">
       <div class="decorador">
-          <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/logos%2Flogo-white.svg?alt=media&token=672e5e33-b918-44aa-b0bc-3e0fd60c456b" alt="lanzarote summer challenge" />
+        <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/logos%2Flogo-white.svg?alt=media&token=672e5e33-b918-44aa-b0bc-3e0fd60c456b"
+          alt="lanzarote summer challenge" />
       </div>
 
       <div class="profile-info">
@@ -34,17 +44,17 @@
           <i *ngIf="atleta.inscripcion.estado<=1" title="Editar" routerLink="/edit" routerLinkActive="active" class="material-icons mini-action">mode_edit</i>
         </div>
         <div class="actions">
-          <a *ngIf="atleta.inscripcion.estado<=1" target="_blank" class="btn" (click)="pay()">
+          <!-- <a *ngIf="atleta.inscripcion.estado<=1" target="_blank" class="btn" (click)="pay()">
               PAGAR INSCRIPCIÓN
-          </a>
+          </a> -->
           <a routerLink="/edit" routerLinkActive="active" class="btn">
             EDITAR DATOS
           </a>
           <a *ngIf="atleta.inscripcion.estado > 1" routerLink="/wods" routerLinkActive="active" class="btn">
-              VER WODS
+            VER WODS
           </a>
           <a *ngIf="atleta.inscripcion.estado <= 1" class="btn" disabled>
-              VER WODS
+            VER WODS
           </a>
         </div>
       </div>
