@@ -8,6 +8,7 @@ import { AtletasService } from "../atletas/atletas.service";
 import { CategoriasService } from "../categorias/categorias.service";
 import { RedSysAPIService } from '../redSysAPI/red-sys-api.service';
 import { RedsysPayment } from '../models/redsys-payment';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,8 @@ export class DashboardComponent implements OnInit {
                private route: ActivatedRoute,
                private atletasService : AtletasService,
                private categoriasService : CategoriasService,
-               private redsys : RedSysAPIService,) {
+               private redsys : RedSysAPIService,
+              private http: Http) {
   //this.atleta = new Atleta("", "", "", "", "", "");
   //Nos subscribimos y cargamos los datos de auth para obtener el atleta actual
   //this.router.navigate(['/login']);
@@ -137,6 +139,39 @@ export class DashboardComponent implements OnInit {
         };
       this.atletasService.updateTeam_3(this.key, atl_1);
     }
+  }
+
+  // Gestión del pago mediante Stripe
+  openCheckout() {
+    let redsys = this.redsys;
+    let t_key = 'pk_test_aftvFWjm81D4kedB2NSeQ44r';
+    let l_key = 'pk_live_T4dafQ7HHy8YiyaOt9lrr1fI';
+    let u_key = this.atleta.$key;
+    let u_email = this.atleta.email;
+
+    var handler = (<any>window).StripeCheckout.configure({
+      key: t_key,
+      locale: 'auto',
+
+      token: function (token: any) {
+        // Enviamos los datos necesarios para gestionar el pago en la API
+        redsys.stripeData(token.id, u_key)
+          .subscribe(data => {
+            console.log(data);
+          })
+      }
+    });
+    //Formulario de pago de stripe
+    handler.open({
+      name: 'Gran Canaria Summer Challenge',
+      description: 'Inscripción',
+      currency: 'eur',
+      amount: 1605,
+      zipCode: true,
+      allowRememberMe: false,
+      email: u_email
+
+    });
   }
 
   pay() {
