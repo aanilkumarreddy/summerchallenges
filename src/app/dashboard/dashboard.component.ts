@@ -16,33 +16,35 @@ import { Http } from '@angular/http';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  private auth : any;
-  public key : any;
-  public atleta : any;
-  public categoria : any;
-  public teamData : boolean;
-  public team : any;
-  private paymentData : any;
+  private auth: any;
+  public key: any;
+  public atleta: any;
+  public categoria: any;
+  public teamData: boolean;
+  public team: any;
+  private paymentData: any;
+  private payProgress: string = 'notInitiated';
+  private payed: boolean = false;
 
-  constructor( private authService : AuthService,
-               private af : AngularFire,
-               private router : Router,
-               private route: ActivatedRoute,
-               private atletasService : AtletasService,
-               private categoriasService : CategoriasService,
-               private redsys : RedSysAPIService,
-              private http: Http) {
-  //this.atleta = new Atleta("", "", "", "", "", "");
-  //Nos subscribimos y cargamos los datos de auth para obtener el atleta actual
-  //this.router.navigate(['/login']);
+  constructor(private authService: AuthService,
+    private af: AngularFire,
+    private router: Router,
+    private route: ActivatedRoute,
+    private atletasService: AtletasService,
+    private categoriasService: CategoriasService,
+    private redsys: RedSysAPIService,
+    private http: Http) {
+    //this.atleta = new Atleta("", "", "", "", "", "");
+    //Nos subscribimos y cargamos los datos de auth para obtener el atleta actual
+    //this.router.navigate(['/login']);
 
     this.team = {
-                  'atl_1' : "",
-                  'atl_2' : "",
-                  'atl_3' : ""
-                };
-    this.af.auth.subscribe( (data : any) => {
-      if(data){
+      'atl_1': "",
+      'atl_2': "",
+      'atl_3': ""
+    };
+    this.af.auth.subscribe((data: any) => {
+      if (data) {
         this.auth = data.auth;
         let aux_atleta = this.atletasService.getAtleta_byEmail(this.auth.email);
         aux_atleta.subscribe(data => {
@@ -52,7 +54,7 @@ export class DashboardComponent implements OnInit {
               this.getTeam(data);
               this.atleta = data;
               this.key = data.$key;
-              if(data.email == "info@summerchallenges.com"){
+              if (data.email == "info@summerchallenges.com") {
                 this.router.navigate(['/admin']);
               }
 
@@ -66,98 +68,108 @@ export class DashboardComponent implements OnInit {
           });
         })
 
-      }else{
+      } else {
         this.auth = null;
         this.atleta = null;
         this.router.navigate(['/login']);
       }
 
     })
-   }
+  }
 
   ngOnInit() {
   }
 
-  isTeam(atleta){
+  isTeam(atleta) {
     return atleta.id_categoria == 4 ? true : false;
   }
-  getTeam(atleta){
+  getTeam(atleta) {
 
-    if(this.isTeam(atleta)){
+    if (this.isTeam(atleta)) {
       this.teamData = true;
-      if(!atleta.atl_1){
+      if (!atleta.atl_1) {
         return
-      }else{
+      } else {
         this.team.atl_1 = atleta.atl_1 || "";
         this.team.atl_2 = atleta.atl_2 || "";
         this.team.atl_3 = atleta.atl_3 || "";
         let flag = false;
-          if(this.team.atl_1.nombre == "" || this.team.atl_2.nombre == "" || this.team.atl_3.nombre == ""){
-            this.teamData = true;
-          }else{
-            this.teamData = false;
-          }
+        if (this.team.atl_1.nombre == "" || this.team.atl_2.nombre == "" || this.team.atl_3.nombre == "") {
+          this.teamData = true;
+        } else {
+          this.teamData = false;
+        }
       }
     }
   }
 
-  closeModal(){
+  closeModal() {
     const modal = document.querySelector('.team-modal');
 
     modal.classList.add('off');
     this.removeBlur();
   }
 
-  removeBlur(){
+  removeBlur() {
     const dashboard = document.querySelector('#dashboard');
     dashboard.classList.remove('blur');
   }
 
-  addAthlete_1(name, id){
-    if(!this.atleta.atl_1){
-        let atl_1 = {
-          nombre : name.value,
-          id : id.value
-        };
+  addAthlete_1(name, id) {
+    if (!this.atleta.atl_1) {
+      let atl_1 = {
+        nombre: name.value,
+        id: id.value
+      };
       this.atletasService.updateTeam_1(this.key, atl_1);
     }
   }
-  addAthlete_2(name, id){
-    if(!this.atleta.atl_2){
-        let atl_1 = {
-          nombre : name.value,
-          id : id.value
-        };
+  addAthlete_2(name, id) {
+    if (!this.atleta.atl_2) {
+      let atl_1 = {
+        nombre: name.value,
+        id: id.value
+      };
       this.atletasService.updateTeam_2(this.key, atl_1);
     }
   }
-  addAthlete_3(name, id){
-    if(!this.atleta.atl_3){
-        let atl_1 = {
-          nombre : name.value,
-          id : id.value
-        };
+  addAthlete_3(name, id) {
+    if (!this.atleta.atl_3) {
+      let atl_1 = {
+        nombre: name.value,
+        id: id.value
+      };
       this.atletasService.updateTeam_3(this.key, atl_1);
     }
   }
 
   // Gestión del pago mediante Stripe
   openCheckout() {
+    this.payProgress = 'inProgress';
+    let kk = this.changeStateOfPayment;
+    console.log(this.payProgress);
+
     let redsys = this.redsys;
     let t_key = 'pk_test_aftvFWjm81D4kedB2NSeQ44r';
     let l_key = 'pk_live_T4dafQ7HHy8YiyaOt9lrr1fI';
     let u_key = this.atleta.$key;
     let u_email = this.atleta.email;
+    let entorno = this;
 
     var handler = (<any>window).StripeCheckout.configure({
+
       key: t_key,
       locale: 'auto',
 
-      token: function (token: any) {
+      token: function (token: any, payProgres: any) {
         // Enviamos los datos necesarios para gestionar el pago en la API
         redsys.stripeData(token.id, u_key)
           .subscribe(data => {
+            entorno.changeStateOfPayment();
             console.log(data);
+          },
+          err => {
+            console.log("No se hizo pago!");
           })
       }
     });
@@ -174,6 +186,10 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  changeStateOfPayment(){
+    this.payProgress = 'finished';
+  }
+
   pay() {
     //TODO - Eliminar, es sólo para test.
     console.log(this.atleta.$key);
@@ -184,27 +200,27 @@ export class DashboardComponent implements OnInit {
     //Nos suscribimos a la respuesta de la API
     payment.subscribe(data => {
       //Formulario de envio de datos para Redsys
-      let payment_form : HTMLFormElement = document.createElement('form');
+      let payment_form: HTMLFormElement = document.createElement('form');
       payment_form.setAttribute('method', 'POST');
       payment_form.setAttribute('action', data.url);
       payment_form.setAttribute('target', '_blank');
 
       //Input con los parametros de la compra devueltos por la API - Datos obligatorios + opcionales + urls
-      let params : HTMLInputElement = document.createElement('input');
+      let params: HTMLInputElement = document.createElement('input');
       params.setAttribute('name', 'Ds_MerchantParameters');
       params.setAttribute('type', 'hidden');
       params.setAttribute('value', data.params);
       payment_form.appendChild(params);
 
       //Input con la versión de la firma de RedSys - Obligatorio
-      let version : HTMLInputElement = document.createElement('input');
+      let version: HTMLInputElement = document.createElement('input');
       version.setAttribute('name', 'Ds_SignatureVersion');
       version.setAttribute('type', 'hidden');
       version.setAttribute('value', data.version);
       payment_form.appendChild(version);
 
       //Input con la firma de Redsys - Obligatorio
-      let signature : HTMLInputElement = document.createElement('input');
+      let signature: HTMLInputElement = document.createElement('input');
       signature.setAttribute('name', 'Ds_Signature');
       signature.setAttribute('type', 'hidden');
       signature.setAttribute('value', data.signature);
