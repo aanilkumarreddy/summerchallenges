@@ -66,6 +66,7 @@ table tr *{
     float: right;
    /* width: 60vh;*/
 }
+
 .form-control input{
     text-transform: lowercase;
 }
@@ -129,4 +130,7 @@ table tr *{
     background: rgb(231, 114, 114);
     color: #641313;
     margin: 10px 0;
+}
+input.email {
+    text-transform: lowercase;
 }

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1" id="confirmacion">
-    
+
         <form atletaDatos [formGroup]="rForm" (ngSubmit)="enviarDatos()">
           <md-card class="example-card row bg-white">
             <h2 class="btn btn-block">
@@ -9,7 +9,7 @@
             </h2>
             <hr/>
             <md-card-content class="col col-md-12">
-  
+
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">
                   <i class="material-icons">perm_identity</i>
@@ -18,7 +18,7 @@
                   placeholder="Nombre completo" aria-describedby="basic-addon1">
                 <span class="form-control-invalid-alert" *ngIf="validarCampo('name')">(*) Se requiere al menos 3 letras</span>
               </div>
-  
+
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">
                   <i class="material-icons">picture_in_picture</i>
@@ -27,17 +27,17 @@
                   placeholder="DNI" aria-describedby="basic-addon1">
                 <span class="form-control-invalid-alert" *ngIf="validarCampo('dni')">(*) Se requiere este campo</span>
               </div>
-  
+
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">
                   <i class="material-icons">mail_outline</i>
                 </span>
-                <input type="text" formControlName="email" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('email') || error=='emailErr'}"
+                <input type="text" formControlName="email" class="form-control email" [ngClass]="{'form-control-invalid': validarCampo('email') || error=='emailErr'}"
                   placeholder="Email de contacto" aria-describedby="basic-addon1">
                 <span class="form-control-invalid-alert" *ngIf="validarCampo('email')">(*) Se requiere email válido</span>
                 <span class="form-control-invalid-alert" *ngIf="error=='emailErr'">(*) El email ya está registrado</span>
               </div>
-  
+
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">
                   <i class="material-icons">vpn_key</i>
@@ -46,7 +46,7 @@
                   placeholder="Contraseña" aria-describedby="basic-addon1">
                 <span class="form-control-invalid-alert" *ngIf="validarCampo('password')">(*) Contraseña de al menos seis caracteres</span>
               </div>
-  
+
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">
                   <i class="material-icons">vpn_key</i>
@@ -55,14 +55,14 @@
                   placeholder="Repita la Contraseña" aria-describedby="basic-addon1">
                 <span class="form-control-invalid-alert" *ngIf="validarPassword() || validarCampo('passwordConfirm')">(*) La contraseña no coincide</span>
               </div>
-  
+
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">
                   <i class="material-icons">my_location</i>
                 </span>
                 <input type="text" formControlName="box" class="form-control" placeholder="Box / Club (Opcional)" aria-describedby="basic-addon1">
               </div>
-  
+
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">
                   <i class="material-icons">assessment</i>
@@ -73,27 +73,27 @@
                 </select>
                 <span class="form-control-invalid-alert" *ngIf="validarCampo('category')">(*) Seleccione una categoría</span>
               </div>
-  
+
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">
                   <i class="material-icons">attach_money</i>
                 </span>
                 <input type="text" #prize class="form-control" aria-describedby="basic-addon1" [disabled]="true" value="{{precio}} € (IGIC incluido)">
               </div>
-  
+
               <hr/>
               <input type="submit" class="btn btn-block" value="CREAR CUENTA">
-  
+
             </md-card-content>
           </md-card>
         </form>
-  
+
         <!-- <app-registro-team *ngIf="equipo"></app-registro-team>
-  
+
         <app-registro-juez *ngIf="juez"></app-registro-juez>
-  
+
         <app-registro-voluntario *ngIf="voluntario"></app-registro-voluntario> -->
-  
+
       </div>
     </div>
   </div>

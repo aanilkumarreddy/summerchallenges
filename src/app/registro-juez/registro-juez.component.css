@@ -46,12 +46,12 @@ table tr *{
     margin-bottom: 5px;
     padding-top: 12px;
 }
-.input-group-addon{    
+.input-group-addon{
     background-color: transparent;
     color: #009c9c;
     border: none;
     font-family: 'Open Sans';
-    font-weight: 400; 
+    font-weight: 400;
 }
 .form-control{
     box-shadow: none;
@@ -95,7 +95,7 @@ table tr *{
 }
 .mat-radio-inner-circle {
     background-color: #009c9c !important;
-} 
+}
 .bg-white{
     background-color: white;
 }
@@ -121,4 +121,7 @@ table tr *{
     background: rgb(231, 114, 114);
     color: #641313;
     margin: 10px 0;
+}
+input.email {
+    text-transform: lowercase;
 }

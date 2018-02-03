@@ -32,7 +32,7 @@
               <span class="input-group-addon" id="basic-addon1">
                 <i class="material-icons">mail_outline</i>
               </span>
-              <input type="text" formControlName="email" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('email') || error=='emailErr'}"
+              <input type="text" formControlName="email" class="form-control email" [ngClass]="{'form-control-invalid': validarCampo('email') || error=='emailErr'}"
                 placeholder="Email de contacto" aria-describedby="basic-addon1">
               <span class="form-control-invalid-alert" *ngIf="validarCampo('email')">(*) Se requiere email válido</span>
               <span class="form-control-invalid-alert" *ngIf="error=='emailErr'">(*) El email ya está registrado</span>

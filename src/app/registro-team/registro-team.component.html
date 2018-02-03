@@ -76,7 +76,7 @@
               <span class="input-group-addon" id="basic-addon1">
                 <i class="material-icons">mail_outline</i>
               </span>
-              <input type="text" formControlName="email" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('email') || error=='emailErr'}"
+              <input type="text" formControlName="email" class="form-control email" [ngClass]="{'form-control-invalid': validarCampo('email') || error=='emailErr'}"
                 placeholder="Email de contacto" aria-describedby="basic-addon1">
               <span class="form-control-invalid-alert" *ngIf="validarCampo('email')">(*) Se requiere email válido</span>
               <span class="form-control-invalid-alert" *ngIf="error=='emailErr'">(*) El email ya está registrado</span>
@@ -107,7 +107,7 @@
               </span>
               <input type="text" #prize class="form-control" aria-describedby="basic-addon1" [disabled]="true" value="{{precio}} € (IGIC incluido)">
             </div>
-            <!-- 
+            <!--
       <div class="input-group col col-md-10 col-md-offset-1">
         <span class="input-group-addon" id="basic-addon1">
           <i class="material-icons">info_outline</i>
