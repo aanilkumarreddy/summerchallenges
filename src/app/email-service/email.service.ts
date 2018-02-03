@@ -3,7 +3,7 @@ import { Http } from '@angular/http/src/http';
 
 @Injectable()
 export class EmailService {
-  private base_url = 'https://api.gcsummerchallenge.com/email';
+  private base_url = 'https://gcsummerchallenge.com/api/email';
   constructor(private http:Http) { }
 
   send(section, key) {

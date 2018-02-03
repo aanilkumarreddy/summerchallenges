@@ -11,16 +11,16 @@ export class RedSysAPIService {
     * La API se encarga de generar la petición de pago con los datos del usuario
     * Por parámetro debe llegar el key del auth del usuario
     */
-      return this.http.get('https://api.gcsummerchallenge.com/payment/' + key)
+      return this.http.get('https://gcsummerchallenge.com/api/payment/' + key)
     .map(response => response.json());
   }
 
   stripeData(key, u_key) {
-    return this.http.get('https://api.gcsummerchallenge.com/stripe/' + key + '/' + u_key)
+    return this.http.get('https://gcsummerchallenge.com/api/stripe/' + key + '/' + u_key)
       .map(response => response);
   }
   stripeTeam(key, u_key) {
-    return this.http.get('https://api.gcsummerchallenge.com/stripe-team/' + key + '/' + u_key)
+    return this.http.get('https://gcsummerchallenge.com/api/stripe-team/' + key + '/' + u_key)
       .map(response => response);
   }
 }
