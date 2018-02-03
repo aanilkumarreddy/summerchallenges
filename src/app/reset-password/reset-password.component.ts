@@ -75,12 +75,10 @@ export class ResetPasswordComponent implements OnInit {
                 }, 1000);
               })
             }).catch(error => {
-              console.log(error);
             })
         })
       })
     }).catch(error => {
-      console.log(error);
     })
   }
 

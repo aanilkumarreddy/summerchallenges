@@ -83,11 +83,9 @@ export class RegistroJuezComponent {
           })
           .catch(error => {
             this.error = error.message;
-            console.log(this.error);
           })
       } else {
         this.error = "emailErr";
-            console.log(this.error);
         
       }
     })
