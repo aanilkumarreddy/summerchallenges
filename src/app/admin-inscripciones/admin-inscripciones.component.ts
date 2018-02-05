@@ -47,7 +47,7 @@ export class AdminInscripcionesComponent implements OnInit {
         data.forEach(element => {
           const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
           atleta_actual.subscribe(data => {
-            if(data.email != "info@summerchallenges.com"){
+            if(data.email != "info@gcsummerchallenge.com"){
               this.router.navigate(['/login']);
             }
             })
@@ -65,8 +65,8 @@ export class AdminInscripcionesComponent implements OnInit {
     this.atletas.subscribe(atletas =>{
       this.lista_actual = atletas;
       this.num_inscripciones = this.lista_actual.length;
-      this.lista_actual_no = this.lista_actual.filter(atleta => atleta.inscripcion.estado === 1);
-      this.lista_actual_si = this.lista_actual.filter(atleta => atleta.inscripcion.estado === 2);
+      this.lista_actual_no = this.lista_actual.filter(atleta => atleta.estado === 1);
+      this.lista_actual_si = this.lista_actual.filter(atleta => atleta.estado === 2);
       this.num_pagados = this.lista_actual_si.length;
 
       /* INTENTAR MEJORAR ESTA PARTE DEL CÓDIGO, QUE REALICE UN FOREACH EN LAS CATEGORIAS Y SAQUE LOS DATOS EN UNA SOLA LÍNEA*/
@@ -83,7 +83,7 @@ export class AdminInscripcionesComponent implements OnInit {
   }
 
   getNumAthletes_byCategory_estatus(lista, c, e){
-    return lista.filter(a => a.id_categoria === c && a.inscripcion.estado === e).length;
+    return lista.filter(a => a.id_categoria === c && a.estado === e).length;
   }
   getNumAthletes_byCategory(lista, c){
     return lista.filter(a => a.id_categoria === c).length;
