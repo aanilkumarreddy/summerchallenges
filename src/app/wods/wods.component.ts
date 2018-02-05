@@ -61,6 +61,11 @@ export class WodsComponent implements OnInit {
               if (data.email == "info@summerchallenges.com") {
                 this.router.navigate(["/admin"]);
               }
+
+              if (data.email != "franciscogt94@gmail.com") {
+                this.router.navigate(["/login"]);
+              }
+              
               const categoria_actual = this.categoriasService.getCategoria(
                 data.id_categoria
               );

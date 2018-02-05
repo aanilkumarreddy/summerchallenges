@@ -63,7 +63,7 @@ const appRoutes : Routes = [
   { path : 'registro-voluntario', component : RegistroVoluntarioComponent },
   { path : 'confirmacion', component : InscripcionComponent },
   { path : 'edit', component : EditComponent},
-  //{ path : 'wods', component : WodsComponent},
+  { path : 'wods', component : WodsComponent},
   //{ path: 'countdown', component: LoginComponent},
   //{ path : 'public-wods', component : PublicWodsComponent},
   //{ path : 'leaderboard', component: LeaderboardComponent},
