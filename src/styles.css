@@ -96,3 +96,6 @@ table tr{
 .flex-column {
     flex-direction: column;
 }
+.flex-wraper {
+    flex-wrap: wrap;
+}

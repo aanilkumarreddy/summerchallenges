@@ -1,5 +1,7 @@
 <div class="data-container">
-  <button routerLink="/admin-leaderboard" roterLinkActive="active"> ADMIN LEADERBOARD </button>
+  <!-- TODO: RERUN ADMIN LEADERBOARD
+    <button routerLink="/admin-leaderboard" roterLinkActive="active"> ADMIN LEADERBOARD </button>
+  -->
   <div class="num-container" *ngIf="num_inscripciones">
     <div class="num-panel">
       <span class="title">INSCRIPCIONES </span>
@@ -42,23 +44,27 @@
     </div>
   </div>
 </div>
-<div *ngIf="lista_actual" class="atleta-list">
-  <div class="atleta" *ngFor="let atleta of lista_actual">
-    <div class="atleta--data">
+
+<div *ngIf="lista_actual" class="atleta-list flex flex-wraper flex-center flex-column">
+  <div class="atleta flex" *ngFor="let atleta of lista_actual">
+    <div class="atleta--data flex flex-column">
       <div class="atleta--name">
         {{atleta.nombre}}
       </div>
-      <div class="atleta--email">
+      <div class="atleta--email flex flex-wrap">
         {{atleta.email}}
       </div>
+      <div class="atleta--categoria">
+        {{atleta.cat}}
+      </div>
     </div>
-    <div class="atleta--estado">
-      {{atleta.estado}}
+    <div class="flex flex-center atleta--estado estado--{{atleta.state}}">
+      <i class="fas fa-check"></i>
     </div>
   </div>
 </div>
 
-
+<!--
 <div *ngIf="atletas" class="admin-container container">
   <table *ngIf="lista_actual">
     <tr>
@@ -102,6 +108,7 @@
       </td>
   </table>
 </div>
+-->
 <!--
 <div class="modalk">
   HOLA

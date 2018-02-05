@@ -49,6 +49,7 @@ table tr td span{
     align-items: center;
     flex-wrap: wrap;
     max-width: 100%;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .num-container{
@@ -104,6 +105,52 @@ table tr td span{
     justify-content: center;
     text-align: center;
     align-items: center;
+}
+.atleta-list {
+    width: 90%;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 35px;
+}
+.atleta {
+    background-color: #009c9c;
+    border-radius: 3px;
+    flex: 1 1 100%;
+    width: 100%;
+    color: white;
+    margin-top: 16px;
+}
+.atleta--data {
+    border-right: 4px solid rgba(22,22,22, 0.05);
+    width: 80%;
+}
+.atleta--name {
+    padding: 18px 16px 2px 16px;
+    font-size: 24px;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+}
+.atleta--email, .atleta--categoria {
+    padding: 2px 16px;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+}
+.atleta--categoria {
+    padding-bottom: 18px;
+}
+.atleta--estado {
+    width: 20%;
+}
+.estado--on {
+    background-color: rgba(244,244,244, 0.3);
+    border-radius: 0px 3px 3px 0px;
+}
+.estado--of i {
+    display: none;
+}
+.estado--on i {
+    font-size: 28px;
+    color: #009c9c;
 }
 
 @media(max-width: 780px) {
