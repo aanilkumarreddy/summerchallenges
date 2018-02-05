@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
               this.getTeam(data);
               this.atleta = data;
               this.key = data.$key;
-              if (data.email == "info@summerchallenges.com") {
+              if (data.email == "info@gcsummerchallenge.com") {
                 this.router.navigate(["/admin"]);
               }
 
@@ -152,7 +152,7 @@ export class DashboardComponent implements OnInit {
   // Gestión del pago mediante Stripe
   openCheckout() {
     let entorno = this;
-    entorno.payError = "noError";     
+    entorno.payError = "noError";
     entorno.payProgress = "inProgress";
 
     let redsys = this.redsys;
@@ -175,7 +175,7 @@ export class DashboardComponent implements OnInit {
           redsys.stripeTeam(token.id, u_key).subscribe(
             data => {
               entorno.payProgress = "finished";
-                      
+
               // console.log(data);
             },
             err => {
@@ -188,13 +188,13 @@ export class DashboardComponent implements OnInit {
           redsys.stripeData(token.id, u_key).subscribe(
             data => {
               entorno.payProgress = "finished";
-              
+
               // console.log(data);
             },
             err => {
               // console.log("No se hizo pago!");
               entorno.payError = "error";
-              
+
             }
           );
 

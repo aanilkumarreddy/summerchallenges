@@ -17,23 +17,23 @@
       <span class="data">{{num_rx}}</span>
     </div>
     <div class="num-panel">
-      <span class="title"> SCALE MASCULINO </span>
+      <span class="title"> RX FEMENINO </span>
       <span class="data">{{num_scm}}</span>
     </div>
     <div class="num-panel">
-      <span class="title"> SCALE FEMENINO </span>
+      <span class="title"> TEAM MASCULINO </span>
       <span class="data">{{num_scf}}</span>
     </div>
     <div class="num-panel">
-      <span class="title"> TEAMS </span>
+      <span class="title"> TEAM MIXTO </span>
       <span class="data">{{num_tm}}</span>
     </div>
     <div class="num-panel">
-      <span class="title"> MASTER MASCULINO </span>
+      <span class="title"> TEEN </span>
       <span class="data">{{num_msm}}</span>
     </div>
     <div class="num-panel">
-      <span class="title"> MASTER FEMENINO </span>
+      <span class="title"> AMATEUR </span>
       <span class="data">{{num_msf}}</span>
     </div>
     <div class="num-panel">
@@ -42,6 +42,22 @@
     </div>
   </div>
 </div>
+<div *ngIf="lista_actual" class="atleta-list">
+  <div class="atleta" *ngFor="let atleta of lista_actual">
+    <div class="atleta--data">
+      <div class="atleta--name">
+        {{atleta.nombre}}
+      </div>
+      <div class="atleta--email">
+        {{atleta.email}}
+      </div>
+    </div>
+    <div class="atleta--estado">
+      {{atleta.estado}}
+    </div>
+  </div>
+</div>
+
 
 <div *ngIf="atletas" class="admin-container container">
   <table *ngIf="lista_actual">
@@ -54,12 +70,12 @@
     </tr>
     <tr *ngFor="let admin of lista_actual_no">
       <td>{{admin.nombre}}<br /><span>({{admin.email}} -<b>{{admin.$key}}</b>)</span></td>
-      <td>{{admin.inscripcion.fecha || "Sin confirmar"}}</td>
-      <td><b>{{admin.inscripcion.id_pedido}}</b></td> 
-      <td>{{admin.inscripcion.estado}}</td>
+      <td>{{admin.fecha || "Sin confirmar"}}</td>
+      <td><b>{{admin.id_pedido}} || "Sin pedido"</b></td>
+      <td>{{admin.estado}}</td>
       <td>
-        <button *ngIf="admin.inscripcion.estado <= 1" (click)="activar(admin.$key, admin.inscripcion.fecha, admin.inscripcion.id_pedido)" >ACTIVAR</button>
-        <button *ngIf="admin.inscripcion.estado > 1" (click)="desactivar(admin.$key, admin.inscripcion.fecha, admin.inscripcion.id_pedido)" > DESACTIVAR </button>
+        <button *ngIf="admin.estado <= 1" (click)="activar(admin.$key, admin.fecha, admin.id_pedido)" >ACTIVAR</button>
+        <button *ngIf="admin.estado > 1" (click)="desactivar(admin.$key, admin.fecha, admin.id_pedido)" > DESACTIVAR </button>
       </td>
   </table>
 </div>
@@ -76,13 +92,13 @@
     </tr>
     <tr *ngFor="let admin of lista_actual_si">
       <td>{{admin.nombre}}<br /><span>({{admin.email}} - {{admin.$key}})</span></td>
-      <td>{{admin.inscripcion.fecha || "Sin confirmar"}}</td>
-      <td><b>{{admin.inscripcion.id_pedido}}</b></td>
-      <td>{{admin.id_categoria}}</td> 
-      <td>{{admin.inscripcion.estado}}</td>
+      <td>{{admin.fecha || "Sin confirmar"}}</td>
+      <td><b>{{admin.id_pedido || "Sin pedido"}}</b></td>
+      <td>{{admin.id_categoria}}</td>
+      <td>{{admin.estado}}</td>
       <td>
-        <button *ngIf="admin.inscripcion.estado <= 1" (click)="activar(admin.$key, admin.inscripcion.fecha, admin.inscripcion.id_pedido)" >ACTIVAR</button>
-        <button *ngIf="admin.inscripcion.estado > 1" (click)="desactivar(admin.$key, admin.inscripcion.fecha, admin.inscripcion.id_pedido)" > DESACTIVAR </button>
+        <button *ngIf="admin.estado <= 1" (click)="activar(admin.$key, admin.fecha, admin.id_pedido)" >ACTIVAR</button>
+        <button *ngIf="admin.estado > 1" (click)="desactivar(admin.$key, admin.fecha, admin.id_pedido)" > DESACTIVAR </button>
       </td>
   </table>
 </div>

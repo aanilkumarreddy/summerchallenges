@@ -33,12 +33,12 @@ export class AdminInscripcionesComponent implements OnInit {
   public num_tn : number;
 
   constructor(private atletasService : AtletasService,
-              private af : AngularFire, 
+              private af : AngularFire,
               private router : Router,
-              private wodsService : WodsService) { 
+              private wodsService : WodsService) {
 
   this.atletas = this.atletasService.atletas;
-  this.getAtletas();      
+  this.getAtletas();
   this.af.auth.subscribe( (data : any) => {
     if(data){
       this.auth = data.auth;
@@ -48,14 +48,14 @@ export class AdminInscripcionesComponent implements OnInit {
           const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
           atleta_actual.subscribe(data => {
 
-            if(data.email != "info@summerchallenges.com"){
+            if(data.email != "info@gcsummerchallenge.com"){
               this.router.navigate(['/login']);
             }
             })
           })
-        });                  
+        });
       }
-    })  
+    })
 
   }
 
@@ -66,8 +66,8 @@ export class AdminInscripcionesComponent implements OnInit {
     this.atletas.subscribe(atletas =>{
       this.lista_actual = atletas;
       this.num_inscripciones = this.lista_actual.length;
-      this.lista_actual_no = this.lista_actual.filter(atleta => atleta.inscripcion.estado === 1);
-      this.lista_actual_si = this.lista_actual.filter(atleta => atleta.inscripcion.estado === 2);
+      this.lista_actual_no = this.lista_actual.filter(atleta => atleta.estado === 1);
+      this.lista_actual_si = this.lista_actual.filter(atleta => atleta.estado === 2);
       this.num_pagados = this.lista_actual_si.length;
 
       /* INTENTAR MEJORAR ESTA PARTE DEL CÓDIGO, QUE REALICE UN FOREACH EN LAS CATEGORIAS Y SAQUE LOS DATOS EN UNA SOLA LÍNEA*/
@@ -79,12 +79,12 @@ export class AdminInscripcionesComponent implements OnInit {
       this.num_msf = this.getNumAthletes_byCategory_estatus(this.lista_actual, 6, 2);
       this.num_tn = this.getNumAthletes_byCategory_estatus(this.lista_actual, 7, 2);
       /* HASTA AQUÍ */
-      
+
     })
   }
 
   getNumAthletes_byCategory_estatus(lista, c, e){
-    return lista.filter(a => a.id_categoria === c && a.inscripcion.estado === e).length;
+    return lista.filter(a => a.id_categoria === c && a.estado === e).length;
   }
   getNumAthletes_byCategory(lista, c){
     return lista.filter(a => a.id_categoria === c).length;

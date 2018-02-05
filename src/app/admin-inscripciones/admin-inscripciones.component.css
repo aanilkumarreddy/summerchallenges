@@ -10,7 +10,7 @@
     background-color: rgba(22,22,22,0.8);
     z-index: 99999;
     top: 0;
-    left: 0; 
+    left: 0;
 }
 .admin-container table{
     width: 100%;
@@ -47,6 +47,8 @@ table tr td span{
     justify-content: center;
     text-align: center;
     align-items: center;
+    flex-wrap: wrap;
+    max-width: 100%;
 }
 
 .num-container{
@@ -59,6 +61,8 @@ table tr td span{
     text-align: center;
     align-items: center;
     flex: 1;
+    max-width: 100%;
+    flex-wrap: wrap;
 }
 .data-container .num-container:first-child .num-panel{
     min-width: 300px;
@@ -81,7 +85,7 @@ table tr td span{
 .num-panel .title{
     border-right: 2px solid rgba(88,88,88, 0.2);
     padding: 25px;
-    font-size: 1.5vh;    
+    font-size: 1.5vh;
     color:rgba(22,22,22, 0.4);
     font-weight: 800;
     letter-spacing: 0.2em;
@@ -100,4 +104,11 @@ table tr td span{
     justify-content: center;
     text-align: center;
     align-items: center;
+}
+
+@media(max-width: 780px) {
+    .num-panel {
+        margin-left: 25px;
+        flex: 1 1 100%;
+    }
 }
