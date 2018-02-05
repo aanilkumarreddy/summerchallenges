@@ -60,10 +60,44 @@ export class AdminInscripcionesComponent implements OnInit {
 
   ngOnInit() {
   }
+  checkCategory(id_c) {
+    if(id_c == 1) {
+      return "RX Masculino";
+    }
+    if(id_c == 2) {
+      return "RX Femenino";
+    }
+    if(id_c == 3) {
+      return "Team Masculino";
+    }
+    if(id_c == 4) {
+      return "Team Mixto";
+    }
+    if(id_c == 5) {
+      return "Teeanagers";
+    }
+    if(id_c == 6) {
+      return "Amateur";
+    }
+  }
+
+  checkState(estado) {
+    if(estado > 1){
+      return "on";
+    }
+    return "of";
+  }
 
   getAtletas(){
     this.atletas.subscribe(atletas =>{
       this.lista_actual = atletas;
+      this.lista_actual.forEach(atleta => {
+        atleta.cat = this.checkCategory(atleta.id_categoria);
+        atleta.state = this.checkState(atleta.estado);
+      })
+      this.lista_actual.sort((a, b) => {
+        return b.estado - a.estado;
+      })
       this.num_inscripciones = this.lista_actual.length;
       this.lista_actual_no = this.lista_actual.filter(atleta => atleta.estado === 1);
       this.lista_actual_si = this.lista_actual.filter(atleta => atleta.estado === 2);
