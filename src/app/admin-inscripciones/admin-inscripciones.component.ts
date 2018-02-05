@@ -33,12 +33,12 @@ export class AdminInscripcionesComponent implements OnInit {
   public num_tn : number;
 
   constructor(private atletasService : AtletasService,
-              private af : AngularFire, 
+              private af : AngularFire,
               private router : Router,
-              private wodsService : WodsService) { 
+              private wodsService : WodsService) {
 
   this.atletas = this.atletasService.atletas;
-  this.getAtletas();      
+  this.getAtletas();
   this.af.auth.subscribe( (data : any) => {
     if(data){
       this.auth = data.auth;
@@ -47,15 +47,14 @@ export class AdminInscripcionesComponent implements OnInit {
         data.forEach(element => {
           const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
           atleta_actual.subscribe(data => {
-
             if(data.email != "info@summerchallenges.com"){
               this.router.navigate(['/login']);
             }
             })
           })
-        });                  
+        });
       }
-    })  
+    })
 
   }
 
@@ -79,7 +78,7 @@ export class AdminInscripcionesComponent implements OnInit {
       this.num_msf = this.getNumAthletes_byCategory_estatus(this.lista_actual, 6, 2);
       this.num_tn = this.getNumAthletes_byCategory_estatus(this.lista_actual, 7, 2);
       /* HASTA AQUÍ */
-      
+
     })
   }
 
