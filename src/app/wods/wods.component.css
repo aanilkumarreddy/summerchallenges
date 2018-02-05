@@ -1,10 +1,13 @@
+.section-wods {
+    padding-top: 120px;
+}
 .wods-container{
-    padding-top: 40px;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     padding-left: 0px;
     width: 100%;
+    padding-top: 18px;
 }
 .wod-img-container{
     max-width: 100%;
@@ -108,7 +111,6 @@ p.puntuacion{
 }
 
 .mis-wod{
-    margin-top: 120px;
     display: flex;
     justify-content: space-between;
     width: 100%;

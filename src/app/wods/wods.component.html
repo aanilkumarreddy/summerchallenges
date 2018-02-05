@@ -1,14 +1,14 @@
-<section class="container-fluid">
-  <div *ngIf="atleta" class="container mis-wod">
+<section class="container-fluid section-wods">
+  <div *ngIf="atleta && (atleta.wod_1 || atleta.wod_2)" class="container mis-wod">
     <div class="mi-wod">
       <div class="mi-titulo">
         TU WORKOUT 1
       </div>
       <div class="mi-puntuacion">
-        <!-- REPS: {{atleta.wod_1.puntuacion}} -->
+        REPS: {{atleta.wod_1.puntuacion}}
       </div>
       <div class="mi-puesto">
-        <!-- PUESTO: {{atleta.wod_1.puesto}} -->
+        PUESTO: {{atleta.wod_1.puesto}}
       </div>
     </div>
     <div class="mi-wod">
@@ -16,10 +16,10 @@
         TU WORKOUT 2
       </div>
       <div class="mi-puntuacion">
-        <!-- REPS: {{atleta.wod_2.puntuacion}} -->
+        REPS: {{atleta.wod_2.puntuacion}}
       </div>
       <div class="mi-puesto">
-        <!-- PUESTO: {{atleta.wod_2.puesto}} -->
+        PUESTO: {{atleta.wod_2.puesto}}
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
           <div *ngFor="let esp of wod.especificaciones" class="wod-especifications">
             <p *ngIf="esp"> - {{esp}} </p>
           </div>
-        </div>        
+        </div>
       </div>
-      <div class="wod-actions">  
+      <div class="wod-actions">
         <!-- <p class="puntuacion">PUNTUACION = {{wod.puntuacion}}</p> -->
         <p class="puntuacion">TIEBRAKE = {{wod.tiebreak}}</p>
         <div class="data">
@@ -66,15 +66,15 @@
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="material-icons">videocam</i></span>
             <input type="text" placeholder="URL / Link del vídeo" name="url" #url class="form-control"  aria-describedby="basic-addon1" required>
-          </div> 
-          <input *ngIf="wod.titulo=='WORKOUT 1' || wod.titulo=='WORKOUT 1 - TEENAGERS'" type="submit" class="btn btn-block" value="Enviar/Modificar puntuación" (click)="update_wod1(puntuacion, time, url, this.atleta.id_categoria)" />
-          <input *ngIf="wod.titulo=='WORKOUT 2' || wod.titulo=='WORKOUT 2 - TEENAGERS'" type="submit" class="btn btn-block" value="Enviar/Modificar puntuación" (click)="update_wod2(puntuacion, time, url, this.atleta.id_categoria)" />
+          </div>
+          <input *ngIf="wod.titulo=='WOD 1'" type="submit" class="btn btn-block" value="Enviar/Modificar puntuación" (click)="update_wod1(puntuacion, time, url, this.atleta.id_categoria)" />
+          <input *ngIf="wod.titulo=='WOD 2'" type="submit" class="btn btn-block" value="Enviar/Modificar puntuación" (click)="update_wod2(puntuacion, time, url, this.atleta.id_categoria)" />
           </form>
         </div>
-        
+
       </div>
     </div>
   </div>
 
- </div> 
+ </div>
 </section>

@@ -1,24 +1,21 @@
 <div *ngIf="atleta" class="container leaderboard-container">
   <h2>LEADERBOARD {{aux_categoria}} </h2>
-  <p class="info"> La clasificación es suceptible de contener errores de automatización. 
+  <p class="info"> La clasificación es suceptible de contener errores de automatización.
     La clasificación definitiva será publicada una vez se haya finalizado el plazo
     para entregar los WORKOUT. </p>
   <div class="container-of">
     <div class="boton-container">
       <button class="btn" (click)="getAtletas_byCategoria(atleta.id_categoria)"> Ver mi categoría </button>
       <button class="btn" (click)="getAtletas_byCategoria(1)"> RX Masculino </button>
-      <button class="btn" (click)="getAtletas_byCategoria(2)"> Scale Masculino </button>
-      <button class="btn" (click)="getAtletas_byCategoria(3)"> Scale Femenino </button>
+      <button class="btn" (click)="getAtletas_byCategoria(2)"> RX Femenino </button>
+      <button class="btn" (click)="getAtletas_byCategoria(3)"> Team Masculino </button>
     </div>
     <div class="boton-container">
-      <button class="btn" (click)="getAtletas_byCategoria(4)"> Team </button>
-      <button class="btn" (click)="getAtletas_byCategoria(5)"> Master Masculino </button>
-      <button class="btn" (click)="getAtletas_byCategoria(6)"> Master Femenino </button>
-      <button class="btn" (click)="getAtletas_byCategoria(7)"> Teens </button>
+      <button class="btn" (click)="getAtletas_byCategoria(4)"> Team Mixto </button>
+      <button class="btn" (click)="getAtletas_byCategoria(5)"> Teenagers </button>
+      <button class="btn" (click)="getAtletas_byCategoria(6)"> Amateur </button>
     </div>
   </div>
-
-
 
     <div *ngIf="atletas" class="orderBy">
       <span> ORDERNAR POR: </span>
@@ -37,9 +34,15 @@
     <tr *ngFor="let atleta of atletas; let i = index" [attr.data-index]="i">
       <td id="pos"> {{i+1}} </td>
       <td id="name"> <b>{{atleta.nombre}}</b><span>{{atleta.box||"Independiente"}}</span></td>
-      <td id="score" class="score">{{atleta.puntos}}</td>
-      <td id="score" class="score">{{atleta.wod_1.puesto || 0}} ({{atleta.wod_1.puntuacion}})</td> 
-      <td id="score" class="score">{{atleta.wod_2.puesto || 0}} ({{atleta.wod_2.puntuacion}})</td>
+      <td id="score" class="score puntos">{{atleta.puntos || 0}}</td>
+      <td id="score" class="score wod1">
+        <div *ngIf="atleta.wod_1">{{atleta.wod_1.puesto || 0}} <br /> ({{atleta.wod_1.puntuacion || 0}})</div>
+        <div *ngIf="!atleta.wod_1">0 <br/> (0)</div>
+      </td>
+      <td id="score" class="score wod2">
+        <div *ngIf="atleta.wod_2">{{atleta.wod_2.puesto || 0}} <br /> ({{atleta.wod_2.puntuacion || 0}})</div>
+        <div *ngIf="!atleta.wod_2">0 <br/> (0)</div>
+      </td>
   </table>
 
 </div>
