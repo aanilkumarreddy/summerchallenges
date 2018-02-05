@@ -11,12 +11,14 @@ export class AtletasService {
   public atleta : any;
   public team : any;
 
+
   constructor(private af:AngularFire,
               private authService : AuthService) {
     this.atletas = af.database.list('/Atletas');
     this.atletas.subscribe(data =>{
       this.aux_atletas = data;
     })
+
 
   }
 
@@ -28,6 +30,10 @@ export class AtletasService {
       }
     })
     return aux_atleta;
+  }
+  getAtletas() {
+    const _query = this.af.database.list('/Atletas');
+    return _query.map(atletas => atletas);
   }
 
   getAtleta_byState(state:number){

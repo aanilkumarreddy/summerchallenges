@@ -31,18 +31,42 @@ export class LeaderboardComponent implements OnInit {
                private atletasService : AtletasService,
                private categoriasService : CategoriasService,
                private wodsService : WodsService) {
-    this.atleta = this.atletasService.atleta;
-    this.key = this.atleta.$key;
-    this.categoria = this.atleta.id_categoria;
-    /*this.getAtletas_byCategoria(this.categoria);*/
+    this.af.auth.subscribe (data => {
+      if(data) {
+        this.auth = data.auth;
+        let aux_atletas = this.atletasService.getAtleta_byEmail(this.auth.email);
+        aux_atletas.subscribe((atleta:any) => {
+          this.atleta = atleta[0];
+          this.key = atleta.$key;
+          this.categoria = this.atleta.id_categoria;
+
+          this.atletasService.getAtletas().subscribe(atletas => {
+            // this.atletas = atletas;
+            // Aquí ya tendríamos todos los atletas, a falta de filtrarlos
+            this.getAtletas_byCategoria(this.categoria);
+          })
+        })
+      }else {
+        // Código de redirección a login .
+        // No hay datos en auth, no está logueado.
+      }
+    })
    }
 
   ngOnInit() {
   }
 
   getAtletas_byCategoria(id_categoria){
-    this.atletas = this.atletasService.aux_atletas.filter(atleta => atleta.inscripcion.estado > 1 && atleta.id_categoria==id_categoria);
-    this.orderBy_total();
+    console.log(id_categoria);
+    let _atletas = this.atletasService.getAtletas_byCategoria(id_categoria);
+    _atletas.subscribe(data => {
+      this.atletas = data
+        .filter(atleta => atleta.estado > 1 &&
+                          atleta.id_categoria==id_categoria
+                          //Aquí se pueden añadir más filtros
+                );
+    })
+    //this.orderBy_total();
   }
   orderBy_wod2(){
     // Ordernar por wod_2

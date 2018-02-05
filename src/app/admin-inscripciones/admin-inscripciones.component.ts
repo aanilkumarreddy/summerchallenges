@@ -47,7 +47,6 @@ export class AdminInscripcionesComponent implements OnInit {
         data.forEach(element => {
           const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
           atleta_actual.subscribe(data => {
-
             if(data.email != "info@gcsummerchallenge.com"){
               this.router.navigate(['/login']);
             }
