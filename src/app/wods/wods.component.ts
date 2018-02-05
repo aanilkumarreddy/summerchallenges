@@ -38,7 +38,7 @@ export class WodsComponent implements OnInit {
     // this.key = this.atleta.$key;
     // this.categoria = this.atleta.id_categoria;
     // this.getWods(this.categoria);
-    // this.router.navigate(['public-wods']); 
+    // this.router.navigate(['public-wods']);
     this.af.auth.subscribe((data: any) => {
       if (data) {
         this.auth = data.auth;
@@ -80,7 +80,7 @@ export class WodsComponent implements OnInit {
   ngOnInit() {
   }
   /*getPosition(){
-  
+
     this.atletasService.atletas.subscribe(data =>{
 
       const atletas_wod1 = data.filter(element => element.wod_1);
@@ -97,11 +97,11 @@ export class WodsComponent implements OnInit {
       //console.log(atletas_wod1.findIndex(x => x.nombre=="ADMIN")+1);
       //console.table(atletas_wod1);
     })
-    
+
   }*/
 
   getWods(categoria) {
-    console.log(categoria);  
+    console.log(categoria);
     let aux_wods = this.wodsService.wods;
     console.log(aux_wods);
     /* FILTRAMOS LOS WODS DE LA CATEGORIA TEEN*/
@@ -113,38 +113,38 @@ export class WodsComponent implements OnInit {
 
   }
 
-  // update_wod1(puntuacion, tiempo, url, categoria) {
-  //   if (puntuacion == "" || tiempo == "" || url == "") {
-  //     return
-  //   } else {
-  //     /*let aux_atletas = this.atletas.filter(atleta => atleta.id_categoria == categoria && atleta.inscripcion.estado > 1);*/
-  //     let wod = { puntuacion: puntuacion.value, tiempo: tiempo.value, url: url.value, puesto: "" };
-  //     this.wodsService.update_wod1(this.key, wod);
-  //     this.router.navigate(['/']);
+   update_wod1(puntuacion, tiempo, url, categoria) {
+     if (puntuacion == "" || tiempo == "" || url == "") {
+       return
+     } else {
+       /*let aux_atletas = this.atletas.filter(atleta => atleta.id_categoria == categoria && atleta.inscripcion.estado > 1);*/
+       let wod = { puntuacion: puntuacion.value, tiempo: tiempo.value, url: url.value, puesto: "" };
+       this.wodsService.update_wod1(this.key, wod);
+       this.router.navigate(['/']);
 
-  //     /*this.update_category(this.atletas.filter(atleta => atleta.id_categoria == categoria && atleta.inscripcion.estado > 1));*/
-  //   }
-  // }
+       /*this.update_category(this.atletas.filter(atleta => atleta.id_categoria == categoria && atleta.inscripcion.estado > 1));*/
+     }
+   }
 
-  // update_wod2(puntuacion, tiempo, url, categoria) {
-  //   if (puntuacion == "" || tiempo == "" || url == "") {
-  //     return
-  //   } else {
-  //     /*let aux_atletas = this.atletas.filter(atleta => atleta.id_categoria == categoria && atleta.inscripcion.estado > 1);*/
-  //     let wod = { puntuacion: puntuacion.value, tiempo: tiempo.value, url: url.value, puesto: "" };
-  //     this.wodsService.update_wod2(this.key, wod);
-  //     this.router.navigate(['/']);
+   update_wod2(puntuacion, tiempo, url, categoria) {
+     if (puntuacion == "" || tiempo == "" || url == "") {
+       return
+     } else {
+       /*let aux_atletas = this.atletas.filter(atleta => atleta.id_categoria == categoria && atleta.inscripcion.estado > 1);*/
+       let wod = { puntuacion: puntuacion.value, tiempo: tiempo.value, url: url.value, puesto: "" };
+       this.wodsService.update_wod2(this.key, wod);
+       this.router.navigate(['/']);
 
-  //     /*this.update_category(this.atletas.filter(atleta => atleta.id_categoria == categoria && atleta.inscripcion.estado > 1));*/
-  //   }
-  // }
+       /*this.update_category(this.atletas.filter(atleta => atleta.id_categoria == categoria && atleta.inscripcion.estado > 1));*/
+     }
+   }
 
-  /*update_category(atletas_by){
+  update_category(atletas_by){
     this.wodsService.update_leaderboard_wod1(atletas_by);
     this.wodsService.update_leaderboard_wod2(atletas_by);
-  }*/
+  }
 
-  /*update_categories_wod1(){
+  update_categories_wod1(){
     const aux_categories = this.categoriasService.categorias;
     aux_categories.subscribe(categorias =>{
       categorias.forEach(categoria => {
@@ -153,6 +153,6 @@ export class WodsComponent implements OnInit {
         this.wodsService.update_leaderboard_wod1(atl_by_category);
       })
     })
-  }*/
+  }
 
 }
