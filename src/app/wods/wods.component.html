@@ -65,11 +65,12 @@
           </div>
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="material-icons">videocam</i></span>
-            <input type="text" placeholder="URL / Link del vídeo" name="url" #url class="form-control"  aria-describedby="basic-addon1" required>
+            <input type="text" placeholder="URL / Link del vídeo" name="url" #url class="form-control" aria-describedby="basic-addon1" required>
           </div>
+          <iframe width="100%" height="auto" src="https://www.youtube.com/embed/{{keyYoutube}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           <input *ngIf="wod.titulo=='WOD 1'" type="submit" class="btn btn-block" value="Enviar/Modificar puntuación" (click)="update_wod1(puntuacion, time, url, this.atleta.id_categoria)" />
           <input *ngIf="wod.titulo=='WOD 2'" type="submit" class="btn btn-block" value="Enviar/Modificar puntuación" (click)="update_wod2(puntuacion, time, url, this.atleta.id_categoria)" />
-          </form>
+        </form>
         </div>
 
       </div>

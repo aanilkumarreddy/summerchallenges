@@ -130,6 +130,16 @@ p.puntuacion{
     text-align: center;
 }
 
+.form-control-valid{
+    border: 1px solid rgb(208, 255, 0);
+    background: rgb(218, 238, 170);
+    color: #5a801d;
+}
+
+.icon-done-url{
+    color: rgb(187, 221, 109);
+}
+
 @media (max-width: 840px){
     .wods-container{
         flex-direction: column;
