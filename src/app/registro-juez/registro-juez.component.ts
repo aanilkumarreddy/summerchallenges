@@ -73,6 +73,7 @@ export class RegistroJuezComponent {
   registroJuez(juez, password) {
     const aux_observable = this.juecesService.getJuez_byEmail(juez.email).subscribe(data => {
       if (data.length == 0) {
+        juez.email = juez.email.toLowerCase();
         this.authService.createUser(juez.email, password)
           .then(data => {
             let aux_juez = this.juecesService.pushJuez(juez);
@@ -86,7 +87,7 @@ export class RegistroJuezComponent {
           })
       } else {
         this.error = "emailErr";
-        
+
       }
     })
   }

@@ -96,6 +96,7 @@ export class RegistroIndividualComponent implements OnInit {
   registroAtleta(atleta, password) {
     const aux_observable = this.atletasService.getAtleta_byEmail(atleta.email).subscribe(data => {
       if (data.length == 0) {
+        atleta.email = atleta.email.toLowerCase();
         this.authService.createUser(atleta.email, password)
           .then(data => {
             /*const inscripcion = this.generarInscripcion(atleta);*/

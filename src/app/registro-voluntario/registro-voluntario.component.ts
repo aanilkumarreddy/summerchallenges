@@ -72,6 +72,7 @@ export class RegistroVoluntarioComponent {
   registroVoluntario(voluntario, password) {
     const aux_observable = this.voluntariosService.getVoluntario_byEmail(voluntario.email).subscribe(data => {
       if (data.length == 0) {
+        voluntario.email = voluntario.email.toLowerCase();
         this.authService.createUser(voluntario.email, password)
           .then(data => {
             let aux_voluntario = this.voluntariosService.pushVoluntario(voluntario);

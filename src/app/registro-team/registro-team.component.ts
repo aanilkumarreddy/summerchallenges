@@ -112,6 +112,7 @@ export class RegistroTeamComponent implements OnInit {
   registroAtleta(atleta, password) {
     const aux_observable = this.atletasService.getAtleta_byEmail(atleta.email).subscribe(data => {
       if (data.length == 0) {
+        atleta.email = atleta.email.toLowerCase();
         this.authService.createUser(atleta.email, password)
           .then(data => {
             /*const inscripcion = this.generarInscripcion(atleta);*/
@@ -123,7 +124,7 @@ export class RegistroTeamComponent implements OnInit {
                 *  dependiendo si la respuesta es positiva
                 */
               })
-            //this.router.navigateByUrl(['/confirmacion']); 
+            //this.router.navigateByUrl(['/confirmacion']);
           })
           .catch(error => {
             this.error = error.message;
