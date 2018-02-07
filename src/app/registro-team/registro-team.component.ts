@@ -37,7 +37,7 @@ export class RegistroTeamComponent implements OnInit {
   private precio: number = 32.10;
 
   public emailRegularExpression = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  public dniRegularExpression = /^\d{8}[a-zA-Z]$/;
+  public dniRegularExpression = /^[XYZxyz]?\d{7,8}[a-zA-Z]$/;
 
   constructor(
     private categoriasService: CategoriasService,

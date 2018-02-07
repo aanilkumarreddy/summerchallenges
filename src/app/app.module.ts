@@ -67,7 +67,7 @@ const appRoutes : Routes = [
   { path : 'wods', component : WodsComponent},
   //{ path: 'countdown', component: LoginComponent},
   //{ path : 'public-wods', component : PublicWodsComponent},
-  //{ path : 'leaderboard', component: LeaderboardComponent},
+  { path : 'leaderboard', component: LeaderboardComponent},
   //{ path : 'public-leaderboard', component : PublicLeaderboardComponent},
   { path : 'admin', component : AdminInscripcionesComponent},
   { path : 'admin-leaderboard', component : AdminLeaderboardComponent},

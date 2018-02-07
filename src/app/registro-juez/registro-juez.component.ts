@@ -31,7 +31,7 @@ export class RegistroJuezComponent {
   private passwordConfirm: string = '';
 
   private emailRegularExpression = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  private dniRegularExpression = /^\d{8}[a-zA-Z]$/;
+  public dniRegularExpression = /^[XYZxyz]?\d{7,8}[a-zA-Z]$/;
 
   constructor(
     private af: AngularFire,
