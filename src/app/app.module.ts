@@ -42,6 +42,7 @@ import { RegistroVoluntarioComponent } from './registro-voluntario/registro-volu
 import { EmailService } from './email-service/email.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RegistroIndividualComponent } from './registro-individual/registro-individual.component';
+import { WodCardComponent } from './wod-card/wod-card.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -105,6 +106,7 @@ const appRoutes : Routes = [
     RegistroVoluntarioComponent,
     ResetPasswordComponent,
     RegistroIndividualComponent,
+    WodCardComponent,
   ],
   imports: [
     BrowserModule,

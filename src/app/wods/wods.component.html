@@ -24,58 +24,10 @@
     </div>
   </div>
   <div class="container wods-container">
+    
     <div *ngFor="let wod of wods" class="wod-container">
-      <div class="wod-cc">
-      <h1 class="wod-title">
-        {{wod.titulo}}
-      </h1>
-      <div class="wod-img-container">
-        <img src="{{wod.imagen}}" alt="Lanzarote Summer Challenge 2017 - {{wod.titulo}}" />
-      </div>
-      <div class="wod-description-container">
-        <div class="wod-movements">
-          <div *ngFor="let p of wod.descripcion" class="movement-block">{{p}}<br /></div>
-        </div>
-        <div class="wod-poweredBy">
-          <span> Patrocinado por: </span>
-          <img src="{{wod.patrocinador.img}}" alt="{{wod.patrocinador.nombre}}" />
-        </div>
-        <div class="especifications-container">
-          <div class="especifications-title">
-            <i class="material-icons">assignment</i>
-            <span> ESPECIFICACIONES </span>
-          </div>
-          <div *ngFor="let esp of wod.especificaciones" class="wod-especifications">
-            <p *ngIf="esp"> - {{esp}} </p>
-          </div>
-        </div>
-      </div>
-      <div class="wod-actions">
-        <!-- <p class="puntuacion">PUNTUACION = {{wod.puntuacion}}</p> -->
-        <p class="puntuacion">TIEBRAKE = {{wod.tiebreak}}</p>
-        <div class="data">
-          <form #formPuntuacion>
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1"><i class="material-icons">format_list_numbered</i></span>
-            <input type="text" placeholder="Puntuación" name="puntuacion" #puntuacion class="form-control" aria-describedby="basic-addon1" required>
-          </div>
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1"><i class="material-icons"><i class="material-icons">access_time</i></i></span>
-            <input type="text" placeholder="Tiebrake (MM:SS)" name="time" #time class="form-control" aria-describedby="basic-addon1" required>
-          </div>
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1"><i class="material-icons">videocam</i></span>
-            <input type="text" placeholder="URL / Link del vídeo" name="url" #url class="form-control" aria-describedby="basic-addon1" required>
-          </div>
-          <iframe width="100%" height="auto" src="https://www.youtube.com/embed/{{keyYoutube}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          <input *ngIf="wod.titulo=='WOD 1'" type="submit" class="btn btn-block" value="Enviar/Modificar puntuación" (click)="update_wod1(puntuacion, time, url, this.atleta.id_categoria)" />
-          <input *ngIf="wod.titulo=='WOD 2'" type="submit" class="btn btn-block" value="Enviar/Modificar puntuación" (click)="update_wod2(puntuacion, time, url, this.atleta.id_categoria)" />
-        </form>
-        </div>
-
-      </div>
+      <app-wod-card  [wod]="wod"></app-wod-card>
     </div>
-  </div>
 
- </div>
+  </div>
 </section>
