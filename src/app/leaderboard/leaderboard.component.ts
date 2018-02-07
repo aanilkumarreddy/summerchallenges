@@ -35,9 +35,10 @@ export class LeaderboardComponent implements OnInit {
     this.af.auth.subscribe(data => {
       if (data) {
         this.auth = data.auth;
-        let aux_atletas = this.atletasService.getAtleta_byEmail(
-          this.auth.email
-        );
+        if(this.auth.email != 'info@gcsummerchallenge.com') {
+          this.router.navigate(['/login']);
+        }
+        let aux_atletas = this.atletasService.getAtleta_byEmail(this.auth.email);
         aux_atletas.subscribe((atleta: any) => {
           this.atleta = atleta[0];
           this.key = atleta.$key;
@@ -49,9 +50,38 @@ export class LeaderboardComponent implements OnInit {
             this.getAtletas_byCategoria(this.categoria);
           });
         });
+
+        /*
+        * Inicializa los wods de los atletas que aún no tengan datos introducidos
+        */
+        this.wodsService.initWods();
+
+        /*
+        * Wods de test para comprobar la funcionalidad TODO: BORRAR
+        */
+        const wod_1_init = {
+          kilos: 50,
+          puesto: "",
+          puntuacion: 500,
+          reps: 10,
+          url: 'https://youtube.com'
+        };
+        const wod_2_init = {
+          reps: 220,
+          tiempo: "00:00",
+          puesto: "",
+          puntuacion: 220,
+          url: 'https://youtube.com'
+        };
+        // Actualiza WOD 1 (KEY, WOD) -
+          // this.wodsService.update_wod1('-L4RtFZOBTe7JwU3yr8W', wod_1_init);
+        // Actualiza WOD 2 (KEY, WOD) -
+          //this.wodsService.update_wod2('-L4a9Ekj6Y40JQwhovvr', wod_2_init);
+
       } else {
         // Código de redirección a login .
         // No hay datos en auth, no está logueado.
+        this.router.navigate(['/login']);
       }
     });
   }
@@ -59,7 +89,6 @@ export class LeaderboardComponent implements OnInit {
   ngOnInit() {}
 
   getAtletas_byCategoria(id_categoria) {
-    console.log(id_categoria);
     let _atletas = this.atletasService.getAtletas_byCategoria(id_categoria);
     _atletas.subscribe(data => {
       this.atletas = data.filter(
@@ -99,6 +128,9 @@ export class LeaderboardComponent implements OnInit {
 
   orderBy_wod1() {
     this.atletas.forEach(atleta => {
+      if(atleta.wod_1.kilos != 0) {
+        console.log(atleta);
+      }
       atleta.wod_1.puntuacion = parseInt(atleta.wod_1.puntuacion);
     });
     this.atletas.sort(

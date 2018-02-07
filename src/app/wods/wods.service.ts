@@ -31,11 +31,40 @@ export class WodsService {
     });
   }
 
+  initWods() {
+    const wod_1_init = {
+      kilos: 0,
+      puesto: 99,
+      puntuacion: 0,
+      reps: 0,
+      url: 'https://youtube.com'
+    };
+    const wod_2_init = {
+      reps: 0,
+      tiempo: "00:00",
+      puesto: 99,
+      puntuacion: 0,
+      url: 'https://youtube.com'
+    };
+    this.atletasService.atletas.subscribe(atletas => {
+      atletas.forEach(atleta => {
+        if(!atleta.wod_1) {
+          this.update_wod1(atleta.$key, wod_1_init);
+          console.log(atleta);
+        }
+        if(!atleta.wod_2) {
+          this.update_wod2(atleta.$key, wod_2_init);
+          console.log(atleta);
+        }
+      })
+    })
+  }
+
   update_wod(wod) {
     const atl = this.atletasService.getAtleta_byKey(wod.key);
     atl.update({ [wod.name]: wod.data });
   }
-  
+
   update_wod1(key, wod) {
     const atl = this.atletasService.getAtleta_byKey(key);
     atl.update({ wod_1: wod });

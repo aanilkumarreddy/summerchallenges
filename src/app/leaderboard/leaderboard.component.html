@@ -33,7 +33,9 @@
     </tr>
     <tr *ngFor="let atleta of atletas; let i = index" [attr.data-index]="i">
       <td id="pos"> {{i+1}} </td>
-      <td id="name"> <b>{{atleta.nombre}}</b><span>{{atleta.box||"Independiente"}}</span></td>
+      <td id="name">
+        <b>{{atleta.nombre}}</b>
+        <span>{{atleta.box||"Independiente"}} - {{atleta.$key}}</span></td>
       <td id="score" class="score puntos">{{atleta.puntos || 0}}</td>
       <td id="score" class="score wod1">
         <div *ngIf="atleta.wod_1">{{atleta.wod_1.puesto || 0}} <br /> ({{atleta.wod_1.puntuacion || 0}})</div>
