@@ -99,6 +99,14 @@ export class LeaderboardComponent implements OnInit {
     });
 
   }
+
+  orderBy_inscritos(){
+    this.atletasService.getAtletas().subscribe(data=>{
+      this.atletas = data;
+      console.log(data);
+    })
+  }
+
   orderBy_wod2() {
     // Ordernar por wod_2
     this.atletas.forEach(atleta => {

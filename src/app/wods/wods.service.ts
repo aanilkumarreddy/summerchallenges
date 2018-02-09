@@ -61,7 +61,7 @@ export class WodsService {
 
   update_wod(wod) {
     const atl = this.atletasService.getAtleta_byKey(wod.key);
-    console.log("servicio - wod update: ", { [wod.name]: wod.data });
+    console.log("servicio - wod update: ", wod);
     atl.update({ [wod.name]: wod.data });
   }
 

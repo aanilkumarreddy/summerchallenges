@@ -55,8 +55,10 @@ export class RegistroTeamComponent implements OnInit {
       'category': [null, Validators.required],
       'name1': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(400)])],
       'dni1': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
+      'box1': [null],
       'name2': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(40)])],
       'dni2': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
+      'box2': [null],
       'email': [null, Validators.compose([Validators.required, Validators.pattern(this.emailRegularExpression)])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
       'passwordConfirm': [null, Validators.compose([Validators.required, Validators.minLength(6)])]
@@ -102,6 +104,8 @@ export class RegistroTeamComponent implements OnInit {
         name2: formValues.name2,
         dni1: formValues.dni1,
         dni2: formValues.dni2,
+        box1: formValues.box1,
+        box2: formValues.box2,
       }
     }
     // this.registroAtleta(formValues.name1, formValues.password);
