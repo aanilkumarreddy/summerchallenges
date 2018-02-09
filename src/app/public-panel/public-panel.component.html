@@ -1,0 +1,32 @@
+<section class="flex flex-column">
+  <div class="menu-container flex flex-center">
+    <div class="options flex flex-wraper">
+      <button *ngFor="let cat of categorias" (click)="filter(cat.c_id, cat.nombre)" class="btn btn-select {{cat.estado}}">
+        {{cat.nombre}}
+      </button>
+    </div>
+  </div>
+  <div *ngIf="activeCategoria.nombre !=''" class="active-categoria flex flex-center">
+    <label>{{activeCategoria.nombre}}</label>
+    <label class="flex flex-center" *ngIf="activeCategoria.id < 3"><i class="fas fa-trophy"></i> 1.000€</label>
+    <label class="flex flex-center" *ngIf="activeCategoria.id == 5"><i class="fas fa-trophy"></i> Armitron - 300€</label>
+  </div>
+  <div class="panel-container flex flex-column">
+    <div *ngFor="let atl of list" class="atleta-card flex">
+      <div class="flex" [ngClass]="{'unchecked': atl.estado < 2}">
+        <div class="atleta--estado flex flex-center">
+          <i class="fas fa-check"></i>
+        </div>
+        <div class="atleta--datos flex flex-column">
+          <div class="atleta--nombre">
+            {{atl.nombre}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="list && list.length < 5" class="call-to-action flex flex-center">
+      <button class="btn--call-to-action">¡Inscríbete ahora!</button>
+    </div>
+  </div>
+</section>
+
