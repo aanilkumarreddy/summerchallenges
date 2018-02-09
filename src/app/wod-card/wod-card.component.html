@@ -33,7 +33,7 @@
 
       <form [formGroup]="scoreForm" (ngSubmit)="updateWod(scoreForm.value)">
 
-        <div class="input-group">
+        <div class="input-group" *ngIf="wod.titulo == 'WOD 1'">
           <span class="input-group-addon" id="basic-addon1">
             <i class="material-icons" *ngIf="!sendedScore">trending_up</i>
             <i class="material-icons" *ngIf="sendedScore" [ngClass]="{'icon-done-url':sendedScore}">done</i>
@@ -55,7 +55,7 @@
           <span class="form-control-invalid-alert" *ngIf="validarCampo('reps')">(*) Introduzca las repeticiones</span>
         </div>
 
-        <div class="input-group">
+        <div class="input-group" *ngIf="wod.titulo == 'WOD 2'">
           <span class="input-group-addon" id="basic-addon1">
             <i class="material-icons">
               <i class="material-icons" *ngIf="!sendedScore">access_time</i>

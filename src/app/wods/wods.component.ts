@@ -118,15 +118,19 @@ export class WodsComponent {
   }
 
   getWods(categoria) {
-    console.log(categoria);
-    let aux_wods = this.wodsService.wods;
-    console.log(aux_wods);
-    /* FILTRAMOS LOS WODS DE LA CATEGORIA TEEN*/
-    if (this.atleta.id_categoria == 7) {
-      this.wods = aux_wods.filter(wod => wod.teen == 1);
-    } else {
-      this.wods = aux_wods.filter(wod => wod.teen == 0);
-    }
+    this.wodsService.getWods().subscribe(data => {
+      data.forEach(wod => {
+        wod.descripcion = wod.descripcion.split(">");
+      });
+      this.wods = data;
+
+      /* FILTRAMOS LOS WODS DE LA CATEGORIA TEEN*/
+      if (this.atleta.id_categoria == 7) {
+        this.wods = this.wods.filter(wod => wod.teen == 1);
+      } else {
+        this.wods = this.wods.filter(wod => wod.teen == 0);
+      }
+    });
   }
 
   update_category(atletas_by) {
