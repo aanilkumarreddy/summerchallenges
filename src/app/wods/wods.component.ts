@@ -48,6 +48,7 @@ export class WodsComponent {
     // this.getWods(this.categoria);
     // this.router.navigate(['public-wods']);
     this.authAtleta(af);
+    this.router.navigate(['dashboard']);
   }
 
   /*getPosition(){
@@ -88,7 +89,6 @@ export class WodsComponent {
       data.forEach(element => {
         const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
         atleta_actual.subscribe(data => {
-          console.log(data);
           // this.getTeam(data);
           this.atleta = data;
           this.key = data.$key;

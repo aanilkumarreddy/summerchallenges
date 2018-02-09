@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriasService } from '../categorias/categorias.service';
 import { AtletasService } from '../atletas/atletas.service';
+import { Router, RouterModule, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-public-panel',
@@ -17,7 +18,10 @@ export class PublicPanelComponent implements OnInit {
   };
 
   constructor(private categoriasService: CategoriasService,
-              private atletasService: AtletasService) {
+              private atletasService: AtletasService,
+              private route: ActivatedRoute,
+              private router: Router) {
+                /*
     this.atletasService.getAtletas().subscribe(data => {
       this.atletas = data;
       this.filter(1, "RX Masculino");
@@ -25,12 +29,19 @@ export class PublicPanelComponent implements OnInit {
 
     this.categoriasService.getCategorias().subscribe(data => {
       this.categorias = data;
-    })
+    })*/
 
   //Fin constructor
   }
 
   ngOnInit() {
+    this.atletasService.getAtletas().subscribe(data => {
+      this.atletas = data;
+      this.categoriasService.getCategorias().subscribe(data => {
+        this.categorias = data;
+        this.filter(1, "RX Masculino");
+      })
+    })
   }
 
   activate(id_cat) {
@@ -51,6 +62,10 @@ export class PublicPanelComponent implements OnInit {
     this.list.sort((a, b) => {
       return b.estado - a.estado;
     })
+  }
+
+  redirect(url) {
+    this.router.navigate([url]);
   }
 
 }
