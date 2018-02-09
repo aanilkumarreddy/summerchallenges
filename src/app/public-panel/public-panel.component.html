@@ -1,7 +1,7 @@
 <section class="flex flex-column">
   <div class="menu-container flex flex-center">
     <div class="options flex flex-wraper">
-      <button *ngFor="let cat of categorias" (click)="filter(cat.c_id, cat.nombre)" class="btn {{cat.estado}}">
+      <button *ngFor="let cat of categorias" (click)="filter(cat.c_id, cat.nombre)" class="btn btn-select {{cat.estado}}">
         {{cat.nombre}}
       </button>
     </div>
@@ -12,9 +12,6 @@
     <label class="flex flex-center" *ngIf="activeCategoria.id == 5"><i class="fas fa-trophy"></i> Armitron - 300€</label>
   </div>
   <div class="panel-container flex flex-column">
-    <div *ngIf="list && list.length < 5" class="call-to-action">
-      <button class="btn btn-call-to-action">¡Inscríbete ahora!</button>
-    </div>
     <div *ngFor="let atl of list" class="atleta-card flex">
       <div class="flex" [ngClass]="{'unchecked': atl.estado < 2}">
         <div class="atleta--estado flex flex-center">
@@ -26,6 +23,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div *ngIf="list && list.length < 5" class="call-to-action flex flex-center">
+      <button class="btn--call-to-action">¡Inscríbete ahora!</button>
     </div>
   </div>
 </section>

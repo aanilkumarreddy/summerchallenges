@@ -99,3 +99,11 @@ table tr{
 .flex-wraper {
     flex-wrap: wrap;
 }
+/*
+*   Buttons
+*/
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus, :focus {
+    outline: none;
+    outline: none;
+    outline-offset: none;
+}
