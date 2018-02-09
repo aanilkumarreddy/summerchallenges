@@ -43,6 +43,8 @@ import { EmailService } from './email-service/email.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RegistroIndividualComponent } from './registro-individual/registro-individual.component';
 import { WodCardComponent } from './wod-card/wod-card.component';
+import { InstagramComponent } from './instagram/instagram.component';
+import { InstagramService } from './instagram/instagram.service';
 
 // Must export the config
 export const firebaseConfig = {
@@ -68,6 +70,7 @@ const appRoutes : Routes = [
   //{ path: 'countdown', component: LoginComponent},
   //{ path : 'public-wods', component : PublicWodsComponent},
   { path : 'leaderboard', component: LeaderboardComponent},
+  { path : 'instagram', component: InstagramComponent},
   //{ path : 'public-leaderboard', component : PublicLeaderboardComponent},
   { path : 'admin', component : AdminInscripcionesComponent},
   { path : 'admin-leaderboard', component : AdminLeaderboardComponent},
@@ -107,6 +110,7 @@ const appRoutes : Routes = [
     ResetPasswordComponent,
     RegistroIndividualComponent,
     WodCardComponent,
+    InstagramComponent,
   ],
   imports: [
     BrowserModule,
@@ -128,7 +132,8 @@ const appRoutes : Routes = [
     InscripcionService,
     WodsService,
     RedSysAPIService,
-    EmailService
+    EmailService,
+    InstagramService
   ],
   bootstrap: [AppComponent]
 })

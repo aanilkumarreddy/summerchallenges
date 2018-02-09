@@ -1,0 +1,25 @@
+.container{
+    width: 100%;
+    padding: 100px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center; 
+}
+.message-container{
+    display: flex;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    flex: 1;
+    flex-direction: row;
+    padding: 25px;
+    background-color: rgba(244,244,244,0.9);
+    vertical-align: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+h2{
+    font-size: 20px;
+    font-weight: 600;
+}
