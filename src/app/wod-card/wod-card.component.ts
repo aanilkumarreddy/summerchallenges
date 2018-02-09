@@ -10,14 +10,29 @@ import { AtletaService } from "../atleta/atleta.service";
 import { AngularFire } from "angularfire2";
 import { SafeResourceUrl } from "@angular/platform-browser/src/security/dom_sanitization_service";
 
+interface IwodData {
+  key: string;
+  name: string;
+  data: {
+    kilos?: number;
+    tiempo?: number;
+    reps: number;
+    puesto: any;
+    puntuacion: number;
+    url: string;
+  };
+}
+
 @Component({
   selector: "app-wod-card",
   templateUrl: "./wod-card.component.html",
   styleUrls: ["./wod-card.component.css"]
 })
-export class WodCardComponent {
+export class WodCardComponent implements OnInit {
   @Input() wod: any;
 
+  private wodData: IwodData;
+  private formObject;
   private youtubeUrl: SafeResourceUrl;
   private videoUrlDone: boolean = false;
   private sendedScore: boolean = false;
@@ -37,10 +52,63 @@ export class WodCardComponent {
     private sanitizer: DomSanitizer,
     private fb: FormBuilder,
     private atletasService: AtletasService,
-    private af: AngularFire,
+    private af: AngularFire
   ) {
-    this.formConfig(fb);
     this.authAtleta(af);
+  }
+  
+  ngOnInit() {
+    this.formConfig();
+    console.log(this.wod.titulo);
+  }
+
+  selectWodType(typeWod) {
+    // Aqui lo ideal sería meter un switch o llamada a servicio
+    // Que gestionase cualquier tipo de wod con sus nombres estipulados
+    // Y genere el form en consecuencia. Asi se tendría una solución general.
+
+    this.formObject = {
+      kilos: [null, Validators.required],
+      reps: [null, Validators.required],
+      time: [
+        null,
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(this.timeExpReg)
+        ])
+      ],
+      url: [
+        null,
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(this.urlExpReg)
+        ])
+      ]
+    };
+
+    this.wodData = {
+      key: "",
+      name: typeWod.toLowerCase().replace(" ","_"),
+      data: {
+        kilos: 0,
+        tiempo: 0,
+        reps: 0,
+        puesto: "",
+        puntuacion: 0,
+        url: ""
+      }
+    };
+
+    if (typeWod == "WOD 1") {
+      delete this.formObject.time;
+      delete this.wodData.data.tiempo;
+      console.log("wod1", this.formObject);
+    }
+    if (typeWod == "WOD 2") {
+      delete this.formObject.kilos;
+      delete this.wodData.data.kilos;
+      console.log("wod2", this.formObject);    
+    }
   }
 
   updateWod(post) {
@@ -50,24 +118,26 @@ export class WodCardComponent {
       return;
     }
 
-    this.checkVideoUrl(post.url, () => {
+    this.checkVideoUrl(post.url, this.setWodScore(post));
+  }
 
-      const wodData = {
-        key: this.key,
-        name: this.wod.titulo.toLowerCase().replace(" ", "_"),
-        data: {
-          puntuacion: post.kilos * post.reps,
-          kilos: post.kilos,
-          reps: post.reps,
-          tiempo: post.time,
-          url: post.url,
-          puesto: ""
-        }
-      };
-      this.wodsService.update_wod(wodData);
-      this.sendedScore = true;
-      // this.router.navigate(["/"]);
-    });
+  setWodScore(post) {
+
+    // Aqui tambien tendría que haber un switch
+    // O un handler del servicio para que concuerde
+    // La adquisicion de datos con el form correspondiente
+    if (this.wod.titulo == "WOD 1") {
+      this.wodData.data.kilos = parseFloat(post.kilos);
+    }
+    if (this.wod.titulo == "WOD 2") {
+      this.wodData.data.tiempo = post.time;
+    }
+
+    this.wodData.data.reps = parseFloat(post.reps);
+    this.wodData.data.url = post.url;
+
+    this.wodsService.update_wod(this.wodData);
+    this.sendedScore = true;
   }
 
   checkVideoUrl(url: string, fn?: any): void {
@@ -96,25 +166,9 @@ export class WodCardComponent {
     this.videoUrlDone = true;
   }
 
-  formConfig(fb: FormBuilder): void {
-    this.scoreForm = fb.group({
-      kilos: [null, Validators.required],
-      reps: [null, Validators.required],
-      time: [
-        null,
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(this.timeExpReg)
-        ])
-      ],
-      url: [
-        null,
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(this.urlExpReg)
-        ])
-      ]
-    });
+  formConfig(): void {
+    this.selectWodType(this.wod.titulo);
+    this.scoreForm = this.fb.group(this.formObject);
   }
 
   authAtleta(af): void {
@@ -131,7 +185,7 @@ export class WodCardComponent {
     if (
       !this.scoreForm.controls[campo].valid &&
       this.scoreForm.controls[campo].touched
-    ){
+    ) {
       return true;
     }
     if (!this.scoreForm.controls[campo].valid && this.trySendScore) return true;

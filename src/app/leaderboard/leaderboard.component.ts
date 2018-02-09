@@ -35,9 +35,9 @@ export class LeaderboardComponent implements OnInit {
     this.af.auth.subscribe(data => {
       if (data) {
         this.auth = data.auth;
-        if(this.auth.email != 'info@gcsummerchallenge.com') {
-          this.router.navigate(['/login']);
-        }
+        // if(this.auth.email != 'info@gcsummerchallenge.com') {
+        //   this.router.navigate(['/login']);
+        // }
         let aux_atletas = this.atletasService.getAtleta_byEmail(this.auth.email);
         aux_atletas.subscribe((atleta: any) => {
           this.atleta = atleta[0];
@@ -61,14 +61,14 @@ export class LeaderboardComponent implements OnInit {
         */
         const wod_1_init = {
           kilos: 50,
+          reps: 10,
           puesto: "",
           puntuacion: 500,
-          reps: 10,
           url: 'https://youtube.com'
         };
         const wod_2_init = {
-          reps: 220,
           tiempo: "00:00",
+          reps: 220,
           puesto: "",
           puntuacion: 220,
           url: 'https://youtube.com'
