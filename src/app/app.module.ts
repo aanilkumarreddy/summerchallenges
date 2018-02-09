@@ -45,6 +45,8 @@ import { RegistroIndividualComponent } from './registro-individual/registro-indi
 import { WodCardComponent } from './wod-card/wod-card.component';
 import { InstagramComponent } from './instagram/instagram.component';
 import { InstagramService } from './instagram/instagram.service';
+import { PublicPanelComponent } from './public-panel/public-panel.component';
+
 
 // Must export the config
 export const firebaseConfig = {
@@ -67,6 +69,7 @@ const appRoutes : Routes = [
   { path : 'confirmacion', component : InscripcionComponent },
   { path : 'edit', component : EditComponent},
   { path : 'wods', component : WodsComponent},
+  { path: 'public-panel', component : PublicPanelComponent},
   //{ path: 'countdown', component: LoginComponent},
   //{ path : 'public-wods', component : PublicWodsComponent},
   { path : 'leaderboard', component: LeaderboardComponent},
@@ -111,6 +114,7 @@ const appRoutes : Routes = [
     RegistroIndividualComponent,
     WodCardComponent,
     InstagramComponent,
+    PublicPanelComponent,
   ],
   imports: [
     BrowserModule,

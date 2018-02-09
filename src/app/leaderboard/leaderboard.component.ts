@@ -95,8 +95,9 @@ export class LeaderboardComponent implements OnInit {
         atleta => atleta.estado > 1 && atleta.id_categoria == id_categoria
         //Aquí se pueden añadir más filtros
       );
+      this.orderBy_total();
     });
-    //this.orderBy_total();
+
   }
 
   orderBy_inscritos(){

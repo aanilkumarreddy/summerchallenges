@@ -10,7 +10,7 @@ body{
 }
 /* PROBANDO */
 *{
-    font-family: "Raleway";
+    /*font-family: "Raleway";*/
 }
 .container-fluid{
     background-size: cover;
@@ -98,4 +98,12 @@ table tr{
 }
 .flex-wraper {
     flex-wrap: wrap;
+}
+/*
+*   Buttons
+*/
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus, :focus {
+    outline: none;
+    outline: none;
+    outline-offset: none;
 }
