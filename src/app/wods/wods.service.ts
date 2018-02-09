@@ -18,17 +18,16 @@ export class WodsService {
     private authService: AuthService,
     private atletasService: AtletasService
   ) {
-    let aux_wods = af.database.list("/Wods");
-    aux_wods.subscribe(data => {
-      data.forEach(wod => {
-        wod.descripcion = wod.descripcion.split(">");
-      });
-      this.wods = data;
-    });
+    
 
     this.atletasService.atletas.subscribe(atletas => {
       this.allAtletes = atletas;
     });
+  }
+
+  getWods(){
+    let aux_wods = this.af.database.list("/Wods");
+    return aux_wods;
   }
 
   initWods() {
@@ -62,6 +61,7 @@ export class WodsService {
 
   update_wod(wod) {
     const atl = this.atletasService.getAtleta_byKey(wod.key);
+    console.log("servicio - wod update: ", { [wod.name]: wod.data });
     atl.update({ [wod.name]: wod.data });
   }
 
