@@ -56,6 +56,11 @@
           <button class="boton btn-block"> VOLVER </button>
         </a>
       </div>
+      <div *ngIf="auth && atleta && atleta.estado < 2" class="payment">
+        <a routerLink="/" routerLinkActive="active">
+          <button class="boton btn-block"> VOLVER </button>
+        </a>
+      </div>
 
     </div>
 

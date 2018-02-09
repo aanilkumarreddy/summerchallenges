@@ -16,6 +16,14 @@ export class CategoriasService {
     })
    }
 
+  getCategorias() {
+    this.categorias = this.af.database.list('/Categorias');
+    return this.categorias.map(data => {
+      return data;
+    })
+
+  }
+
   getCategoria(id:string){
    this.categoria = this.af.database.list('/Categorias', {
       query : {

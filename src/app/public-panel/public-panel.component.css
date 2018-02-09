@@ -1,0 +1,62 @@
+section {
+    padding-top: 100px;
+    width: 90%;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif !important;
+}
+/*
+*   Botones de selección de categoría
+*/
+button {
+    transition: all 200ms ease-in;
+    flex: 1;
+    transform: scale(0.9);
+}
+button:hover, button:active, button:visited, button:focus {
+    color: white;
+}
+button.on {
+    background-color: #DFA540;
+    transform: scale(1);
+    border-radius: 3px;
+}
+.active-categoria {
+    margin: 16px 0px 12px 0px;
+}
+.active-categoria label {
+    padding: 8px 16px;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 25px;
+    background: #DFA540;
+    color: #ffffff;
+    margin: 0px 8px;
+}
+.active-categoria label i {
+    margin-right: 8px;
+}
+
+/*
+*   Cards de los atletas
+*/
+.atleta-card {
+    margin: 8px 0px;
+    font-size: 20px;
+    background-color: #009c9c;
+    border-radius: 3px;
+    width: 100%;
+    color: #efefef;
+    font-weight: 800;
+}
+.unchecked {
+    opacity: 0.5;
+}
+.atleta--estado {
+    font-size: 16px;
+    border-right: 3px solid rgba(22,22,22, 0.1);
+    padding: 12px;
+}
+.atleta--datos {
+    padding: 12px;
+    color: white;
+}

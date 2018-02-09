@@ -43,6 +43,7 @@ import { EmailService } from './email-service/email.service';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RegistroIndividualComponent } from './registro-individual/registro-individual.component';
 import { WodCardComponent } from './wod-card/wod-card.component';
+import { PublicPanelComponent } from './public-panel/public-panel.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -65,6 +66,7 @@ const appRoutes : Routes = [
   { path : 'confirmacion', component : InscripcionComponent },
   { path : 'edit', component : EditComponent},
   { path : 'wods', component : WodsComponent},
+  { path: 'public-panel', component : PublicPanelComponent},
   //{ path: 'countdown', component: LoginComponent},
   //{ path : 'public-wods', component : PublicWodsComponent},
   { path : 'leaderboard', component: LeaderboardComponent},
@@ -107,6 +109,7 @@ const appRoutes : Routes = [
     ResetPasswordComponent,
     RegistroIndividualComponent,
     WodCardComponent,
+    PublicPanelComponent,
   ],
   imports: [
     BrowserModule,
