@@ -59,7 +59,6 @@ export class WodCardComponent implements OnInit {
   
   ngOnInit() {
     this.formConfig();
-    console.log(this.wod.titulo);
   }
 
   selectWodType(typeWod) {
@@ -102,12 +101,10 @@ export class WodCardComponent implements OnInit {
     if (typeWod == "WOD 1") {
       delete this.formObject.time;
       delete this.wodData.data.tiempo;
-      console.log("wod1", this.formObject);
     }
     if (typeWod == "WOD 2") {
       delete this.formObject.kilos;
       delete this.wodData.data.kilos;
-      console.log("wod2", this.formObject);    
     }
   }
 
@@ -117,28 +114,32 @@ export class WodCardComponent implements OnInit {
       this.checkVideoUrl(post.url);
       return;
     }
+    this.checkVideoUrl(post.url, () => this.setWodScore(post));
 
-    this.checkVideoUrl(post.url, this.setWodScore(post));
-  }
+   }
 
   setWodScore(post) {
 
     // Aqui tambien tendría que haber un switch
     // O un handler del servicio para que concuerde
     // La adquisicion de datos con el form correspondiente
+    
     if (this.wod.titulo == "WOD 1") {
       this.wodData.data.kilos = parseFloat(post.kilos);
     }
     if (this.wod.titulo == "WOD 2") {
       this.wodData.data.tiempo = post.time;
     }
-
+    
     this.wodData.data.reps = parseFloat(post.reps);
     this.wodData.data.url = post.url;
+    this.wodData.key = this.key;
 
-    this.wodsService.update_wod(this.wodData);
+    
     this.sendedScore = true;
+    this.wodsService.update_wod(this.wodData);
   }
+
 
   checkVideoUrl(url: string, fn?: any): void {
     if (!this.scoreForm.controls["url"].valid || !this.scoreForm.valid) return;
@@ -147,10 +148,14 @@ export class WodCardComponent implements OnInit {
       .get(url)
       .toPromise()
       .then(res => {
+        console.log("No Error");
         this.checkUrlYoutube(url);
         fn();
       })
       .catch(err => {
+        console.log("Error");
+        console.log(err);
+        
         this.errVideoUrl = true;
       });
   }
@@ -177,6 +182,7 @@ export class WodCardComponent implements OnInit {
 
       aux_atleta.subscribe(data => {
         this.key = data[0].$key;
+        console.log(this.key)
       });
     });
   }

@@ -19,6 +19,7 @@
 
     <div *ngIf="atletas" class="orderBy">
       <span> ORDERNAR POR: </span>
+      <button class="btn" (click)="orderBy_inscritos()"> INSCRITOS </button>
       <button class="btn" (click)="orderBy_total()"> PUNTOS </button>
       <button class="btn" (click)="orderBy_wod1()"> WOD 1 </button>
       <button class="btn" (click)="orderBy_wod2()"> WOD 2 </button>

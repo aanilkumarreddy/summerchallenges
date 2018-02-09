@@ -50,6 +50,13 @@
               <span class="form-control-invalid-alert" *ngIf="validarCampo('dni1')">(*) Se requiere este campo</span>
             </div>
 
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">
+                <i class="material-icons">my_location</i>
+              </span>
+              <input type="text" formControlName="box1" class="form-control" placeholder="Box / Club (Opcional)" aria-describedby="basic-addon1">
+            </div>
+
             <span class=".form-title-field">Datos del segundo atleta:</span>
 
             <div class="input-group">
@@ -68,6 +75,13 @@
               <input type="text" formControlName="dni2" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('dni2')}"
                 maxlength="9" placeholder="DNI" aria-describedby="basic-addon1">
               <span class="form-control-invalid-alert" *ngIf="validarCampo('dni2')">(*) Se requiere este campo</span>
+            </div>
+
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">
+                <i class="material-icons">my_location</i>
+              </span>
+              <input type="text" formControlName="box2" class="form-control" placeholder="Box / Club (Opcional)" aria-describedby="basic-addon1">
             </div>
 
             <span class=".form-title-field">Datos de la cuenta:</span>
