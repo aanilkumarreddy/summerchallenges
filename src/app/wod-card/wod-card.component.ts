@@ -118,7 +118,7 @@ export class WodCardComponent implements OnInit {
       return;
     }
 
-    this.checkVideoUrl(post.url, this.setWodScore(post));
+    this.checkVideoUrl(post.url, post => this.setWodScore(post));
   }
 
   setWodScore(post) {
@@ -149,9 +149,12 @@ export class WodCardComponent implements OnInit {
       .then(res => {
         this.checkUrlYoutube(url);
         fn();
+        console.log("no error: ",  fn );    
+        
       })
       .catch(err => {
         this.errVideoUrl = true;
+        console.log("error chechVideoUrl: ",  this.errVideoUrl );    
       });
   }
 
