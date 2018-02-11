@@ -24,8 +24,11 @@
         </div>
       </div>
     </div>
-    <div *ngIf="list && list.length < 5" class="call-to-action flex flex-center">
-      <button (click)="redirect('/registro')" class="btn--call-to-action">¡Inscríbete ahora!</button>
+    <div *ngIf="list && list.length < 5" class="call-to-action flex flex-column flex-center">
+      <button (click)="redirect('/registro')" class="btn--call-to-action flex flex-column flex-center">
+        ¡Inscríbete ahora!
+      </button>
+      <span>(Inscripciones abiertas hasta el 05 de marzo)</span>
     </div>
   </div>
 </section>
