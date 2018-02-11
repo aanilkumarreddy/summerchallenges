@@ -92,7 +92,8 @@ export class LeaderboardComponent implements OnInit {
     let _atletas = this.atletasService.getAtletas_byCategoria(id_categoria);
     _atletas.subscribe(data => {
       this.atletas = data.filter(
-        atleta => atleta.estado > 1 && atleta.id_categoria == id_categoria
+        // TODO: MODIFICAR ESTO
+        atleta => /*atleta.estado > 1 && */ atleta.id_categoria == id_categoria
         //Aquí se pueden añadir más filtros
       );
       this.orderBy_total();

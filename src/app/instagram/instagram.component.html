@@ -1,15 +1,50 @@
 <div class="container">
+
+  <div class="hashtags-container">
+
+    <div class="hashtag">
+      <h2>#OHS</h2>
+      <span class="hashtag__score">{{ohs}}</span>
+      <button class="hashtag__clipboard" (click)="clipboard('#gcsummerohs')">#gcsummerohs</button>
+
+    </div>
+
+    <div class="hashtag">
+      <h2>#CLUSTHER</h2>
+      <span class="hashtag__score">{{clusther}}</span>
+      <button class="hashtag__clipboard" (click)="clipboard('#gcsummerclusther')">#gcsummerclusther</button>
+
+    </div>
+
+  </div>
+
   <div class="message-container">
-    Este año el @gcsummerchallenge mola, podemos elegir el primer wod del clasificatorio online. ¿Cuál te pides tú?
+    Este año el @gcsummerchallenge mola, podemos elegir el primer wod del clasificatorio online. ¿Cuál te pides tú? // EXPLICACION
   </div>
-  
-  <div>
-    <h2>#OHS</h2>
-    <span class="insta-count">{{ohs}}</span>
+
+  <div class="posts-container">
+    <div class="post__group">
+      <div class="post__img"></div>
+      <div class="post__img"></div>
+    </div>
+    <p class="post__text">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam,
+    </p>
+    <p class="post__text">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam,
+    </p>
+
+    <div class="post__hashtags">
+      <span class="post__hashtag">#loquesea</span>
+      <span class="post__hashtag">#loquesea</span>
+      <span class="post__hashtag">#loquesea</span>
+      <span class="post__hashtag">#loquesea</span>
+      <span class="post__hashtag">#loquesea</span>
+      <span class="post__hashtag">#loquesea</span>
+      <span class="post__hashtag">#loquesea</span>
+    </div>
   </div>
-  
-  <div>  
-    <h2>#CLUSTHER</h2>
-    <span class="insta-count">{{clusther}}</span>
-  </div>
+
 </div>

@@ -48,7 +48,7 @@ export class WodsComponent {
     // this.getWods(this.categoria);
     // this.router.navigate(['public-wods']);
     this.authAtleta(af);
-    this.router.navigate(['dashboard']);
+    // this.router.navigate(['dashboard']);
   }
 
   /*getPosition(){
@@ -73,6 +73,7 @@ export class WodsComponent {
   }*/
   authAtleta(af) {
     this.af.auth.subscribe((data: any) => {
+          
       if (!data) {
         this.auth = null;
         this.atleta = null;
@@ -106,10 +107,14 @@ export class WodsComponent {
   }
 
   getWodsAcrossCategories(data) {
+    console.log(data);
+    
     const categoria_actual = this.categoriasService.getCategoria(
       data.id_categoria
     );
     categoria_actual.subscribe(c_data => {
+      console.log('getWodsAcrossCategories');
+      console.log(c_data);
       c_data.forEach(element => {
         const categoria = element.nombre;
         this.getWods(categoria);
@@ -144,8 +149,8 @@ export class WodsComponent {
       categorias.forEach(categoria => {
         let atl_by_category = this.atletas.filter(
           atleta =>
-            atleta.id_categoria == categoria.c_id &&
-            atleta.inscripcion.estado > 1
+            atleta.id_categoria == categoria.c_id 
+            && atleta.inscripcion.estado > 1
         );
 
         this.wodsService.update_leaderboard_wod1(atl_by_category);

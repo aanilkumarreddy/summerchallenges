@@ -10,19 +10,6 @@ import { AtletaService } from "../atleta/atleta.service";
 import { AngularFire } from "angularfire2";
 import { SafeResourceUrl } from "@angular/platform-browser/src/security/dom_sanitization_service";
 
-interface IwodData {
-  key: string;
-  name: string;
-  data: {
-    kilos?: number;
-    tiempo?: number;
-    reps: number;
-    puesto: any;
-    puntuacion: number;
-    url: string;
-  };
-}
-
 @Component({
   selector: "app-wod-card",
   templateUrl: "./wod-card.component.html",
@@ -30,8 +17,9 @@ interface IwodData {
 })
 export class WodCardComponent implements OnInit {
   @Input() wod: any;
+  @Input() category: any;
 
-  private wodData: IwodData;
+  private wodData;
   private formObject;
   private youtubeUrl: SafeResourceUrl;
   private videoUrlDone: boolean = false;
@@ -39,11 +27,10 @@ export class WodCardComponent implements OnInit {
   private errVideoUrl: boolean = false;
   private scoreForm: FormGroup;
   private auth;
-  private atleta;
   private key;
   private trySendScore;
 
-  private timeExpReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+  // private timeExpReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
   private urlExpReg = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 
   constructor(
@@ -56,7 +43,7 @@ export class WodCardComponent implements OnInit {
   ) {
     this.authAtleta(af);
   }
-  
+
   ngOnInit() {
     this.formConfig();
   }
@@ -67,15 +54,7 @@ export class WodCardComponent implements OnInit {
     // Y genere el form en consecuencia. Asi se tendría una solución general.
 
     this.formObject = {
-      kilos: [null, Validators.required],
       reps: [null, Validators.required],
-      time: [
-        null,
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(this.timeExpReg)
-        ])
-      ],
       url: [
         null,
         Validators.compose([
@@ -87,24 +66,58 @@ export class WodCardComponent implements OnInit {
 
     this.wodData = {
       key: "",
-      name: typeWod.toLowerCase().replace(" ","_"),
+      name: typeWod.toLowerCase().replace(" ", "_"),
       data: {
         kilos: 0,
-        tiempo: 0,
+        kilos2: 0,
         reps: 0,
+        reps2: 0,
         puesto: "",
         puntuacion: 0,
         url: ""
       }
     };
 
+    console.log("categoria");
+    console.log(this.category);
     if (typeWod == "WOD 1") {
-      delete this.formObject.time;
-      delete this.wodData.data.tiempo;
+      this.formObject.kilos = [null, Validators.required];
+
+      if (this.category === 3 || this.category === 4) {
+        this.formObject.kilos2 = [null, Validators.required];
+        this.formObject.reps2 = [null, Validators.required];
+        this.formObject.url2 = [
+          null,
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(this.urlExpReg)
+          ])
+        ];
+
+        this.wodData.data.kilos2 = 0;
+        this.wodData.data.reps2 = 0;
+        this.wodData.data.url2 = 0;
+        console.log("this.formObject WOD 2");
+        console.log(this.formObject);
+      }
     }
+
     if (typeWod == "WOD 2") {
-      delete this.formObject.kilos;
-      delete this.wodData.data.kilos;
+      if (this.category === 3 || this.category === 4) {
+        this.formObject.reps2 = [null, Validators.required];
+        this.formObject.url2 = [
+          null,
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(this.urlExpReg)
+          ])
+        ];
+
+        this.wodData.data.reps2 = 0;
+        this.wodData.data.url2 = 0;
+        console.log("this.formObject WOD 2");
+        console.log(this.formObject);
+      }
     }
   }
 
@@ -115,31 +128,38 @@ export class WodCardComponent implements OnInit {
       return;
     }
     this.checkVideoUrl(post.url, () => this.setWodScore(post));
-   }
-
+  }
 
   setWodScore(post) {
-
     // Aqui tambien tendría que haber un switch
     // O un handler del servicio para que concuerde
     // La adquisicion de datos con el form correspondiente
-    
+
     if (this.wod.titulo == "WOD 1") {
       this.wodData.data.kilos = parseFloat(post.kilos);
+      this.wodData.data.puntuacion = post.reps * post.kilos;
+      if (this.category === 3 || this.category === 4) {
+        this.wodData.data.kilos = parseFloat(post.kilos2);
+        this.wodData.data.reps2 = parseFloat(post.reps2);
+        this.wodData.data.puntuacion = post.reps * post.kilos + post.reps2 * post.kilos2;
+        this.wodData.data.url2 = post.url2;
+      }
     }
     if (this.wod.titulo == "WOD 2") {
-      this.wodData.data.tiempo = post.time;
+      this.wodData.data.puntuacion = parseFloat(post.reps);
+      if (this.category === 3 || this.category === 4) {
+        this.wodData.data.puntuacion = post.reps + post.reps2;
+        this.wodData.data.url2 = post.url2;
+      }
     }
-    
+
     this.wodData.data.reps = parseFloat(post.reps);
     this.wodData.data.url = post.url;
     this.wodData.key = this.key;
 
-    
     this.sendedScore = true;
     this.wodsService.update_wod(this.wodData);
   }
-
 
   checkVideoUrl(url: string, fn?: any): void {
     if (!this.scoreForm.controls["url"].valid || !this.scoreForm.valid) return;
@@ -151,15 +171,14 @@ export class WodCardComponent implements OnInit {
         console.log("No Error");
         this.checkUrlYoutube(url);
         fn();
-        console.log("no error: ",  fn );    
-        
+        console.log("no error: ", fn);
       })
       .catch(err => {
         console.log("Error");
         console.log(err);
-        
+
         this.errVideoUrl = true;
-        console.log("error chechVideoUrl: ",  this.errVideoUrl );    
+        console.log("error chechVideoUrl: ", this.errVideoUrl);
       });
   }
 
@@ -185,7 +204,6 @@ export class WodCardComponent implements OnInit {
 
       aux_atleta.subscribe(data => {
         this.key = data[0].$key;
-        console.log(this.key)
       });
     });
   }

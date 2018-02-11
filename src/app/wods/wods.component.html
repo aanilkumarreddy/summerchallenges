@@ -26,7 +26,7 @@
   <div class="container wods-container">
     
     <div *ngFor="let wod of wods" class="wod-container">
-      <app-wod-card  [wod]="wod"></app-wod-card>
+      <app-wod-card  [wod]="wod" [category]="atleta.id_categoria "></app-wod-card>
     </div>
 
   </div>
