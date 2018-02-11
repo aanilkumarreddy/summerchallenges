@@ -59,17 +59,17 @@ export class AppComponent {
 
   login_google() {
     this.authService.login_google();
-    this.router.navigate(['/dashboard', this.auth.email]);    
+    this.router.navigate(['/dashboard', this.auth.email]);
   }
-  
+
   login_correo(atletaCorreo : string, atletaPass : string){
     this.authService.login_correo(atletaCorreo, atletaPass);
-    this.router.navigate(['/dashboard', this.auth.email]);    
+    this.router.navigate(['/dashboard', this.auth.email]);
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
   getAtleta(){

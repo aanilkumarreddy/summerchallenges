@@ -82,7 +82,7 @@ const appRoutes : Routes = [
   //{ path : 'countdown', redirectTo : '/login', pathMatch: 'full'},
   { path: 'reset-password-login', component: LoginFormComponent},
   { path: 'reset-password', component: ResetPasswordComponent},
-  { path : '', redirectTo : '/login', pathMatch : 'full'},
+  { path : '', redirectTo : '/inscritos', pathMatch : 'full'},
   { path : '**', redirectTo : '/login' }
 ];
 

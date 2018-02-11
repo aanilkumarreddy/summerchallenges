@@ -28,18 +28,16 @@
   <div class="phone-mobile">
 
     <div class="info">
-      <div *ngIf="atleta" class="datos">
+      <div routerLink="/dashboard" routerLinkActive="active" *ngIf="atleta" class="datos">
         <i class="material-icons"> account_circle </i>
         <span id="name"> {{atleta.nombre}} </span>
       </div>
       <div *ngIf="!atleta" class="home" routerLink="/" routerLinkActive="active">
-        <i class="material-icons">home</i>
+        <i class="fas fa-home"></i>
       </div>
-      <div routerLink="/" routerLinkActive="active" class="logo">
-        <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/logos%2Flogo-white.svg?alt=media&token=672e5e33-b918-44aa-b0bc-3e0fd60c456b" alt="lanzarote summer challenge" />
-      </div>
-      <div *ngIf="atleta" class="logout">
-        <i (click)="logout()" class="material-icons">exit_to_app</i>
+      <div class="logout" >
+        <i *ngIf="atleta" (click)="logout()" class="fas fa-sign-out-alt"></i>
+        <i *ngIf="!atleta" routerLink="/login" routerLinkActive="active" class="fas fa-sign-in-alt"></i>
       </div>
     </div>
 
@@ -49,10 +47,10 @@
         <button *ngIf="!auth" routerLink="/registro" routerLinkActive="active" class="boton"> INSCRÍBETE </button>
       </div>
       <div *ngIf="auth && atleta && atleta.estado > 1" class="payment">
-        <a routerLink="/wods" routerLinkActive="active">
-          <button class="boton btn-block">VER WODS </button>
+        <a routerLink="/inscritos" routerLinkActive="active">
+          <button class="boton btn-block">VER INSCRITOS </button>
         </a>
-        <a routerLink="/" routerLinkActive="active">
+        <a routerLink="/dashboard" routerLinkActive="active">
           <button class="boton btn-block"> VOLVER </button>
         </a>
       </div>
@@ -73,7 +71,9 @@
     <a > VER WODS </a>
   </div>
   -->
-  <div routerLink="/public-panel" routerLinkActive="active" class="op">
+<!--
+  <div *ngIf="!auth"  routerLink="/public-panel" routerLinkActive="active" class="op">
     <a> Ver Inscritos </a>
   </div>
+-->
 </div>
