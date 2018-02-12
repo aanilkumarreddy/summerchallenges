@@ -139,7 +139,7 @@ export class WodCardComponent implements OnInit {
       this.wodData.data.kilos = parseFloat(post.kilos);
       this.wodData.data.puntuacion = post.reps * post.kilos;
       if (this.category === 3 || this.category === 4) {
-        this.wodData.data.kilos = parseFloat(post.kilos2);
+        this.wodData.data.kilos2 = parseFloat(post.kilos2);
         this.wodData.data.reps2 = parseFloat(post.reps2);
         this.wodData.data.puntuacion = post.reps * post.kilos + post.reps2 * post.kilos2;
         this.wodData.data.url2 = post.url2;
