@@ -30,7 +30,7 @@ export class CategoriasService {
         orderByChild: 'c_id',
         equalTo: id,
       }
-    })
+    });
     return this.categoria;
   }
   setCategoriaActual(id){

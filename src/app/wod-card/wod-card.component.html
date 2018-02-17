@@ -33,6 +33,7 @@
 
       <form [formGroup]="scoreForm" (ngSubmit)="updateWod(scoreForm.value)">
 
+        <span  *ngIf="category == 3 || category == 4">Datos del primer atleta: </span>
         <div class="input-group" *ngIf="wod.titulo == 'WOD 1'">
           <span class="input-group-addon" id="basic-addon1">
             <i class="material-icons" *ngIf="!sendedScore">trending_up</i>
@@ -55,18 +56,32 @@
           <span class="form-control-invalid-alert" *ngIf="validarCampo('reps')">(*) Introduzca las repeticiones</span>
         </div>
 
-        <div class="input-group" *ngIf="wod.titulo == 'WOD 2'">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="material-icons">
-              <i class="material-icons" *ngIf="!sendedScore">access_time</i>
+        <!-- SEGUNDO ATLETA -->
+        <span *ngIf="category == 3 || category == 4"> Datos del segundo atleta: </span>
+        <div class="input-group" *ngIf="wod.titulo == 'WOD 1' && (category == 3 || category == 4)">
+            <span class="input-group-addon" id="basic-addon1">
+              <i class="material-icons" *ngIf="!sendedScore">trending_up</i>
               <i class="material-icons" *ngIf="sendedScore" [ngClass]="{'icon-done-url':sendedScore}">done</i>
-            </i>
-          </span>
-          <input type="text" placeholder="Tiempo (MM:SS)" formControlName="time" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('time')}"
-            aria-describedby="basic-addon1">
-          <span class="form-control-invalid-alert" *ngIf="validarCampo('time')">(*) Introduzca el tiempo en formato MM:SS</span>
-        </div>
+            </span>
+            <input type="number" placeholder="Kilogramos por una repetición" formControlName="kilos2" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('kilos2')}"
+              aria-describedby="basic-addon1">
+            <span class="form-control-invalid-alert" *ngIf="validarCampo('kilos2')">(*) Introduzca los kilogramos por repetición</span>
+          </div>
+  
+          <div class="input-group" *ngIf="category == 3 || category == 4">
+            <span class="input-group-addon" id="basic-addon1">
+              <i class="material-icons">
+                <i class="material-icons" *ngIf="!sendedScore">format_list_numbered</i>
+                <i class="material-icons" *ngIf="sendedScore" [ngClass]="{'icon-done-url':sendedScore}">done</i>
+              </i>
+            </span>
+            <input type="number" placeholder="Repeticiones" formControlName="reps2" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('reps2')}"
+              aria-describedby="basic-addon1">
+            <span class="form-control-invalid-alert" *ngIf="validarCampo('reps2')">(*) Introduzca las repeticiones</span>
+          </div>
 
+        <!-- URL -->
+        <span *ngIf="category == 3 || category == 4"> Urls de los videos respectivamente: </span>        
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">
             <i class="material-icons" *ngIf="!sendedScore">videocam</i>
@@ -75,6 +90,16 @@
           <input type="text" placeholder="URL / Link del vídeo" formControlName="url" class="form-control" [ngClass]="{'form-control-invalid':validarCampo('url')}"
             aria-describedby="basic-addon1">
           <span class="form-control-invalid-alert" *ngIf="validarCampo('url')">(*) Introduzca una url correcta</span>
+        </div>
+
+        <div class="input-group" *ngIf="category == 3 || category == 4">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="material-icons" *ngIf="!sendedScore">videocam</i>
+            <i class="material-icons" *ngIf="sendedScore" [ngClass]="{'icon-done-url':sendedScore}">done</i>
+          </span>
+          <input type="text" placeholder="URL / Link del vídeo" formControlName="url2" class="form-control" [ngClass]="{'form-control-invalid':validarCampo('url2')}"
+            aria-describedby="basic-addon1">
+          <span class="form-control-invalid-alert" *ngIf="validarCampo('url2')">(*) Introduzca una url correcta</span>
         </div>
 
         <iframe *ngIf="videoUrlDone" width="100%" height="auto" [src]="youtubeUrl" frameborder="0" allow="autoplay; encrypted-media"

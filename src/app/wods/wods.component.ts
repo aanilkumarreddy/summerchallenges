@@ -28,6 +28,7 @@ export class WodsComponent {
   private urlValidator: boolean = false;
   private youtubeUrl;
   private videoUrlDone: boolean = false;
+  private atleta_actual_suscription;
 
   constructor(
     private authService: AuthService,
@@ -48,28 +49,29 @@ export class WodsComponent {
     // this.getWods(this.categoria);
     // this.router.navigate(['public-wods']);
     this.authAtleta(af);
-    this.router.navigate(['dashboard']);
+
+    // this.router.navigate(['dashboard']);
   }
 
   /*getPosition(){
-
+    
     this.atletasService.atletas.subscribe(data =>{
-
+      
       const atletas_wod1 = data.filter(element => element.wod_1);
       atletas_wod1.sort((a, b) => a.wod_1.puntuacion < b.wod_1.puntuacion ? 1 : -1);
-
+      
       atletas_wod1.forEach(atleta =>{
         let aux = atletas_wod1.findIndex(at => at.nombre==atleta.nombre)+1;
         let aux_wod = {puntuacion: atleta.wod_1.puntuacion || 0, tiempo: atleta.wod_1.tiempo || 0, url: atleta.wod_1.url || "", puesto: aux};
         this.wodsService.update_wod1(atleta.$key, aux_wod);
         console.log(atleta.nombre + " - " + atleta.wod_1.puntuacion + " - PUNTOS:" + aux);
       })
-
+      
 
       //console.log(atletas_wod1.findIndex(x => x.nombre=="ADMIN")+1);
       //console.table(atletas_wod1);
     })
-
+    
   }*/
   authAtleta(af) {
     this.af.auth.subscribe((data: any) => {
@@ -85,15 +87,15 @@ export class WodsComponent {
 
   getAtletaInfo(data) {
     const aux_atleta = this.atletasService.getAtleta_byEmail(data.auth.email);
-    aux_atleta.subscribe(data => {
+    this.atleta_actual_suscription = aux_atleta.subscribe(data => {
       data.forEach(element => {
-        const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
-        atleta_actual.subscribe(data => {
+        this.atletasService.getAtleta_byKey(element.$key).subscribe(data => {
           // this.getTeam(data);
           this.atleta = data;
           this.key = data.$key;
           this.checkAdminAccess(data);
           this.getWodsAcrossCategories(data);
+          this.atleta_actual_suscription.unsubscribe();
         });
       });
     });
@@ -106,10 +108,9 @@ export class WodsComponent {
   }
 
   getWodsAcrossCategories(data) {
-    const categoria_actual = this.categoriasService.getCategoria(
-      data.id_categoria
-    );
-    categoria_actual.subscribe(c_data => {
+    console.log(data);
+
+    this.categoriasService.getCategoria(data.id_categoria).subscribe(c_data => {
       c_data.forEach(element => {
         const categoria = element.nombre;
         this.getWods(categoria);

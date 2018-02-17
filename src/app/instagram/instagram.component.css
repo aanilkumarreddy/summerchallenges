@@ -1,25 +1,91 @@
-.container{
+.container {
     width: 100%;
-    padding: 100px;
+    margin-top: 100px;
     display: flex;
     flex-flow: column;
     justify-content: center;
-    align-items: center; 
-}
-.message-container{
+    align-items: center;
+  }
+  
+  .hashtags-container {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  
+  .hashtag {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 10px;
+  }
+  
+  .hashtag__score{
+    font-size: 60px;
+  }
+  
+  hashtag__clipboard{
+    height: 20px;
+    line-height: 20px;
+    display: block;
+    cursor: pointer;
+  }
+  
+  .posts-container{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  
+  .post__group{
+    display: flex;
+    flex-flow: row;
+  }
+  
+  .post__img{
+    width: 200px;
+    height: 250px;
+    background-color: white;
+    margin: 10px;
+  }
+  
+  .post__text{
+    width: auto;
+  }
+  
+  .post__hashtags{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  
+  .post__hashtag{
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  
+  .message-container {
     display: flex;
     margin-top: 25px;
     margin-bottom: 25px;
     flex: 1;
     flex-direction: row;
     padding: 25px;
-    background-color: rgba(244,244,244,0.9);
+    background-color: rgba(244, 244, 244, 0.9);
     vertical-align: center;
     align-content: center;
     align-items: center;
     text-align: center;
-}
-h2{
+  }
+  h2 {
     font-size: 20px;
     font-weight: 600;
-}
+  }
+  

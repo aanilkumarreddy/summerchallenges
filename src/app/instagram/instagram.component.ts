@@ -21,4 +21,18 @@ export class InstagramComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  clipboard(text) {
+    let download = document.createElement('a');
+    download.setAttribute('href', 'http://www.fundacionunam.org.mx/wp-content/uploads/2016/03/herpetarioUNAM1.jpg');
+    download.setAttribute('download', 'foto.jpg');
+    download.click();
+
+    let inputToCopy = document.createElement("input");
+    inputToCopy.setAttribute("value", text);
+    document.body.appendChild(inputToCopy);
+    inputToCopy.select();
+    document.execCommand("copy");
+    document.body.removeChild(inputToCopy);
+  }
 }
