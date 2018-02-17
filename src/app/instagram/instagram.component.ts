@@ -18,9 +18,15 @@ export class InstagramComponent implements OnInit {
     this.instaService.getCountHastag("gcsummerclusther").subscribe(count => {
       this.clusther = count;
     });
+
+    this.instaService.getImageByHashtag("gcsummerchallenge")
+      .subscribe(data => {
+        console.log(data);
+      })
+
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   clipboard(text) {
     let download = document.createElement('a');

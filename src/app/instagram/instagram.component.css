@@ -1,3 +1,15 @@
+.overlay {
+  background-color: #fafafa;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
 .container {
     width: 100%;
     margin-top: 100px;
@@ -6,71 +18,99 @@
     justify-content: center;
     align-items: center;
   }
-  
+
   .hashtags-container {
     width: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
   }
-  
+
   .hashtag {
-    width: 200px;
-    height: 200px;
+    width: 300px;
     background-color: white;
     display: flex;
     flex-flow: column;
     align-items: center;
     margin: 10px;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
   }
-  
+
+  .hashtag .header {
+    height: 60px;
+    padding: 16px;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+  .hashtag .header h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .hashtag .profile--img {
+    width: 39px;
+    height: 39px;
+    border-radius: 100%;
+    background-color: #e6e6e6;
+  }
+
+  .hashtag .profile--name {
+    margin-left: 12px;
+    font-size: 12px;
+    color: #262626;
+  }
+
   .hashtag__score{
     font-size: 60px;
   }
-  
+
   hashtag__clipboard{
     height: 20px;
     line-height: 20px;
     display: block;
     cursor: pointer;
   }
-  
+
   .posts-container{
     width: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
   }
-  
+
   .post__group{
     display: flex;
     flex-flow: row;
   }
-  
+
   .post__img{
     width: 200px;
     height: 250px;
     background-color: white;
     margin: 10px;
   }
-  
+
   .post__text{
     width: auto;
   }
-  
+
   .post__hashtags{
     width: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
   }
-  
+
   .post__hashtag{
     text-decoration: underline;
     cursor: pointer;
   }
-  
-  
+
+
   .message-container {
     display: flex;
     margin-top: 25px;
@@ -88,4 +128,3 @@
     font-size: 20px;
     font-weight: 600;
   }
-  
