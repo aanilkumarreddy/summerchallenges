@@ -4,9 +4,11 @@ import { InstagramService } from "./instagram.service";
 @Component({
   selector: "app-instagram",
   templateUrl: "./instagram.component.html",
-  styleUrls: ["./instagram.component.css"]
+  styleUrls: ['./instagram.component.css']
 })
 export class InstagramComponent implements OnInit {
+  private urlImgOhs = 'http://www.fundacionunam.org.mx/wp-content/uploads/2016/03/herpetarioUNAM1.jpg';
+  private urlImgCluster = 'http://www.fundacionunam.org.mx/wp-content/uploads/2016/03/herpetarioUNAM1.jpg';
   private ohs: number;
   private cluster: number;
   public instaposts = {
@@ -19,11 +21,11 @@ export class InstagramComponent implements OnInit {
       this.ohs = count;
     });
 
-    this.instaService.getCountHastag("gcsummercluster").subscribe(count => {
+    this.instaService.getCountHastag('gcsummercluster').subscribe(count => {
       this.cluster = count;
     });
 
-    this.instaService.getImageByHashtag("gcsummerchallenge")
+    this.instaService.getImageByHashtag('gcsummerchallenge')
       .subscribe(data => {
         this.instaposts.ohs = data;
         console.log(this.instaposts.ohs);
@@ -39,16 +41,27 @@ export class InstagramComponent implements OnInit {
   ngOnInit() { }
 
   clipboard(text) {
-    let download = document.createElement('a');
-    download.setAttribute('href', 'http://www.fundacionunam.org.mx/wp-content/uploads/2016/03/herpetarioUNAM1.jpg');
-    download.setAttribute('download', 'foto.jpg');
-    download.click();
-
-    let inputToCopy = document.createElement("input");
-    inputToCopy.setAttribute("value", text);
+    const inputToCopy = document.createElement('input');
+    inputToCopy.setAttribute('value', text);
     document.body.appendChild(inputToCopy);
     inputToCopy.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(inputToCopy);
+  }
+
+  downloadImage(url){
+    const download = document.createElement('a');
+    download.setAttribute('href', url);
+    download.setAttribute('download', 'foto.jpg');
+    download.click();
+  }
+  
+  copyShareText(hashtag){
+    const text = `
+En el @gcsummerchallenge yo voto por ${hashtag} para el primer wod del clasificatorio online, ¿y tú? 
+- 
+Si quieres saber cómo hacerlo, entra en la web app del campeonato y sube tu foto. (https://app.gcsummerchallenge.com/instagram)
+`;
+    this.clipboard(text);
   }
 }

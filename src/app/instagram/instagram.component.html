@@ -15,9 +15,9 @@
       <p>
         Sube una foto a Instagram con el hashtag
         <strong>#gcsummercluster</strong>
-        <i class="far fa-copy"></i> para votar por cluster y
+        <i class="far fa-copy" (click)="clipboard('#gcsummercluster')"></i> para votar por cluster y
         <strong>#gcsummerohs</strong>
-        <i class="far fa-copy"></i> si quieres dar tu voto a over head squat.
+        <i class="far fa-copy" (click)="clipboard('#gcsummerohs')"></i> si quieres dar tu voto a over head squat.
         <br>
         <br> El hashtag con el mayor número de fotos decidirá el movimiento con el que nuestros atletas tendrán que realizar
         el primer wod de la fase de clasificación online.
@@ -68,8 +68,8 @@
           </p>
         </div>
         <div class="actions flex">
-          <button class="btn">Descargar imagen</button>
-          <button class="btn">Copiar texto</button>
+          <button class="btn" (click)="downloadImage(urlImgOhs)">Descargar imagen</button>
+          <button class="btn" (click)="copyShareText('#gcsummerohs')">Copiar texto</button>
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@
       </div>
       <div class="body">
         <div class="body--image flex flex-center">
-          <div class="contador">{{ohs}}</div>
+          <div class="contador">{{cluster}}</div>
         </div>
         <div class="body--stats">
           <!-- BODY STATS CODE -->
@@ -102,8 +102,8 @@
           </p>
         </div>
         <div class="actions flex">
-          <button class="btn">Descargar imagen</button>
-          <button class="btn">Copiar texto</button>
+          <button class="btn" (click)="downloadImage(urlImgCluster)">Descargar imagen</button>
+          <button class="btn" (click)="copyShareText('#gcsummercluster')">Copiar texto</button>          
         </div>
       </div>
     </div>

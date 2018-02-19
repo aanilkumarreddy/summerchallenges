@@ -2,15 +2,15 @@
   <div class="container-fluid header-container">
 
     <div routerLink="/" routerLinkActive="active" class="info-container datos">
-        <button class="boton navbar-btn">VOLVER </button>
-      </div>
+      <button class="boton navbar-btn">VOLVER </button>
+    </div>
 
     <div *ngIf="atleta" class="info-container">
-        <i class="material-icons"> account_circle </i>
-        <div class="datos">
-          <span id="name"> {{atleta.nombre}} </span>
-          <span id="email"> {{atleta.email}} </span>
-        </div>
+      <i class="material-icons"> account_circle </i>
+      <div class="datos">
+        <span id="name"> {{atleta.nombre}} </span>
+        <span id="email"> {{atleta.email}} </span>
+      </div>
     </div>
 
     <div class="spacer"> </div>
@@ -35,7 +35,7 @@
       <div *ngIf="!atleta" class="home" routerLink="/" routerLinkActive="active">
         <i class="fas fa-home"></i>
       </div>
-      <div class="logout" >
+      <div class="logout">
         <i *ngIf="atleta" (click)="logout()" class="fas fa-sign-out-alt"></i>
         <i *ngIf="!atleta" routerLink="/login" routerLinkActive="active" class="fas fa-sign-in-alt"></i>
       </div>
@@ -71,7 +71,7 @@
     <a > VER WODS </a>
   </div>
   -->
-<!--
+  <!--
   <div *ngIf="!auth"  routerLink="/public-panel" routerLinkActive="active" class="op">
     <a> Ver Inscritos </a>
   </div>
