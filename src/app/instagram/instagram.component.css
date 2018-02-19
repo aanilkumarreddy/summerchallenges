@@ -259,14 +259,59 @@
     width: 40%;
 }
 
+.copied {
+  background-color: #009c9c;
+  border-radius: 6px;
+  box-shadow: 0px 0px 8px #D6D6D6;
+  border: 1px solid #D6D6D6;
+  color: #fafafa;
+  font-size: 12px;
+  padding: 12px;
+  position: fixed;
+  z-index: 99;
+  text-align: center;
+  opacity: 1;
+  transition: all 200ms;
+  display: initial;
+}
+.copied.off {
+  opacity: 0;
+  display: none;
+}
+.copied label {
+  margin-bottom: 0px;
+}
+
   @media (max-width: 700px) {
     .hashtags-container {
       width: 95%;
     }
     .hashtag {
-      width: 95%;
+      width: 100%;
     }
     .explicacion h2 {
       font-size: 32px;
+    }
+    .title {
+      flex-direction: column;
+    }
+    .explicacion .title{
+      padding: 12px 0;
+    }
+    .explicacion .title i {
+      border: none;
+      border-bottom: 4px solid #F2A634;
+      padding: 16px;
+      font-size: 55px;
+      margin-bottom: 16px;
+    }
+    .explicacion p {
+      background-color: transparent;
+      border: none;
+      border-top: 2px dashed #D6D6D6;
+      border-radius: 0;
+      margin-top: 8px;
+      line-height: 1.58;
+      text-align: start;
     }
   }

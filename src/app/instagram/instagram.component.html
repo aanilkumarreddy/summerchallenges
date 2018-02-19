@@ -1,5 +1,7 @@
 <div class="overlay"></div>
-
+<div class="copied flex flex--center" id="copied">
+  <label> ¡Hashtag copiado! </label>
+</div>
 <div class="container">
 
   <div class="hashtags-container">
@@ -14,10 +16,8 @@
 
       <p>
         Sube una foto a Instagram con el hashtag
-        <strong>#gcsummercluster</strong>
-        <i class="far fa-copy" (click)="clipboard('#gcsummercluster')"></i> para votar por cluster y
-        <strong>#gcsummerohs</strong>
-        <i class="far fa-copy" (click)="clipboard('#gcsummerohs')"></i> si quieres dar tu voto a over head squat.
+        <strong id="hash-cluster" (click)="onClick($event)">#gcsummercluster</strong> para votar por cluster y
+        <strong id="hash-ohs" (click)="onClick($event)">#gcsummerohs</strong> si quieres dar tu voto a over head squat.
         <br>
         <br> El hashtag con el mayor número de fotos decidirá el movimiento con el que nuestros atletas tendrán que realizar
         el primer wod de la fase de clasificación online.
@@ -68,10 +68,14 @@
           </p>
         </div>
         <div class="actions flex">
-            <button class="btn" (click)="downloadImage(urlImgOhs,'ohs')" *ngIf="!ohsDownloaded">Descargar imagen</button>
-            <span class="btn" *ngIf="ohsDownloaded"><i class="material-icons">done</i></span>          
-            <button class="btn" (click)="copyShareText('#gcsummerohs')" *ngIf="!ohsCopied">Copiar texto</button>          
-            <span class="btn" *ngIf="ohsCopied"><i class="material-icons">done</i></span>  
+          <button class="btn" (click)="downloadImage(urlImgOhs,'ohs')" *ngIf="!ohsDownloaded">Descargar imagen</button>
+          <span class="btn" *ngIf="ohsDownloaded">
+            <i class="material-icons">done</i>
+          </span>
+          <button class="btn" (click)="copyShareText('#gcsummerohs')" *ngIf="!ohsCopied">Copiar texto</button>
+          <span class="btn" *ngIf="ohsCopied">
+            <i class="material-icons">done</i>
+          </span>
         </div>
       </div>
     </div>
@@ -105,9 +109,13 @@
         </div>
         <div class="actions flex">
           <button class="btn" (click)="downloadImage(urlImgCluster,'cluster')" *ngIf="!clusterDownloaded">Descargar imagen</button>
-          <span class="btn"  *ngIf="clusterDownloaded"><i class="material-icons">done</i></span>          
-          <button class="btn" (click)="copyShareText('#gcsummercluster')" *ngIf="!clusterCopied">Copiar texto</button>          
-          <span class="btn" *ngIf="clusterCopied"><i class="material-icons" >done</i></span> 
+          <span class="btn" *ngIf="clusterDownloaded">
+            <i class="material-icons">done</i>
+          </span>
+          <button class="btn" (click)="copyShareText('#gcsummercluster')" *ngIf="!clusterCopied">Copiar texto</button>
+          <span class="btn" *ngIf="clusterCopied">
+            <i class="material-icons">done</i>
+          </span>
         </div>
       </div>
     </div>
