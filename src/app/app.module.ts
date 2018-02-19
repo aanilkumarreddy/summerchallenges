@@ -13,7 +13,7 @@ import { AtletasComponent } from './atletas/atletas.component';
 import { AtletaComponent } from './atleta/atleta.component';
 import { InscripcionComponent } from './inscripcion/inscripcion.component';
 import { AtletaService } from "./atleta/atleta.service";
-import { AtletasService} from "./atletas/atletas.service";
+import { AtletasService } from "./atletas/atletas.service";
 import { JuecesService } from "./jueces/jueces.service";
 import { VoluntariosService } from "./voluntarios/voluntarios.service";
 import { CategoriasComponent } from './categorias/categorias.component';
@@ -56,34 +56,34 @@ export const firebaseConfig = {
   projectId: "lnzsumchl1",
   storageBucket: "lnzsumchl1.appspot.com",
   messagingSenderId: "523835141115"
- };
+};
 
-const appRoutes : Routes = [
-  { path : 'dashboard', component : DashboardComponent },
-  { path : 'login', component : LoginComponent },
-  { path : 'registro', component : RegistroComponent },
-  { path : 'registro-individual', component : RegistroIndividualComponent },
-  { path : 'registro-team', component : RegistroTeamComponent },
-  { path : 'registro-juez', component : RegistroJuezComponent },
-  { path : 'registro-voluntario', component : RegistroVoluntarioComponent },
-  { path : 'confirmacion', component : InscripcionComponent },
-  { path : 'edit', component : EditComponent},
+const appRoutes: Routes = [
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegistroComponent },
+  { path: 'registro-individual', component: RegistroIndividualComponent },
+  { path: 'registro-team', component: RegistroTeamComponent },
+  { path: 'registro-juez', component: RegistroJuezComponent },
+  { path: 'registro-voluntario', component: RegistroVoluntarioComponent },
+  { path: 'confirmacion', component: InscripcionComponent },
+  { path: 'edit', component: EditComponent },
   // { path : 'wods', component : WodsComponent},
-  { path: 'public-panel', redirectTo:'/inscritos', pathMatch: 'full'},
-  { path: 'inscritos', component : PublicPanelComponent},
+  { path: 'public-panel', redirectTo: '/inscritos', pathMatch: 'full' },
+  { path: 'inscritos', component: PublicPanelComponent },
   //{ path: 'countdown', component: LoginComponent},
   //{ path : 'public-wods', component : PublicWodsComponent},
   // { path : 'leaderboard', component: LeaderboardComponent},
-  // { path : 'instagram', component: InstagramComponent},
+  { path: 'instagram', component: InstagramComponent },
   // { path : 'public-leaderboard', component : PublicLeaderboardComponent},
-  { path : 'admin', component : AdminInscripcionesComponent},
+  { path: 'admin', component: AdminInscripcionesComponent },
   // { path : 'admin-leaderboard', component : AdminLeaderboardComponent},
   //{ path : 'team-scores', component : TeamScoresComponent},
   //{ path : 'countdown', redirectTo : '/login', pathMatch: 'full'},
-  { path: 'reset-password-login', component: LoginFormComponent},
-  { path: 'reset-password', component: ResetPasswordComponent},
-  { path : '', redirectTo : '/inscritos', pathMatch : 'full'},
-  { path : '**', redirectTo : '/login' }
+  { path: 'reset-password-login', component: LoginFormComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: '', redirectTo: '/inscritos', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({
