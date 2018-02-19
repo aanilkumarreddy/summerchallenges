@@ -20,21 +20,21 @@
   }
 
   .hashtags-container {
-    width: 100%;
+    width: 70%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    align-items: center;
   }
 
   .hashtag {
-    width: 300px;
+    width: 45%;
     background-color: white;
     display: flex;
     flex-flow: column;
     align-items: center;
-    margin: 10px;
-    border: 1px solid #e6e6e6;
     border-radius: 6px;
+    margin: 10px 0px;
   }
 
   .hashtag .header {
@@ -42,6 +42,8 @@
     padding: 16px;
     width: 100%;
     justify-content: flex-start;
+    border-radius: 6px 6px 0px 0px;
+    border: 1px solid #e6e6e6;
 }
 
   .hashtag .header h2 {
@@ -51,17 +53,86 @@
     font-weight: 600;
   }
 
+  .hashtag .body {
+    width: 100%;
+  }
+
   .hashtag .profile--img {
     width: 39px;
     height: 39px;
     border-radius: 100%;
     background-color: #e6e6e6;
+    overflow: hidden;
+    border: 1px solid #e6e6e6;
+  }
+
+  .hashtag .profile--img img {
+    max-width: 100%;
   }
 
   .hashtag .profile--name {
     margin-left: 12px;
     font-size: 12px;
     color: #262626;
+  }
+
+  .hashtag .body .contador {
+    font-size: 50px;
+    color: #fafafa;
+    text-shadow: 0px 0px 8px rgba(22,22,22, 0.1);
+  }
+
+  .hashtag .body .body--image {
+    width: 100%;
+    min-height: 300px;
+    background-color: #009c9c;
+  }
+  .hashtag .body .body--stats {
+    width: 100%;
+    border: 1px solid #e6e6e6;
+    border-bottom: none;
+    padding: 12px 16px;
+    font-weight: 800;
+    font-size: 12px;
+  }
+  .hashtag .body .body--stats .likes i {
+    font-size: 24px;
+    margin: 4px 0px;
+    color: #DB565B;
+  }
+
+  .body--stats .likes {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .hashtag .body .body--text {
+    width: 100%;
+    border: 1px solid #e6e6e6;
+    border-top: none;
+    border-bottom: none;
+    padding: 8px 16px 16px 16px;
+  }
+
+  .body--text p {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .hashtag .actions {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e6e6e6;
+    border-radius: 0px 0px 6px 6px;
+  }
+
+  .hashtag .actions .btn {
+    border-radius: 3px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0px 0px 8px #e6e6e6;
+    flex: 1;
+    margin: 0px 8px;
   }
 
   .hashtag__score{
@@ -127,4 +198,64 @@
   h2 {
     font-size: 20px;
     font-weight: 600;
+  }
+  .explicacion h2 {
+    font-size: 24px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .explicacion p {
+    font-size: 18px;
+    font-family: 'Merriweather', serif;
+    font-weight: 300;
+    text-align: justify;
+    background-color: #ffffff;
+    padding: 16px;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+  }
+
+  .explicacion p i {
+    color: #009c9c;
+    cursor: pointer;
+  }
+
+  .marcador {
+    background: #ffffff;
+    box-shadow: 0px 3px 5px #e6e6e6;
+    border-radius: 3px;
+    font-weight: 800;
+    height: 70px;
+    width: 100%;
+    max-width: 100%;
+    border-left: 8px solid #009c9c;
+    border-right: 8px solid #F2A634;
+  }
+
+  .marcador .numbers {
+    background-color: #e6e6e6;
+    font-weight: 800;
+    color: #fafafa;
+    width: 20%;
+    font-size: 24px;
+  }
+  .marcador .number {
+    padding: 16px;
+    text-shadow: 0px 0px 8px #D6D6D6;
+  }
+  .marcador .tag {
+    width: 40%;
+}
+
+  @media (max-width: 700px) {
+    .hashtags-container {
+      width: 95%;
+    }
+    .hashtag {
+      width: 95%;
+    }
+    .explicacion h2 {
+      font-size: 32px;
+    }
   }

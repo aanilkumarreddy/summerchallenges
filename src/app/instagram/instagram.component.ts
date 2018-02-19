@@ -8,20 +8,30 @@ import { InstagramService } from "./instagram.service";
 })
 export class InstagramComponent implements OnInit {
   private ohs: number;
-  private clusther: number;
+  private cluster: number;
+  public instaposts = {
+    ohs: {},
+    cluster: {}
+  };
 
   constructor(private instaService: InstagramService) {
     this.instaService.getCountHastag("gcsummerohs").subscribe(count => {
       this.ohs = count;
     });
 
-    this.instaService.getCountHastag("gcsummerclusther").subscribe(count => {
-      this.clusther = count;
+    this.instaService.getCountHastag("gcsummercluster").subscribe(count => {
+      this.cluster = count;
     });
 
     this.instaService.getImageByHashtag("gcsummerchallenge")
       .subscribe(data => {
-        console.log(data);
+        this.instaposts.ohs = data;
+        console.log(this.instaposts.ohs);
+      })
+
+    this.instaService.getImageByHashtag("gcsummerchallenge")
+      .subscribe(data => {
+        this.instaposts.cluster = data;
       })
 
   }

@@ -9,8 +9,16 @@ export class InstagramService {
 
   constructor(private http: Http) { }
 
-  generateUrl(hashtag) {
-    return this.url + hashtag + '?access_token=' + this.token;
+  generateUrl(hashtag, options?) {
+    if (!options) {
+      return this.url + hashtag + '?access_token=' + this.token;
+
+    }
+    let endpoint = "";
+    options.forEach(op => {
+      endpoint += "/" + op;
+    })
+    return this.url + hashtag + endpoint + '?access_token=' + this.token;
   }
 
   getCountHastag(hashtag) {
@@ -20,9 +28,12 @@ export class InstagramService {
   }
 
   getImageByHashtag(hashtag) {
-    const url = this.generateUrl(hashtag);
+    const url = this.generateUrl(hashtag, ['media', 'recent']);
 
     return this.http.get(url)
-      .map((response: any) => JSON.parse(response._body));
+      .map((response: any) => {
+        let data = JSON.parse(response._body);
+        return data.data[0];
+      });
   }
 }

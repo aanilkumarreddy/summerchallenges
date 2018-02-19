@@ -4,25 +4,116 @@
 
   <div class="hashtags-container">
 
-    <div class="hashtag">
-      <div class="header flex flex-center">
-        <div class="profile--img">
-          <img src="" alt="" class="rounded">
-        </div>
-        <div class="profile--name">
-          <h2 class="name">gcsummerchallenge</h2>
-        </div>
-      </div>
-      <h2>#OHS</h2>
-      <span class="hashtag__score">{{ohs}}</span>
-      <button class="hashtag__clipboard" (click)="clipboard('#gcsummerohs')">#gcsummerohs</button>
-
+    <div class="explicacion">
+      <h2>
+        ¡En el Gran Canaria Summer Challenge el primer wod del clasificatorio online lo eliges tú!
+      </h2>
+      <p>
+        Sube una foto a Instagram con el hashtag
+        <strong>#gcsummercluster</strong>
+        <i class="far fa-copy"></i> para votar por cluster y
+        <strong>#gcsummerohs</strong>
+        <i class="far fa-copy"></i> si quieres dar tu voto a over head squat.
+        <br>
+        <br> El hashtag con el mayor número de fotos decidirá el movimiento con el que nuestros atletas tendrán que realizar
+        el primer wod de la fase de clasificación online.
+      </p>
     </div>
 
+    <!--
+    <div class="marcador flex">
+      <div class="tag flex flex-center">
+        #gcsummercluster
+      </div>
+      <div class="numbers flex flex-center">
+        <div class="number number--cluster">
+          {{cluster}}
+        </div>
+        <span>-</span>
+        <div class="number number--ohs">
+          {{ohs}}
+        </div>
+      </div>
+      <div class="tag flex flex-center">
+        #gcsummerohs
+      </div>
+    </div>
+    -->
+
+    <div class="hashtag" *ngIf="instaposts.ohs.user">
+      <div class="header flex flex-center">
+        <div class="profile--img">
+          <img src="{{instaposts.ohs.user.profile_picture}}" alt="" class="rounded">
+        </div>
+        <div class="profile--name">
+          <h2 class="name">#gcsummerohs </h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="body--image flex flex-center">
+          <div class="contador">{{ohs}}</div>
+        </div>
+        <div class="body--stats">
+          <!-- BODY STATS CODE -->
+        </div>
+        <div class="body--text">
+          <p>
+            En el @gcsummerchallenge yo voto por #gcsummerohs para el primer wod del clasificatorio online, ¿y tú?
+            <br> -
+            <br> Si quieres saber cómo hacerlo, entra en la web app del campeonato y sube tu foto. (https://app.gcsummerchallenge.com/instagram)
+          </p>
+        </div>
+        <div class="actions flex">
+          <button class="btn">Descargar imagen</button>
+          <button class="btn">Copiar texto</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="versus">
+      VS
+    </div>
+
+    <div class="hashtag" *ngIf="instaposts.ohs.user">
+      <div class="header flex flex-center">
+        <div class="profile--img">
+          <img src="{{instaposts.ohs.user.profile_picture}}" alt="" class="rounded" />
+        </div>
+        <div class="profile--name">
+          <h2 class="name">#gcsummercluster</h2>
+        </div>
+      </div>
+      <div class="body">
+        <div class="body--image flex flex-center">
+          <div class="contador">{{ohs}}</div>
+        </div>
+        <div class="body--stats">
+          <!-- BODY STATS CODE -->
+        </div>
+        <div class="body--text">
+          <p>
+            En el @gcsummerchallenge yo voto por #gcsummercluster para el primer wod del clasificatorio online, ¿y tú?
+            <br> -
+            <br> Si quieres saber cómo hacerlo, entra en la web app del campeonato y sube tu foto. (https://app.gcsummerchallenge.com/instagram)
+          </p>
+        </div>
+        <div class="actions flex">
+          <button class="btn">Descargar imagen</button>
+          <button class="btn">Copiar texto</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anterior maquetación
+
+    <h2>#OHS</h2>
+    <span class="hashtag__score">{{ohs}}</span>
+    <button class="hashtag__clipboard" (click)="clipboard('#gcsummerohs')">#gcsummerohs</button>
+
     <div class="hashtag">
-      <h2>#CLUSTHER</h2>
-      <span class="hashtag__score">{{clusther}}</span>
-      <button class="hashtag__clipboard" (click)="clipboard('#gcsummerclusther')">#gcsummerclusther</button>
+      <h2>#cluster</h2>
+      <span class="hashtag__score">{{cluster}}</span>
+      <button class="hashtag__clipboard" (click)="clipboard('#gcsummercluster')">#gcsummercluster</button>
 
     </div>
 
@@ -57,4 +148,6 @@
     </div>
   </div>
 
-</div>
+  Fin de anterior maquetación -->
+
+  </div>
