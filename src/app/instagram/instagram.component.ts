@@ -56,6 +56,8 @@ export class InstagramComponent implements OnInit {
 
     copied.setAttribute('style', 'transform: translate(' + x + 'px,' + y + 'px)');
 
+    this.clipboard(element.innerText);
+
     setTimeout(() => {
       copied.classList.add('off');
     }, 1000);
@@ -70,7 +72,7 @@ export class InstagramComponent implements OnInit {
     document.execCommand('copy');
     document.body.removeChild(inputToCopy);
 
-    console.log(e);
+    console.log("Has copiado: " + text + " en el portapapeles");
   }
 
   downloadImage(url, hashtag) {

@@ -19,8 +19,8 @@
         <strong id="hash-cluster" (click)="onClick($event)">#gcsummercluster</strong> para votar por cluster y
         <strong id="hash-ohs" (click)="onClick($event)">#gcsummerohs</strong> si quieres dar tu voto a over head squat.
         <br>
-        <br> El hashtag con el mayor número de fotos decidirá el movimiento con el que nuestros atletas tendrán que realizar
-        el primer wod de la fase de clasificación online.
+        <br> El hashtag con el mayor número de post decidirá el movimiento con el que nuestros atletas tendrán que realizar el
+        primer wod de la fase de clasificación online.
       </p>
     </div>
 
@@ -54,17 +54,22 @@
         </div>
       </div>
       <div class="body">
-        <div class="body--image flex flex-center">
-          <div class="contador">{{ohs}}</div>
+        <div class="body--image flex flex-column flex-center">
+          <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/common%2Fgcsummerohs.jpg?alt=media&token=cda1ec80-03a6-44bf-8d3b-2607c70cfb7e"
+            alt="#gcsummerohs">
         </div>
-        <div class="body--stats">
+        <div class="body--stats flex flex-column flex-center">
           <!-- BODY STATS CODE -->
+          <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/common%2Fgcsummerohs.jpg?alt=media&token=cda1ec80-03a6-44bf-8d3b-2607c70cfb7e"
+            alt="#gcsummerohs">
+          <span class="stats--hashtag">#gcsummerohs</span>
+          <span class="stats--counter">{{ohs}} post</span>
         </div>
         <div class="body--text">
           <p>
             En el @gcsummerchallenge yo voto por #gcsummerohs para el primer wod del clasificatorio online, ¿y tú?
             <br> -
-            <br> Si quieres saber cómo hacerlo, entra en la web app del campeonato y sube tu foto. (https://app.gcsummerchallenge.com/instagram)
+            <br> Si quieres saber cómo hacerlo, entra en la web app del campeonato y descúbrelo. (https://app.gcsummerchallenge.com/instagram)
           </p>
         </div>
         <div class="actions flex">
@@ -80,9 +85,7 @@
       </div>
     </div>
 
-    <div class="versus">
-      VS
-    </div>
+    <div class="separator--dashed"></div>
 
     <div class="hashtag" *ngIf="instaposts.ohs.user">
       <div class="header flex flex-center">
@@ -93,18 +96,22 @@
           <h2 class="name">#gcsummercluster</h2>
         </div>
       </div>
-      <div class="body">
-        <div class="body--image flex flex-center">
-          <div class="contador">{{cluster}}</div>
+      <div class="body bg--cluster">
+        <div class="body--image flex flex-column flex-center">
+          <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/common%2Fgcsumercluster.jpg?alt=media&token=c21f847c-6164-4959-8360-52d1498ef095"
+            alt="gcsummercluster">
         </div>
-        <div class="body--stats">
-          <!-- BODY STATS CODE -->
+        <div class="body--stats flex flex-center flex-column">
+          <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/common%2Fgcsumercluster.jpg?alt=media&token=c21f847c-6164-4959-8360-52d1498ef095"
+            alt="gcsummercluster">
+          <span class="stats--hashtag">#gcsummercluster</span>
+          <span class="stats--counter">{{cluster}} post</span>
         </div>
         <div class="body--text">
           <p>
             En el @gcsummerchallenge yo voto por #gcsummercluster para el primer wod del clasificatorio online, ¿y tú?
             <br> -
-            <br> Si quieres saber cómo hacerlo, entra en la web app del campeonato y sube tu foto. (https://app.gcsummerchallenge.com/instagram)
+            <br> Si quieres saber cómo hacerlo, entra en la web app del campeonato y descúbrelo. (https://app.gcsummerchallenge.com/instagram)
           </p>
         </div>
         <div class="actions flex">
