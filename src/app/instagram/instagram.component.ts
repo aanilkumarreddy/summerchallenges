@@ -8,8 +8,8 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./instagram.component.css']
 })
 export class InstagramComponent implements OnInit {
-  private urlImgOhs = 'http://www.fundacionunam.org.mx/wp-content/uploads/2016/03/herpetarioUNAM1.jpg';
-  private urlImgCluster = 'http://www.fundacionunam.org.mx/wp-content/uploads/2016/03/herpetarioUNAM1.jpg';
+  private urlImgOhs = 'https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/common%2Fgcsummerohs.jpg?alt=media&token=cda1ec80-03a6-44bf-8d3b-2607c70cfb7e';
+  private urlImgCluster = 'https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/common%2Fgcsumercluster.jpg?alt=media&token=c21f847c-6164-4959-8360-52d1498ef095';
   private ohs: number;
   private cluster: number;
   private ohsDownloaded: boolean = false;

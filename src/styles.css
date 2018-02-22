@@ -8,12 +8,9 @@ body{
     background-image: url('assets/img/bg-01.jpg');
     min-height: 100vh;
     padding-top: 30px;
-    padding-bottom: 10px;
+    padding-bottom: 64px;
 }
 /* PROBANDO */
-*{
-    /*font-family: "Raleway";*/
-}
 .container-fluid{
     background-size: cover;
     background-repeat: no-repeat;

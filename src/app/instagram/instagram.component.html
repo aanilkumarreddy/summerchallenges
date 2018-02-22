@@ -55,13 +55,11 @@
       </div>
       <div class="body">
         <div class="body--image flex flex-column flex-center">
-          <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/common%2Fgcsummerohs.jpg?alt=media&token=cda1ec80-03a6-44bf-8d3b-2607c70cfb7e"
-            alt="#gcsummerohs">
+          <img src="{{urlImgOhs}}" alt="#gcsummerohs" (click)="downloadImage(urlImgOhs,'ohs')">
         </div>
         <div class="body--stats flex flex-column flex-center">
           <!-- BODY STATS CODE -->
-          <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/common%2Fgcsummerohs.jpg?alt=media&token=cda1ec80-03a6-44bf-8d3b-2607c70cfb7e"
-            alt="#gcsummerohs">
+          <img src="{{urlImgOhs}}" alt="#gcsummerohs" (click)="downloadImage(urlImgOhs,'ohs')">
           <span class="stats--hashtag">#gcsummerohs</span>
           <span class="stats--counter">{{ohs}} post</span>
         </div>
@@ -98,12 +96,10 @@
       </div>
       <div class="body bg--cluster">
         <div class="body--image flex flex-column flex-center">
-          <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/common%2Fgcsumercluster.jpg?alt=media&token=c21f847c-6164-4959-8360-52d1498ef095"
-            alt="gcsummercluster">
+          <img src="{{urlImgCluster}}" alt="gcsummercluster" (click)="downloadImage(urlImgCluster,'cluster')">
         </div>
         <div class="body--stats flex flex-center flex-column">
-          <img src="https://firebasestorage.googleapis.com/v0/b/lnzsumchl1.appspot.com/o/common%2Fgcsumercluster.jpg?alt=media&token=c21f847c-6164-4959-8360-52d1498ef095"
-            alt="gcsummercluster">
+          <img src="{{urlImgCluster}}" alt="gcsummercluster" (click)="downloadImage(urlImgCluster,'cluster')">
           <span class="stats--hashtag">#gcsummercluster</span>
           <span class="stats--counter">{{cluster}} post</span>
         </div>
