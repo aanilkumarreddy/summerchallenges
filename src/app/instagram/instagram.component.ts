@@ -89,7 +89,7 @@ export class InstagramComponent implements OnInit {
     const text = `
     En el @gcsummerchallenge yo voto por ${hashtag} para el primer wod del clasificatorio online, ¿y tú?
     -
-    Si quieres saber cómo hacerlo, entra en la web app del campeonato y sube tu foto. (https://app.gcsummerchallenge.com/instagram)
+    Si quieres saber cómo hacerlo, entra en la web app del campeonato y descúbrelo. (https://app.gcsummerchallenge.com/instagram)
     `;
     if (hashtag === '#gcsummerohs') this.ohsCopied = true;
     if (hashtag === '#gcsummercluster') this.clusterCopied = true;
