@@ -1,9 +1,11 @@
 <nav class="navbar navbar-fixed-top">
   <div class="container-fluid header-container">
 
+    <!-- Testing
     <div routerLink="/" routerLinkActive="active" class="info-container datos">
-      <button class="boton navbar-btn">VOLVER </button>
+      <button class="boton navbar-btn btn--desktop">VOLVER </button>
     </div>
+    -->
 
     <div *ngIf="atleta" class="info-container">
       <i class="material-icons"> account_circle </i>
@@ -16,12 +18,13 @@
     <div class="spacer"> </div>
 
     <div *ngIf="!auth" class="login-actions-container">
-      <button *ngIf="!auth" routerLink="/login" routerLinkActive="active" class="boton navbar-btn navbar-right"> ACCEDER </button>
-      <button *ngIf="!auth" routerLink="/registro" routerLinkActive="active" class="boton navbar-btn navbar-right"> INSCRÍBETE </button>
+      <button *ngIf="!auth" routerLink="/login" routerLinkActive="active" class="boton btn--desktop navbar-btn navbar-right"> ACCEDER </button>
+      <button *ngIf="!auth" routerLink="/registro" routerLinkActive="active" class="boton btn--desktop navbar-btn navbar-right">
+        INSCRÍBETE </button>
     </div>
 
     <div *ngIf="auth" class="auth-actions-container">
-      <button class="boton navbar-btn navbar-right" (click)="logout()"> CERRAR SESION </button>
+      <button class="boton navbar-btn navbar-right btn--desktop" (click)="logout()"> CERRAR SESION </button>
     </div>
 
   </div>
@@ -41,7 +44,7 @@
       </div>
     </div>
 
-    <div class="actions">
+    <div *ngIf="!auth" class="actions">
       <div *ngIf="!auth" class="login">
         <button *ngIf="!auth" routerLink="/login" routerLinkActive="active" class="boton"> ACCEDER </button>
         <button *ngIf="!auth" routerLink="/registro" routerLinkActive="active" class="boton"> INSCRÍBETE </button>
@@ -76,22 +79,25 @@
     <a> Ver Inscritos </a>
   </div>
 -->
-  <div routerLink="/inscritos" routerLinkActive="active" class="option flex flex-column flex-center">
-    <div class="option--icon">
-      <i class="fas fa-list"></i>
-    </div>
-    <div class="option--text">Inscritos</div>
-  </div>
   <div routerLink="/dashboard" routerLinkActive="active" class="option flex flex-column flex-center">
     <div class="option--icon">
       <i class="fas fa-home"></i>
     </div>
     <div class="option--text">Home</div>
   </div>
+
+  <div routerLink="/inscritos" routerLinkActive="active" class="option flex flex-column flex-center">
+    <div class="option--icon">
+      <i class="fas fa-list"></i>
+    </div>
+    <div class="option--text">Inscritos</div>
+  </div>
+
   <div routerLink="/instagram" routerLinkActive="active" class="option flex flex-column flex-center">
     <div class="option--icon">
       <i class="fas fa-crosshairs"></i>
     </div>
     <div class="option--text">Wods</div>
+    <span routerLink="/instagram" routerLinkActive="active" class="flotante _pulse">¡Elige el WOD 1!</span>
   </div>
 </div>
