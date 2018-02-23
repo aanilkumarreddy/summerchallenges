@@ -12,7 +12,7 @@
 
 .container {
     width: 100%;
-    margin-top: 100px;
+    margin-top: 10px;
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -72,9 +72,12 @@
   }
 
   .hashtag .profile--name {
-    margin-left: 12px;
+    margin-left: 4px;
     font-size: 12px;
     color: #262626;
+  }
+  .profile--name a {
+    color: #F2A634;
   }
 
   .hashtag .body .contador {
@@ -250,10 +253,8 @@
     font-family: 'Merriweather', serif;
     font-weight: 300;
     text-align: justify;
-    background-color: #ffffff;
     padding: 16px;
-    border: 1px solid #e6e6e6;
-    border-radius: 6px;
+    border-top: 2px dashed #D6D6D6;
   }
 
   .explicacion p i {
@@ -262,31 +263,38 @@
   }
 
   .marcador {
-    background: #ffffff;
-    box-shadow: 0px 3px 5px #e6e6e6;
+    background: #F2A634;
     border-radius: 3px;
     font-weight: 800;
     height: 70px;
     width: 100%;
     max-width: 100%;
-    border-left: 8px solid #009c9c;
-    border-right: 8px solid #F2A634;
-  }
-
-  .marcador .numbers {
-    background-color: #e6e6e6;
-    font-weight: 800;
+    font-size: 30px;
     color: #fafafa;
-    width: 20%;
-    font-size: 24px;
+    text-shadow: 0px -1px 2px #E29624;
+    margin-bottom: 16px;
   }
-  .marcador .number {
-    padding: 16px;
-    text-shadow: 0px 0px 8px #D6D6D6;
+  .marcador > * {
+    width: 50%;
   }
-  .marcador .tag {
-    width: 40%;
-}
+  .marcador--container {
+    flex: 1;
+  }
+  .marcador--container:first-child {
+    border-right: 2px dashed #E29624;
+  }
+  .separator--dashed {
+    display: none;
+  }
+  .marcador--container > * {
+    margin: 4px 8px;
+  }
+  .marcador--hashtag h3 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Merriweather', serif;
+    font-size: 30px;
+  }
 
 .versus {
   width: 100px;
@@ -310,6 +318,7 @@
   opacity: 1;
   transition: all 200ms;
   display: initial;
+  transform: translateY(-200%);
 }
 .copied.off {
   opacity: 0;
@@ -325,6 +334,19 @@
   margin: 8px 0;
 }
 
+  @media (min-width: 1000px) {
+    .explicacion h2 {
+      text-align: left;
+    }
+    .hashtags-container {
+      width: 90%;
+    }
+    .hashtags-container .separator--dashed{
+      display: none;
+    }
+  }
+
+  /* Responsive */
   @media (max-width: 700px) {
     .hashtags-container {
       width: 95%;
@@ -355,6 +377,25 @@
       border-radius: 0;
       margin-top: 8px;
       line-height: 1.58;
-      text-align: start;
+      text-align: center;
+    }
+    .marcador.flex {
+      flex-direction: column;
+      height: auto;
+    }
+    .marcador > * {
+      width: 90%;
+      padding: 12px 0;
+    }
+    .marcador .marcador--container:first-child {
+      border: none;
+      border-bottom: 2px dashed #E29624;
+    }
+  }
+  @media (max-width: 480px) {
+    .hashtag .actions .btn{
+      font-size: 12px;
+      padding: 16px 4px;
+      margin: 0px 4px;
     }
   }

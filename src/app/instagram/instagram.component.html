@@ -43,6 +43,25 @@
       </div>
     </div>
     -->
+    <div class="marcador flex flex-center">
+      <div class="marcador--container flex flex-center">
+        <div class="marcador--hashtag">
+          <h3>#gcsummerohs</h3>
+        </div>
+        <div class="marcador--number">
+          <span> {{ohs}} </span>
+        </div>
+      </div>
+      <div class="marcador--container flex flex-center">
+        <div class="marcador--hashtag">
+          <h3>#gcsummercluster</h3>
+        </div>
+        <div class="marcador--number">
+          <span> {{cluster}} </span>
+        </div>
+      </div>
+
+    </div>
 
     <div class="hashtag" *ngIf="instaposts.ohs.user">
       <div class="header flex flex-center">
@@ -50,7 +69,9 @@
           <img src="{{instaposts.ohs.user.profile_picture}}" alt="" class="rounded">
         </div>
         <div class="profile--name">
-          <h2 class="name">#gcsummerohs </h2>
+          <h2 class="name">
+            <a href="https://www.instagram.com/gcsummerchallenge/" target="_blank">{{instaposts.ohs.user.username}}</a>
+          </h2>
         </div>
       </div>
       <div class="body">
@@ -91,7 +112,9 @@
           <img src="{{instaposts.ohs.user.profile_picture}}" alt="" class="rounded" />
         </div>
         <div class="profile--name">
-          <h2 class="name">#gcsummercluster</h2>
+          <h2 class="name">
+            <a href="https://www.instagram.com/gcsummerchallenge/" target="_blank">{{instaposts.ohs.user.username}}</a>
+          </h2>
         </div>
       </div>
       <div class="body bg--cluster">

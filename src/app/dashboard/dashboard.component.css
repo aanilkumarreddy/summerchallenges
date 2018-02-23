@@ -1,6 +1,6 @@
 
 #dashboard{
-    padding-top: 100px;
+    padding-top: 50px;
     padding-bottom: 100px;
 }
 .blur{
@@ -260,6 +260,10 @@
     font-size: 2vh;
 }
 @media (max-width: 768px){
+    #dashboard{
+        padding-top: 10px;
+        padding-bottom: 100px;
+    }
     .message-container{
         flex-direction: column;
         padding: 0;
