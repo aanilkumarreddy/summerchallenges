@@ -23,7 +23,8 @@
                 <span class="input-group-addon" id="basic-addon1">
                   <i class="material-icons">picture_in_picture</i>
                 </span>
-                <input type="text" formControlName="dni" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('dni')}" maxlength="9"
+                <!-- [TODO] maxlength = 9 -->
+                <input type="text" formControlName="dni" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('dni')}" maxlength="15"
                   placeholder="DNI o NIE" aria-describedby="basic-addon1">
                 <span class="form-control-invalid-alert" *ngIf="validarCampo('dni')">(*) Se requiere este campo</span>
               </div>

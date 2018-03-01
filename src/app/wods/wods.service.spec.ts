@@ -12,4 +12,9 @@ describe('WodsService', () => {
   it('should ...', inject([WodsService], (service: WodsService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('should ...', inject([WodsService], (service: WodsService) => {
+    expect(service).toBeTruthy();
+  }));
+
 });
