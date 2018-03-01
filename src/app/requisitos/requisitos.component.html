@@ -2,7 +2,7 @@
 <div class="container">
   <div class="requisitos__menu flex flex-center flex-wraper">
     <div class="menu__option flex flex-center" *ngFor="let cat of categorias; let i = index">
-      <label [ngClass]="{'active' : i==0, 'option' : true}" (click)="activateCategory(cat, $event)">{{cat.nombre}}</label>
+      <label class="option" [ngClass]="{'option' : true, 'active' : i==0}" (click)="activateCategory(cat, $event)">{{cat.nombre}}</label>
     </div>
   </div>
   <div class="requisitos__info flex flex-center">

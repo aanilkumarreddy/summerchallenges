@@ -41,8 +41,7 @@ export class RequisitosComponent implements OnInit {
   }
 
   activateCategory(e, event) {
-    const options = document.querySelectorAll('.option');
-
+    const options = Array.from(document.querySelectorAll('.option'));
     options.forEach(option => {
       option.classList.remove('active');
     })
