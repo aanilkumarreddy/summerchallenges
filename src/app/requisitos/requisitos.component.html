@@ -1,0 +1,22 @@
+<div class="overlay"></div>
+<div class="container">
+  <div class="requisitos__menu flex flex-center flex-wraper">
+    <div class="menu__option flex flex-center" *ngFor="let cat of categorias; let i = index">
+      <label class="option" [ngClass]="{'active' : i==0}" (click)="activateCategory(cat, $event)">{{cat.nombre}}</label>
+    </div>
+  </div>
+  <div class="requisitos__info flex flex-center">
+    <div *ngIf="categoria_actual" class="info__panel info__fake">
+      <p>
+        {{categoria_actual.requisitos.resumen}}
+      </p>
+      <p>
+        {{categoria_actual.requisitos.weights}} kg
+      </p>
+      <p>
+        {{categoria_actual.requisitos.gymnastics}}
+      </p>
+    </div>
+  </div>
+
+</div>

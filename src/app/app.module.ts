@@ -46,6 +46,7 @@ import { WodCardComponent } from './wod-card/wod-card.component';
 import { InstagramComponent } from './instagram/instagram.component';
 import { InstagramService } from './instagram/instagram.service';
 import { PublicPanelComponent } from './public-panel/public-panel.component';
+import { RequisitosComponent } from './requisitos/requisitos.component';
 
 
 // Must export the config
@@ -71,6 +72,7 @@ const appRoutes: Routes = [
   // { path : 'wods', component : WodsComponent},
   { path: 'public-panel', redirectTo: '/inscritos', pathMatch: 'full' },
   { path: 'inscritos', component: PublicPanelComponent },
+  { path: 'requisitos', component: RequisitosComponent },
   //{ path: 'countdown', component: LoginComponent},
   //{ path : 'public-wods', component : PublicWodsComponent},
   // { path : 'leaderboard', component: LeaderboardComponent},
@@ -116,6 +118,7 @@ const appRoutes: Routes = [
     WodCardComponent,
     InstagramComponent,
     PublicPanelComponent,
+    RequisitosComponent,
   ],
   imports: [
     BrowserModule,
