@@ -12,7 +12,7 @@
 
 .container {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 50px;
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -390,6 +390,9 @@
     .marcador .marcador--container:first-child {
       border: none;
       border-bottom: 2px dashed #E29624;
+    }
+    .marcador--hashtag, .marcador--hashtag h3 {
+      font-size: 24px;
     }
   }
   @media (max-width: 480px) {
