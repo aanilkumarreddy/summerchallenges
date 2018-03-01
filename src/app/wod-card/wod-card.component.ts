@@ -19,16 +19,16 @@ export class WodCardComponent implements OnInit {
   @Input() wod: any;
   @Input() category: any;
 
-  private wodData;
-  private formObject;
-  private youtubeUrl: SafeResourceUrl;
-  private videoUrlDone: boolean = false;
-  private sendedScore: boolean = false;
-  private errVideoUrl: boolean = false;
-  private scoreForm: FormGroup;
-  private auth;
-  private key;
-  private trySendScore;
+  public wodData;
+  public formObject;
+  public youtubeUrl: SafeResourceUrl;
+  public videoUrlDone: boolean = false;
+  public sendedScore: boolean = false;
+  public errVideoUrl: boolean = false;
+  public scoreForm: FormGroup;
+  public auth;
+  public key;
+  public trySendScore;
 
   // private timeExpReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
   private urlExpReg = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
@@ -78,8 +78,6 @@ export class WodCardComponent implements OnInit {
       }
     };
 
-    console.log("categoria");
-    console.log(this.category);
     if (typeWod == "WOD 1") {
       this.formObject.kilos = [null, Validators.required];
 
@@ -97,8 +95,6 @@ export class WodCardComponent implements OnInit {
         this.wodData.data.kilos2 = 0;
         this.wodData.data.reps2 = 0;
         this.wodData.data.url2 = 0;
-        console.log("this.formObject WOD 2");
-        console.log(this.formObject);
       }
     }
 
@@ -115,8 +111,6 @@ export class WodCardComponent implements OnInit {
 
         this.wodData.data.reps2 = 0;
         this.wodData.data.url2 = 0;
-        console.log("this.formObject WOD 2");
-        console.log(this.formObject);
       }
     }
   }
@@ -138,7 +132,7 @@ export class WodCardComponent implements OnInit {
     if (this.wod.titulo == "WOD 1") {
       this.wodData.data.kilos = parseFloat(post.kilos);
       this.wodData.data.puntuacion = post.reps * post.kilos;
-      if (this.category === 3 || this.category === 4) {
+      if (this.isTeamCategory()) {
         this.wodData.data.kilos2 = parseFloat(post.kilos2);
         this.wodData.data.reps2 = parseFloat(post.reps2);
         this.wodData.data.puntuacion = post.reps * post.kilos + post.reps2 * post.kilos2;
@@ -147,7 +141,7 @@ export class WodCardComponent implements OnInit {
     }
     if (this.wod.titulo == "WOD 2") {
       this.wodData.data.puntuacion = parseFloat(post.reps);
-      if (this.category === 3 || this.category === 4) {
+      if (this.isTeamCategory()) {
         this.wodData.data.puntuacion = post.reps + post.reps2;
         this.wodData.data.url2 = post.url2;
       }
@@ -159,6 +153,10 @@ export class WodCardComponent implements OnInit {
 
     this.sendedScore = true;
     this.wodsService.update_wod(this.wodData);
+  }
+
+  isTeamCategory(){
+    return this.category === 3 || this.category === 4;
   }
 
   checkVideoUrl(url: string, fn?: any): void {

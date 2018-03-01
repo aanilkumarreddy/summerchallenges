@@ -58,7 +58,7 @@ export const firebaseConfig = {
   messagingSenderId: "523835141115"
 };
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
@@ -68,7 +68,7 @@ const appRoutes: Routes = [
   { path: 'registro-voluntario', component: RegistroVoluntarioComponent },
   { path: 'confirmacion', component: InscripcionComponent },
   { path: 'edit', component: EditComponent },
-  // { path : 'wods', component : WodsComponent},
+  { path : 'wods', component : WodsComponent},
   { path: 'public-panel', redirectTo: '/inscritos', pathMatch: 'full' },
   { path: 'inscritos', component: PublicPanelComponent },
   //{ path: 'countdown', component: LoginComponent},

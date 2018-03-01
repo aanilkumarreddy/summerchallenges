@@ -52,7 +52,7 @@ export class RegistroIndividualComponent implements OnInit {
 
     this.rForm = fb.group({
       'name': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(40)])],
-      'dni': [null, Validators.compose([Validators.required, Validators.pattern(this.dniRegularExpression)])],
+      'dni': [null, Validators.compose([Validators.required /*, Validators.pattern(this.dniRegularExpression)*/])],
       'email': [null, Validators.compose([Validators.required, Validators.pattern(this.emailRegularExpression)])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
       'passwordConfirm': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
