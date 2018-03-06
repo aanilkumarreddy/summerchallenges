@@ -41,7 +41,6 @@ export class WodCardComponent implements OnInit {
     private atletasService: AtletasService,
     private af: AngularFire
   ) {
-    alert();
     this.authAtleta(af);
   }
 
