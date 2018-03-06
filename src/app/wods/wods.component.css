@@ -143,6 +143,7 @@ p.puntuacion{
 @media (max-width: 840px){
     .wods-container{
         flex-direction: column;
+        padding-left: 15px;
     }
     .wod-container{
         flex: 1;

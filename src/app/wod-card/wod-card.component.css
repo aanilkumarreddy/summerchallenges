@@ -5,7 +5,6 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    /* padding-left: 0px; */
     width: 100%;
     padding-top: 18px;
 }
@@ -181,7 +180,10 @@ h1 {
 @media (max-width: 840px){
     .wods-container{
         flex-direction: column;
-        padding-left: 15px !important;
+        padding-left: 15px;
+    }
+    .wods-container {
+        padding-left: 15px;
     }
     .wod-container{
         flex: 1;

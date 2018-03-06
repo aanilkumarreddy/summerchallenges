@@ -49,29 +49,30 @@ export class WodsComponent {
     // this.getWods(this.categoria);
     // this.router.navigate(['public-wods']);
     this.authAtleta(af);
+    //this.wodsService.initWods();
 
     // this.router.navigate(['dashboard']);
   }
 
   /*getPosition(){
-    
+
     this.atletasService.atletas.subscribe(data =>{
-      
+
       const atletas_wod1 = data.filter(element => element.wod_1);
       atletas_wod1.sort((a, b) => a.wod_1.puntuacion < b.wod_1.puntuacion ? 1 : -1);
-      
+
       atletas_wod1.forEach(atleta =>{
         let aux = atletas_wod1.findIndex(at => at.nombre==atleta.nombre)+1;
         let aux_wod = {puntuacion: atleta.wod_1.puntuacion || 0, tiempo: atleta.wod_1.tiempo || 0, url: atleta.wod_1.url || "", puesto: aux};
         this.wodsService.update_wod1(atleta.$key, aux_wod);
         console.log(atleta.nombre + " - " + atleta.wod_1.puntuacion + " - PUNTOS:" + aux);
       })
-      
+
 
       //console.log(atletas_wod1.findIndex(x => x.nombre=="ADMIN")+1);
       //console.table(atletas_wod1);
     })
-    
+
   }*/
   authAtleta(af) {
     this.af.auth.subscribe((data: any) => {
