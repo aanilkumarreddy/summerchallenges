@@ -7,7 +7,7 @@
 
     <div class="data">
 
-      <form [formGroup]="scoreForm" (ngSubmit)="updateWod(scoreForm.value)">
+      <form [formGroup]="scoreForm">
 
         <span *ngIf="category == 3 || category == 4">Datos del primer atleta: </span>
         <div class="input-group" *ngIf="wod.titulo == 'WOD 1.A'">
@@ -81,7 +81,7 @@
         <iframe *ngIf="videoUrlDone" width="100%" height="auto" [src]="youtubeUrl" frameborder="0" allow="autoplay; encrypted-media"
           allowfullscreen></iframe>
 
-        <input type="submit" *ngIf="!sendedScore && !videoUrlDone" class="btn btn-block" value="Enviar/Modificar puntuación" />
+        <button (click)="updateWod(scoreForm.value)" *ngIf="!sendedScore && !videoUrlDone" class="btn btn-block"> Enviar/Modificar puntuación </button>
         <span class="btn btn-block btn-cancel" *ngIf="errVideoUrl && !sendedScore">INTÉNTELO MÁS TARDE</span>
 
       </form>
