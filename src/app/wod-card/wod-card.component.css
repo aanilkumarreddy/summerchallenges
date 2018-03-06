@@ -1,6 +1,13 @@
 .section-wods {
     padding-top: 120px;
 }
+
+i.fa-check-circle {
+    color: #f2a634;
+    font-size: 50px;
+    padding: 24px 0;
+}
+
 .wods-container{
     display: flex;
     justify-content: space-between;

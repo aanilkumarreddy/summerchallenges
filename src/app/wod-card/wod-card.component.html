@@ -7,8 +7,12 @@
 
     <div class="data">
 
-      <form [formGroup]="scoreForm">
+      <div class="flex flex-center flex-column" *ngIf="wod.titulo == 'WOD 1.A' && atleta.wod_1a.puntuacion !== 0 || wod.titulo == 'WOD 1.B' && atleta.wod_1b.puntuacion !== 0">
+        <i class="fas fa-check-circle" *ngIf="!modPuntuacion"></i>
+        <button class="btn btn-block" (click)="modPuntuacion = !modPuntuacion" *ngIf="!modPuntuacion">Modificar puntuación</button>
+      </div>
 
+      <form [formGroup]="scoreForm" *ngIf="wod.titulo == 'WOD 1.A' && atleta.wod_1a.puntuacion == 0 || wod.titulo == 'WOD 1.B' && atleta.wod_1b.puntuacion == 0 || modPuntuacion">
         <span *ngIf="category == 3 || category == 4">Datos del primer atleta: </span>
         <div class="input-group" *ngIf="wod.titulo == 'WOD 1.A'">
           <span class="input-group-addon" id="basic-addon1">
@@ -78,8 +82,8 @@
           <span class="form-control-invalid-alert" *ngIf="validarCampo('url2')">(*) Introduzca una url correcta</span>
         </div>
 
-        <iframe *ngIf="videoUrlDone" width="100%" height="auto" [src]="youtubeUrl" frameborder="0" allow="autoplay; encrypted-media"
-          allowfullscreen></iframe>
+        <!-- <iframe *ngIf="videoUrlDone" width="100%" height="auto" [src]="youtubeUrl" frameborder="0" allow="autoplay; encrypted-media"
+          allowfullscreen></iframe> -->
 
         <button (click)="updateWod(scoreForm.value)" *ngIf="!sendedScore && !videoUrlDone" class="btn btn-block">Enviar/Modificar puntuación</button>
         <span class="btn btn-block btn-cancel" *ngIf="errVideoUrl && !sendedScore">INTÉNTELO MÁS TARDE</span>

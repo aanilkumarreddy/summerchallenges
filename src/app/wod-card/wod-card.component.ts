@@ -18,6 +18,7 @@ import { SafeResourceUrl } from "@angular/platform-browser/src/security/dom_sani
 export class WodCardComponent implements OnInit {
   @Input() wod: any;
   @Input() category: any;
+  @Input() atleta: any;
 
   public wodData;
   public formObject;
@@ -29,6 +30,7 @@ export class WodCardComponent implements OnInit {
   public auth;
   public key;
   public trySendScore;
+  public modPuntuacion = false;
 
   // private timeExpReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
   private urlExpReg = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
@@ -41,11 +43,11 @@ export class WodCardComponent implements OnInit {
     private atletasService: AtletasService,
     private af: AngularFire
   ) {
-    this.authAtleta(af);
   }
 
   ngOnInit() {
     this.formConfig();
+    this.key = this.atleta.$key;
   }
 
   selectWodType(typeWod) {
@@ -169,49 +171,52 @@ export class WodCardComponent implements OnInit {
   checkVideoUrl(url: string, fn?: any): void {
     if (!this.scoreForm.controls["url"].valid || !this.scoreForm.valid) return;
 
-    this.http
-      .get(url)
-      .toPromise()
-      .then(res => {
-        console.log("No Error");
-        this.checkUrlYoutube(url);
-        fn();
-        console.log("no error: ", fn);
-      })
-      .catch(err => {
-        console.log("Error");
-        console.log(err);
-
-        this.errVideoUrl = true;
-        console.log("error chechVideoUrl: ", this.errVideoUrl);
-      });
-  }
-
-  checkUrlYoutube(url: string): void {
-    let part = url.split("/");
-    part = part[part.length - 1].split("=");
-    let keyYoutube = part[part.length - 1];
-    let baseUrl = "https://www.youtube.com/embed/";
-    this.youtubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-      baseUrl + keyYoutube
-    );
+    fn();
     this.videoUrlDone = true;
+    
+    // this.http
+    //   .get(url)
+    //   .toPromise()
+    //   .then(res => {
+    //     console.log("No Error");
+    //     this.checkUrlYoutube(url);
+    //     fn();
+    //     console.log("no error: ", fn);
+    //   })
+    //   .catch(err => {
+    //     console.log("Error");
+    //     console.log(err);
+
+    //     this.errVideoUrl = true;
+    //     console.log("error chechVideoUrl: ", this.errVideoUrl);
+    //   });
   }
+
+  // checkUrlYoutube(url: string): void {
+  //   let part = url.split("/");
+  //   part = part[part.length - 1].split("=");
+  //   let keyYoutube = part[part.length - 1];
+  //   let baseUrl = "https://www.youtube.com/embed/";
+  //   this.youtubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+  //     baseUrl + keyYoutube
+  //   );
+  //   this.videoUrlDone = true;
+  // }
 
   formConfig(): void {
     this.selectWodType(this.wod.titulo);
     this.scoreForm = this.fb.group(this.formObject);
   }
 
-  authAtleta(af): void {
-    this.af.auth.subscribe((data: any) => {
-      const aux_atleta = this.atletasService.getAtleta_byEmail(data.auth.email);
+  // authAtleta(af): void {
+  //   this.af.auth.subscribe((data: any) => {
+  //     const aux_atleta = this.atletasService.getAtleta_byEmail(data.auth.email);
 
-      aux_atleta.subscribe(data => {
-        this.key = data[0].$key;
-      });
-    });
-  }
+  //     aux_atleta.subscribe(data => {
+  //       this.key = data[0].$key;
+  //     });
+  //   });
+  // }
 
   validarCampo(campo) {
     if (

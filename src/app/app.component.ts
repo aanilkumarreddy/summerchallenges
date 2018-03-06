@@ -33,8 +33,7 @@ export class AppComponent {
     this.af.auth.subscribe( (data : any) => {
       if(data){
         this.auth = data.auth;
-        let aux_atleta = this.atletasService.getAtleta_byEmail(this.auth.email);
-        aux_atleta.subscribe(data => {
+        let aux_atleta = this.atletasService.getAtleta_byEmail(this.auth.email).subscribe(data => {
           data.forEach(element => {
             const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
             atleta_actual.subscribe(data => {
@@ -42,6 +41,7 @@ export class AppComponent {
               this.key = data.$key;
               this.atletasService.setAtletaActual(this.key);
               this.categoriasService.setCategoriaActual(data.id_categoria);
+              
             })
           });
         })
