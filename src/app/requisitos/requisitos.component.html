@@ -1,22 +1,40 @@
 <div class="overlay"></div>
-<div class="container">
-  <div class="requisitos__menu flex flex-center flex-wraper">
-    <div class="menu__option flex flex-center" *ngFor="let cat of categorias; let i = index">
-      <label class="option" [ngClass]="{'option' : true, 'active' : i==0}" (click)="activateCategory(cat, $event)">{{cat.nombre}}</label>
-    </div>
-  </div>
-  <div class="requisitos__info flex flex-center">
-    <div *ngIf="categoria_actual" class="info__panel info__fake">
-      <p>
-        {{categoria_actual.requisitos.resumen}}
-      </p>
-      <p>
-        {{categoria_actual.requisitos.weights}} kg.
-      </p>
-      <p>
-        {{categoria_actual.requisitos.gymnastics}}
-      </p>
-    </div>
-  </div>
+<div [ngClass]="{'container' : true, 'logged' : auth}">
+  <div class="wrapped">
+    <p>
+      El clasificatorio online de este Gran Canaria Summer Challenge constará de
+      <strong> un único WOD </strong>, el cual, estará dividido en dos partes (WOD 1.A y WOD 1.B).
+      <br>
+      <br> Los atletas deberán realizar ambos bloques de manera continuada ya que
+      <strong>se trata de un único WOD.</strong>
+      <br>
+      <br> En el bloque 1.A, cada atleta deberá seleccionar el peso con el que quiere realizar los OHS, su puntuación será el
+      total de repeticiones multiplicado por el número de repeticiones realizadas durante los 2 minutos.
 
+
+    </p>
+  </div>
+  <div class="requisitos__menu flex flex-center flex-wraper">
+    <div class="menu__option flex flex-center" *ngFor="let wod of wods; let i = index">
+      <label class="option" [ngClass]="{'option' : true, 'active' : i==0}" (click)="activateCategory(wod, $event)">{{wod.titulo}}</label>
+    </div>
+  </div>
+  <div class="container__requisitos__info">
+    <div class="requisitos__info flex flex-center flex-column">
+      <div *ngIf="wod_actual" class="info__panel info__fake">
+        <h2> {{wod_actual.descripcion}}
+        </h2>
+        <p *ngFor="let mov of wod_actual.movimientos">
+          <span *ngIf="mov.reps">{{mov.reps}} - </span>{{mov.nombre}}
+          <br>
+          <span *ngIf="mov.peso">{{mov.peso}} </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="wod_actual" class="especificaciones">
+    <p *ngFor="let des of wod_actual.especificaciones">
+      · {{des}}
+    </p>
+  </div>
 </div>

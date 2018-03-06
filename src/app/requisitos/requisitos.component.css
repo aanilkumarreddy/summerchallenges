@@ -19,14 +19,29 @@ p {
 
 .container {
     width: 100%;
+
     margin-top: 100px;
+    padding: 0;
+
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
   }
+  .container.logged {
+    margin-top: 35px;
+  }
+  .wrapped {
+    width: 80%;
+  }
   .requisitos__menu {
     width: 90%;
+    margin: 24px 0px;
+  }
+  .container__requisitos__info {
+    width: 100%;
+    overflow: hidden;
+    background-color: #eaeaea;
   }
   .menu__option {
     transition: all 300ms;
@@ -37,6 +52,7 @@ p {
     border-bottom: 3px solid #FAFAFA;
     font-size: 16px;
     color: #CFCFCF;
+    transition: all 300ms;
   }
   .menu__option label.active {
     border-bottom: 3px solid #F2A634;
@@ -50,8 +66,27 @@ p {
     border-radius: 3px;
     background-color: #eaeaea;
     transition: all 300ms;
-    width: 90%;
-    min-height: 300px;
+    width: 100%;
+    text-align: center;
+  }
+  .requisitos__info__modal {
+    display: none;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: red;
+  }
+  .btn--modal:hover + .requisitos__info__modal {
+    display: flex;
+    position: fixed;
+  }
+  .especificaciones {
+    width: 80%;
+    margin-top: 12px;
+  }
+  .especificaciones p {
+    font-size: 12px;
+    text-transform: capitalize;
   }
 
   .out {
@@ -59,20 +94,29 @@ p {
     animation: out 0.5s;
   }
 
+  @keyframes in {
+
+  }
+
   @keyframes out {
     0% {
       transform: translateX(0px);
     }
-    25% {
-      transform: translateX(120%);
-      opacity: 0;
+    50% {
+      transform: scale(1.1);
     }
-    75% {
+    80% {
+      transform: translateX(120%);
+    }
+    85% {
       transform: translateX(-120%);
       opacity: 0;
     }
+    90% {
+      transform: scale(1.1);
+    }
     100% {
-      transform: translateX(0px);
+      transform: scale(1) translateX(0px);
       opacity: 1;
     }
   }

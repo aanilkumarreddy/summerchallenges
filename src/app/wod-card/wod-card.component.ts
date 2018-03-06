@@ -78,7 +78,7 @@ export class WodCardComponent implements OnInit {
       }
     };
 
-    if (typeWod == "WOD 1") {
+    if (typeWod == "WOD 1.A") {
       this.formObject.kilos = [null, Validators.required];
 
       if (this.category === 3 || this.category === 4) {
@@ -98,7 +98,7 @@ export class WodCardComponent implements OnInit {
       }
     }
 
-    if (typeWod == "WOD 2") {
+    if (typeWod == "WOD 1.B") {
       if (this.category === 3 || this.category === 4) {
         this.formObject.reps2 = [null, Validators.required];
         this.formObject.url2 = [
@@ -129,7 +129,7 @@ export class WodCardComponent implements OnInit {
     // O un handler del servicio para que concuerde
     // La adquisicion de datos con el form correspondiente
 
-    if (this.wod.titulo == "WOD 1") {
+    if (this.wod.titulo == "WOD 1.A") {
       this.wodData.data.kilos = parseFloat(post.kilos);
       this.wodData.data.puntuacion = post.reps * post.kilos;
       if (this.isTeamCategory()) {
@@ -139,7 +139,7 @@ export class WodCardComponent implements OnInit {
         this.wodData.data.url2 = post.url2;
       }
     }
-    if (this.wod.titulo == "WOD 2") {
+    if (this.wod.titulo == "WOD 1.B") {
       this.wodData.data.puntuacion = parseFloat(post.reps);
       if (this.isTeamCategory()) {
         this.wodData.data.puntuacion = post.reps + post.reps2;
@@ -155,7 +155,7 @@ export class WodCardComponent implements OnInit {
     this.wodsService.update_wod(this.wodData);
   }
 
-  isTeamCategory(){
+  isTeamCategory() {
     return this.category === 3 || this.category === 4;
   }
 

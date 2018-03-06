@@ -19,8 +19,10 @@
 
     <div *ngIf="!auth" class="login-actions-container">
       <button *ngIf="!auth" routerLink="/login" routerLinkActive="active" class="boton btn--desktop navbar-btn navbar-right"> ACCEDER </button>
+      <!--
       <button *ngIf="!auth" routerLink="/registro" routerLinkActive="active" class="boton btn--desktop navbar-btn navbar-right">
         INSCRÍBETE </button>
+      -->
     </div>
 
     <div *ngIf="auth" class="auth-actions-container">
@@ -47,7 +49,9 @@
     <div *ngIf="!auth" class="actions">
       <div *ngIf="!auth" class="login">
         <button *ngIf="!auth" routerLink="/login" routerLinkActive="active" class="boton"> ACCEDER </button>
+        <!--
         <button *ngIf="!auth" routerLink="/registro" routerLinkActive="active" class="boton"> INSCRÍBETE </button>
+        -->
       </div>
       <div *ngIf="auth && atleta && atleta.estado > 1" class="payment">
         <a routerLink="/inscritos" routerLinkActive="active">
@@ -93,11 +97,20 @@
     <div class="option--text">Inscritos</div>
   </div>
 
-  <div routerLink="/instagram" routerLinkActive="active" class="option flex flex-column flex-center">
+  <div routerLink="/wods" routerLinkActive="active" class="option flex flex-column flex-center">
+    <div class="option--icon">
+      <i class="fab fa-youtube"></i>
+    </div>
+    <div class="option--text">Enviar WOD</div>
+  </div>
+
+  <div routerLink="/requisitos" routerLinkActive="active" class="option flex flex-column flex-center">
     <div class="option--icon">
       <i class="fas fa-crosshairs"></i>
     </div>
     <div class="option--text">Wods</div>
+    <!--
     <span routerLink="/instagram" routerLinkActive="active" class="flotante _pulse">¡Elige el WOD 1!</span>
+    -->
   </div>
 </div>

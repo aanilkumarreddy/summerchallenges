@@ -2,46 +2,28 @@
   <h1 class="wod-title">
     {{wod.titulo}}
   </h1>
-  <div class="wod-img-container">
-    <img src="{{wod.imagen}}" alt="Lanzarote Summer Challenge 2017 - {{wod.titulo}}" />
-  </div>
   <div class="wod-description-container">
     <div class="wod-movements">
       <div *ngFor="let p of wod.descripcion" class="movement-block">{{p}}
-        <br />
-      </div>
-    </div>
-    <div class="wod-poweredBy">
-      <span> Patrocinado por: </span>
-      <img src="{{wod.patrocinador.img}}" alt="{{wod.patrocinador.nombre}}" />
-    </div>
-    <div class="especifications-container">
-      <div class="especifications-title">
-        <i class="material-icons">assignment</i>
-        <span> ESPECIFICACIONES </span>
-      </div>
-      <div *ngFor="let esp of wod.especificaciones" class="wod-especifications">
-        <p *ngIf="esp"> - {{esp}} </p>
       </div>
     </div>
   </div>
   <div class="wod-actions">
     <!-- <p class="puntuacion">PUNTUACION = {{wod.puntuacion}}</p> -->
-    <p class="puntuacion">TIEBRAKE = {{wod.tiebreak}}</p>
 
     <div class="data">
 
       <form [formGroup]="scoreForm" (ngSubmit)="updateWod(scoreForm.value)">
 
-        <span  *ngIf="category == 3 || category == 4">Datos del primer atleta: </span>
+        <span *ngIf="category == 3 || category == 4">Datos del primer atleta: </span>
         <div class="input-group" *ngIf="wod.titulo == 'WOD 1'">
           <span class="input-group-addon" id="basic-addon1">
             <i class="material-icons" *ngIf="!sendedScore">trending_up</i>
             <i class="material-icons" *ngIf="sendedScore" [ngClass]="{'icon-done-url':sendedScore}">done</i>
           </span>
-          <input type="number" placeholder="Kilogramos por una repetición" formControlName="kilos" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('kilos')}"
+          <input type="number" placeholder="kg" formControlName="kilos" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('kilos')}"
             aria-describedby="basic-addon1">
-          <span class="form-control-invalid-alert" *ngIf="validarCampo('kilos')">(*) Introduzca los kilogramos por repetición</span>
+          <span class="form-control-invalid-alert" *ngIf="validarCampo('kilos')">(*) kg</span>
         </div>
 
         <div class="input-group">
@@ -59,29 +41,29 @@
         <!-- SEGUNDO ATLETA -->
         <span *ngIf="category == 3 || category == 4"> Datos del segundo atleta: </span>
         <div class="input-group" *ngIf="wod.titulo == 'WOD 1' && (category == 3 || category == 4)">
-            <span class="input-group-addon" id="basic-addon1">
-              <i class="material-icons" *ngIf="!sendedScore">trending_up</i>
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="material-icons" *ngIf="!sendedScore">trending_up</i>
+            <i class="material-icons" *ngIf="sendedScore" [ngClass]="{'icon-done-url':sendedScore}">done</i>
+          </span>
+          <input type="number" placeholder="Kilogramos por una repetición" formControlName="kilos2" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('kilos2')}"
+            aria-describedby="basic-addon1">
+          <span class="form-control-invalid-alert" *ngIf="validarCampo('kilos2')">(*) Introduzca los kilogramos por repetición</span>
+        </div>
+
+        <div class="input-group" *ngIf="category == 3 || category == 4">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="material-icons">
+              <i class="material-icons" *ngIf="!sendedScore">format_list_numbered</i>
               <i class="material-icons" *ngIf="sendedScore" [ngClass]="{'icon-done-url':sendedScore}">done</i>
-            </span>
-            <input type="number" placeholder="Kilogramos por una repetición" formControlName="kilos2" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('kilos2')}"
-              aria-describedby="basic-addon1">
-            <span class="form-control-invalid-alert" *ngIf="validarCampo('kilos2')">(*) Introduzca los kilogramos por repetición</span>
-          </div>
-  
-          <div class="input-group" *ngIf="category == 3 || category == 4">
-            <span class="input-group-addon" id="basic-addon1">
-              <i class="material-icons">
-                <i class="material-icons" *ngIf="!sendedScore">format_list_numbered</i>
-                <i class="material-icons" *ngIf="sendedScore" [ngClass]="{'icon-done-url':sendedScore}">done</i>
-              </i>
-            </span>
-            <input type="number" placeholder="Repeticiones" formControlName="reps2" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('reps2')}"
-              aria-describedby="basic-addon1">
-            <span class="form-control-invalid-alert" *ngIf="validarCampo('reps2')">(*) Introduzca las repeticiones</span>
-          </div>
+            </i>
+          </span>
+          <input type="number" placeholder="Repeticiones" formControlName="reps2" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('reps2')}"
+            aria-describedby="basic-addon1">
+          <span class="form-control-invalid-alert" *ngIf="validarCampo('reps2')">(*) Introduzca las repeticiones</span>
+        </div>
 
         <!-- URL -->
-        <span *ngIf="category == 3 || category == 4"> Urls de los videos respectivamente: </span>        
+        <span *ngIf="category == 3 || category == 4"> Urls de los videos respectivamente: </span>
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">
             <i class="material-icons" *ngIf="!sendedScore">videocam</i>
