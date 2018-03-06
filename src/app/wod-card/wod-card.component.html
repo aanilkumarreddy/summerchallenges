@@ -34,7 +34,7 @@
 
         <!-- SEGUNDO ATLETA -->
         <span *ngIf="category == 3 || category == 4"> Datos del segundo atleta: </span>
-        <div class="input-group" *ngIf="wod.titulo == 'WOD 1' && (category == 3 || category == 4)">
+        <div class="input-group" *ngIf="wod.titulo == 'WOD 1.A' && (category == 3 || category == 4)">
           <span class="input-group-addon" id="basic-addon1">
             <i class="material-icons" *ngIf="!sendedScore">trending_up</i>
             <i class="material-icons" *ngIf="sendedScore" [ngClass]="{'icon-done-url':sendedScore}">done</i>
