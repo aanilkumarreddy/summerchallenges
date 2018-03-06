@@ -2,12 +2,6 @@
   <h1 class="wod-title">
     {{wod.titulo}}
   </h1>
-  <div class="wod-description-container">
-    <div class="wod-movements">
-      <div *ngFor="let p of wod.descripcion" class="movement-block">{{p}}
-      </div>
-    </div>
-  </div>
   <div class="wod-actions">
     <!-- <p class="puntuacion">PUNTUACION = {{wod.puntuacion}}</p> -->
 
@@ -16,7 +10,7 @@
       <form [formGroup]="scoreForm" (ngSubmit)="updateWod(scoreForm.value)">
 
         <span *ngIf="category == 3 || category == 4">Datos del primer atleta: </span>
-        <div class="input-group" *ngIf="wod.titulo == 'WOD 1'">
+        <div class="input-group" *ngIf="wod.titulo == 'WOD 1.A'">
           <span class="input-group-addon" id="basic-addon1">
             <i class="material-icons" *ngIf="!sendedScore">trending_up</i>
             <i class="material-icons" *ngIf="sendedScore" [ngClass]="{'icon-done-url':sendedScore}">done</i>
