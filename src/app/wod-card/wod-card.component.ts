@@ -66,7 +66,10 @@ export class WodCardComponent implements OnInit {
 
     this.wodData = {
       key: "",
-      name: typeWod.toLowerCase().replace(" ", "_"),
+      name: typeWod
+        .toLowerCase()
+        .replace(" ", "_")
+        .replace(".", ""),
       data: {
         kilos: 0,
         kilos2: 0,
@@ -135,7 +138,8 @@ export class WodCardComponent implements OnInit {
       if (this.isTeamCategory()) {
         this.wodData.data.kilos2 = parseFloat(post.kilos2);
         this.wodData.data.reps2 = parseFloat(post.reps2);
-        this.wodData.data.puntuacion = post.reps * post.kilos + post.reps2 * post.kilos2;
+        this.wodData.data.puntuacion =
+          post.reps * post.kilos + post.reps2 * post.kilos2;
         this.wodData.data.url2 = post.url2;
       }
     }
@@ -143,6 +147,7 @@ export class WodCardComponent implements OnInit {
       this.wodData.data.puntuacion = parseFloat(post.reps);
       if (this.isTeamCategory()) {
         this.wodData.data.puntuacion = post.reps + post.reps2;
+        this.wodData.data.reps2 = parseFloat(post.reps2);
         this.wodData.data.url2 = post.url2;
       }
     }
@@ -152,6 +157,8 @@ export class WodCardComponent implements OnInit {
     this.wodData.key = this.key;
 
     this.sendedScore = true;
+    console.log("wodData");
+    console.log(this.wodData);
     this.wodsService.update_wod(this.wodData);
   }
 
