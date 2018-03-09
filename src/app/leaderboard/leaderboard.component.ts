@@ -38,7 +38,6 @@ export class LeaderboardComponent implements OnInit {
       this.categoriasService.getCategorias().subscribe(data => {
         this.categorias = data;
         this.getAtletas_byCategoria(1);
-        this.seleccion = 'general';
       })
       if (data) {
         this.auth = data.auth;
@@ -89,12 +88,29 @@ export class LeaderboardComponent implements OnInit {
         // Código de redirección a login .
         // No hay datos en auth, no está logueado.
         //this.router.navigate(['/login']);
+        console.log("Estoy aqui bro");
       }
     });
   }
 
-  ngOnInit() { }
-
+  ngOnInit() {
+  }
+  animateAtletasCard() {
+    setTimeout(() => {
+      const cardsAtletas = Array.from(document.querySelectorAll('.atleta-card'));
+      console.log(cardsAtletas);
+      let timer = 100;
+      cardsAtletas.forEach(card => {
+        timer += 100;
+        setTimeout(() => {
+          console.log("Estoy bro!")
+          card.classList.add('fadeIn');
+          card.classList.add('display');
+        }, timer)
+      })
+      this.seleccion = 'general';
+    }, 50)
+  }
   getAtletas_byCategoria(id_categoria) {
     console.log(this.seleccion);
     let _atletas = this.atletasService.getAtletas_byCategoria(id_categoria);
@@ -104,6 +120,7 @@ export class LeaderboardComponent implements OnInit {
         atleta => atleta.estado > 1 && atleta.id_categoria == id_categoria
         //Aquí se pueden añadir más filtros
       );
+      this.animateAtletasCard();
       this.orderBy_total();
     });
 

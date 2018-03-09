@@ -71,7 +71,7 @@ export const appRoutes: Routes = [
   { path: 'edit', component: EditComponent },
   { path: 'wods', component: WodsComponent },
   { path: 'public-panel', redirectTo: '/inscritos', pathMatch: 'full' },
-  { path: 'inscritos', component: PublicPanelComponent },
+  { path: 'inscritos', redirectTo: '/leaderboard', pathMatch: 'full' },
   { path: 'requisitos', component: RequisitosComponent },
   //{ path: 'countdown', component: LoginComponent},
   //{ path : 'public-wods', component : PublicWodsComponent},
@@ -84,8 +84,8 @@ export const appRoutes: Routes = [
   //{ path : 'countdown', redirectTo : '/login', pathMatch: 'full'},
   { path: 'reset-password-login', component: LoginFormComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: '', redirectTo: '/inscritos', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' }
+  { path: '', redirectTo: '/leaderboard', pathMatch: 'full' },
+  { path: '**', redirectTo: '/leaderboard' }
 ];
 
 @NgModule({
