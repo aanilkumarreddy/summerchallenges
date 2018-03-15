@@ -16,8 +16,8 @@
       <div *ngIf="atleta.estado>1" class="text-container">
         <p>
           <b>¡PAGO COMPLETADO!</b>
-          <br />
-          Wods disponibles a partir del <b> 06 de marzo.</b>
+          <br /> Wods disponibles a partir del
+          <b> 06 de marzo.</b>
         </p>
       </div>
 
@@ -60,7 +60,7 @@
           <a routerLink="/edit" routerLinkActive="active" class="btn">
             EDITAR DATOS
           </a>
-          <a *ngIf="atleta.estado > 1" routerLink="/wods" routerLinkActive="active" class="btn">
+          <a *ngIf="atleta.estado > 1" routerLink="/requisitos" routerLinkActive="active" class="btn">
             VER WODS
           </a>
           <a *ngIf="atleta.estado <= 1" class="btn" disabled>

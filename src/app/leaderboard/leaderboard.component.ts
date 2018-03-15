@@ -37,6 +37,7 @@ export class LeaderboardComponent implements OnInit {
     this.af.auth.subscribe(data => {
       this.categoriasService.getCategorias().subscribe(data => {
         this.categorias = data;
+        this.categorias.pop();
         this.getAtletas_byCategoria(1);
       })
       if (data) {
@@ -88,7 +89,6 @@ export class LeaderboardComponent implements OnInit {
         // Código de redirección a login .
         // No hay datos en auth, no está logueado.
         //this.router.navigate(['/login']);
-        console.log("Estoy aqui bro");
       }
     });
   }
@@ -98,12 +98,10 @@ export class LeaderboardComponent implements OnInit {
   animateAtletasCard() {
     setTimeout(() => {
       const cardsAtletas = Array.from(document.querySelectorAll('.atleta-card'));
-      console.log(cardsAtletas);
       let timer = 100;
       cardsAtletas.forEach(card => {
         timer += 100;
         setTimeout(() => {
-          console.log("Estoy bro!")
           card.classList.add('fadeIn');
           card.classList.add('display');
         }, timer)
@@ -112,7 +110,6 @@ export class LeaderboardComponent implements OnInit {
     }, 50)
   }
   getAtletas_byCategoria(id_categoria) {
-    console.log(this.seleccion);
     let _atletas = this.atletasService.getAtletas_byCategoria(id_categoria);
     _atletas.subscribe(data => {
       this.atletas = data.filter(
@@ -144,6 +141,7 @@ export class LeaderboardComponent implements OnInit {
     // Ordernar por wod_2
     this.atletas.forEach(atleta => {
       atleta.wod_1b.puntuacion = parseInt(atleta.wod_1b.puntuacion);
+      console.log(atleta);
     });
 
     this.atletas.sort(
@@ -182,7 +180,6 @@ export class LeaderboardComponent implements OnInit {
   orderBy_wod1() {
     this.atletas.forEach(atleta => {
       if (atleta.wod_1a.kilos != 0) {
-        console.log(atleta);
       }
       atleta.wod_1a.puntuacion = parseInt(atleta.wod_1a.puntuacion);
     });
