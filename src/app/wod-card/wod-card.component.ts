@@ -6,7 +6,6 @@ import { WodsService } from "../wods/wods.service";
 import { DomAdapter } from "@angular/platform-browser/src/dom/dom_adapter";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AtletasService } from "../atletas/atletas.service";
-import { AtletaService } from "../atleta/atleta.service";
 import { AngularFire } from "angularfire2";
 import { SafeResourceUrl } from "@angular/platform-browser/src/security/dom_sanitization_service";
 
@@ -208,15 +207,15 @@ export class WodCardComponent implements OnInit {
     this.scoreForm = this.fb.group(this.formObject);
   }
 
-  // authAtleta(af): void {
-  //   this.af.auth.subscribe((data: any) => {
-  //     const aux_atleta = this.atletasService.getAtleta_byEmail(data.auth.email);
+  authAtleta(af): void {
+    this.af.auth.subscribe((data: any) => {
+      const aux_atleta = this.atletasService.getAtleta_byEmail(data.auth.email);
 
-  //     aux_atleta.subscribe(data => {
-  //       this.key = data[0].$key;
-  //     });
-  //   });
-  // }
+      aux_atleta.subscribe(data => {
+        this.key = data[0].$key;
+      });
+    });
+  }
 
   validarCampo(campo) {
     if (

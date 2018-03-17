@@ -47,6 +47,7 @@ import { InstagramComponent } from './instagram/instagram.component';
 import { InstagramService } from './instagram/instagram.service';
 import { PublicPanelComponent } from './public-panel/public-panel.component';
 import { RequisitosComponent } from './requisitos/requisitos.component';
+import { DniConfirmComponent } from './dni-confirm/dni-confirm.component';
 
 
 // Must export the config
@@ -83,6 +84,7 @@ export const appRoutes: Routes = [
   //{ path : 'team-scores', component : TeamScoresComponent},
   //{ path : 'countdown', redirectTo : '/login', pathMatch: 'full'},
   { path: 'reset-password-login', component: LoginFormComponent },
+  { path: 'dni-confirm', component: DniConfirmComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: '', redirectTo: '/leaderboard', pathMatch: 'full' },
   { path: '**', redirectTo: '/leaderboard' }
@@ -119,6 +121,7 @@ export const appRoutes: Routes = [
     InstagramComponent,
     PublicPanelComponent,
     RequisitosComponent,
+    DniConfirmComponent,
   ],
   imports: [
     BrowserModule,
