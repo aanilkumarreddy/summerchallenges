@@ -1,0 +1,13 @@
+/* VALIDATIONS */
+
+.form-control-invalid-alert{
+    font-size: 12px;
+    color: red;
+    font-weight: 500;
+}
+
+.form-control-invalid{
+    border: 1px solid red;
+    background: rgb(238, 170, 170);
+    color: #641313;
+}

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1" id="confirmacion">
+        <form [formGroup]="dniConfirmForm" (ngSubmit)="confirmDNI()">
+          <md-card class="example-card row bg-white">
+            <span class="btn btn-block">
+              CONFIRME SU DNI
+            </span>
+            <hr />
+            <md-card-content class="col col-md-12">
+  
+              <!-- DNI -->
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="material-icons">perm_identity</i>
+                </span>
+                <input type="text" maxlength="9" formControlName="dni" class="form-control" [ngClass]="{'form-control-invalid': validarCampo('dni')}" placeholder="Introduce tu DNI" aria-describedby="basic-addon1">
+                <span class="form-control-invalid-alert" *ngIf="validarCampo('dni')">(*) Se requiere DNI válido</span>
+                <span class="form-control-invalid-alert" *ngIf="error=='DNI no registrado'">(*) DNI no registrado</span>
+              </div>
+
+              <!-- SUBMIT -->
+              <input type="submit" class="btn btn-block" [disabled]="!dniConfirmForm.valid" value="ENTRAR">
+  
+            </md-card-content>
+          </md-card>
+        </form>
+      </div>
+    </div>
+  </div>
