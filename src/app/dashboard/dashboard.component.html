@@ -1,7 +1,7 @@
 <div *ngIf="atleta" class="container-fluid" id="dashboard">
   <div class="container">
 
-    <div class="message-container">
+    <!-- <div class="message-container">
       <div class="icon-container">
         <i class="material-icons">error</i>
       </div>
@@ -34,6 +34,22 @@
         </span>
 
       </div>
+
+      
+    </div> -->
+
+    <!-- *ngIf="atleta.estado===3" [TODO]-->
+    <div class="msg-container">
+      <div class="msg-card">
+        <p>
+          <b>¡Enhorabuena te has clasificado para la SummerChallenge!</b>
+          <br /> Tienes
+          <b>hasta el 26 de marzo</b> para hacer el pago de la misma.
+        </p>
+      </div>
+      <button routerLink="/" routerLinkActive="active" class="btn btn-select on">
+        CONFIRMA ASISTENCIA
+      </button>
     </div>
 
     <div class="profile-container">
