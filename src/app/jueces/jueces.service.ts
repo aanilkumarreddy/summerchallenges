@@ -18,6 +18,10 @@ export class JuecesService {
 
   }
 
+  getJueces() {
+    return this.jueces.map(jueces => jueces);
+  }
+
   getJuez_byEmail(email: string) {
     const aux_juez = this.af.database.list('/Jueces', {
       query: {

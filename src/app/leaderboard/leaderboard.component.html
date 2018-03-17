@@ -1,5 +1,4 @@
 <div class="container leaderboard-container">
-
   <!-- Antiguo menú TODO: BORRAR
 
     <div class="container-of">
@@ -26,11 +25,17 @@
     </div>
   </div>
 
+
+
   <div class="active-categoria flex flex-center">
-    <label class="flex flex--center active" id="general" (click)="orderBy_total()">General</label>
+    <label class="flex flex--center active" (click)="orderBy_total()" id="general">General</label>
+
     <label class="flex flex-center" id="wod1a" (click)="orderBy_wod1()">WOD 1.A</label>
     <label class="flex flex-center" id="wod1b" (click)="orderBy_wod2()">WOD 1.B</label>
+
   </div>
+  <h2>Listado definitivo de clasificados</h2>
+
 
 
   <!-- Antiguo filter
@@ -43,8 +48,8 @@
   -->
 
   <div class="panel-container flex flex-column">
-    <div *ngFor="let atl of atletas; let i = index" class="atleta-card flex">
-      <div class="atleta flex" [ngClass]="{'unchecked': atl.estado < 2}">
+    <div *ngFor="let atl of atletas; let i = index" class="atleta-card flex" [ngClass]="{'active': i < categoria.limit && atl.puntos > 0, 'allin' : atl.estado > 2}">
+      <div class="atleta flex">
         <div class="atleta--estado flex flex-center">
           {{i+1}}
         </div>

@@ -5,6 +5,8 @@ import { AdminAtleta } from "./admin-atleta";
 import { AngularFire } from "angularfire2";
 import { Router } from "@angular/router";
 import { WodsService } from "../wods/wods.service";
+import { JuecesService } from '../jueces/jueces.service';
+import { EmailService } from '../email-service/email.service';
 
 @Component({
   selector: 'app-admin-inscripciones',
@@ -16,40 +18,48 @@ export class AdminInscripcionesComponent implements OnInit {
   private atletas;
   private atletas_nopagado;
   private atletas_pagado;
-  private auth : any;
+  private auth: any;
 
-  public lista_actual:Array<any>;
-  public lista_actual_no:Array<any>;
-  public lista_actual_si:Array<any>;
+  public lista_actual: Array<any>;
+  public lista_actual_no: Array<any>;
+  public lista_actual_si: Array<any>;
 
-  public num_inscripciones : number;
-  public num_pagados : number;
-  public num_rx : number;
-  public num_scm : number;
-  public num_scf : number;
-  public num_tm : number;
-  public num_msm : number;
-  public num_msf : number;
-  public num_tn : number;
+  public num_inscripciones: number;
+  public num_pagados: number;
+  public num_rx: number;
+  public num_scm: number;
+  public num_scf: number;
+  public num_tm: number;
+  public num_msm: number;
+  public num_msf: number;
+  public num_tn: number;
 
-  constructor(private atletasService : AtletasService,
-              private af : AngularFire,
-              private router : Router,
-              private wodsService : WodsService) {
+  constructor(private atletasService: AtletasService,
+    private af: AngularFire,
+    private router: Router,
+    private wodsService: WodsService,
+    private juecesService: JuecesService,
+    private emailService: EmailService) {
 
-  this.atletas = this.atletasService.atletas;
-  this.getAtletas();
-  this.af.auth.subscribe( (data : any) => {
-    if(data){
-      this.auth = data.auth;
-      let aux_atleta = this.atletasService.getAtleta_byEmail(this.auth.email);
-      aux_atleta.subscribe(data => {
-        data.forEach(element => {
-          const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
-          atleta_actual.subscribe(data => {
-            if(data.email != "info@gcsummerchallenge.com"){
-              this.router.navigate(['/login']);
-            }
+    this.atletas = this.atletasService.atletas;
+    this.getAtletas();
+
+    juecesService.getJueces().subscribe(data => {
+      console.log(data);
+    })
+
+
+    this.af.auth.subscribe((data: any) => {
+      if (data) {
+        this.auth = data.auth;
+        let aux_atleta = this.atletasService.getAtleta_byEmail(this.auth.email);
+        aux_atleta.subscribe(data => {
+          data.forEach(element => {
+            const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
+            atleta_actual.subscribe(data => {
+              if (data.email != "info@gcsummerchallenge.com") {
+                this.router.navigate(['/login']);
+              }
             })
           })
         });
@@ -61,35 +71,35 @@ export class AdminInscripcionesComponent implements OnInit {
   ngOnInit() {
   }
   checkCategory(id_c) {
-    if(id_c == 1) {
+    if (id_c == 1) {
       return "RX Masculino";
     }
-    if(id_c == 2) {
+    if (id_c == 2) {
       return "RX Femenino";
     }
-    if(id_c == 3) {
+    if (id_c == 3) {
       return "Team Masculino";
     }
-    if(id_c == 4) {
+    if (id_c == 4) {
       return "Team Mixto";
     }
-    if(id_c == 5) {
+    if (id_c == 5) {
       return "Teeanagers";
     }
-    if(id_c == 6) {
+    if (id_c == 6) {
       return "Amateur";
     }
   }
 
   checkState(estado) {
-    if(estado > 1){
+    if (estado > 1) {
       return "on";
     }
     return "of";
   }
 
-  getAtletas(){
-    this.atletas.subscribe(atletas =>{
+  getAtletas() {
+    this.atletas.subscribe(atletas => {
       this.lista_actual = atletas;
       this.lista_actual.forEach(atleta => {
         atleta.cat = this.checkCategory(atleta.id_categoria);
@@ -116,31 +126,27 @@ export class AdminInscripcionesComponent implements OnInit {
     })
   }
 
-  getNumAthletes_byCategory_estatus(lista, c, e){
+  getNumAthletes_byCategory_estatus(lista, c, e) {
     return lista.filter(a => a.id_categoria === c && a.estado === e).length;
   }
-  getNumAthletes_byCategory(lista, c){
+  getNumAthletes_byCategory(lista, c) {
     return lista.filter(a => a.id_categoria === c).length;
   }
 
-  getAtletasNoPagado(){
+  getAtletasNoPagado() {
     this.atletas
   }
 
-  activar(key, fecha, pedido){
-    let inscripcion = {estado : 2, fecha : fecha, id_pedido : pedido};
+  activar(key) {
+    // let inscripcion = { estado: 2, fecha: fecha, id_pedido: pedido };
     const atl = this.atletasService.getAtleta_byKey(key);
-    atl.update({ inscripcion : inscripcion });
-    let wod = {puntuacion : 0, tiempo : 0, url : 0, puesto : ""};
-    this.wodsService.update_wod1(key, wod);
-    this.wodsService.update_wod2(key, wod);
-    this.wodsService.update_puntos(key, 0);
+    atl.update({ estado: 3 });
   }
 
-  desactivar(key, fecha, pedido){
-    let inscripcion = {estado : 1, fecha : fecha, id_pedido : pedido};
+  desactivar(key, fecha, pedido) {
+    let inscripcion = { estado: 1, fecha: fecha, id_pedido: pedido };
     const atl = this.atletasService.getAtleta_byKey(key);
-    atl.update({ inscripcion : inscripcion });
+    atl.update({ inscripcion: inscripcion });
   }
 
 }

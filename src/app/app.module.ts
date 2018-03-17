@@ -76,7 +76,7 @@ export const appRoutes: Routes = [
   //{ path: 'countdown', component: LoginComponent},
   //{ path : 'public-wods', component : PublicWodsComponent},
   { path: 'leaderboard', component: LeaderboardComponent },
-  { path: 'instagram', component: InstagramComponent },
+  // { path: 'instagram', component: InstagramComponent },
   // { path : 'public-leaderboard', component : PublicLeaderboardComponent},
   { path: 'admin', component: AdminInscripcionesComponent },
   // { path : 'admin-leaderboard', component : AdminLeaderboardComponent},

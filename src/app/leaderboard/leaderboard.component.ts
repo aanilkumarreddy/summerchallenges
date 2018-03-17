@@ -38,7 +38,10 @@ export class LeaderboardComponent implements OnInit {
       this.categoriasService.getCategorias().subscribe(data => {
         this.categorias = data;
         this.categorias.pop();
-        this.getAtletas_byCategoria(1);
+
+        setTimeout(() => {
+          this.getAtletas_byCategoria(1);
+        }, 400);
       })
       if (data) {
         this.auth = data.auth;
@@ -124,11 +127,12 @@ export class LeaderboardComponent implements OnInit {
     this.categorias.forEach(cat => {
       if (cat.c_id == id_categoria) {
         cat.estado = "on";
+        this.categoria = cat;
       } else {
         cat.estado = "";
       }
     })
-
+    console.log(this.categoria);
   }
 
   orderBy_inscritos() {
@@ -141,7 +145,6 @@ export class LeaderboardComponent implements OnInit {
     // Ordernar por wod_2
     this.atletas.forEach(atleta => {
       atleta.wod_1b.puntuacion = parseInt(atleta.wod_1b.puntuacion);
-      console.log(atleta);
     });
 
     this.atletas.sort(
@@ -164,7 +167,6 @@ export class LeaderboardComponent implements OnInit {
         atleta.wod_1b.puesto = "-";
       }
     });
-
     this.seleccion = 'wod1b';
     let label = document.querySelector('#wod1b');
     this.resetLabels();
@@ -203,7 +205,6 @@ export class LeaderboardComponent implements OnInit {
         atleta.wod_1a.puesto = "-";
       }
     });
-
     this.seleccion = "wod1a";
     let label = document.querySelector('#wod1a');
     this.resetLabels();

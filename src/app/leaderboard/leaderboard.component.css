@@ -216,9 +216,16 @@ button.btn-select.on {
     color: #efefef;
     font-weight: 800;
     opacity: 0;
+    transition: all 200ms;
 }
 .atleta-card.display {
+    opacity: 0.3;
+}
+.atleta-card.display.active {
     opacity: 1;
+}
+.atleta-card.display.active.allin {
+    background-color: #F2A634;
 }
 .unchecked {
     opacity: 0.5;
