@@ -22,7 +22,7 @@
       </div>
 
       <div class="actions-container" *ngIf="atleta.estado<2">
-        <button (click)="openCheckout()" class="btn" *ngIf="payProgress=='notInitiated'">PAGAR INSCRIPCIÓN</button>
+        
         <span class="btn btn-cancel" *ngIf="payError=='error'">NO SE HA PODIDO REALIZAR EL PAGO</span>
 
         <div class="spinner-container" *ngIf="payProgress=='inProgress'">
@@ -51,6 +51,8 @@
         CONFIRMA ASISTENCIA
       </button>
     </div>
+
+    <button (click)="openCheckout()" class="btn" *ngIf="payProgress=='notInitiated'"> </button>
 
     <div class="profile-container">
       <div class="decorador">

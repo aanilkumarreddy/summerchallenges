@@ -7,6 +7,7 @@ import { CategoriasService } from "./categorias/categorias.service";
 import { AtletasService } from "./atletas/atletas.service";
 import { RouterModule, Routes, Router } from '@angular/router';
 import { WodsService } from "./wods/wods.service";
+import { loadedAtleta } from "./models/loaded-atleta";
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ export class AppComponent {
                private atletasService : AtletasService,
                public wodsService : WodsService,
                private router : Router) {
+
     //Nos subscribimos y cargamos los datos de auth
     this.af.auth.subscribe( (data : any) => {
       if(data){
@@ -38,9 +40,11 @@ export class AppComponent {
             const atleta_actual = this.atletasService.getAtleta_byKey(element.$key);
             atleta_actual.subscribe(data => {
               this.atleta = data;
+              loadedAtleta.loadAtleta(data);
               this.key = data.$key;
               this.atletasService.setAtletaActual(this.key);
               this.categoriasService.setCategoriaActual(data.id_categoria);
+              
               
             })
           });

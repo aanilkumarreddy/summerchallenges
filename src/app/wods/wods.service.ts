@@ -7,6 +7,7 @@ import {
 } from "angularfire2";
 import { AuthService } from "../auth/auth.service";
 import { AtletasService } from "../atletas/atletas.service";
+// import { loadedAtleta } from "./models/loaded-atleta";
 
 @Injectable()
 export class WodsService {

@@ -163,8 +163,8 @@ export class DashboardComponent implements OnInit {
     let u_price:number;
 
     // TODO: REFACTORIZAR
-    if(this.atleta.id_categoria == 3 || this.atleta.id_categoria == 4) u_price = 3210;
-    else u_price = 1605;
+    if(this.atleta.id_categoria == 3 || this.atleta.id_categoria == 4) u_price = 9095;
+    else u_price = 4815;
 
     var handler = (<any>window).StripeCheckout.configure({
       key: l_key,
