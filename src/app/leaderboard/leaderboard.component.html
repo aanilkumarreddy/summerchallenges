@@ -1,9 +1,8 @@
-<div *ngIf="atleta" class="container leaderboard-container">
-  <h2>LEADERBOARD {{aux_categoria}} </h2>
-  <p class="info"> La clasificación es suceptible de contener errores de automatización.
-    La clasificación definitiva será publicada una vez se haya finalizado el plazo
-    para entregar los WORKOUT. </p>
-  <div class="container-of">
+<div class="container leaderboard-container">
+
+  <!-- Antiguo menú TODO: BORRAR
+
+    <div class="container-of">
     <div class="boton-container">
       <button class="btn" (click)="getAtletas_byCategoria(atleta.id_categoria)"> Ver mi categoría </button>
       <button class="btn" (click)="getAtletas_byCategoria(1)"> RX Masculino </button>
@@ -17,13 +16,57 @@
     </div>
   </div>
 
-    <div *ngIf="atletas" class="orderBy">
-      <span> ORDERNAR POR: </span>
-      <button class="btn" (click)="orderBy_inscritos()"> INSCRITOS </button>
-      <button class="btn" (click)="orderBy_total()"> PUNTOS </button>
-      <button class="btn" (click)="orderBy_wod1()"> WOD 1 </button>
-      <button class="btn" (click)="orderBy_wod2()"> WOD 2 </button>
+  -->
+
+  <div class="menu-container flex flex-center">
+    <div class="options flex flex-wraper">
+      <button *ngFor="let cat of categorias" (click)="getAtletas_byCategoria(cat.c_id)" class="btn btn-select {{cat.estado}}">
+        {{cat.nombre}}
+      </button>
     </div>
+  </div>
+
+  <div class="active-categoria flex flex-center">
+    <label class="flex flex--center active" id="general" (click)="orderBy_total()">General</label>
+    <label class="flex flex-center" id="wod1a" (click)="orderBy_wod1()">WOD 1.A</label>
+    <label class="flex flex-center" id="wod1b" (click)="orderBy_wod2()">WOD 1.B</label>
+  </div>
+
+
+  <!-- Antiguo filter
+  <div *ngIf="atletas" class="orderBy">
+    <span> ORDERNAR POR: </span>
+    <button class="btn" (click)="orderBy_total()"> PUNTOS </button>
+    <button class="btn" (click)="orderBy_wod1()"> WOD 1 </button>
+    <button class="btn" (click)="orderBy_wod2()"> WOD 2 </button>
+  </div>
+  -->
+
+  <div class="panel-container flex flex-column">
+    <div *ngFor="let atl of atletas; let i = index" class="atleta-card flex">
+      <div class="atleta flex" [ngClass]="{'unchecked': atl.estado < 2}">
+        <div class="atleta--estado flex flex-center">
+          {{i+1}}
+        </div>
+        <div class="atleta--datos flex flex-column">
+          <div class="atleta--nombre">
+            {{atl.nombre}}
+          </div>
+        </div>
+        <div *ngIf="seleccion == 'wod1a'" class="atleta--posicion flex flex-center">
+          {{atl.wod_1a.puesto}} ({{atl.wod_1a.puntuacion}})
+        </div>
+        <div *ngIf="seleccion == 'wod1b'" class="atleta--posicion flex flex-center">
+          {{atl.wod_1b.puesto}} ({{atl.wod_1b.puntuacion}})
+        </div>
+        <div *ngIf="seleccion == 'general'" class="atleta--posicion flex flex-center">
+          {{atl.puntos}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Antigua clasificación
   <table *ngIf="atletas">
     <tr>
       <td id="pos"> POS </td>
@@ -36,16 +79,22 @@
       <td id="pos"> {{i+1}} </td>
       <td id="name">
         <b>{{atleta.nombre}}</b>
-        <span>{{atleta.box||"Independiente"}} - {{atleta.$key}}</span></td>
+        <span>{{atleta.box||"Independiente"}} - {{atleta.$key}}</span>
+      </td>
       <td id="score" class="score puntos">{{atleta.puntos || 0}}</td>
       <td id="score" class="score wod1">
-        <div *ngIf="atleta.wod_1">{{atleta.wod_1.puesto || 0}} <br /> ({{atleta.wod_1.puntuacion || 0}})</div>
-        <div *ngIf="!atleta.wod_1">0 <br/> (0)</div>
+        <div *ngIf="atleta.wod_1">{{atleta.wod_1a.puesto || 0}}
+          <br /> ({{atleta.wod_1a.puntuacion || 0}})</div>
+        <div *ngIf="!atleta.wod_1">0
+          <br/> (0)</div>
       </td>
       <td id="score" class="score wod2">
-        <div *ngIf="atleta.wod_2">{{atleta.wod_2.puesto || 0}} <br /> ({{atleta.wod_2.puntuacion || 0}})</div>
-        <div *ngIf="!atleta.wod_2">0 <br/> (0)</div>
+        <div *ngIf="atleta.wod_2">{{atleta.wod_1b.puesto || 0}}
+          <br /> ({{atleta.wod_1b.puntuacion || 0}})</div>
+        <div *ngIf="!atleta.wod_2">0
+          <br/> (0)</div>
       </td>
   </table>
+  -->
 
 </div>

@@ -62,20 +62,20 @@ export const firebaseConfig = {
 export const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
-  //{ path: 'registro', component: RegistroComponent },
-  //{ path: 'registro-individual', component: RegistroIndividualComponent },
-  //{ path: 'registro-team', component: RegistroTeamComponent },
+  { path: 'registro', component: RegistroComponent },
+  { path: 'registro-individual', component: RegistroIndividualComponent },
+  { path: 'registro-team', component: RegistroTeamComponent },
   { path: 'registro-juez', component: RegistroJuezComponent },
   { path: 'registro-voluntario', component: RegistroVoluntarioComponent },
   { path: 'confirmacion', component: InscripcionComponent },
-  { path: 'edit', component: EditComponent },
+  // { path: 'edit', component: EditComponent },
   { path: 'wods', component: WodsComponent },
   { path: 'public-panel', redirectTo: '/inscritos', pathMatch: 'full' },
-  { path: 'inscritos', component: PublicPanelComponent },
+  { path: 'inscritos', redirectTo: '/leaderboard', pathMatch: 'full' },
   { path: 'requisitos', component: RequisitosComponent },
   //{ path: 'countdown', component: LoginComponent},
   //{ path : 'public-wods', component : PublicWodsComponent},
-  // { path : 'leaderboard', component: LeaderboardComponent},
+  { path: 'leaderboard', component: LeaderboardComponent },
   { path: 'instagram', component: InstagramComponent },
   // { path : 'public-leaderboard', component : PublicLeaderboardComponent},
   { path: 'admin', component: AdminInscripcionesComponent },
@@ -84,8 +84,8 @@ export const appRoutes: Routes = [
   //{ path : 'countdown', redirectTo : '/login', pathMatch: 'full'},
   { path: 'reset-password-login', component: LoginFormComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: '', redirectTo: '/inscritos', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' }
+  { path: '', redirectTo: '/leaderboard', pathMatch: 'full' },
+  { path: '**', redirectTo: '/leaderboard' }
 ];
 
 @NgModule({

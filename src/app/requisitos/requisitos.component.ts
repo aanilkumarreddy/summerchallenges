@@ -32,13 +32,11 @@ export class RequisitosComponent implements OnInit {
   ) {
     categoriasService.getCategorias().subscribe(data => {
       this.categorias = data;
-      console.log(data[0]);
       this.categoria_actual = data[0];
     })
 
     wodService.getWods().subscribe(data => {
       this.wods = data;
-      console.log(data);
       this.wod_actual = data[0];
     })
 

@@ -109,7 +109,6 @@ export class WodsComponent {
   }
 
   getWodsAcrossCategories(data) {
-    console.log(data);
 
     this.categoriasService.getCategoria(data.id_categoria).subscribe(c_data => {
       c_data.forEach(element => {

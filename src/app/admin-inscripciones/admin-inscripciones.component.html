@@ -55,11 +55,12 @@
         {{atleta.email}}
       </div>
       <div class="atleta--categoria">
-        {{atleta.cat}}
+        {{atleta.cat}} - {{atleta.$key}}
       </div>
     </div>
     <div class="flex flex-center atleta--estado estado--{{atleta.state}}">
       <i class="fas fa-check"></i>
+      <a target="_blank" href="https://gcsummerchallenge.com/api/email/deadline/{{atleta.$key}}"> Enviar email </a>
     </div>
   </div>
 </div>
