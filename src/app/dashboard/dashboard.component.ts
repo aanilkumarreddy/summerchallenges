@@ -212,7 +212,7 @@ export class DashboardComponent implements OnInit {
       allowRememberMe: false,
       email: u_email,
       closed: () => {
-        if(entorno.atleta.estado < 2) entorno.payProgress = "notInitiated";
+        if(entorno.atleta.estado < 5) entorno.payProgress = "notInitiated";
       },
     });
   }

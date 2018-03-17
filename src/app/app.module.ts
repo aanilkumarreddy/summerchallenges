@@ -84,7 +84,6 @@ export const appRoutes: Routes = [
   //{ path : 'team-scores', component : TeamScoresComponent},
   //{ path : 'countdown', redirectTo : '/login', pathMatch: 'full'},
   { path: 'reset-password-login', component: LoginFormComponent },
-  { path: 'dni-confirm', component: DniConfirmComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: '', redirectTo: '/leaderboard', pathMatch: 'full' },
   { path: '**', redirectTo: '/leaderboard' }

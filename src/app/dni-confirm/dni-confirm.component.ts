@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AtletasService } from "../atletas/atletas.service";
 import { AngularFire } from "angularfire2";
@@ -9,6 +9,8 @@ import { AngularFire } from "angularfire2";
   styleUrls: ["./dni-confirm.component.css"]
 })
 export class DniConfirmComponent implements OnInit {
+  @Output() pago = new EventEmitter;
+
   public dniConfirmForm: FormGroup;
   public dniRegularExpression = /^[XYZxyz]?\d{7,8}[a-zA-Z]$/;
   public emptyField = false;
@@ -32,6 +34,10 @@ export class DniConfirmComponent implements OnInit {
 
   ngOnInit() {
     this.authAtleta();
+  }
+
+  pagoClick(){
+    this.pago.emit(true);
   }
 
   validarCampo(campo) {
@@ -60,7 +66,8 @@ export class DniConfirmComponent implements OnInit {
     let promptDNI = this.dniConfirmForm.value.dni.toLowerCase();
     let atletaDNI = this.atleta.dni.toLowerCase();
     if (atletaDNI === promptDNI) {
-      alert('LANZAMOS STRIPE');
+      const atl = this.atletasService.getAtleta_byKey(this.atleta.$key);
+      atl.update({ estado: 4 });
     }
   }
 }

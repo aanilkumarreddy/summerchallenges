@@ -39,8 +39,8 @@
     </div> -->
 
     <!-- *ngIf="atleta.estado===3" [TODO]-->
-    
-    <div class="msg-container">
+
+    <div class="msg-container" *ngIf="atleta.estado===3 && !dniConfirm">
       <div class="msg-card">
         <p>
           <b>¡Enhorabuena te has clasificado para la SummerChallenge!</b>
@@ -48,12 +48,29 @@
           <b>hasta el 26 de marzo</b> para hacer el pago de la misma.
         </p>
       </div>
-      <button routerLink="/dni-confirm" routerLinkActive="active" class="btn btn-select on">
+
+      <button (click)="dniConfirm = true" class="btn btn-select on">
         CONFIRMA ASISTENCIA
       </button>
     </div>
 
-    <button (click)="openCheckout()" class="btn" *ngIf="payProgress=='notInitiated'"> </button>
+    <app-dni-confirm *ngIf="dniConfirm" (pago)="openCheckout($event)"></app-dni-confirm>
+
+
+    <div class="actions-container">
+      <button (click)="openCheckout()" class="btn btn-select on" *ngIf="payProgress=='notInitiated' && atleta.estado===4">PAGAR INSCRIPCIÓN</button>
+
+      <span class="btn btn-cancel" *ngIf="payError=='error'">NO SE HA PODIDO REALIZAR EL PAGO</span>
+
+      <div class="spinner-container" *ngIf="payProgress=='inProgress'">
+        <div class="load-spinner"></div>
+      </div>
+
+      <span *ngIf="payProgress=='finished'">
+        Pago realizado. Revise el correo.
+      </span>
+
+    </div>
 
     <div class="profile-container">
       <div class="decorador">
