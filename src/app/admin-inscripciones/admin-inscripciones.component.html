@@ -3,13 +3,17 @@
     <button routerLink="/admin-leaderboard" roterLinkActive="active"> ADMIN LEADERBOARD </button>
   -->
   <div class="num-container" *ngIf="num_inscripciones">
-    <div class="num-panel">
+    <div class="num-panel" (click)="getAtletas()">
       <span class="title">INSCRIPCIONES </span>
       <span class="data">{{num_inscripciones}}</span>
     </div>
     <div class="num-panel">
       <span class="title"> PAGADAS </span>
       <span class="data">{{num_pagados}}</span>
+    </div>
+    <div class="num-panel" *ngIf="jueces" (click)="getJueces()">
+      <span class="title"> Jueces </span>
+      <span class="data">{{jueces.length}}</span>
     </div>
   </div>
 
@@ -49,7 +53,8 @@
   <div class="atleta flex" *ngFor="let atleta of lista_actual">
     <div class="atleta--data flex flex-column">
       <div class="atleta--name">
-        {{atleta.nombre}}
+        {{atleta.nombre || atleta.name}} -
+        <a target="_blank" href="http://gcsummerchallenge.com/api/email/deadline/{{atleta.$key}}"> Enviar email </a>
       </div>
       <div class="atleta--email flex flex-wrap">
         {{atleta.email}}

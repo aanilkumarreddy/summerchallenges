@@ -129,10 +129,11 @@ b {
 }
 .message-container .actions-container {
   flex: 1;
+  background: transparent;
 }
-.message-container .actions-container .btn {
-  /*width: 100%;*/
+.message-container .actions-container .btn, .actions-container .btn {
   width: 100%;
+  margin: 12px 0px;
 }
 .team-modal {
   width: 100%;
@@ -283,12 +284,24 @@ button.btn-select.on {
 }
 .msg-card {
     margin: 8px 0px;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: 200;
     background-color: #009c9c;
     border-radius: 3px;
     width: 100%;
     color: #efefef;
-    font-weight: 800;
+}
+.msg-card p, .msg-card h3 {
+  margin: 0px;
+  padding: 12px 24px;
+  text-align: center;
+  width: 100%;
+}
+.msg-card p {
+  background-color: #ffffff20;
+}
+.msg-card h3 {
+  border-bottom: 1px solid #00000010;
 }
 
 @media (max-width: 768px) {
@@ -335,7 +348,6 @@ button.btn-select.on {
   .actions-container {
     flex: 1;
     width: 100%;
-    background-color: rgba(244, 244, 244, 0.9);
   }
   .profile-container {
     flex-direction: column;

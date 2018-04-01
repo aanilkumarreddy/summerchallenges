@@ -34,6 +34,8 @@ export class AdminInscripcionesComponent implements OnInit {
   public num_msf: number;
   public num_tn: number;
 
+  public jueces: any;
+
   constructor(private atletasService: AtletasService,
     private af: AngularFire,
     private router: Router,
@@ -45,7 +47,7 @@ export class AdminInscripcionesComponent implements OnInit {
     this.getAtletas();
 
     juecesService.getJueces().subscribe(data => {
-      console.log(data);
+      this.jueces = data;
     })
 
 
@@ -126,8 +128,17 @@ export class AdminInscripcionesComponent implements OnInit {
     })
   }
 
+  getJueces() {
+    let printJuez = "(" + this.jueces.length + ")";
+    this.jueces.forEach(juez => {
+      printJuez += " - " + juez.name;
+    })
+    console.log(printJuez);
+    this.lista_actual = this.jueces;
+  }
+
   getNumAthletes_byCategory_estatus(lista, c, e) {
-    return lista.filter(a => a.id_categoria === c && a.estado === e).length;
+    return lista.filter(a => a.id_categoria === c && a.estado > 1).length;
   }
   getNumAthletes_byCategory(lista, c) {
     return lista.filter(a => a.id_categoria === c).length;

@@ -83,13 +83,6 @@
     <a> Ver Inscritos </a>
   </div>
 -->
-  <div routerLink="/dashboard" routerLinkActive="active" class="option flex flex-column flex-center">
-    <div class="option--icon">
-      <i class="fas fa-home"></i>
-    </div>
-    <div class="option--text">Home</div>
-  </div>
-
   <!--
   <div routerLink="/wods" routerLinkActive="active" class="option flex flex-column flex-center">
     <div class="option--icon">
@@ -104,17 +97,26 @@
     </div>
     <div class="option--text">Wods</div>
   </div>
-  <div routerLink="/registro" routerLinkActive="active" class="option flex flex-column flex-center">
-    <div class="option--icon">
-      <i class="fas fa-edit"></i>
-    </div>
-    <div class="option--text">Únete</div>
-  </div>
-  <div routerLink="/leaderboard" routerLinkActive="active" class="option flex flex-column flex-center">
+  <div routerLink="/dashboard" routerLinkActive="active" class="option flex flex-column flex-center">
     <div class="option--icon">
       <i class="fas fa-list-ol"></i>
     </div>
-    <div class="option--text">Clasificados</div>
-    <span routerLink="/leaderboard" routerLinkActive="active" class="flotante _pulse">¡Nuevo!</span>
+    <div class="option--text">Clasificación</div>
+    <span routerLink="/registro" routerLinkActive="active" class="flotante _pulse">¡En Directo!</span>
+  </div>
+  <div routerLink="/registro" routerLinkActive="active" class="option flex flex-column flex-center">
+    <div class="option--icon">
+      <i class="far fa-clock"></i>
+    </div>
+    <div class="option--text">Horarios</div>
+  </div>
+  <div routerLink="/leaderboard" routerLinkActive="active" class="option flex flex-column flex-center">
+    <div class="option--icon">
+      <i class="fas fa-map-marker-alt"></i>
+    </div>
+    <div class="option--text">Cómo llegar</div>
+    <!--
+      <span routerLink="/leaderboard" routerLinkActive="active" class="flotante _pulse">¡Nuevo!</span>
+    -->
   </div>
 </div>

@@ -37,7 +37,9 @@ export class LeaderboardComponent implements OnInit {
     this.af.auth.subscribe(data => {
       this.categoriasService.getCategorias().subscribe(data => {
         this.categorias = data;
-        this.categorias.pop();
+
+        /* Eliminamos la categoría Amateur */
+        //this.categorias.pop();
 
         setTimeout(() => {
           this.getAtletas_byCategoria(1);
@@ -132,7 +134,6 @@ export class LeaderboardComponent implements OnInit {
         cat.estado = "";
       }
     })
-    console.log(this.categoria);
   }
 
   orderBy_inscritos() {
@@ -167,10 +168,12 @@ export class LeaderboardComponent implements OnInit {
         atleta.wod_1b.puesto = "-";
       }
     });
+    /*
     this.seleccion = 'wod1b';
     let label = document.querySelector('#wod1b');
     this.resetLabels();
     label.classList.add('active');
+    */
   }
   resetLabels() {
     let labelsContainer = document.querySelector('.active-categoria');
@@ -205,10 +208,12 @@ export class LeaderboardComponent implements OnInit {
         atleta.wod_1a.puesto = "-";
       }
     });
+    /*
     this.seleccion = "wod1a";
     let label = document.querySelector('#wod1a');
     this.resetLabels();
     label.classList.add('active');
+    */
   }
 
   orderBy_total() {

@@ -1,28 +1,26 @@
 <div *ngIf="atleta" class="container-fluid" id="dashboard">
   <div class="container">
 
-    <!-- <div class="message-container">
-      <div class="icon-container">
-        <i class="material-icons">error</i>
-      </div>
-      <div *ngIf="atleta.estado<2" class="text-container">
-        <p>
-          <b>¡YA PUEDES FORMALIZAR TU INSCRIPCIÓN!</b>
-          <br /> Tienes
-          <b>hasta el 05 de marzo</b> para hacer el pago de la misma.
-        </p>
-      </div>
 
-      <div *ngIf="atleta.estado>1" class="text-container">
-        <p>
-          <b>¡PAGO COMPLETADO!</b>
-          <br /> Wods disponibles a partir del
-          <b> 06 de marzo.</b>
-        </p>
+      <div class="msg-container" *ngIf="atleta.id_categoria===6">
+        <div class="msg-card" *ngIf="atleta.estado < 2">
+          <h3>
+            ¡Ya puedes formalizar tu inscripción!
+          </h3>
+          <p>
+            Tienes hasta el 6 de abril para confirmar tu asistencia y realizar el pago de tu inscripción.
+          </p>
+          <p *ngIf="payProgress=='finished' || atleta.estado > 1">
+              Pago realizado con éxito. Nos pondremos en contacto contigo por email antes del evento para comunicarte las novedades que puedan seguir surgiendo y enviarte las fechas y horarios de los eventos.
+
+              <br><br> ¡Nos vemos en la arena!
+          </p>
+        </div>
       </div>
 
       <div class="actions-container" *ngIf="atleta.estado<2">
-        
+        <button (click)="openCheckout()" class="btn btn-select on" *ngIf="payProgress=='notInitiated' && atleta.estado<2">PAGAR INSCRIPCIÓN</button>
+
         <span class="btn btn-cancel" *ngIf="payError=='error'">NO SE HA PODIDO REALIZAR EL PAGO</span>
 
         <div class="spinner-container" *ngIf="payProgress=='inProgress'">
@@ -35,41 +33,60 @@
 
       </div>
 
-      
-    </div> -->
+
 
     <!-- *ngIf="atleta.estado===3" [TODO]-->
 
     <div class="msg-container" *ngIf="atleta.estado===3 && !dniConfirm">
       <div class="msg-card">
+        <h3>
+          ¡Enhorabuena!
+        </h3>
         <p>
-          <b>¡Enhorabuena te has clasificado para la SummerChallenge!</b>
-          <br /> Tienes
-          <b>hasta el 26 de marzo</b> para hacer el pago de la misma.
+          Tienes hasta el 26 de marzo para confirmar tu asistencia y realizar el pago de tu inscripción.
+        </p>
+        <p *ngIf="payProgress=='finished' || atleta.estado===5">
+            Pago realizado con éxito. Nos pondremos en contacto contigo por email antes del evento para comunicarte las novedades que puedan seguir surgiendo y enviarte las fechas y horarios de los eventos.
+
+            <br><br> ¡Nos vemos en la arena!
         </p>
       </div>
-
+      <!--
       <button (click)="dniConfirm = true" class="btn btn-select on">
         CONFIRMA ASISTENCIA
       </button>
+      -->
     </div>
+
+    <div class="msg-container" *ngIf="atleta.estado===5">
+        <div class="msg-card">
+          <h3>
+            ¡Enhorabuena!
+          </h3>
+          <p *ngIf="payProgress=='finished' || atleta.estado===5">
+              Pago realizado con éxito. Nos pondremos en contacto contigo por email antes del evento para comunicarte las novedades que puedan seguir surgiendo y enviarte las fechas y horarios de los eventos.
+
+              <br><br> ¡Nos vemos en la arena!
+          </p>
+        </div>
+        <!--
+        <button (click)="dniConfirm = true" class="btn btn-select on">
+          CONFIRMA ASISTENCIA
+        </button>
+        -->
+      </div>
 
     <app-dni-confirm *ngIf="dniConfirm" (pago)="openCheckout($event)"></app-dni-confirm>
 
 
     <div class="actions-container">
-      <button (click)="openCheckout()" class="btn btn-select on" *ngIf="payProgress=='notInitiated' && atleta.estado===4">PAGAR INSCRIPCIÓN</button>
+      <button (click)="openCheckout()" class="btn btn-select on" *ngIf="payProgress=='notInitiated' && atleta.estado===3">CONFIRMAR ASISTENCIA Y PAGAR</button>
 
       <span class="btn btn-cancel" *ngIf="payError=='error'">NO SE HA PODIDO REALIZAR EL PAGO</span>
 
       <div class="spinner-container" *ngIf="payProgress=='inProgress'">
         <div class="load-spinner"></div>
       </div>
-
-      <span *ngIf="payProgress=='finished'">
-        Pago realizado. Revise el correo.
-      </span>
-
     </div>
 
     <div class="profile-container">

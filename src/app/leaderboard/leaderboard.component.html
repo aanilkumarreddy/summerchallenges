@@ -28,10 +28,11 @@
 
 
   <div class="active-categoria flex flex-center">
-    <label class="flex flex--center active" (click)="orderBy_total()" id="general">General</label>
-
+    <label class="flex flex--center active" id="general">General</label>
+    <!--
     <label class="flex flex-center" id="wod1a" (click)="orderBy_wod1()">WOD 1.A</label>
     <label class="flex flex-center" id="wod1b" (click)="orderBy_wod2()">WOD 1.B</label>
+    -->
 
   </div>
   <h2>Listado definitivo de clasificados</h2>
@@ -48,14 +49,15 @@
   -->
 
   <div class="panel-container flex flex-column">
-    <div *ngFor="let atl of atletas; let i = index" class="atleta-card flex" [ngClass]="{'active': i < categoria.limit && atl.puntos > 0, 'allin' : atl.estado > 2}">
+    <div *ngFor="let atl of atletas; let i = index" class="atleta-card flex" [ngClass]="{'active': (i < categoria.limit && atl.puntos > 0) || atl.id_categoria == 6}">
       <div class="atleta flex">
-        <div class="atleta--estado flex flex-center">
+        <div *ngIf="atl.id_categoria != 6" class="atleta--estado flex flex-center">
           {{i+1}}
         </div>
         <div class="atleta--datos flex flex-column">
           <div class="atleta--nombre">
-            {{atl.nombre}}
+            {{atl.nombre}} ({{atl.email}})
+            <span *ngIf="atl.estado > 4"> PAGADO</span>
           </div>
         </div>
         <div *ngIf="seleccion == 'wod1a'" class="atleta--posicion flex flex-center">

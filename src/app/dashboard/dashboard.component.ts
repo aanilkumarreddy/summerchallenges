@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   isTeam(atleta) {
     return atleta.id_categoria == 4 ? true : false;
@@ -160,18 +160,19 @@ export class DashboardComponent implements OnInit {
     let l_key = "pk_live_T4dafQ7HHy8YiyaOt9lrr1fI";
     let u_key = this.atleta.$key;
     let u_email = this.atleta.email;
-    let u_price:number;
+    let u_price: number;
 
     // TODO: REFACTORIZAR
-    if(this.atleta.id_categoria == 3 || this.atleta.id_categoria == 4) u_price = 9095;
-    else u_price = 4815;
+    u_price = 1605;
+    if (this.atleta.id_categoria == 3 || this.atleta.id_categoria == 4) u_price = 7490;
+    if (this.atleta.id_categoria == 1 || this.atleta.id_categoria == 2 || this.atleta.id_categoria == 5) u_price = 4815;
 
     var handler = (<any>window).StripeCheckout.configure({
       key: l_key,
       locale: "auto",
-      token: function(token: any, payProgres: any) {
+      token: function (token: any, payProgres: any) {
         // Enviamos los datos necesarios para gestionar el pago en la API
-        if(entorno.atleta.id_categoria == 3 || entorno.atleta.id_categoria == 4){
+        if (entorno.atleta.id_categoria == 3 || entorno.atleta.id_categoria == 4) {
           redsys.stripeTeam(token.id, u_key).subscribe(
             data => {
               entorno.payProgress = "finished";
@@ -184,7 +185,7 @@ export class DashboardComponent implements OnInit {
             }
           );
         }
-        else{
+        else {
           redsys.stripeData(token.id, u_key).subscribe(
             data => {
               entorno.payProgress = "finished";
@@ -212,7 +213,7 @@ export class DashboardComponent implements OnInit {
       allowRememberMe: false,
       email: u_email,
       closed: () => {
-        if(entorno.atleta.estado < 5) entorno.payProgress = "notInitiated";
+        if (entorno.atleta.estado < 5) entorno.payProgress = "notInitiated";
       },
     });
   }
