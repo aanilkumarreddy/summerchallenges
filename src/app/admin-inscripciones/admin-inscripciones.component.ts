@@ -7,6 +7,7 @@ import { Router } from "@angular/router";
 import { WodsService } from "../wods/wods.service";
 import { JuecesService } from '../jueces/jueces.service';
 import { EmailService } from '../email-service/email.service';
+import { VoluntariosService } from '../voluntarios/voluntarios.service';
 
 @Component({
   selector: 'app-admin-inscripciones',
@@ -41,13 +42,33 @@ export class AdminInscripcionesComponent implements OnInit {
     private router: Router,
     private wodsService: WodsService,
     private juecesService: JuecesService,
+    private voluntariosService: VoluntariosService,
     private emailService: EmailService) {
+
+
+
 
     this.atletas = this.atletasService.atletas;
     this.getAtletas();
 
+    voluntariosService.getVoluntarios().subscribe(data => {
+      data.forEach(juez => {
+        console.log(juez);
+        /*this.emailService.send('voluntario', juez.$key)
+          .subscribe(_data => {
+            console.log(juez.$key, _data);
+          })*/
+      })
+    })
+
     juecesService.getJueces().subscribe(data => {
-      this.jueces = data;
+      data.forEach(voluntario => {
+        console.log(voluntario);
+        /*this.emailService.send('juez', voluntario.$key)
+          .subscribe(_data => {
+            console.log(voluntario.$key, _data);
+          })*/
+      })
     })
 
 
@@ -104,6 +125,12 @@ export class AdminInscripcionesComponent implements OnInit {
     this.atletas.subscribe(atletas => {
       this.lista_actual = atletas;
       this.lista_actual.forEach(atleta => {
+        /*if (atleta.estado > 4 || atleta.id_categoria == 6) {
+          this.emailService.send('deadline', atleta.$key)
+            .subscribe(data => {
+              console.log(atleta.nombre, data);
+            })
+        }*/
         atleta.cat = this.checkCategory(atleta.id_categoria);
         atleta.state = this.checkState(atleta.estado);
       })
@@ -112,16 +139,16 @@ export class AdminInscripcionesComponent implements OnInit {
       })
       this.num_inscripciones = this.lista_actual.length;
       this.lista_actual_no = this.lista_actual.filter(atleta => atleta.estado === 1);
-      this.lista_actual_si = this.lista_actual.filter(atleta => atleta.estado === 2);
+      this.lista_actual_si = this.lista_actual.filter(atleta => atleta.estado === 5);
       this.num_pagados = this.lista_actual_si.length;
 
       /* INTENTAR MEJORAR ESTA PARTE DEL CÓDIGO, QUE REALICE UN FOREACH EN LAS CATEGORIAS Y SAQUE LOS DATOS EN UNA SOLA LÍNEA*/
-      this.num_rx = this.getNumAthletes_byCategory_estatus(this.lista_actual, 1, 2);
-      this.num_scm = this.getNumAthletes_byCategory_estatus(this.lista_actual, 2, 2);
-      this.num_scf = this.getNumAthletes_byCategory_estatus(this.lista_actual, 3, 2);
-      this.num_tm = this.getNumAthletes_byCategory_estatus(this.lista_actual, 4, 2);
-      this.num_msm = this.getNumAthletes_byCategory_estatus(this.lista_actual, 5, 2);
-      this.num_msf = this.getNumAthletes_byCategory_estatus(this.lista_actual, 6, 2);
+      this.num_rx = this.getNumAthletes_byCategory_estatus(this.lista_actual, 1, 5);
+      this.num_scm = this.getNumAthletes_byCategory_estatus(this.lista_actual, 2, 5);
+      this.num_scf = this.getNumAthletes_byCategory_estatus(this.lista_actual, 3, 5);
+      this.num_tm = this.getNumAthletes_byCategory_estatus(this.lista_actual, 4, 5);
+      this.num_msm = this.getNumAthletes_byCategory_estatus(this.lista_actual, 5, 5);
+      this.num_msf = this.getNumAthletes_byCategory_estatus(this.lista_actual, 6, 5);
       this.num_tn = this.getNumAthletes_byCategory_estatus(this.lista_actual, 7, 2);
       /* HASTA AQUÍ */
 
@@ -138,7 +165,7 @@ export class AdminInscripcionesComponent implements OnInit {
   }
 
   getNumAthletes_byCategory_estatus(lista, c, e) {
-    return lista.filter(a => a.id_categoria === c && a.estado > 1).length;
+    return lista.filter(a => a.id_categoria === c && a.estado === e).length;
   }
   getNumAthletes_byCategory(lista, c) {
     return lista.filter(a => a.id_categoria === c).length;
