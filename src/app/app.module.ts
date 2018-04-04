@@ -48,6 +48,7 @@ import { InstagramService } from './instagram/instagram.service';
 import { PublicPanelComponent } from './public-panel/public-panel.component';
 import { RequisitosComponent } from './requisitos/requisitos.component';
 import { DniConfirmComponent } from './dni-confirm/dni-confirm.component';
+import { OrdenarPuestosService } from "./ordenar-puestos.service";
 
 
 // Must export the config
@@ -143,7 +144,8 @@ export const appRoutes: Routes = [
     WodsService,
     RedSysAPIService,
     EmailService,
-    InstagramService
+    InstagramService,
+    OrdenarPuestosService
   ],
   bootstrap: [AppComponent]
 })
