@@ -7,6 +7,7 @@ import { Atleta } from "../atleta/atleta";
 import { AtletasService } from "../atletas/atletas.service";
 import { CategoriasService } from "../categorias/categorias.service";
 import { WodsService } from "../wods/wods.service";
+import { OrdenarPuestosService } from "../ordenar-puestos.service";
 
 @Component({
   selector: "app-leaderboard",
@@ -32,8 +33,10 @@ export class LeaderboardComponent implements OnInit {
     private route: ActivatedRoute,
     private atletasService: AtletasService,
     private categoriasService: CategoriasService,
-    private wodsService: WodsService
+    private wodsService: WodsService,
+    private ordenarPuesto: OrdenarPuestosService
   ) {
+    ordenarPuesto.getPayedAtletas();
     this.af.auth.subscribe(data => {
       this.categoriasService.getCategorias().subscribe(data => {
         this.categorias = data;
