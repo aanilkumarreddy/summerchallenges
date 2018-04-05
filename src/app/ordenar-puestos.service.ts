@@ -7,6 +7,7 @@ import * as _ from "lodash";
 export class OrdenarPuestosService {
   public atletas;
   public aux_atletas;
+  public KEY_SUPERFALSA = 0;
 
   constructor(private atletasService: AtletasService) {}
 
@@ -14,24 +15,66 @@ export class OrdenarPuestosService {
     let atletasSubscribe = this.atletasService
       .getAtletas()
       .subscribe((data: any) => {
-
-
         this.atletas = data.filter(atleta => atleta.estado === 5);
-        let prueba = this.orderByTotalScore([
-          { wods: { totalScore: 14, totalRanking: 0 } },
-          { wods: { totalScore: 15, totalRanking: 0 } },
-          { wods: { totalScore: 20, totalRanking: 0 } },
-          { wods: { totalScore: 15, totalRanking: 0 } },
-        ])
-        this.addRankig(prueba);
 
+        // PRUEBAS MOCKS
+        let atletasPrueba = [
+          this.createMockAtletaWod(25, "asc", 120, 100, 10),
+          this.createMockAtletaWod(22, "asc", 120, 100, 59),
+          this.createMockAtletaWod(15, "asc", 120, 100, 94),
+          this.createMockAtletaWod(22, "asc", 125, 100, 70),
+          this.createMockAtletaWod(22, "asc", 125, 100, 101),
+          this.createMockAtletaWod(22, "asc", 128, 100, 101),
+          this.createMockAtletaWod(22, "asc", 119, 100, 102),
+          this.createMockAtletaWod(10, "asc", 120, 100, 102),
+          this.createMockAtletaWod(19, "asc", 120, 100, 103),
+          this.createMockAtletaWod(12, "asc", 120, 100, 105),
+          this.createMockAtletaWod(18, "asc", 120, 100, 101)
+        ];
 
+        let atletasOrdenadosPorTotalScore = this.orderByTotalScore(
+          atletasPrueba
+        );
+        let rankeados = this.addRankig(atletasOrdenadosPorTotalScore);
+        let rankeadosSoloDesempatados = this.tieBreakScore(rankeados);
+        let rankeadosDefinitivos = this.insertTieBreakAtletas(
+          rankeadosSoloDesempatados,
+          rankeados
+        );
 
+        console.log("rankeadosDefinitivos", rankeadosDefinitivos);
 
         // Funcion forEach que recorra un arr con todas las categorias y ejecute calculateTotalScore(id_cateogoria)
         // this.calculateTotalScore(1);
         atletasSubscribe.unsubscribe();
       });
+  }
+
+  // CREAMOS WODS FALSOS PARA HACER LAS PRUEBAS
+  createMockAtletaWod(totalscore, type, subScore, maxTime?, time?) {
+    this.KEY_SUPERFALSA++;
+    return {
+      wods: {
+        totalScore: totalscore,
+        totalRanking: 0,
+        wodsArray: [
+          {
+            type: type,
+            name: "??",
+            dataScore: {
+              reps: 0,
+              kilos: 0,
+              time: time || 0,
+              maxTime: maxTime || 0
+            },
+            score: subScore,
+            ranking: 0
+          }
+          // ...
+        ]
+      },
+      key: this.KEY_SUPERFALSA
+    };
   }
 
   orderScoreByWods(atletasArray, wod) {
@@ -109,32 +152,6 @@ export class OrdenarPuestosService {
       .filter(atleta => atleta)
       .filter(atleta => atleta.id_categoria === id_cateogoria);
 
-    // Aqui recorrer objeto WodFinal que contendra la cantidad de wod a recorrer y posterior sumar puntuciones
-    let wods = {
-      totalScore: 0,
-      totalRanking: 0,
-      wodsArray: [
-        {
-          type: "desc",
-          name: "??",
-          dataScore: {
-            reps: 0,
-            kilos: 0,
-            time: 0,
-            maxTime: 0
-          },
-          score: 0,
-          ranking: 0
-        }
-        // ...
-      ]
-    };
-    // ELIMINAR ESTO
-    let wod = {
-      type: "desc",
-      name: "wod_1b"
-    };
-
     // Recorremos objeto wodFinal con for in para extraer scores por wod y extraer puesto por wod
     let wodsStructure = atletasByCategory[0].wods.wodsArray;
     wodsStructure.forEach(wod => {
@@ -149,39 +166,56 @@ export class OrdenarPuestosService {
     });
 
     let atletasByCategoryOrdenado = this.orderByTotalScore(atletasByCategory);
-    let atletasByCategoryApplyRanking = this.addRankig(atletasByCategoryOrdenado);
+    let atletasByCategoryApplyRanking = this.addRankig(
+      atletasByCategoryOrdenado
+    );
 
     this.tieBreakScore(atletasByCategoryApplyRanking);
   }
 
   addRankig(atletasByCategoryOrdenado) {
-    console.log(atletasByCategoryOrdenado);
-
     let ranking = 1;
     let atletasByCategoryApplyRanking = atletasByCategoryOrdenado.map(
       (atleta, index, self) => {
-        console.log(index);
-
         if (index === 0) {
           atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
         } else {
           if (atleta.wods.totalScore === self[index - 1].wods.totalScore) {
-            
-            atleta.wods.totalRanking = self[index -1].wods.totalRanking;
-            console.log('atAct',atleta.wods.totalRanking);
-            console.log('atAnt',self[index - 1].wods.totalRanking);
+            atleta.wods.totalRanking = self[index - 1].wods.totalRanking;
           } else {
             atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
           }
-          console.log(ranking);
         }
         ranking++;
         return atleta;
       }
     );
-    console.log(atletasByCategoryApplyRanking);
-
     return atletasByCategoryApplyRanking;
+  }
+
+  addRankingByWods(arrayAtletasEmpatados, ordenar, ranking) {
+    return arrayAtletasEmpatados.sort(ordenar).map((atleta, index, self) => {
+      if (index === 0) {
+        atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
+        ranking++;
+        return atleta;
+      }
+
+      let scoreAtletaActual =
+        atleta.wods.wodsArray[atleta.wods.wodsArray.length - 1].score;
+      let scoreAtletaAnterior =
+        self[index - 1].wods.wodsArray[
+          self[index - 1].wods.wodsArray.length - 1
+        ].score;
+
+      if (scoreAtletaActual === scoreAtletaAnterior) {
+        return "empate";
+      } else {
+        atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
+        ranking++;
+        return atleta;
+      }
+    });
   }
 
   orderByTotalScore(atletasArray) {
@@ -200,33 +234,111 @@ export class OrdenarPuestosService {
       let typeSortOfLastWod = this.getTypeSortOfLastWod(
         arrayAtletasEmpatados[0]
       );
-      let ordenar;
       let masMejor = (atletaAnterior, atletaActual) =>
-        atletaAnterior.wods.wodsArray[atletaAnterior.odsArray.length - 1]
+        atletaAnterior.wods.wodsArray[atletaAnterior.wods.wodsArray.length - 1]
           .score <
-        atletaActual.wods.wodsArray[atletaActual.wodsArray.length - 1].score
+        atletaActual.wods.wodsArray[atletaActual.wods.wodsArray.length - 1]
+          .score
           ? 1
           : -1;
       let menosMejor = (atletaAnterior, atletaActual) =>
-        atletaAnterior.wods.wodsArray[atletaAnterior.odsArray.length - 1]
+        atletaAnterior.wods.wodsArray[atletaAnterior.wods.wodsArray.length - 1]
           .score <
-        atletaActual.wods.wodsArray[atletaActual.wodsArray.length - 1].score
+        atletaActual.wods.wodsArray[atletaActual.wods.wodsArray.length - 1]
+          .score
+          ? -1
+          : 1;
+      let menosMejorSiTime = (atletaAnterior, atletaActual) =>
+        atletaAnterior.wods.wodsArray[atletaAnterior.wods.wodsArray.length - 1]
+          .dataScore.time <
+        atletaActual.wods.wodsArray[atletaActual.wods.wodsArray.length - 1]
+          .dataScore.time
           ? -1
           : 1;
 
-      if (typeSortOfLastWod === "desc") ordenar = menosMejor;
-      else if (typeSortOfLastWod === "asc") ordenar = masMejor;
-      // else if(typeSortOfLastWod==='maxTimeOrInt') EJECUTAMOS FUNCION QUE HAGA SORT EN DOS PARTES 1. DENTRO DEL TIEMPO 2. ENTRE LOS DE FUERA DE TIEMPO
-      // IGUAL QUE BIFURCAR CONTROL DE FLUJO
-
-      let ranking = 0;
-      arrayDesempatados = arrayAtletasEmpatados.sort(ordenar).map(atleta => {
-        atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
-        ranking++;
-        return atleta;
-      });
+      if (typeSortOfLastWod === "asc")
+        arrayDesempatados = this.orderByTime(
+          arrayAtletasEmpatados,
+          menosMejorSiTime
+        );
+      else if (typeSortOfLastWod === "desc")
+        arrayDesempatados = this.addRankingByWods(
+          arrayAtletasEmpatados,
+          masMejor,
+          0
+        );
     });
     return arrayDesempatados;
+  }
+
+  insertTieBreakAtletas(atletasDesempatdos, atletasArray) {
+    console.log("rankeados", atletasArray);
+    console.log("rankeadosSoloDesempatados", atletasDesempatdos);
+    let arrayConRankingDesordenado = atletasArray.map(atleta => {
+      let atletaToInsert;
+
+      atletasDesempatdos.forEach(atletaDesempatado => {
+        if (atleta.key === atletaDesempatado.key) {
+          atletaToInsert = atletaDesempatado;
+          return;
+        }
+      });
+      console.log('atletaToInsert',atletaToInsert);
+      
+      if (!atletaToInsert) atletaToInsert = atleta;
+      return atletaToInsert;
+    });
+    console.log("arrayConRankingDesordenado", arrayConRankingDesordenado);
+    let arrayAtletasRankeado = arrayConRankingDesordenado.sort(
+      (atletaAnterior, atletaActual) => {
+        return atletaAnterior.wods.totalRanking < atletaActual.wods.totalRanking
+          ? -1
+          : 1;
+      }
+    );
+
+    return arrayAtletasRankeado;
+  }
+
+  orderByTime(atletasArray, menosMejor) {
+    // FALTA QUE LOS ORDENAR MAS MEJOR Y MENOS MEJOR ESTEN ACORDE CON EL .time de dataScores
+
+    let atletas = _.cloneDeep(atletasArray);
+    let atletasPorDebajoDelTiempo = [];
+    let atletasSobrepasandoTiempo = [];
+
+    atletas.forEach(atleta => {
+      let atletaDataScore =
+        atleta.wods.wodsArray[atleta.wods.wodsArray.length - 1].dataScore;
+      if (atletaDataScore.time > atletaDataScore.maxTime) {
+        atletasSobrepasandoTiempo.push(atleta);
+      } else {
+        atletasPorDebajoDelTiempo.push(atleta);
+      }
+    });
+
+    // RANKEAR 1º atletasPorDebajoDelTiempo
+    atletasPorDebajoDelTiempo = this.addRankingByWods(
+      atletasPorDebajoDelTiempo,
+      menosMejor,
+      0
+    );
+    console.log(atletasPorDebajoDelTiempo);
+
+    // RANKEAR 2º atletasSobrepasandoTiempo (y siguiendo el puesto numerico que hayan dejado los atletasPorDebajoDelTiempo)
+    atletasSobrepasandoTiempo = this.addRankingByWods(
+      atletasSobrepasandoTiempo,
+      menosMejor,
+      atletasPorDebajoDelTiempo.length
+    );
+    // CONCATENAR RANKEADOS
+    let atletasOrdenados = _.flatten([
+      atletasPorDebajoDelTiempo,
+      atletasSobrepasandoTiempo
+    ]);
+    console.log("atletasOrdenados", atletasOrdenados);
+
+    return atletasOrdenados;
   }
 
   getAtletasTieArray(atletasArrayOriginal) {
