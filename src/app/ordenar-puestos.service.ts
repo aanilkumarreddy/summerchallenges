@@ -17,35 +17,10 @@ export class OrdenarPuestosService {
       .subscribe((data: any) => {
         this.atletas = data.filter(atleta => atleta.estado === 5);
 
-        // PRUEBAS MOCKS
-        let atletasPrueba = [
-          this.createMockAtletaWod(25, "asc", 120, 100, 10),
-          this.createMockAtletaWod(22, "asc", 120, 100, 59),
-          this.createMockAtletaWod(15, "asc", 120, 100, 94),
-          this.createMockAtletaWod(22, "asc", 125, 100, 70),
-          this.createMockAtletaWod(22, "asc", 125, 100, 101),
-          this.createMockAtletaWod(22, "asc", 128, 100, 101),
-          this.createMockAtletaWod(22, "asc", 119, 100, 102),
-          this.createMockAtletaWod(10, "asc", 120, 100, 102),
-          this.createMockAtletaWod(19, "asc", 120, 100, 103),
-          this.createMockAtletaWod(12, "asc", 120, 100, 105),
-          this.createMockAtletaWod(18, "asc", 120, 100, 101)
-        ];
-
-        let atletasOrdenadosPorTotalScore = this.orderByTotalScore(
-          atletasPrueba
-        );
-        let rankeados = this.addRankig(atletasOrdenadosPorTotalScore);
-        let rankeadosSoloDesempatados = this.tieBreakScore(rankeados);
-        let rankeadosDefinitivos = this.insertTieBreakAtletas(
-          rankeadosSoloDesempatados,
-          rankeados
-        );
-
+        // Funcion forEach que recorra un arr con todas las categorias y ejecute calculateTotalScore(id_cateogoria)
+        let rankeadosDefinitivos = this.calculateTotalScore(1);
         console.log("rankeadosDefinitivos", rankeadosDefinitivos);
 
-        // Funcion forEach que recorra un arr con todas las categorias y ejecute calculateTotalScore(id_cateogoria)
-        // this.calculateTotalScore(1);
         atletasSubscribe.unsubscribe();
       });
   }
@@ -54,6 +29,7 @@ export class OrdenarPuestosService {
   createMockAtletaWod(totalscore, type, subScore, maxTime?, time?) {
     this.KEY_SUPERFALSA++;
     return {
+      id_cateogoria: 1,
       wods: {
         totalScore: totalscore,
         totalRanking: 0,
@@ -82,50 +58,42 @@ export class OrdenarPuestosService {
 
     this.orderByWodType(atletasArray, wod);
 
-    let puesto = 0;
+    let ranking = 0;
     atletasArray.forEach((atleta, index, atletasArr) => {
-      console.log(atletasArr.map(a => a[wod.name].puntuacion));
       // Si no hay puntuacion
-      if (!atleta[wod.name].puntuacion) {
-        atleta[wod.name].puesto = 99;
+      if (!atleta[wod.name].score) {
+        atleta[wod.name].ranking = 99;
         return;
       }
 
-      puesto++;
+      ranking++;
 
       // Si index cero
       if (!index) {
-        atleta[wod.name].puesto = puesto;
+        atleta[wod.name].ranking = ranking;
         return;
       }
 
       // Si empate
       let atletaAnterior = atletasArr[index - 1];
 
-      if (atleta[wod.name].puntuacion === atletaAnterior[wod.name].puntuacion) {
-        console.log("Tenemos empate puto");
-
-        atleta[wod.name].puesto = atletaAnterior[wod.name].puesto;
-        console.log(atletaAnterior[wod.name].puntuacion);
-        console.log(atleta[wod.name].puntuacion);
+      if (atleta[wod.name].score === atletaAnterior[wod.name].score) {
+        atleta[wod.name].ranking = atletaAnterior[wod.name].ranking;
       } else {
         // Normal
-        atleta[wod.name].puesto = puesto;
+        atleta[wod.name].ranking = ranking;
       }
     });
-    console.log(atletasArray.map(a => a[wod.name].puntuacion));
-    console.log(atletasArray.map(a => a[wod.name].puesto));
 
     atletasArray.sort(
-      (a, b) => (a[wod.name].puesto > b[wod.name].puesto ? 1 : -1)
+      (a, b) => (a[wod.name].ranking > b[wod.name].ranking ? 1 : -1)
     );
 
     atletasArray.forEach(atleta => {
-      if (atleta[wod.name].puesto == 99) {
-        atleta[wod.name].puesto = "-";
+      if (atleta[wod.name].ranking == 99) {
+        atleta[wod.name].ranking = "-";
       }
     });
-    console.log(atletasArray.map(a => a[wod.name].puesto));
     return atletasArray;
   }
 
@@ -133,22 +101,23 @@ export class OrdenarPuestosService {
     let orden;
     if (wod.type === "desc")
       orden = (a, b) =>
-        a[wod.name].puntuacion < b[wod.name].puntuacion ? 1 : -1;
+        a[wod.name].score < b[wod.name].score ? 1 : -1;
 
     if (wod.type === "asc")
       orden = (a, b) =>
-        a[wod.name].puntuacion > b[wod.name].puntuacion ? 1 : -1;
+        a[wod.name].score > b[wod.name].score ? 1 : -1;
 
     // FORMATEAR SEGUN REPS O TIEMPO
     atletasArray.forEach(atleta => {
-      atleta[wod.name].puntuacion = parseInt(atleta[wod.name].puntuacion);
+      atleta[wod.name].score = parseInt(atleta[wod.name].score);
     });
 
     atletasArray.sort(orden);
   }
 
   calculateTotalScore(id_cateogoria) {
-    let atletasByCategory = this.atletas
+    // [TODO] -> descomentar luego
+    /*let atletasByCategory = this.atletas
       .filter(atleta => atleta)
       .filter(atleta => atleta.id_categoria === id_cateogoria);
 
@@ -163,14 +132,40 @@ export class OrdenarPuestosService {
       atleta.totalScore = atleta.wodsArray.reduce(
         (wodAnterior, wodActual) => wodActual.score + wodAnterior.score
       );
-    });
+    });*/
 
-    let atletasByCategoryOrdenado = this.orderByTotalScore(atletasByCategory);
-    let atletasByCategoryApplyRanking = this.addRankig(
-      atletasByCategoryOrdenado
+    // PRUEBAS MOCKS
+    let atletasPrueba = [
+      this.createMockAtletaWod(26, "asc", 170, 100, 101),
+      this.createMockAtletaWod(26, "asc", 180, 100, 101),
+      this.createMockAtletaWod(25, "asc", 170, 100, 101),
+      this.createMockAtletaWod(22, "asc", 120, 100, 59),
+      this.createMockAtletaWod(15, "asc", 120, 100, 94),
+      this.createMockAtletaWod(22, "asc", 126, 100, 70),
+      this.createMockAtletaWod(22, "asc", 122, 100, 69),
+      this.createMockAtletaWod(22, "asc", 125, 100, 101),
+      this.createMockAtletaWod(22, "asc", 128, 100, 101),
+      this.createMockAtletaWod(22, "asc", 119, 100, 102),
+      this.createMockAtletaWod(10, "asc", 120, 100, 102),
+      this.createMockAtletaWod(25, "asc", 130, 100, 110),
+      this.createMockAtletaWod(19, "asc", 120, 100, 103),
+      this.createMockAtletaWod(12, "asc", 120, 100, 105),
+      this.createMockAtletaWod(10, "asc", 150, 100, 114),
+      this.createMockAtletaWod(18, "asc", 120, 100, 101)
+    ];
+
+    let atletasOrdenadosPorTotalScore = this.orderByTotalScore(atletasPrueba);
+
+    let rankeados = this.addRankig(atletasOrdenadosPorTotalScore);
+
+    let rankeadosSoloDesempatados = this.tieBreakScore(rankeados);
+
+    let rankeadosDefinitivos = this.insertTieBreakAtletas(
+      rankeadosSoloDesempatados,
+      rankeados
     );
 
-    this.tieBreakScore(atletasByCategoryApplyRanking);
+    return rankeadosDefinitivos;
   }
 
   addRankig(atletasByCategoryOrdenado) {
@@ -257,34 +252,28 @@ export class OrdenarPuestosService {
           : 1;
 
       if (typeSortOfLastWod === "asc")
-        arrayDesempatados = this.orderByTime(
-          arrayAtletasEmpatados,
-          menosMejorSiTime
+        arrayDesempatados.push(
+          this.orderByTime(arrayAtletasEmpatados, menosMejorSiTime, masMejor)
         );
       else if (typeSortOfLastWod === "desc")
-        arrayDesempatados = this.addRankingByWods(
-          arrayAtletasEmpatados,
-          masMejor,
-          0
+        arrayDesempatados.push(
+          this.addRankingByWods(arrayAtletasEmpatados, masMejor, 0)
         );
     });
     return arrayDesempatados;
   }
 
   insertTieBreakAtletas(atletasDesempatdos, atletasArray) {
-    console.log("rankeados", atletasArray);
-    console.log("rankeadosSoloDesempatados", atletasDesempatdos);
     let arrayConRankingDesordenado = atletasArray.map(atleta => {
       let atletaToInsert;
 
-      atletasDesempatdos.forEach(atletaDesempatado => {
+      _.flatten(atletasDesempatdos).forEach((atletaDesempatado: any) => {
         if (atleta.key === atletaDesempatado.key) {
           atletaToInsert = atletaDesempatado;
           return;
         }
       });
-      console.log('atletaToInsert',atletaToInsert);
-      
+
       if (!atletaToInsert) atletaToInsert = atleta;
       return atletaToInsert;
     });
@@ -300,9 +289,8 @@ export class OrdenarPuestosService {
     return arrayAtletasRankeado;
   }
 
-  orderByTime(atletasArray, menosMejor) {
-    // FALTA QUE LOS ORDENAR MAS MEJOR Y MENOS MEJOR ESTEN ACORDE CON EL .time de dataScores
-
+  orderByTime(atletasArray, menosMejor, masMejor) {
+    let x = _.cloneDeep(atletasArray);
     let atletas = _.cloneDeep(atletasArray);
     let atletasPorDebajoDelTiempo = [];
     let atletasSobrepasandoTiempo = [];
@@ -312,6 +300,8 @@ export class OrdenarPuestosService {
         atleta.wods.wodsArray[atleta.wods.wodsArray.length - 1].dataScore;
       if (atletaDataScore.time > atletaDataScore.maxTime) {
         atletasSobrepasandoTiempo.push(atleta);
+        let a = Object.assign({}, atletasSobrepasandoTiempo);
+        console.log("orderyTime", a);
       } else {
         atletasPorDebajoDelTiempo.push(atleta);
       }
@@ -323,14 +313,17 @@ export class OrdenarPuestosService {
       menosMejor,
       0
     );
-    console.log(atletasPorDebajoDelTiempo);
 
     // RANKEAR 2º atletasSobrepasandoTiempo (y siguiendo el puesto numerico que hayan dejado los atletasPorDebajoDelTiempo)
+    let indexRanking = atletasPorDebajoDelTiempo.length;
+    if (!indexRanking) indexRanking = 0;
+
     atletasSobrepasandoTiempo = this.addRankingByWods(
       atletasSobrepasandoTiempo,
-      menosMejor,
-      atletasPorDebajoDelTiempo.length
+      masMejor,
+      indexRanking
     );
+
     // CONCATENAR RANKEADOS
     let atletasOrdenados = _.flatten([
       atletasPorDebajoDelTiempo,
