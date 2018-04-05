@@ -27,6 +27,10 @@ export class VoluntariosService {
     })
     return aux_voluntario;
   }
+  getVoluntarios() {
+    const voluntarios = this.af.database.list('/Voluntarios');
+    return voluntarios.map(data => data);
+  }
 
   getVoluntario_byKey(key) {
     const aux_voluntario = this.af.database.object('/Voluntarios/' + key);

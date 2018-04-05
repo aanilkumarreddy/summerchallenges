@@ -125,8 +125,18 @@ export class LeaderboardComponent implements OnInit {
         atleta => atleta.estado > 1 && atleta.id_categoria == id_categoria
         //Aquí se pueden añadir más filtros
       );
+      this.atletas.forEach((atleta, index) => {
+        let numero = atleta.id_categoria;
+
+        index < 10 ? numero += "0" + index : numero += "" + index;
+
+        atleta.estado > 0 ? console.log(numero + " - " + atleta.nombre) : "";
+      })
       this.animateAtletasCard();
+
       this.orderBy_total();
+
+
     });
 
     this.categorias.forEach(cat => {
@@ -187,7 +197,7 @@ export class LeaderboardComponent implements OnInit {
 
   orderBy_wod1() {
     this.atletas.forEach(atleta => {
-      if (atleta.wod_1a.kilos != 0) {
+      if (atleta.wod_1a && atleta.wod_1a.kilos != 0) {
       }
       atleta.wod_1a.puntuacion = parseInt(atleta.wod_1a.puntuacion);
     });
