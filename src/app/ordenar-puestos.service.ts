@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AtletasService } from "./atletas/atletas.service";
 import { filter } from "rxjs/operator/filter";
-import * as _ from 'lodash';  
-
+import * as _ from "lodash";
 
 @Injectable()
 export class OrdenarPuestosService {
@@ -15,10 +14,22 @@ export class OrdenarPuestosService {
     let atletasSubscribe = this.atletasService
       .getAtletas()
       .subscribe((data: any) => {
+
+
         this.atletas = data.filter(atleta => atleta.estado === 5);
+        let prueba = this.orderByTotalScore([
+          { wods: { totalScore: 14, totalRanking: 0 } },
+          { wods: { totalScore: 15, totalRanking: 0 } },
+          { wods: { totalScore: 20, totalRanking: 0 } },
+          { wods: { totalScore: 15, totalRanking: 0 } },
+        ])
+        this.addRankig(prueba);
+
+
+
 
         // Funcion forEach que recorra un arr con todas las categorias y ejecute calculateTotalScore(id_cateogoria)
-        this.calculateTotalScore(1);
+        // this.calculateTotalScore(1);
         atletasSubscribe.unsubscribe();
       });
   }
@@ -109,7 +120,8 @@ export class OrdenarPuestosService {
           dataScore: {
             reps: 0,
             kilos: 0,
-            time: 0
+            time: 0,
+            maxTime: 0
           },
           score: 0,
           ranking: 0
@@ -136,9 +148,40 @@ export class OrdenarPuestosService {
       );
     });
 
-    this.orderByTotalScore(atletasByCategory);
+    let atletasByCategoryOrdenado = this.orderByTotalScore(atletasByCategory);
+    let atletasByCategoryApplyRanking = this.addRankig(atletasByCategoryOrdenado);
 
-    // AQUI PONER EL DESEMPATADOR tieBreakScore();
+    this.tieBreakScore(atletasByCategoryApplyRanking);
+  }
+
+  addRankig(atletasByCategoryOrdenado) {
+    console.log(atletasByCategoryOrdenado);
+
+    let ranking = 1;
+    let atletasByCategoryApplyRanking = atletasByCategoryOrdenado.map(
+      (atleta, index, self) => {
+        console.log(index);
+
+        if (index === 0) {
+          atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
+        } else {
+          if (atleta.wods.totalScore === self[index - 1].wods.totalScore) {
+            
+            atleta.wods.totalRanking = self[index -1].wods.totalRanking;
+            console.log('atAct',atleta.wods.totalRanking);
+            console.log('atAnt',self[index - 1].wods.totalRanking);
+          } else {
+            atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
+          }
+          console.log(ranking);
+        }
+        ranking++;
+        return atleta;
+      }
+    );
+    console.log(atletasByCategoryApplyRanking);
+
+    return atletasByCategoryApplyRanking;
   }
 
   orderByTotalScore(atletasArray) {
@@ -150,35 +193,53 @@ export class OrdenarPuestosService {
   tieBreakScore(atletasArray) {
     // Obtenemos un array de arrays donde cada subArray son los atletas empatados entre si
     let atletasTieArray = this.getAtletasTieArray(atletasArray);
+    let arrayDesempatados = [];
 
     // Desempatamos por prioridad de wod
     atletasTieArray.forEach(arrayAtletasEmpatados => {
-      let ordenarPorMayorScore = (atletaAnterior, atletaActual) =>
-      atletaAnterior.wods.wodsArray[0].score < atletaActual.wods.wodsArray[0].score ? 1 : -1;
-      
-      // Por aqui deberiamos comprobar si hay un nuevo empate (RECURSIVIDAD?)
+      let typeSortOfLastWod = this.getTypeSortOfLastWod(
+        arrayAtletasEmpatados[0]
+      );
+      let ordenar;
+      let masMejor = (atletaAnterior, atletaActual) =>
+        atletaAnterior.wods.wodsArray[atletaAnterior.odsArray.length - 1]
+          .score <
+        atletaActual.wods.wodsArray[atletaActual.wodsArray.length - 1].score
+          ? 1
+          : -1;
+      let menosMejor = (atletaAnterior, atletaActual) =>
+        atletaAnterior.wods.wodsArray[atletaAnterior.odsArray.length - 1]
+          .score <
+        atletaActual.wods.wodsArray[atletaActual.wodsArray.length - 1].score
+          ? -1
+          : 1;
+
+      if (typeSortOfLastWod === "desc") ordenar = menosMejor;
+      else if (typeSortOfLastWod === "asc") ordenar = masMejor;
+      // else if(typeSortOfLastWod==='maxTimeOrInt') EJECUTAMOS FUNCION QUE HAGA SORT EN DOS PARTES 1. DENTRO DEL TIEMPO 2. ENTRE LOS DE FUERA DE TIEMPO
+      // IGUAL QUE BIFURCAR CONTROL DE FLUJO
 
       let ranking = 0;
-      arrayAtletasEmpatados.sort(ordenarPorMayorScore).map(atleta=> {
+      arrayDesempatados = arrayAtletasEmpatados.sort(ordenar).map(atleta => {
         atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
         ranking++;
-        return atleta
+        return atleta;
       });
-    })
-
+    });
+    return arrayDesempatados;
   }
 
   getAtletasTieArray(atletasArrayOriginal) {
     let atletasArray = _.cloneDeep(atletasArrayOriginal);
     let atletasTieArray = [];
-    
+
     // Recorremos el array en busca de atletas empatados
     let indexPivote = 0;
-    while(indexPivote < atletasArray.length) {
+    while (indexPivote < atletasArray.length) {
       let atletaPivote = atletasArray[indexPivote];
       let atletasTie = [];
 
-      // Con el atleta pivote tenemos un indice de referencia que 
+      // Con el atleta pivote tenemos un indice de referencia que
       // se compara con el resto de valores del array y si hay empate
       // pusheamos
       atletasArray.forEach((atleta, index) => {
@@ -201,10 +262,15 @@ export class OrdenarPuestosService {
         indexPivote = 0;
         continue;
       }
-      
+
       // Incrementamos indice
       indexPivote++;
     }
     return atletasTieArray;
+  }
+
+  getTypeSortOfLastWod(atleta) {
+    let wodArr = atleta.wods.wodsArray;
+    return wodArr[wodArr.length - 1].type;
   }
 }
