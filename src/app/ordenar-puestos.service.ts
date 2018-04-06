@@ -11,22 +11,22 @@ export class OrdenarPuestosService {
 
   constructor(private atletasService: AtletasService) {
     let atletasPrueba = [
-      this.createMockAtletaWod(26, "asc", 170, 100, 99),
-      this.createMockAtletaWod(26, "asc", 180, 100, 101),
-      this.createMockAtletaWod(25, "asc", 170, 100, 40),
-      this.createMockAtletaWod(22, "asc", 120, 100, 59),
-      this.createMockAtletaWod(15, "asc", 120, 100, 94),
-      this.createMockAtletaWod(22, "asc", 126, 100, 70),
-      this.createMockAtletaWod(22, "asc", 122, 100, 69),
-      this.createMockAtletaWod(22, "asc", 125, 100, 69),
-      this.createMockAtletaWod(22, "asc", 128, 100, 69),
-      this.createMockAtletaWod(22, "asc", 120, 100, 12),
-      this.createMockAtletaWod(10, "asc", 120, 100, 11),
-      this.createMockAtletaWod(25, "asc", 130, 100, 110),
-      this.createMockAtletaWod(19, "asc", 120, 100, 103),
-      this.createMockAtletaWod(12, "asc", 120, 100, 105),
-      this.createMockAtletaWod(10, "asc", 150, 100, 114),
-      this.createMockAtletaWod(8, "asc", 8, 100, 101)
+      this.createMockAtletaWod(26, "desc", 170, 100, 99),
+      this.createMockAtletaWod(26, "desc", 180, 100, 101),
+      this.createMockAtletaWod(25, "desc", 170, 100, 40),
+      this.createMockAtletaWod(22, "desc", 120, 100, 59),
+      this.createMockAtletaWod(15, "desc", 120, 100, 94),
+      this.createMockAtletaWod(22, "desc", 126, 100, 70),
+      this.createMockAtletaWod(22, "desc", 122, 100, 69),
+      this.createMockAtletaWod(22, "desc", 125, 100, 69),
+      this.createMockAtletaWod(22, "desc", 128, 100, 69),
+      this.createMockAtletaWod(22, "desc", 120, 100, 12),
+      this.createMockAtletaWod(10, "desc", 120, 100, 11),
+      this.createMockAtletaWod(25, "desc", 130, 100, 110),
+      this.createMockAtletaWod(19, "desc", 120, 100, 103),
+      this.createMockAtletaWod(12, "desc", 120, 100, 105),
+      this.createMockAtletaWod(10, "desc", 150, 100, 114),
+      this.createMockAtletaWod(8, "desc", 8, 100, 101)
     ];
 
     let pruebaHard = atletasPrueba;
@@ -82,6 +82,18 @@ export class OrdenarPuestosService {
         totalScore: totalscore,
         totalRanking: 0,
         wodsArray: [
+          // {
+          //   type: type,
+          //   name: "??",
+          //   dataScore: {
+          //     reps: 0,
+          //     kilos: 0,
+          //     time: time || 0,
+          //     maxTime: maxTime || 0
+          //   },
+          //   score: subScore,
+          //   ranking: 0
+          // },
           {
             type: type,
             name: "??",
@@ -91,8 +103,20 @@ export class OrdenarPuestosService {
               time: time || 0,
               maxTime: maxTime || 0
             },
-            score: subScore,
-            ranking: 0
+            score: Math.floor(Math.random() * (10 - 1)) + 1,
+            ranking: Math.floor(Math.random() * (10 - 1)) + 1
+          },
+          {
+            type: type,
+            name: "??",
+            dataScore: {
+              reps: 0,
+              kilos: 0,
+              time: time || 0,
+              maxTime: maxTime || 0
+            },
+            score: Math.floor(Math.random() * (10 - 1)) + 1,
+            ranking: Math.floor(Math.random() * (10 - 1)) + 1
           },
           
           // ...
@@ -319,13 +343,15 @@ export class OrdenarPuestosService {
     let arrayEmpatadosRankeados = [];
     arrayDeArrayDesmepatadosSinRankear.forEach(atletasEmpatados => {
       arrayEmpatadosRankeados.push(atletasEmpatados.map((atleta,index,self) => {
-        console.log('/////////',atleta.wods.totalRanking);
         if(index!==0){
           let timeAtletaActual = atleta.wods.wodsArray[atleta.wods.wodsArray.length-1].dataScore.time;
           let timeAtletaAnterior = self[index-1].wods.wodsArray[atleta.wods.wodsArray.length-1].dataScore.time;
-          let totalRankingAtletaActual = atleta.wods.totalRanking;
-          let totalRankingAtletaAnterior = self[index-1].wods.totalRanking;
-          if(timeAtletaActual === timeAtletaAnterior) return atleta;
+          let isSameTime = timeAtletaActual === timeAtletaAnterior
+
+          let scoreAtletaActual = atleta.wods.wodsArray[atleta.wods.wodsArray.length-1].score;
+          let scoreAtletaAnterior = self[index-1].wods.wodsArray[atleta.wods.wodsArray.length-1].score;
+          let isSameScore = scoreAtletaActual === scoreAtletaAnterior
+          if(isSameTime || isSameScore) return atleta;
         }
         
         atleta.wods.totalRanking += index;
