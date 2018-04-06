@@ -12,13 +12,13 @@
   <div class="atletas">
     <div *ngFor="let atleta of atletasFiltered">
       <div class="atleta__header">
-        {{atleta?.nombre}} - {{atleta?.id_categoria}}
+        {{atleta?.nombre}} - {{atleta?.id_categoria}} - {{atleta?.estado}}
       </div>
       <div class="atleta__content">
         <!-- button (click)="select(atleta)">Seleccionar</button> -->
-        <div *ngFor="let wod of atleta?.wods.wodsArray">
+        <!-- <div *ngFor="let wod of atleta?.wods.wodsArray">
           {{wod?.name}} - {{wod?.ranking}} - {{wod?.score}}
-        </div>
+        </div>-->
       </div>
     </div>
   </div>

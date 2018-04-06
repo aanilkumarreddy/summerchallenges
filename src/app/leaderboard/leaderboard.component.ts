@@ -25,6 +25,7 @@ export class LeaderboardComponent implements OnInit {
   public aux_categoria;
   public seleccion;
   public categorias;
+  public wods_actuales;
 
   constructor(
     private authService: AuthService,
@@ -36,17 +37,17 @@ export class LeaderboardComponent implements OnInit {
     private wodsService: WodsService,
     private ordenarPuesto: OrdenarPuestosService
   ) {
-    ordenarPuesto.getWodOrdenado(1,"??");
     this.af.auth.subscribe(data => {
       this.categoriasService.getCategorias().subscribe(data => {
         this.categorias = data;
 
         /* Eliminamos la categoría Amateur */
         //this.categorias.pop();
-
-        setTimeout(() => {
-          this.getAtletas_byCategoria(1);
-        }, 400);
+        this.getClasificacion("final", 1);
+        /*setTimeout(() => {
+          //this.getAtletas_byCategoria(1);
+          this.getClasificacion("wod", 1, "WOD 1", 0);
+        }, 400);*/
       })
       if (data) {
         this.auth = data.auth;
@@ -114,9 +115,44 @@ export class LeaderboardComponent implements OnInit {
           card.classList.add('display');
         }, timer)
       })
-      this.seleccion = 'general';
+      //this.seleccion = 'general';
     }, 50)
   }
+  getClasificacion(type, id_categoria, nombre_wod?, index_wod?) {
+
+
+    if (type == "final") {
+      this.ordenarPuesto.getClasificacionFinal(id_categoria)
+        .then(data => {
+          this.atletas = data;
+          //this.getAtletas_byCategoria(1);
+          this.wods_actuales = data[0].wods.wodsArray;
+          this.animateAtletasCard();
+          this.seleccion = 'general';
+        })
+    }
+
+    if (type == "wod") {
+      this.ordenarPuesto.getWodOrdenado(id_categoria, nombre_wod)
+        .then(data => {
+          this.atletas = data;
+          //this.getAtletas_byCategoria(1);
+          this.wods_actuales = data[0].wods.wodsArray;
+          this.animateAtletasCard();
+          this.seleccion = index_wod;
+        })
+    }
+
+    this.categorias.forEach(cat => {
+      if (cat.c_id == id_categoria) {
+        cat.estado = "on";
+        this.categoria = cat;
+      } else {
+        cat.estado = "";
+      }
+    })
+  }
+
   getAtletas_byCategoria(id_categoria) {
     let _atletas = this.atletasService.getAtletas_byCategoria(id_categoria);
     _atletas.subscribe(data => {
@@ -129,8 +165,6 @@ export class LeaderboardComponent implements OnInit {
         let numero = atleta.id_categoria;
 
         index < 10 ? numero += "0" + index : numero += "" + index;
-
-        atleta.estado > 0 ? console.log(numero + " - " + atleta.nombre) : "";
       })
       this.animateAtletasCard();
 

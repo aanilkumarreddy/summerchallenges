@@ -28,9 +28,10 @@ export class AdminLeaderboardComponent implements OnInit {
 
     this.atletasService.getAtletas()
       .subscribe(data => {
-        this.atletas = data.filter(atleta => atleta.estado > 4 || atleta.id_categoria == 6);
+        this.atletas = data.filter(atleta => atleta.estado > 4);
         this.atletasFiltered = this.atletas;
         this.search();
+        this.calculateWods();
       })
 
     this.categoriasService.getCategorias()
@@ -69,22 +70,31 @@ export class AdminLeaderboardComponent implements OnInit {
   calculateWods() {
     let rx = {
       model: [{
-        type: "asc",
+        type: "desc",
         name: "WOD 1",
-        cap: 600
+        cap: 0
       }, {
         type: "desc",
         name: "WOD 2",
         cap: 0
       }, {
-        type: "asc",
+        type: "desc",
         name: "WOD 3",
-        cap: 600
+        cap: 0
+      }, {
+        type: "asc",
+        name: "WOD 4",
+        cap: 900
+      }, {
+        type: "asc",
+        name: "FINAL",
+        cap: 900
       }]
     };
 
     this.atletas.forEach((atleta, index) => {
-      /* if (atleta.id_categoria == 6) {
+
+      if (atleta.id_categoria == 5) {
         let model = rx.model;
         this.WODS.wodsArray = [];
 
@@ -92,9 +102,16 @@ export class AdminLeaderboardComponent implements OnInit {
           let wod = Object.assign({}, this.WOD);
           wod.type = w.type;
           wod.name = w.name;
-          wod.dataScore.maxTime = w.cap;
-
+          console.log(w.cap);
+          let aux_dataScore = {
+            reps: 0,
+            kilos: 0,
+            time: 0,
+            maxTime: w.cap
+          };
+          wod.dataScore = aux_dataScore;
           this.WODS.wodsArray.push(wod);
+          console.log(this.WODS);
 
         })
         this.atletasService.updateWods(atleta.$key, this.WODS)
@@ -102,7 +119,7 @@ export class AdminLeaderboardComponent implements OnInit {
             console.log(response);
           })
         console.log(this.WODS);
-      }*/
+      }
     })
 
 
@@ -122,7 +139,7 @@ export class AdminLeaderboardComponent implements OnInit {
 
   select(atleta) {
     console.log(atleta);
-    this.calculateWods()
+    //this.calculateWods()
   }
 
   search() {
@@ -135,7 +152,12 @@ export class AdminLeaderboardComponent implements OnInit {
     if (this.categoria != "todos") {
       this.atletasFiltered = this.atletasFiltered.filter(atleta => atleta.id_categoria == this.categoria)
     }
-    console.log(this.atletasFiltered);
+    this.atletasFiltered.forEach(atleta => {
+      if (atleta.id_categoria == 6 && atleta.estado == 2) {
+        this.atletasService.updateEstado(atleta.$key, 5).then(data => { console.log(data, atleta) });
+      }
+    })
+
   }
 
   filter(id) {

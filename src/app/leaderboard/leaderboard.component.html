@@ -19,7 +19,7 @@
 
   <div class="menu-container flex flex-center">
     <div class="options flex flex-wraper">
-      <button *ngFor="let cat of categorias" (click)="getAtletas_byCategoria(cat.c_id)" class="btn btn-select {{cat.estado}}">
+      <button *ngFor="let cat of categorias" (click)="getClasificacion('final', cat.c_id)" class="btn btn-select {{cat.estado}}">
         {{cat.nombre}}
       </button>
     </div>
@@ -28,14 +28,18 @@
 
 
   <div class="active-categoria flex flex-center">
-    <label class="flex flex--center active" id="general">General</label>
+    <label class="flex flex--center" [ngClass]="{'active' : seleccion == 'general'}" id="general" (click)="getClasificacion('final', categoria.c_id)">General</label>
+    <label class="flex--center" (click)="getClasificacion('wod', categoria.c_id, wod.name, i)" *ngFor="let wod of wods_actuales; let i = index"
+      [ngClass]="{'active' : i == seleccion}">
+      {{wod?.name}}
+    </label>
     <!--
     <label class="flex flex-center" id="wod1a" (click)="orderBy_wod1()">WOD 1.A</label>
     <label class="flex flex-center" id="wod1b" (click)="orderBy_wod2()">WOD 1.B</label>
     -->
 
   </div>
-  <h2>Listado definitivo de clasificados</h2>
+  <h2>Clasificación</h2>
 
 
 
@@ -48,26 +52,22 @@
   </div>
   -->
 
-  <div class="panel-container flex flex-column">
-    <div *ngFor="let atl of atletas; let i = index" class="atleta-card flex" [ngClass]="{'active': (i < categoria.limit && atl.puntos > 0) || atl.id_categoria == 6}">
+  <div *ngIf="atletas" class="panel-container flex flex-column">
+    <div *ngFor="let atl of atletas; let i = index" class="atleta-card flex" [ngClass]="{'active': atl?.estado > 4 || atl.id_categoria == 6}">
       <div class="atleta flex">
-        <div *ngIf="atl.id_categoria != 6" class="atleta--estado flex flex-center">
+        <div class="atleta--estado flex flex-center">
           {{i+1}}
         </div>
         <div class="atleta--datos flex flex-column">
           <div class="atleta--nombre">
-            {{atl.nombre}} ({{atl.email}})
-            <span *ngIf="atl.estado > 4"> PAGADO</span>
+            {{atl.nombre}}
           </div>
         </div>
-        <div *ngIf="seleccion == 'wod1a'" class="atleta--posicion flex flex-center">
-          {{atl.wod_1a.puesto}} ({{atl.wod_1a.puntuacion}})
-        </div>
-        <div *ngIf="seleccion == 'wod1b'" class="atleta--posicion flex flex-center">
-          {{atl.wod_1b.puesto}} ({{atl.wod_1b.puntuacion}})
+        <div *ngIf="seleccion != 'general'" class="atleta--posicion flex flex-center">
+          {{atl?.wods?.wodsArray[seleccion]?.ranking}} ({{atl?.wods?.wodsArray[seleccion]?.score}})
         </div>
         <div *ngIf="seleccion == 'general'" class="atleta--posicion flex flex-center">
-          {{atl.puntos}}
+          {{atl?.wods?.totalRanking}}
         </div>
       </div>
     </div>

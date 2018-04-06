@@ -95,6 +95,7 @@ export class AtletasService {
     const aux_atlete = this.getAtleta_byKey(key);
     aux_atlete.update({ id_categoria: categoria });
   }
+
   updateTeam_1(key, atl_1) {
     const aux_atleta = this.getAtleta_byKey(key);
     aux_atleta.update({ atl_1: atl_1 });
@@ -111,6 +112,11 @@ export class AtletasService {
     let atleta = this.getAtleta_byKey(key);
 
     return atleta.update({ wods: wods }).then(data => data);
+  }
+  updateEstado(key, estado) {
+    let atleta = this.getAtleta_byKey(key);
+
+    return atleta.update({ estado: estado }).then(data => data);
   }
   setAtletaActual(key) {
     const aux_atleta = this.getAtleta_byKey(key);

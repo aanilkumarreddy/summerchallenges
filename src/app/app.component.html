@@ -41,19 +41,19 @@
         <i class="fas fa-home"></i>
       </div>
       <div class="logout">
-        <i *ngIf="atleta" (click)="logout()" class="fas fa-sign-out-alt"></i>
-        <i *ngIf="!atleta" routerLink="/login" routerLinkActive="active" class="fas fa-sign-in-alt"></i>
+        <i *ngIf="cerrado" (click)="logout()" class="fas fa-sign-out-alt"></i>
+        <i *ngIf="cerrado" routerLink="/login" routerLinkActive="active" class="fas fa-sign-in-alt"></i>
       </div>
     </div>
 
-    <div *ngIf="!auth" class="actions">
+    <div *ngIf="cerrado" class="actions">
       <div *ngIf="!auth" class="login">
         <button *ngIf="!auth" routerLink="/login" routerLinkActive="active" class="boton"> ACCEDER </button>
         <!--
         <button *ngIf="!auth" routerLink="/registro" routerLinkActive="active" class="boton"> INSCRÍBETE </button>
         -->
       </div>
-      <div *ngIf="auth && atleta && atleta.estado > 1" class="payment">
+      <div *ngIf="cerrado && atleta && atleta.estado > 1" class="payment">
         <a routerLink="/inscritos" routerLinkActive="active">
           <button class="boton btn-block">VER INSCRITOS </button>
         </a>
@@ -91,26 +91,30 @@
     <div class="option--text">Enviar WOD</div>
   </div>
 -->
-  <div routerLink="/requisitos" routerLinkActive="active" class="option flex flex-column flex-center">
+  <a href="https://goo.gl/xu9vKR" target="_blank" class="option flex flex-column flex-center">
+
     <div class="option--icon">
       <i class="fas fa-crosshairs"></i>
     </div>
     <div class="option--text">Wods</div>
-  </div>
-  <div routerLink="/dashboard" routerLinkActive="active" class="option flex flex-column flex-center">
+  </a>
+
+  <div routerLink="/leaderboard" routerLinkActive="active" class="option flex flex-column flex-center">
     <div class="option--icon">
       <i class="fas fa-list-ol"></i>
     </div>
     <div class="option--text">Clasificación</div>
     <span routerLink="/registro" routerLinkActive="active" class="flotante _pulse">¡En Directo!</span>
   </div>
-  <div routerLink="/registro" routerLinkActive="active" class="option flex flex-column flex-center">
+
+  <a href="https://goo.gl/rj1fiW" target="_blank" class="option flex flex-column flex-center">
     <div class="option--icon">
       <i class="far fa-clock"></i>
     </div>
     <div class="option--text">Horarios</div>
-  </div>
-  <div routerLink="/leaderboard" routerLinkActive="active" class="option flex flex-column flex-center">
+  </a>
+
+  <a href="https://goo.gl/eB6qnP" target="_blank" class="option flex flex-column flex-center">
     <div class="option--icon">
       <i class="fas fa-map-marker-alt"></i>
     </div>
@@ -118,5 +122,5 @@
     <!--
       <span routerLink="/leaderboard" routerLinkActive="active" class="flotante _pulse">¡Nuevo!</span>
     -->
-  </div>
+  </a>
 </div>
