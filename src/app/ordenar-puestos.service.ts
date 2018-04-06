@@ -49,7 +49,7 @@ export class OrdenarPuestosService {
   getWodOrdenado(id_categoria, wodName) {
     return this.atletas.then(atletas => {
       
-      atletas = this.atletasPrueba; // [TODO] -> ELIMINAR ESTO PARA PRUEBAS REALES
+      // atletas = this.atletasPrueba; // [TODO] -> ELIMINAR ESTO PARA PRUEBAS REALES
       
       let atletasByCategoria = atletas.filter(atleta => atleta.id_categoria === id_categoria);
       let indexWod = atletas[0].wods.wodsArray.findIndex(wod => wod.name = wodName);
@@ -64,6 +64,11 @@ export class OrdenarPuestosService {
     return this.atletas.then(atletas => {
       
       // atletas = this.atletasPrueba; // [TODO] -> ELIMINAR ESTO PARA PRUEBAS REALES
+      // OJO CON LA KEY SUPERFALSA
+      // OJO CON LA KEY SUPERFALSA
+      // OJO CON LA KEY SUPERFALSA
+      // OJO CON LA KEY SUPERFALSA
+      // OJO CON LA KEY SUPERFALSA
       
       let atletasAñadiendoCambios = atletas.filter(atleta => atleta.id_categoria === id_categoria);
       
@@ -169,7 +174,7 @@ export class OrdenarPuestosService {
 
     atletas.forEach(atleta => {
       let atletaDataScore = atleta.wods.wodsArray[indexWod].dataScore;
-      if (atletaDataScore.time > atletaDataScore.maxTime) {
+      if (atletaDataScore.time >= atletaDataScore.maxTime) {
         atletasSobrepasandoTiempo.push(atleta);
       } else {
         atletasPorDebajoDelTiempo.push(atleta);
@@ -372,7 +377,8 @@ export class OrdenarPuestosService {
         let atletaToInsert;
   
         _.flatten(atletasDesempatdos).forEach((atletaDesempatado: any) => {
-          if (atleta.key === atletaDesempatado.key) {
+          // if (atleta.key === atletaDesempatado.key) {
+          if (atleta.$key === atletaDesempatado.$key) {
             atletaToInsert = atletaDesempatado;
             return;
           }
@@ -393,220 +399,6 @@ export class OrdenarPuestosService {
       return arrayAtletasRankeado;
     }
   
-
-
-
-
-
-
-
-
-  // calculateTotalScore(id_cateogoria) {
-  //   // [TODO] -> descomentar luego
-  //   let atletasByCategory = this.atletas
-  //     .filter(atleta => atleta)
-  //     .filter(atleta => atleta.id_categoria === id_cateogoria);
-
-  //   // Finalmente extraemos scores totales y luego desempatamos
-
-  //   // [TODO] -> descomentar!!! OJO ********************************************************************************
-
-  //   // atletasByCategory.forEach(atleta => {
-  //   //   atleta.totalScore = atleta.wods.wodsArray.reduce(
-  //   //     (wodAnterior, wodActual) => wodActual.score + wodAnterior.score
-  //   //   );
-  //   // });
-
-  //   // atletasByCategory.forEach(atleta => {
-  //   //   atleta.totalRanking = atleta.wods.wodsArray.reduce(
-  //   //     (wodAnterior, wodActual) => wodActual.ranking + wodAnterior.ranking
-  //   //   );
-  //   // });
-
-  //   // PRUEBAS MOCKS
-  //   let atletasPrueba = [
-  //     this.createMockAtletaWod(26, "asc", 170, 100, 5),
-  //     this.createMockAtletaWod(26, "asc", 180, 100, 99),
-  //     this.createMockAtletaWod(25, "asc", 170, 100, 40),
-  //     this.createMockAtletaWod(22, "asc", 120, 100, 59),
-  //     this.createMockAtletaWod(15, "asc", 120, 100, 94),
-  //     this.createMockAtletaWod(22, "asc", 126, 100, 70),
-  //     this.createMockAtletaWod(22, "asc", 122, 100, 69),
-  //     this.createMockAtletaWod(22, "asc", 125, 100, 90),
-  //     this.createMockAtletaWod(22, "asc", 128, 100, 10),
-  //     this.createMockAtletaWod(22, "asc", 119, 100, 44),
-  //     this.createMockAtletaWod(10, "asc", 120, 100, 32),
-  //     this.createMockAtletaWod(25, "asc", 130, 100, 92),
-  //     this.createMockAtletaWod(19, "asc", 120, 100, 20),
-  //     this.createMockAtletaWod(12, "asc", 120, 100, 17),
-  //     this.createMockAtletaWod(10, "asc", 150, 100, 1),
-  //     this.createMockAtletaWod(18, "asc", 120, 100, 2)
-  //   ];
-  //   let filtroWod = this.addRankingByWOD(atletasPrueba, 0);
-  //   console.log("filtroWod", filtroWod);
-
-  //   let atletasOrdenadosPorTotalScore = this.orderByTotalScore(atletasPrueba);
-
-  //   let rankeados = this.addRankig(atletasOrdenadosPorTotalScore);
-
-  //   let rankeadosSoloDesempatados = this.tieBreakScore(rankeados);
-
-  //   let rankeadosDefinitivos = this.insertTieBreakAtletas(
-  //     rankeadosSoloDesempatados,
-  //     rankeados
-  //   );
-
-  //   return rankeadosDefinitivos;
-  // }
-
-  // addRankig(atletasByCategoryOrdenado) {
-  //   let ranking = 1;
-  //   let atletasByCategoryApplyRanking = atletasByCategoryOrdenado.map(
-  //     (atleta, index, self) => {
-  //       if (index === 0) {
-  //         atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
-  //       } else {
-  //         if (atleta.wods.totalScore === self[index - 1].wods.totalScore) {
-  //           atleta.wods.totalRanking = self[index - 1].wods.totalRanking;
-  //         } else {
-  //           atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
-  //         }
-  //       }
-  //       ranking++;
-  //       return atleta;
-  //     }
-  //   );
-  //   return atletasByCategoryApplyRanking;
-  // }
-
-  // addRankingByWods(arrayAtletasEmpatados, ordenar, ranking) {
-  //   return arrayAtletasEmpatados.sort(ordenar).map((atleta, index, self) => {
-  //     if (index === 0) {
-  //       atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
-  //       ranking++;
-  //       return atleta;
-  //     }
-
-  //     let rankingAtletaActual =
-  //       atleta.wods.wodsArray[atleta.wods.wodsArray.length - 1].ranking;
-  //     let rankingAtletaAnterior =
-  //       self[index - 1].wods.wodsArray[
-  //         self[index - 1].wods.wodsArray.length - 1
-  //       ].ranking;
-
-  //     if (rankingAtletaActual === rankingAtletaAnterior) {
-  //       atleta.wods.totalRanking = self[index - 1].wods.totalRanking;
-  //       ranking++;
-  //       return atleta;
-  //     } else {
-  //       atleta.wods.totalRanking = atleta.wods.totalRanking + ranking;
-  //       ranking++;
-  //       return atleta;
-  //     }
-  //   });
-  // }
-
-  // addRankingByWOD(atletasArray, indexWod) {
-  //   let ordenar;
-  //   let arrayOrdenado = [];
-  //   let masMejor = (atlAnterior, atlActual) => {
-  //     return atlAnterior.wods.wodsArray[indexWod].score <
-  //       atlActual.wods.wodsArray[indexWod].score
-  //       ? -1
-  //       : 1;
-  //   };
-  //   let menosMejorSiTime = (atletaAnterior, atletaActual) =>
-  //     atletaAnterior.wods.wodsArray[atletaAnterior.wods.wodsArray.length - 1]
-  //       .dataScore.time <
-  //     atletaActual.wods.wodsArray[atletaActual.wods.wodsArray.length - 1]
-  //       .dataScore.time
-  //       ? -1
-  //       : 1;
-
-  //   let typeWod = atletasArray[0].wods.wodsArray[indexWod].type;
-  //   if (typeWod === "desc") {
-  //     ordenar = masMejor;
-  //     arrayOrdenado = atletasArray.sort(ordenar);
-  //   } else if (typeWod === "asc") {
-  //     // alert();
-  //     // return this.orderByTime(atletasArray, menosMejorSiTime, masMejor);
-  //   }
-
-  //   let ranking = 1;
-  //   return arrayOrdenado.map((atleta, index, self) => {
-  //     if (index === 0) {
-  //       atleta.wods.wodsArray[indexWod].ranking = ranking;
-  //       ranking++;
-  //       return atleta;
-  //     }
-
-  //     let scoreAtletaActual = atleta.wods.wodsArray[indexWod].score;
-  //     let scoreAtletaAnterior = self[index - 1].wods.wodsArray[indexWod].score;
-
-  //     if (scoreAtletaActual === scoreAtletaAnterior) {
-  //       atleta.wods.wodsArray[indexWod].ranking =
-  //         self[index - 1].wods.wodsArray[indexWod].ranking;
-  //       ranking++;
-  //       return atleta;
-  //     } else {
-  //       atleta.wods.wodsArray[indexWod].ranking = ranking;
-  //       ranking++;
-  //       return atleta;
-  //     }
-  //   });
-  // }
-
-  // orderByTotalScore(atletasArray) {
-  //   let orden = (atletaAnterior, atletaActual) =>
-  //     atletaAnterior.wods.totalScore < atletaActual.wods.totalScore ? 1 : -1;
-  //   return atletasArray.sort(orden);
-  // }
-
-  
-
-  // 
-  // orderByTime(atletasArray, menosMejor, masMejor) {
-  //   let atletas = _.cloneDeep(atletasArray);
-  //   let atletasPorDebajoDelTiempo = [];
-  //   let atletasSobrepasandoTiempo = [];
-
-  //   atletas.forEach(atleta => {
-  //     let atletaDataScore =
-  //       atleta.wods.wodsArray[atleta.wods.wodsArray.length - 1].dataScore;
-  //     if (atletaDataScore.time > atletaDataScore.maxTime) {
-  //       atletasSobrepasandoTiempo.push(atleta);
-  //     } else {
-  //       atletasPorDebajoDelTiempo.push(atleta);
-  //     }
-  //   });
-
-  //   // RANKEAR 1º atletasPorDebajoDelTiempo
-  //   atletasPorDebajoDelTiempo = this.addRankingByWods(
-  //     atletasPorDebajoDelTiempo,
-  //     menosMejor,
-  //     0
-  //   );
-
-  //   // RANKEAR 2º atletasSobrepasandoTiempo (y siguiendo el puesto numerico que hayan dejado los atletasPorDebajoDelTiempo)
-  //   let indexRanking = atletasPorDebajoDelTiempo.length;
-  //   if (!indexRanking) indexRanking = 0;
-
-  //   atletasSobrepasandoTiempo = this.addRankingByWods(
-  //     atletasSobrepasandoTiempo,
-  //     masMejor,
-  //     indexRanking
-  //   );
-
-  //   // CONCATENAR RANKEADOS
-  //   let atletasOrdenados = _.flatten([
-  //     atletasPorDebajoDelTiempo,
-  //     atletasSobrepasandoTiempo
-  //   ]);
-  //   console.log("atletasOrdenadosPorTiempo", atletasOrdenados);
-
-  //   return atletasOrdenados;
-  // }
-
   getAtletasTieArray(atletasArrayOriginal) {
     let atletasArray = _.cloneDeep(atletasArrayOriginal);
     let atletasTieArray = [];
