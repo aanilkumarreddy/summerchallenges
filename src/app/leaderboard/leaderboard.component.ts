@@ -36,7 +36,7 @@ export class LeaderboardComponent implements OnInit {
     private wodsService: WodsService,
     private ordenarPuesto: OrdenarPuestosService
   ) {
-    ordenarPuesto.getPayedAtletas();
+    ordenarPuesto.getWodOrdenado(1,"??");
     this.af.auth.subscribe(data => {
       this.categoriasService.getCategorias().subscribe(data => {
         this.categorias = data;
