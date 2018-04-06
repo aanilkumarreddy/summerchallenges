@@ -31,7 +31,7 @@ export class AdminLeaderboardComponent implements OnInit {
         this.atletas = data.filter(atleta => atleta.estado > 4);
         this.atletasFiltered = this.atletas;
         this.search();
-        this.calculateWods();
+        //this.calculateWods();
       })
 
     this.categoriasService.getCategorias()
