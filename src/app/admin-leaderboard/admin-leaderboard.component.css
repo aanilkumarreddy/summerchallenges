@@ -1,129 +1,66 @@
-
+.container.leaderboard-container:before {
+    display: none;
+}
 .leaderboard-container:first-child{
-    padding-top: 20px;
+    padding-top: 80px;
     margin-bottom: 40px;
-}
-.leaderboard-container h2{
-    text-transform: uppercase;
-    font-weight: 800;
-    color: white;
-    text-align: center;
-}
-.orderBy{
-    color: white;
-    font-weight: 800;
-    float: right;
-    margin-top: 40px;
-}
-table{
-    width: 100%;
-    background-color: white;
-}
-p.p12{
-    font-size: 18px;
-}
-table tr{
-    display: flex;
-    padding-top: 0;
-    padding: 12px;
-    border-top: 2px rgba(44,44,44,0.6);
-    border-bottom: 2px rgba(44,44,44,0.6);
-}
-table tr:first-child{
-    background-color: #ffc600;
-    color: white;
-    font-weight: 800;
-}
-table tr:first-child td{
-    border: none !important;
-}
-table tr:nth-child(even){
-    background-color: rgba(88,88,88, 0.1);
-}
-table tr td{
-    display: flex;
-    vertical-align: center;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 1.8rem;
-    flex: 1;
-}
-table tr td *{
-    flex: 1;
-}
-table tr td#name{
-    min-width: 240px;
-}
-#pos{
-    max-width: 10%;
-    font-weight: 800;
-    border-right: 2px solid rgba(44,44,44,0.2);
-}
-#score{
-    max-width: 15%;
-}
-table tr td span{
-    font-size: 1rem;
-}
-.container-of{
-    display:flex;
-    flex-direction: column;
-    margin-bottom: 25px;
-}
-.boton-container{
-    display: flex;
-    flex: 1;
-}
-.boton-container .btn{
-    flex: 1;
-    transition: all 0.2s ease-in-out;
-}
-.btn-lg{
-    width: 90%;
-    margin: 12px;
 
+    display: grid;
+    width: 95%;
+    margin: 0 auto;
+
+    grid-template-rows: 40px 80px auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "buscador"
+        "categorias"
+        "atletas";
 }
-.btn:hover{
-    background-color: rgba(222,222,222,0.8);
+
+.buscador {
+    grid-area: "buscador";
 }
-p.info{
-    color: black;
-    text-align: justify;
-    font-size: 2.2vh;
+
+.categorias {
+    grid-area: "categorias";
+}
+
+.atletas {
+    grid-area: "atletas";
+
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 200px);
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+}
+
+.atletas > div {
     background-color: white;
-    padding: 12px;
     border-radius: 3px;
-    border: 5px solid rgba(222,222,222, 0.6);
-}
-@media(max-width: 780px){
+    box-shadow: 0px 2px 4px #00000010;
 
-    .container-of{
-        flex-direction: row;
-        align-content: space-between;
-    }
-    .boton-container{
-        max-width: 50%;        
-        flex-direction: column;
-    }
-    .boton-container .btn{
-        flex: 1;
-        padding: 6px;
-        font-size: 2vh;
-    }
-    #pos{
-        font-size: 2vh;
-        max-width: 5%;
-    }
-    #score{
-        max-width: 10%;
-        font-size: 2vh;
-    }
-    #name{
-        font-weight: 400;
-        font-size: 1.8vh;
-        min-width: 120px !important;
-    }
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    grid-template-columns: 1fr;
 }
+.atleta__header {
+    color: #333;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    padding: 0px 12px;
+}
+.atleta__content {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 5px;
+}
+
+.atleta__content > div {
+    background-color: #00000010;
+}
+
+
+

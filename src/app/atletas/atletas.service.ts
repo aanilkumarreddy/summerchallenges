@@ -5,26 +5,26 @@ import { AuthService } from "../auth/auth.service";
 @Injectable()
 export class AtletasService {
 
-  public atletas : FirebaseListObservable <any[ ]>;
-  public aux_atletas : any;
+  public atletas: FirebaseListObservable<any[]>;
+  public aux_atletas: any;
   public bandera;
-  public atleta : any;
-  public team : any;
+  public atleta: any;
+  public team: any;
 
 
-  constructor(private af:AngularFire,
-              private authService : AuthService) {
+  constructor(private af: AngularFire,
+    private authService: AuthService) {
     this.atletas = af.database.list('/Atletas');
-    this.atletas.subscribe(data =>{
+    this.atletas.subscribe(data => {
       this.aux_atletas = data;
     })
 
 
   }
 
-  getAtleta_byEmail(email : string){
+  getAtleta_byEmail(email: string) {
     const aux_atleta = this.af.database.list('/Atletas', {
-      query : {
+      query: {
         orderByChild: 'email',
         equalTo: email,
       }
@@ -36,26 +36,26 @@ export class AtletasService {
     return _query.map(atletas => atletas);
   }
 
-  getAtleta_byState(state:number){
+  getAtleta_byState(state: number) {
 
   }
 
-  getTeam_atl_1(key){
-    const aux_atleta = this.af.database.object('/Atletas/'+key+'/atl_1');
+  getTeam_atl_1(key) {
+    const aux_atleta = this.af.database.object('/Atletas/' + key + '/atl_1');
     return aux_atleta;
   }
-    getTeam_atl_2(key){
-    const aux_atleta = this.af.database.object('/Atletas/'+key+'/atl_2');
+  getTeam_atl_2(key) {
+    const aux_atleta = this.af.database.object('/Atletas/' + key + '/atl_2');
     return aux_atleta;
   }
-    getTeam_atl_3(key){
-    const aux_atleta = this.af.database.object('/Atletas/'+key+'/atl_3');
+  getTeam_atl_3(key) {
+    const aux_atleta = this.af.database.object('/Atletas/' + key + '/atl_3');
     return aux_atleta;
   }
 
-  getAtleta_byCoach(email : string){
+  getAtleta_byCoach(email: string) {
     const aux_atleta = this.af.database.list('/Atletas', {
-      query : {
+      query: {
         orderByChild: 'coach',
         equalTo: email,
       }
@@ -63,55 +63,61 @@ export class AtletasService {
     return aux_atleta;
   }
 
-  getAtletas_byCategoria(id_categoria:number){
+  getAtletas_byCategoria(id_categoria: number) {
     const aux_atletas = this.af.database.list('/Atletas', {
-      query : {
-        orderByChild : 'id_categoria',
-        equalTo : id_categoria,
+      query: {
+        orderByChild: 'id_categoria',
+        equalTo: id_categoria,
       }
     })
     return aux_atletas;
   }
 
-  getAtleta_byKey(key){
-    const aux_atleta = this.af.database.object('/Atletas/'+key);
+  getAtleta_byKey(key) {
+    const aux_atleta = this.af.database.object('/Atletas/' + key);
     return aux_atleta;
   }
 
-  pushAtleta(atleta){
-      return this.af.database.list('/Atletas').push(atleta);
+  pushAtleta(atleta) {
+    return this.af.database.list('/Atletas').push(atleta);
 
   }
-  updateName(key, name : string){
+  updateName(key, name: string) {
     const aux_atlete = this.getAtleta_byKey(key);
-    aux_atlete.update({nombre : name});
+    aux_atlete.update({ nombre: name });
   }
-  updatePassword(key, password: string){
+  updatePassword(key, password: string) {
     let aux_atleta = this.getAtleta_byKey(key);
-    return aux_atleta.update({password: password});
+    return aux_atleta.update({ password: password });
   }
 
-  updateCategory(key, categoria){
+  updateCategory(key, categoria) {
     const aux_atlete = this.getAtleta_byKey(key);
-    aux_atlete.update({ id_categoria : categoria });
+    aux_atlete.update({ id_categoria: categoria });
   }
-  updateTeam_1(key, atl_1){
+  updateTeam_1(key, atl_1) {
     const aux_atleta = this.getAtleta_byKey(key);
-    aux_atleta.update({ atl_1 : atl_1});
+    aux_atleta.update({ atl_1: atl_1 });
   }
-  updateTeam_2(key, atl_1){
+  updateTeam_2(key, atl_1) {
     const aux_atleta = this.getAtleta_byKey(key);
-    aux_atleta.update({ atl_2 : atl_1});
+    aux_atleta.update({ atl_2: atl_1 });
   }
-  updateTeam_3(key, atl_1){
+  updateTeam_3(key, atl_1) {
     const aux_atleta = this.getAtleta_byKey(key);
-    aux_atleta.update({ atl_3 : atl_1});
+    aux_atleta.update({ atl_3: atl_1 });
   }
-  setAtletaActual(key){
+  updateWods(key, wods) {
+    let atleta = this.getAtleta_byKey(key);
+
+    return atleta.update({ wods: wods }).then(data => data);
+  }
+  setAtletaActual(key) {
     const aux_atleta = this.getAtleta_byKey(key);
     aux_atleta.subscribe(data => {
       this.atleta = data;
     })
   }
+
 
 }

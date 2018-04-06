@@ -81,7 +81,7 @@ export const appRoutes: Routes = [
   // { path: 'instagram', component: InstagramComponent },
   // { path : 'public-leaderboard', component : PublicLeaderboardComponent},
   { path: 'admin', component: AdminInscripcionesComponent },
-  // { path : 'admin-leaderboard', component : AdminLeaderboardComponent},
+  { path: 'admin-leaderboard', component: AdminLeaderboardComponent },
   //{ path : 'team-scores', component : TeamScoresComponent},
   //{ path : 'countdown', redirectTo : '/login', pathMatch: 'full'},
   { path: 'reset-password-login', component: LoginFormComponent },
