@@ -123,10 +123,22 @@ export class LeaderboardComponent implements OnInit {
 
     if (type == "final") {
       this.ordenarPuesto.getClasificacionFinal(id_categoria)
-        .then(data => {
+        .subscribe(data => {
           this.atletas = data;
           //this.getAtletas_byCategoria(1);
           this.wods_actuales = data[0].wods.wodsArray;
+
+          this.atletas.forEach(atleta => {
+            let ranking = 0;
+            atleta.wods.wodsArray.forEach(wod => {
+              ranking += parseFloat(wod.ranking)
+            })
+            atleta.wods.totalRanking = ranking;
+            console.log(typeof atleta.wods.totalRanking);
+            if (isNaN(atleta.wods.totalRanking)) atleta.wods.totalRanking = "-";
+            console.log(ranking);
+          })
+          this.atletas.sort((a, b) => a.wods.totalRanking - b.wods.totalRanking);
           this.animateAtletasCard();
           this.seleccion = 'general';
         })
@@ -134,7 +146,7 @@ export class LeaderboardComponent implements OnInit {
 
     if (type == "wod") {
       this.ordenarPuesto.getWodOrdenado(id_categoria, nombre_wod)
-        .then(data => {
+        .subscribe(data => {
           this.atletas = data;
           //this.getAtletas_byCategoria(1);
           this.wods_actuales = data[0].wods.wodsArray;

@@ -72,12 +72,16 @@ export class AdminLeaderboardComponent implements OnInit {
   calculateWods() {
     let rx = {
       model: [{
-        type: "desc",
+        type: "asc",
         name: "WOD 1",
+        cap: 600
+      }, {
+        type: "desc",
+        name: "WOD 2.A",
         cap: 0
       }, {
         type: "desc",
-        name: "WOD 2",
+        name: "WOD 2.B",
         cap: 0
       }, {
         type: "desc",
@@ -88,6 +92,10 @@ export class AdminLeaderboardComponent implements OnInit {
         name: "WOD 4",
         cap: 900
       }, {
+        type: "desc",
+        name: "WOD 5",
+        cap: 0
+      }, {
         type: "asc",
         name: "FINAL",
         cap: 900
@@ -96,7 +104,7 @@ export class AdminLeaderboardComponent implements OnInit {
 
     this.atletas.forEach((atleta, index) => {
 
-      if (atleta.id_categoria == 5) {
+      if (atleta.id_categoria == 1) {
         let model = rx.model;
         this.WODS.wodsArray = [];
 
@@ -116,6 +124,7 @@ export class AdminLeaderboardComponent implements OnInit {
           console.log(this.WODS);
 
         })
+        console.log(this.WODS);
         this.atletasService.updateWods(atleta.$key, this.WODS)
           .then(response => {
             console.log(response);
@@ -231,8 +240,9 @@ export class AdminLeaderboardComponent implements OnInit {
     console.log(atleta.wods);
 
     atleta.wods.wodsArray.forEach(wod => {
-      if (wod.type == "asc" || (wod.type == "desc" && wod.dataScore.time == wod.dataScore.maxTime)) {
+      if (wod.type == "desc" || (wod.type == "asc" && wod.dataScore.time == wod.dataScore.maxTime)) {
         wod.score = parseFloat(wod.score);
+        console.log(wod.score);
       }
     })
 

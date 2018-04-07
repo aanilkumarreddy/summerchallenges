@@ -63,7 +63,7 @@ export const firebaseConfig = {
 
 export const appRoutes: Routes = [
   // { path: 'dashboard', component: DashboardComponent },
-  // { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   // { path: 'registro', component: RegistroComponent },
   // { path: 'registro-individual', component: RegistroIndividualComponent },
   // { path: 'registro-team', component: RegistroTeamComponent },
