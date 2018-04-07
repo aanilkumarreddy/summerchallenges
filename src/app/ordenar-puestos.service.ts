@@ -46,20 +46,21 @@ export class OrdenarPuestosService {
         .subscribe((data: any) => {
           let atletas = data.filter(atleta => atleta.estado === 5);
           resolve(atletas);
-          atletasSubscribe.unsubscribe();
         });
     });
   }
 
   getWodOrdenado(id_categoria, wodName) {
     return this.atletas.then(atletas => {
+    
+      let atletasByCategoria = _.cloneDeep(atletas).filter(atleta => atleta.id_categoria === id_categoria);
 
-      // atletas = this.atletasPrueba; // [TODO] -> ELIMINAR ESTO PARA PRUEBAS REALES
-
-      let atletasByCategoria = atletas.filter(atleta => atleta.id_categoria === id_categoria);
-      let indexWod = atletas[0].wods.wodsArray.findIndex(wod => wod.name = wodName);
-
+      let indexWod = atletasByCategoria[0].wods.wodsArray.findIndex(wod => wod.name === wodName);    
+      
       let wodRankeado = this.orderScoreByWods(atletasByCategoria, indexWod);
+
+      console.log('despues',wodRankeado.map(a=>a.wods.wodsArray));
+      
 
       return wodRankeado;
     });
@@ -75,17 +76,17 @@ export class OrdenarPuestosService {
       // OJO CON LA KEY SUPERFALSA
       // OJO CON LA KEY SUPERFALSA
 
-      let atletasAñadiendoCambios = atletas.filter(atleta => atleta.id_categoria === id_categoria);
-      // let indexWod = atletasAñadiendoCambios[0].wods.wodsArray.findIndex(wod => wod.name = wodName);
+      let atletasAñadiendoCambios = _.cloneDeep(atletas).filter(atleta => atleta.id_categoria === id_categoria);
       let wodArray = atletasAñadiendoCambios[0].wods.wodsArray;
-      let indexWodLimit = this.ultimoWodRellenado(atletasAñadiendoCambios,wodArray);      
+      let indexWodLimit = this.ultimoWodRellenado(atletasAñadiendoCambios,wodArray);        
+      let wodArrayLimitado = atletasAñadiendoCambios[0].wods.wodsArray.slice(0,indexWodLimit);
       
-      wodArray = atletasAñadiendoCambios[0].wods.wodsArray.slice(0,indexWodLimit);
-      
-      wodArray.forEach((atleta,indexWod)=>{
 
+      wodArrayLimitado.forEach((atleta,indexWod)=>{
         atletasAñadiendoCambios = this.orderScoreByWods(atletasAñadiendoCambios, indexWod);
       })
+      console.log('atletasAñadiendoCambios',atletasAñadiendoCambios)
+      
       let rankeados = this.getAtletasRankeados(atletasAñadiendoCambios);
 
       return rankeados;
@@ -167,10 +168,11 @@ export class OrdenarPuestosService {
   ordenarDesc(atletasArray, indexWod) {
     let atelatasOrdenadosPorMasMejor = atletasArray.sort(
       (atletaAnterior, atletaActual) => {
-        return atletaAnterior.wods.wodsArray[indexWod].score <
-          atletaActual.wods.wodsArray[indexWod].score
-          ? 1
-          : -1;
+        console.log('atletaAnterior',atletaAnterior.wods.wodsArray[indexWod].score);
+        console.log('atletaActual',atletaActual.wods.wodsArray[indexWod].score);
+        
+        return atletaActual.wods.wodsArray[indexWod].score -
+        atletaAnterior.wods.wodsArray[indexWod].score
       }
     );
     return atelatasOrdenadosPorMasMejor;
@@ -203,6 +205,9 @@ export class OrdenarPuestosService {
       atletasPorDebajoDelTiempoOrdenados,
       atletasSobrepasandoTiempoOrdenados
     ]);
+    
+    console.log('atletasOrdenados',atletasOrdenados);
+    
     return atletasOrdenados;
   }
 
@@ -229,9 +234,12 @@ export class OrdenarPuestosService {
       }
 
       ranking++;
-
+    console.log('ranking',ranking);
+      
       // Si index cero
       if (!index) {
+        console.log('NO ENTREEEEEES');
+        
         atleta.wods.wodsArray[indexWod].ranking = ranking;
         return;
       }
@@ -246,16 +254,28 @@ export class OrdenarPuestosService {
         atletasArr[index - 1].wods.wodsArray[indexWod].dataScore.time;
       let atletaActualTime = atleta.wods.wodsArray[indexWod].dataScore.time;
       let isEmpateTime = atletaAnteriorTime === atletaActualTime;
-
-
-      if (isEmpateScore || isEmpateTime) {
+      console.log('indexWod',indexWod);
+      console.log('atleta',atleta);
+      let typeOfwod = atleta.wods.wodsArray[indexWod].type;
+      console.log('isEmpateScore',isEmpateScore);
+      console.log('isEmpateTime',isEmpateTime);
+      
+      if (isEmpateScore && typeOfwod=="desc") {
         atleta.wods.wodsArray[indexWod].ranking =
           atletasArr[index - 1].wods.wodsArray[indexWod].ranking;
+      } else if(isEmpateScore && typeOfwod=="asc"){
+        atleta.wods.wodsArray[indexWod].ranking =
+        atletasArr[index - 1].wods.wodsArray[indexWod].ranking;
+      }else if(isEmpateTime && typeOfwod=="asc" && !isEmpateScore){
+        atleta.wods.wodsArray[indexWod].ranking = ranking;
       } else {
         // Normal
         atleta.wods.wodsArray[indexWod].ranking = ranking;
       }
     });
+
+    console.log('atelatasOrdenadosSinRankear',atelatasOrdenadosSinRankear);
+    
 
     let wodAtletasRankeado = atelatasOrdenadosSinRankear.sort(
       (atletaAnterior, atletaActual) =>
@@ -282,12 +302,12 @@ export class OrdenarPuestosService {
         let porcentajeConScore = (atletasConScore/atletasAñadiendoCambios.length)*100;
 
         if(porcentajeConScore > 90) {
-          indexWodLimit = index + 1;
+          indexWodLimit = index ;
         }else{
           return;
         }
       });
-      return indexWodLimit;
+      return indexWodLimit + 1;
   }
   
   getAtletasRankeados(atletas) {
@@ -302,9 +322,11 @@ export class OrdenarPuestosService {
   }
 
   getTotalRankingOfWods(atletasParaRankear) {
-    let numWods = atletasParaRankear[0].wods.wodsArray.length;
+    let wodArray = atletasParaRankear[0].wods.wodsArray;
+    let indexWodLimit = this.ultimoWodRellenado(atletasParaRankear,wodArray);        
+    let wodArrayLimitado = atletasParaRankear[0].wods.wodsArray.slice(0,indexWodLimit);
     atletasParaRankear.forEach(atleta => {
-      if (numWods < 2) atleta.wods.totalRanking = atleta.wods.wodsArray[0].ranking;
+      if (wodArrayLimitado.length < 2) atleta.wods.totalRanking = atleta.wods.wodsArray[0].ranking;
       else {
         atleta.wods.totalRanking = atleta.wods.wodsArray.reduce(
           (wodAnterior, wodActual) => {
@@ -352,6 +374,7 @@ export class OrdenarPuestosService {
               atletas[index - 1].wods.totalRanking;
           } else if(typeof atletas[index].wods.totalRanking !== 'number') {
             atletas[index].wods.totalRanking = "-";
+            
           } else {
             atletas[index].wods.totalRanking = ranking;
           }
