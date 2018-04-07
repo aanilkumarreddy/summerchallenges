@@ -1,7 +1,7 @@
 <div *ngIf="atletas" class="container leaderboard-container">
 
   <div class="buscador">
-    <input type="text" placeholder="Nombre atleta" [(ngModel)]="query" (change)="search()" (keyup)="search()"> {{atletasFiltered?.length}}
+    <input type="text" class="search-bar" placeholder="Buscar por nombre de atleta" [(ngModel)]="query" (change)="search()" (keyup)="search()"> {{atletasFiltered?.length}}
   </div>
   <div class="categorias">
     <button *ngFor="let cat of categorias" (click)="filter(cat.c_id)">{{cat.nombre}}</button>
@@ -12,13 +12,18 @@
   <div class="atletas">
     <div *ngFor="let atleta of atletasFiltered">
       <div class="atleta__header">
-        {{atleta?.nombre}} - {{atleta?.id_categoria}} - {{atleta?.estado}}
+        {{atleta?.nombre}}
       </div>
       <div class="atleta__content">
-        <!-- button (click)="select(atleta)">Seleccionar</button> -->
-        <!-- <div *ngFor="let wod of atleta?.wods.wodsArray">
-          {{wod?.name}} - {{wod?.ranking}} - {{wod?.score}}
-        </div>-->
+        <div *ngFor="let wod of atleta?.wods.wodsArray">
+
+          <h4>{{wod?.name}}</h4>
+          <span *ngIf="wod?.type == 'asc'"> TIME CAP ({{toMinutes(wod?.dataScore.maxTime)}}) </span> {{wod?.ranking}} - {{wod?.score}} - {{wod?.dataScore?.time}}
+          <input type="text" *ngIf="wod?.dataScore?.maxTime > 0" [(ngModel)]="wod.dataScore.time">
+          <input type="text" *ngIf="wod.dataScore.time == wod?.dataScore?.maxTime && wod?.dataScore.maxTime > 0" [(ngModel)]="wod.score">
+          <input type="text" *ngIf="wod.dataScore.maxTime == 0" [(ngModel)]="wod.score">
+          <button (click)="actualizar(atleta, wod)">Actualizar</button>
+        </div>
       </div>
     </div>
   </div>

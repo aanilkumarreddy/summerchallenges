@@ -3,6 +3,7 @@ import { AtletasService } from "../atletas/atletas.service";
 import { Router } from "@angular/router";
 import { WodsService } from "../wods/wods.service";
 import { CategoriasService } from '../categorias/categorias.service';
+import { OrdenarPuestosService } from '../ordenar-puestos.service';
 
 @Component({
   selector: 'app-admin-leaderboard',
@@ -24,7 +25,8 @@ export class AdminLeaderboardComponent implements OnInit {
   constructor(private atletasService: AtletasService,
     private router: Router,
     private wodsService: WodsService,
-    private categoriasService: CategoriasService) {
+    private categoriasService: CategoriasService,
+    private ordenarPuestos: OrdenarPuestosService) {
 
     this.atletasService.getAtletas()
       .subscribe(data => {
@@ -123,6 +125,8 @@ export class AdminLeaderboardComponent implements OnInit {
     })
 
 
+
+
     let team = {
       wods: this.WODS,
       cuantos: 6
@@ -135,6 +139,13 @@ export class AdminLeaderboardComponent implements OnInit {
       wods: this.WODS,
       cuantos: 3
     };
+  }
+
+  toMinutes(time) {
+    let minutes = time / 60;
+    let seconds = time % 60;
+
+    return minutes + ":" + seconds + "0";
   }
 
   select(atleta) {
@@ -169,5 +180,78 @@ export class AdminLeaderboardComponent implements OnInit {
     return this.atletas.filter(atleta => atleta.id_categoria == id);
   }
 
+  actualizar(atleta, wod) {
+    if (wod.type == "asc") {
+      let time;
+      let minutes;
+      let seconds;
+      let final_time;
+      if (wod.dataScore.time != wod.dataScore.maxTime) {
+        time = wod.dataScore.time.split(":");
+        minutes = time[0] * 60;
+        seconds = time[1];
+        final_time = minutes + parseFloat(seconds);
+        console.log(wod.dataScore.time);
+      }
+      console.log(final_time, wod.dataScore.time);
+
+      if (final_time == wod.dataScore.maxTime || wod.dataScore.time == wod.dataScore.maxTime) {
+        wod.dataScore.time = final_time || wod.dataScore.time;
+
+        atleta.wods.wodsArray.forEach(_wod => {
+          console.log(_wod);
+          if (_wod.name == wod.name) {
+            console.log(wod.score, wod.dataScore.time);
+            _wod.score = wod.score;
+            _wod.dataScore.time = wod.dataScore.time;
+            if (final_time) {
+              wod.score = final_time;
+            }
+          }
+        })
+      } else {
+        console.log(final_time, wod.score);
+        atleta.wods.wodsArray.forEach(_wod => {
+          if (_wod.name == wod.name) {
+            _wod.score = wod.dataScore.time
+            _wod.dataScore.time = final_time;
+          }
+        })
+      }
+      console.log(wod);
+      /* wod.dataScore.time = final_time || wod.dataScore.time; */
+
+    }
+    atleta.wods.wodsArray.forEach(a_wod => {
+      if (a_wod.name == wod.name) {
+        a_wod = wod.name;
+      }
+    })
+
+    console.log(atleta.wods);
+
+    atleta.wods.wodsArray.forEach(wod => {
+      if (wod.type == "asc" || (wod.type == "desc" && wod.dataScore.time == wod.dataScore.maxTime)) {
+        wod.score = parseFloat(wod.score);
+      }
+    })
+
+    this.atletasService.updateWods(atleta.$key, atleta.wods);
+
+    this.ordenarPuestos.getWodOrdenado(atleta.id_categoria, wod.name)
+      .subscribe(data => {
+        data.forEach(_atleta => {
+          if (_atleta.$key == atleta.$key) {
+            atleta.wods = _atleta.wods;
+            console.log(atleta);
+            this.atletasService.updateWods(atleta.$key, atleta.wods);
+          }
+        })
+      });
+
+    this.ordenarPuestos.getClasificacionFinal(atleta.id_categoria)
+      .subscribe(data => { console.log(data) });
+  }
 
 }
+
