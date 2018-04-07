@@ -125,16 +125,23 @@ export class LeaderboardComponent implements OnInit {
       this.ordenarPuesto.getClasificacionFinal(id_categoria)
         .subscribe(data => {
           this.atletas = data;
+          console.log('ATLETAs',this.atletas);
+          
           //this.getAtletas_byCategoria(1);
           this.wods_actuales = data[0].wods.wodsArray;
 
           this.atletas.forEach(atleta => {
             let ranking = 0;
             atleta.wods.wodsArray.forEach(wod => {
-              ranking += parseFloat(wod.ranking)
+              if(wod.ranking !== "-"){
+                ranking += parseFloat(wod.ranking)
+                console.log('dadsadsa',wod.ranking);
+
+              }
+              
             })
             atleta.wods.totalRanking = ranking;
-            console.log(typeof atleta.wods.totalRanking);
+            console.log(atleta.wods.totalRanking,atleta);
             if (isNaN(atleta.wods.totalRanking)) atleta.wods.totalRanking = "-";
             console.log(ranking);
           })
